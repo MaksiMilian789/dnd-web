@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { pwaService } from '../shared/services/pwa-service.service';
 
 @Component({
   selector: 'app-home',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(public pwa: pwaService) { }
 
   ngOnInit(): void {
   }
