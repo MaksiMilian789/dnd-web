@@ -11,6 +11,8 @@ import { AuthGuard } from './auth/auth.guard';
 import { TestComponent } from './test/test.component';
 import { HomeComponent } from './home/home.component';
 import { MyResultsComponent } from './my-results/my-results.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [AppComponent, AuthComponent, AppShellComponent, TestComponent, HomeComponent, MyResultsComponent],
@@ -19,6 +21,12 @@ import { MyResultsComponent } from './my-results/my-results.component';
     AppRoutingModule,
     SharedModule,
     BrowserAnimationsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    }),
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent],
