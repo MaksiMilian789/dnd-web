@@ -1,0 +1,23 @@
+:host {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.matrix-button {
+  width: 100px;
+  height: 100px;
+  font-size: large;
+  margin: 5px;
+}
+
+.toolbar-button {
+  font-size: large;
+}

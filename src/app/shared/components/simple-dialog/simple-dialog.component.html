@@ -1,0 +1,11 @@
+<h2 mat-dialog-title>{{ data.title }}</h2>
+<mat-dialog-content
+  *ngIf="bypassedText"
+  [innerHTML]="bypassedText"
+></mat-dialog-content>
+<mat-dialog-actions>
+  <div class="spacer"></div>
+  <button mat-button [color]="data.actionColor" [mat-dialog-close]="true">
+    {{ data.actionText }}
+  </button>
+</mat-dialog-actions>

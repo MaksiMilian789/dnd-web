@@ -1,0 +1,23 @@
+<mat-toolbar color="primary" class="toolbar mat-elevation-z4">
+    <button mat-button *ngIf="disabled" (click)="startWithGuide()" class="toolbar-button">Начать тестирование</button>
+    <div *ngIf="disabled" class="spacer"></div>
+    <span *ngIf="timer.timerDisplay">Время: {{timer.timerDisplay}}</span>
+    <div class="spacer"></div>
+    <span *ngIf="mistakes >= 0">Ошибок: {{mistakes}}</span>
+    <div class="spacer"></div>
+    <span *ngIf="stage">Этап: {{stage}}</span>
+    <div class="spacer"></div>
+    <button mat-icon-button *ngIf="disabled" (click)="openGuide()" class="toolbar-button" matTooltip="Инструкция"><mat-icon>assignment</mat-icon></button>    
+    <button mat-icon-button *ngIf="!disabled" (click)="start()" class="toolbar-button" matTooltip="Перезапустить тестирование"><mat-icon>restart_alt</mat-icon></button>
+    <button mat-icon-button *ngIf="!disabled" (click)="stop()" class="toolbar-button" matTooltip="Остановить тестирование" color="warn"><mat-icon>stop</mat-icon></button>
+</mat-toolbar>
+<div class="container">
+    <div>
+        <div *ngFor="let row of matrix">
+            <button mat-raised-button *ngFor="let cell of row" class="matrix-button" (click)="checkButton(cell)"
+                [color]=color [disabled]="disabled">
+                {{cell}}
+            </button>
+        </div>
+    </div>
+</div>
