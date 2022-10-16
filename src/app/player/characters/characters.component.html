@@ -9,7 +9,7 @@
 </mat-toolbar>
 
 <ng-container *ngIf="shortCharacters$ | async as characters">
-    <div class="center" *ngFor="let character of characters;">
+    <div class="center pointer" *ngFor="let character of characters;" [routerLink]="['/player/character', 1]">
         <mat-card class="card">
             <mat-card-title>{{character.name}}</mat-card-title>
             <mat-card-subtitle>

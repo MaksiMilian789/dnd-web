@@ -9,6 +9,7 @@ import { PlayerHomeComponent } from './player/player-home/player-home.component'
 import { WorldsComponent } from './shared/components/worlds/worlds.component';
 import { CharactersComponent } from './player/characters/characters.component';
 import { InitiativeTrackerComponent } from './master/initiative-tracker/initiative-tracker.component';
+import { CharacterMainComponent } from './player/character/character-main/character-main.component';
 
 const routes: Routes = [
   {
@@ -21,9 +22,22 @@ const routes: Routes = [
     component: PlayerShellComponent,
     canActivate: [AuthGuard],
     children: [
-      { path: '', component: PlayerHomeComponent },
-      { path: 'characters', component: CharactersComponent },
-      { path: 'worlds', component: WorldsComponent},
+      {
+        path: '',
+        component: PlayerHomeComponent,
+      },
+      {
+        path: 'characters',
+        component: CharactersComponent,
+      },
+      {
+        path: 'character/:characterId',
+        component: CharacterMainComponent,
+      },
+      {
+        path: 'worlds',
+        component: WorldsComponent,
+      },
     ],
   },
   {

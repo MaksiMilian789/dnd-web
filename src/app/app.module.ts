@@ -15,9 +15,11 @@ import { PlayerHomeComponent } from './player/player-home/player-home.component'
 import { CharactersComponent } from './player/characters/characters.component';
 import { InitiativeTrackerComponent } from './master/initiative-tracker/initiative-tracker.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CharacterMainComponent } from './player/character/character-main/character-main.component';
+import { CharacterInventoryComponent } from './player/character/character-inventory/character-inventory.component';
 
 @NgModule({
-  declarations: [AppComponent, AuthComponent, PlayerShellComponent, HomeComponent, PlayerHomeComponent, CharactersComponent, InitiativeTrackerComponent],
+  declarations: [AppComponent, AuthComponent, PlayerShellComponent, HomeComponent, PlayerHomeComponent, CharactersComponent, InitiativeTrackerComponent, CharacterMainComponent, CharacterInventoryComponent],
   imports: [
     HttpClientModule,
     BrowserModule,
