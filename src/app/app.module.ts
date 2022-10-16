@@ -5,17 +5,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthComponent } from './auth/auth.component';
 import { httpService, SharedModule } from './shared';
-import { AppShellComponent } from './app-shell/app-shell.component';
+import { PlayerShellComponent } from './player/player-shell/playe-shell.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthGuard } from './auth/auth.guard';
-import { TestComponent } from './test/test.component';
 import { HomeComponent } from './home/home.component';
-import { MyResultsComponent } from './my-results/my-results.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { PlayerHomeComponent } from './player/player-home/player-home.component';
 
 @NgModule({
-  declarations: [AppComponent, AuthComponent, AppShellComponent, TestComponent, HomeComponent, MyResultsComponent],
+  declarations: [AppComponent, AuthComponent, PlayerShellComponent, HomeComponent, PlayerHomeComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

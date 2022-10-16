@@ -1,9 +1,24 @@
-<h2>Сервис для тестирования по методике Шульте</h2>
-<p>Методика применяется для исследования темпа сенсомоторных реакций и характеристик внимания, уровня умственной
-    работоспособности. </p>
-<p>Стимульным материалом служат 5 черно-белых таблиц квадратной формы, на которых в случайном порядке размещены числа от
-    1 до 25.</p>
-<h3>Для начала работы выберите нужный пункт в меню слева.</h3>
-<button *ngIf="pwa.showInstallPromotion" (click)="pwa.addToHomeScreen()">
-    Добавить на домашний экран
-</button>
+<mat-toolbar color="primary" class="toolbar mat-elevation-z4">
+    <span [routerLink]="['']" class="pointer truncate">DnD компаньон</span>
+    <div class="spacer"></div>
+    <ng-container *ngIf="user$ | async as user">
+        <span>{{ user.fio }}</span>
+        <button mat-icon-button (click)="logout()" matTooltip="Выйти">
+            <mat-icon>logout</mat-icon>
+        </button>
+    </ng-container>
+</mat-toolbar>
+<div class="center">
+    <button mat-raised-button [routerLink]="['player']" class="home-button">
+        <mat-icon [inline]="true" class="home-icon">person</mat-icon>
+        Игрок
+    </button>
+    <br>
+    <button mat-raised-button [routerLink]="['master']" class="home-button">
+        <mat-icon [inline]="true" class="home-icon">engineering</mat-icon>
+        Мастер
+    </button>
+    <button *ngIf="pwa.showInstallPromotion" (click)="pwa.addToHomeScreen()">
+        Добавить на домашний экран
+    </button>
+</div>

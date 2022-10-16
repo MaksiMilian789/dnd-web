@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+
 import { Observable } from 'rxjs';
-import { AuthService } from '../auth/auth.service';
-import { User } from '../shared/models/user';
+import { AuthService } from '../../auth/auth.service';
+import { User } from '../../shared/models/user';
 
 @Component({
-  templateUrl: './app-shell.component.html',
-  styleUrls: ['./app-shell.component.scss'],
+  templateUrl: './playe-shell.component.html',
+  styleUrls: ['./playe-shell.component.scss'],
 })
-export class AppShellComponent {
+export class PlayerShellComponent {
   user$!: Observable<User>;
 
   constructor(private _auth: AuthService) {

@@ -4,17 +4,12 @@
   </button>
   <span [routerLink]="['']" class="pointer truncate">DnD компаньон</span>
   <div class="spacer"></div>
-  <ng-container *ngIf="user$ | async as user; else login">
+  <ng-container *ngIf="user$ | async as user">
     <span>{{ user.fio }}</span>
     <button mat-icon-button (click)="logout()" matTooltip="Выйти">
       <mat-icon>logout</mat-icon>
     </button>
   </ng-container>
-  <ng-template #login>
-    <button mat-icon-button [routerLink]="['auth']" matTooltip="Авторизация">
-      <mat-icon>login</mat-icon>
-    </button>
-  </ng-template>
 </mat-toolbar>
 <mat-drawer-container class="example-container" autosize>
   <mat-drawer #drawer class="sidenav mat-elevation-z4" mode="side" opened>
