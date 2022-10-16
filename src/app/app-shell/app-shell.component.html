@@ -2,7 +2,7 @@
   <button mat-icon-button (click)="drawer.toggle()">
     <mat-icon>menu</mat-icon>
   </button>
-  <span [routerLink]="['']" class="pointer">Сервис тестирования по методике Шульте</span>
+  <span [routerLink]="['']" class="pointer truncate">DnD компаньон</span>
   <div class="spacer"></div>
   <ng-container *ngIf="user$ | async as user; else login">
     <span>{{ user.fio }}</span>
