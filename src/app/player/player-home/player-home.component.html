@@ -1,1 +1,9 @@
-<p>player-home works!</p>
+<button mat-raised-button [routerLink]="['characters']" class="home-button">
+    <mat-icon [inline]="true" class="home-icon">group</mat-icon>
+    Персонажи
+</button>
+<br>
+<button mat-raised-button [routerLink]="['worlds']" class="home-button">
+    <mat-icon [inline]="true" class="home-icon">public</mat-icon>
+    Игровые миры
+</button>
