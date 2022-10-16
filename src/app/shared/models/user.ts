@@ -5,6 +5,4 @@ export enum role {
 
 export interface User {
   login: string;
-  fio: string;
-  role: role;
 }

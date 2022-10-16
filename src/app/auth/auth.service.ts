@@ -41,8 +41,6 @@ export class AuthService {
     );*/
     let res: User = {
       login: 'maksim',
-      fio: 'Козырин Максим Евгеньевич',
-      role: 1,
     };
     return of(res);
   }

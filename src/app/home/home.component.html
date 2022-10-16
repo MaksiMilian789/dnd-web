@@ -2,7 +2,7 @@
     <span [routerLink]="['']" class="pointer truncate">DnD компаньон</span>
     <div class="spacer"></div>
     <ng-container *ngIf="user$ | async as user">
-        <span>{{ user.fio }}</span>
+        <span>{{ user.login }}</span>
         <button mat-icon-button (click)="logout()" matTooltip="Выйти">
             <mat-icon>logout</mat-icon>
         </button>
