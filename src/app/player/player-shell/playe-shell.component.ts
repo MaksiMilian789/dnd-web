@@ -1,7 +1,9 @@
 import { Component, OnDestroy } from '@angular/core';
+import { MatDrawerMode } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 
 import { Observable, Subscription } from 'rxjs';
+import { PwaService } from 'src/app/shared/services/pwa-service.service';
 import { AuthService } from '../../auth/auth.service';
 import { User } from '../../shared/models/user';
 
@@ -13,8 +15,13 @@ export class PlayerShellComponent implements OnDestroy {
   user$!: Observable<User>;
   showShadow: boolean = false;
   shadowCheck: Subscription;
+  drawlerMode: MatDrawerMode = 'side';
 
-  constructor(private _auth: AuthService, private _router: Router) {
+  constructor(
+    public pwa: PwaService,
+    private _auth: AuthService,
+    private _router: Router
+  ) {
     if (sessionStorage.getItem('auth') != null) {
       //получение информации о пользователе
       this.user$ = this._auth.httpGetUser();
@@ -27,6 +34,8 @@ export class PlayerShellComponent implements OnDestroy {
         this.showShadow = false;
       }
     });
+
+    if(pwa.modalPwaPlatform == 'ANDROID') this.drawlerMode = 'over';
   }
 
   ngOnDestroy(): void {

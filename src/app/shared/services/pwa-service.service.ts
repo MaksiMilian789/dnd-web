@@ -5,8 +5,8 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class PwaService {
+  public modalPwaPlatform: string | undefined = 'ANDROID'; // убрать значение
   modalPwaEvent: any;
-  modalPwaPlatform: string | undefined;
   showInstallPromotion: boolean = false;
 
   constructor(private platform: Platform) {

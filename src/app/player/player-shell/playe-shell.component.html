@@ -14,16 +14,16 @@
   </ng-container>
 </mat-toolbar>
 <mat-drawer-container class="example-container" autosize>
-  <mat-drawer #drawer class="sidenav mat-elevation-z4" mode="side">
+  <mat-drawer #drawer class="sidenav mat-elevation-z4" [mode]="drawlerMode">
     <div class="drawer-content">
       <mat-nav-list>
         <a mat-list-item [routerLink]="['characters']" routerLinkActive="active">
           <mat-icon matListIcon>group</mat-icon>
-          <p matLine>Персонажи</p>
+          <p matLine class="nav-list-text">Персонажи</p>
         </a>
         <a mat-list-item [routerLink]="['worlds']" routerLinkActive="active">
           <mat-icon matListIcon>public</mat-icon>
-          <p matLine>Игровые миры</p>
+          <p matLine class="nav-list-text">Игровые миры</p>
         </a>
       </mat-nav-list>
     </div>
