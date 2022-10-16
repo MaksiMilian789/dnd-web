@@ -1,18 +1,19 @@
-import { Platform } from "@angular/cdk/platform";
-import { Injectable } from "@angular/core";
+import { Platform } from '@angular/cdk/platform';
+import { Injectable } from '@angular/core';
 
 @Injectable({
-    providedIn: 'root',
-  })
-  export class pwaService {
-    modalPwaEvent: any;
-    modalPwaPlatform: string | undefined;
-    showInstallPromotion: boolean = false;
+  providedIn: 'root',
+})
+export class pwaService {
+  modalPwaEvent: any;
+  modalPwaPlatform: string | undefined;
+  showInstallPromotion: boolean = false;
 
-    constructor(private platform: Platform){
-        this._loadModalPwa();
-    }
-    
+  constructor(private platform: Platform) {
+    console.log('constructor pwa');
+    this._loadModalPwa();
+  }
+
   addToHomeScreen() {
     this.showInstallPromotion = false;
     this.modalPwaEvent.prompt();
@@ -28,11 +29,13 @@ import { Injectable } from "@angular/core";
 
   private _loadModalPwa(): void {
     if (this.platform.ANDROID) {
+      console.log('ANDROID');
       window.addEventListener('beforeinstallprompt', (e) => {
         e.preventDefault();
         this.modalPwaEvent = e;
         this.showInstallPromotion = true;
         this.modalPwaPlatform = 'ANDROID';
+        console.log(this.modalPwaPlatform);
       });
     }
 
@@ -45,4 +48,4 @@ import { Injectable } from "@angular/core";
       }
     }
   }
-  }
+}

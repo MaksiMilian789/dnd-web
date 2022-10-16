@@ -18,7 +18,7 @@
         <mat-icon [inline]="true" class="home-icon">engineering</mat-icon>
         Мастер
     </button>
-    <button *ngIf="pwa.showInstallPromotion" (click)="pwa.addToHomeScreen()">
+    <button mat-raised-button *ngIf="pwa.showInstallPromotion" (click)="pwa.addToHomeScreen()">
         Добавить на домашний экран
     </button>
 </div>
