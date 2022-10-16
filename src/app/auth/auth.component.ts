@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from './auth.service';
-import { pwaService } from '../shared/services/pwa-service.service';
+import { PwaService } from '../shared/services/pwa-service.service';
 
 @Component({
   templateUrl: './auth.component.html',
@@ -15,7 +15,7 @@ export class AuthComponent {
   hide = true;
 
   constructor(
-    public pwa: pwaService,
+    public pwa: PwaService,
     private _router: Router,
     private _snackbar: MatSnackBar,
     private _auth: AuthService    

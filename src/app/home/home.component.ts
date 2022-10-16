@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { User } from '../shared/models/user';
-import { pwaService } from '../shared/services/pwa-service.service';
+import { PwaService } from '../shared/services/pwa-service.service';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +14,7 @@ export class HomeComponent{
 
   user$!: Observable<User>;
 
-  constructor(public pwa: pwaService, private _auth: AuthService) {
+  constructor(public pwa: PwaService, private _auth: AuthService) {
     if (sessionStorage.getItem('auth') != null) {
       //получение информации о пользователе
       this.user$ = this._auth.httpGetUser();

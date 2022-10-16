@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root',
 })
-export class pwaService {
+export class PwaService {
   modalPwaEvent: any;
   modalPwaPlatform: string | undefined;
   showInstallPromotion: boolean = false;
