@@ -6,6 +6,9 @@ import { AuthComponent } from './auth/auth.component';
 import { AuthGuard } from './auth/auth.guard';
 import { HomeComponent } from './home/home.component';
 import { PlayerHomeComponent } from './player/player-home/player-home.component';
+import { WorldsComponent } from './shared/components/worlds/worlds.component';
+import { CharactersComponent } from './player/characters/characters.component';
+import { InitiativeTrackerComponent } from './master/initiative-tracker/initiative-tracker.component';
 
 const routes: Routes = [
   {
@@ -19,8 +22,14 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: '', component: PlayerHomeComponent },
-      //{ path: 'statistic', component: TestComponent, canActivate: [AuthGuard] },
+      { path: 'characters', component: CharactersComponent },
+      { path: 'worlds', component: WorldsComponent},
     ],
+  },
+  {
+    path: 'master',
+    component: InitiativeTrackerComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'auth',
