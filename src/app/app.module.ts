@@ -12,9 +12,11 @@ import { HomeComponent } from './home/home.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { PlayerHomeComponent } from './player/player-home/player-home.component';
+import { CharactersComponent } from './player/characters/characters.component';
+import { InitiativeTrackerComponent } from './master/initiative-tracker/initiative-tracker.component';
 
 @NgModule({
-  declarations: [AppComponent, AuthComponent, PlayerShellComponent, HomeComponent, PlayerHomeComponent],
+  declarations: [AppComponent, AuthComponent, PlayerShellComponent, HomeComponent, PlayerHomeComponent, CharactersComponent, InitiativeTrackerComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
