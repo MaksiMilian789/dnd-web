@@ -1,0 +1,45 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+
+@mixin material-ext-theme($theme) {
+  $config: mat.get-color-config($theme);
+  $primary: map.get($config, 'primary');
+
+  .mat-list-item.active {
+    color: mat.get-color-from-palette($primary);
+    background-color: transparentize(mat.get-color-from-palette($primary), 0.8);
+
+    &:hover, &:focus {
+      background-color: transparentize(mat.get-color-from-palette($primary), 0.7);
+    }
+  }
+
+  $foreground-palette: null;
+  @if map.get($theme, is-dark) {
+    $foreground-palette: mat.$dark-theme-foreground-palette;
+  } @else {
+    $foreground-palette: mat.$light-theme-foreground-palette;
+  }
+
+  $dividers-color: map.get($foreground-palette, 'dividers');
+
+  .mat-table-sticky-border-elem-right {
+    border-left: 1px solid $dividers-color;
+  }
+
+  .mat-table-sticky-border-elem-left {
+    border-right: 1px solid $dividers-color;
+  }
+}
+
+.mat-icon-button + img.logo {
+  margin: 14px;
+}
+
+.mat-button-wrapper > .mat-icon + * {
+  margin-left: 0.5rem;
+}
+
+.mat-button-wrapper > * + .mat-icon {
+  margin-left: 0.5rem;
+}
