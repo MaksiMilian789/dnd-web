@@ -50,4 +50,33 @@ export class HttpService {
     ];
     return of(res);
   }
+
+  public loadCharacters(login: string): Observable<httpResults[]> {
+    /*return this._http.get(
+      `${this._baseUrl}/Users/${idUser}/group/${idGroup}`,
+      {}
+    );*/
+    let res: httpResults[] = [
+      {
+        login: 'maksim',
+        time: 50,
+        mistakes: 1,
+        date: new Date(),
+        efficiency: 5,
+        workability: 1,
+        sustainability: 1,
+      },
+      {
+        login: 'elya',
+        time: 30,
+        mistakes: 0,
+        date: new Date(),
+        efficiency: 7,
+        workability: 1.2,
+        sustainability: 0.5,
+      },
+    ];
+    return of(res);
+  }
+
 }

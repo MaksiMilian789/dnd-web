@@ -10,6 +10,7 @@ export class CharactersComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    //loadCharacters
   }
 
 }
