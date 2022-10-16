@@ -1,0 +1,12 @@
+.center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 30px;
+}
+
+.card {
+  min-width: 300px;
+  width: 50vw;
+}

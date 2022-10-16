@@ -14,10 +14,12 @@ import { environment } from '../environments/environment';
 import { PlayerHomeComponent } from './player/player-home/player-home.component';
 import { CharactersComponent } from './player/characters/characters.component';
 import { InitiativeTrackerComponent } from './master/initiative-tracker/initiative-tracker.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent, AuthComponent, PlayerShellComponent, HomeComponent, PlayerHomeComponent, CharactersComponent, InitiativeTrackerComponent],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     SharedModule,

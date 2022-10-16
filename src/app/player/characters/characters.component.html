@@ -1,9 +1,21 @@
 <mat-toolbar color="primary" class="toolbar mat-elevation-z6 secondary-toolbar">
-    <button mat-icon-button [routerLink]="['/player']"><mat-icon>arrow_back</mat-icon></button>
+    <button mat-icon-button [routerLink]="['/player']">
+        <mat-icon>arrow_back</mat-icon>
+    </button>
     <div class="spacer"></div>
-    <button mat-icon-button><mat-icon>person_add</mat-icon></button>
+    <button mat-icon-button>
+        <mat-icon>person_add</mat-icon>
+    </button>
 </mat-toolbar>
 
-<div class="center">
-
-</div>
+<ng-container *ngIf="shortCharacters$ | async as characters">
+    <div class="center" *ngFor="let character of characters;">
+        <mat-card class="card">
+            <mat-card-title>{{character.name}}</mat-card-title>
+            <mat-card-subtitle>
+                {{character.class}}
+                <div style="float: right;">Уровень: {{character.level}}</div>
+            </mat-card-subtitle>
+        </mat-card>
+    </div>
+</ng-container>

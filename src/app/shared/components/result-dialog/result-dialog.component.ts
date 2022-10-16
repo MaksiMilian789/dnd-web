@@ -2,7 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Results } from '../../models/results';
+import { Results } from '../../models/character';
 import { timeService } from '../../services/time-service.service';
 
 /**
