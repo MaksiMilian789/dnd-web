@@ -16,6 +16,7 @@ export class PlayerShellComponent implements OnDestroy {
   showShadow: boolean = false;
   shadowCheck: Subscription;
   drawlerMode: MatDrawerMode = 'side';
+  openDrawer: boolean = false;
 
   constructor(
     public pwa: PwaService,
