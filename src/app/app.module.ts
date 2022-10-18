@@ -17,6 +17,9 @@ import { InitiativeTrackerComponent } from './master/initiative-tracker/initiati
 import { HttpClientModule } from '@angular/common/http';
 import { CharacterMainComponent } from './player/character/character-main/character-main.component';
 import { CharacterInventoryComponent } from './player/character/character-inventory/character-inventory.component';
+import { MasterShellComponent } from './master/master-shell/master-shell.component';
+import { MasterHomeComponent } from './master/master-home/master-home.component';
+import { AccessPlayersComponent } from './master/access-players/access-players.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,10 @@ import { CharacterInventoryComponent } from './player/character/character-invent
     CharactersComponent,
     InitiativeTrackerComponent,
     CharacterMainComponent,
-    CharacterInventoryComponent
+    CharacterInventoryComponent,
+    MasterShellComponent,
+    MasterHomeComponent,
+    AccessPlayersComponent
   ],
   imports: [
     HttpClientModule,

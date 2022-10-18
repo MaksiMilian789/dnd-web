@@ -10,6 +10,9 @@ import { WorldsComponent } from './shared/components/worlds/worlds.component';
 import { CharactersComponent } from './player/characters/characters.component';
 import { InitiativeTrackerComponent } from './master/initiative-tracker/initiative-tracker.component';
 import { CharacterMainComponent } from './player/character/character-main/character-main.component';
+import { MasterShellComponent } from './master/master-shell/master-shell.component';
+import { MasterHomeComponent } from './master/master-home/master-home.component';
+import { AccessPlayersComponent } from './master/access-players/access-players.component';
 
 const routes: Routes = [
   {
@@ -42,8 +45,26 @@ const routes: Routes = [
   },
   {
     path: 'master',
-    component: InitiativeTrackerComponent,
+    component: MasterShellComponent,
     canActivate: [AuthGuard],
+    children: [
+      {
+        path: '',
+        component: MasterHomeComponent,
+      },
+      {
+        path: 'access-players',
+        component: AccessPlayersComponent,
+      },
+      {
+        path: 'worlds',
+        component: WorldsComponent,
+      },
+      {
+        path: 'tracker',
+        component: InitiativeTrackerComponent,
+      },
+    ],
   },
   {
     path: 'auth',
