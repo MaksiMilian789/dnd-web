@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthComponent } from './auth/auth.component';
 import { SharedModule } from './shared';
-import { PlayerShellComponent } from './player/player-shell/playe-shell.component';
+import { PlayerShellComponent } from './player/player-shell/player-shell.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthGuard } from './auth/auth.guard';
 import { HomeComponent } from './home/home.component';
@@ -19,7 +19,17 @@ import { CharacterMainComponent } from './player/character/character-main/charac
 import { CharacterInventoryComponent } from './player/character/character-inventory/character-inventory.component';
 
 @NgModule({
-  declarations: [AppComponent, AuthComponent, PlayerShellComponent, HomeComponent, PlayerHomeComponent, CharactersComponent, InitiativeTrackerComponent, CharacterMainComponent, CharacterInventoryComponent],
+  declarations: [
+    AppComponent,
+    AuthComponent,
+    PlayerShellComponent,
+    HomeComponent,
+    PlayerHomeComponent,
+    CharactersComponent,
+    InitiativeTrackerComponent,
+    CharacterMainComponent,
+    CharacterInventoryComponent
+  ],
   imports: [
     HttpClientModule,
     BrowserModule,
@@ -30,7 +40,7 @@ import { CharacterInventoryComponent } from './player/character/character-invent
       enabled: environment.production,
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000'
+      registrationStrategy: 'registerWhenStable:30000',
     }),
   ],
   providers: [AuthGuard],

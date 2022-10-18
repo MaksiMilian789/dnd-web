@@ -8,8 +8,8 @@ import { AuthService } from '../../auth/auth.service';
 import { User } from '../../shared/models/user';
 
 @Component({
-  templateUrl: './playe-shell.component.html',
-  styleUrls: ['./playe-shell.component.scss'],
+  templateUrl: './player-shell.component.html',
+  styleUrls: ['./player-shell.component.scss'],
 })
 export class PlayerShellComponent implements OnDestroy {
   user$!: Observable<User>;

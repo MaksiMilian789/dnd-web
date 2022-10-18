@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { PlayerShellComponent } from './player/player-shell/playe-shell.component';
+import { PlayerShellComponent } from './player/player-shell/player-shell.component';
 import { AuthComponent } from './auth/auth.component';
 import { AuthGuard } from './auth/auth.guard';
 import { HomeComponent } from './home/home.component';

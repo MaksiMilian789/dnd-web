@@ -1,1 +1,21 @@
-<p>worlds works!</p>
+<mat-toolbar color="primary" class="toolbar mat-elevation-z6 secondary-toolbar">
+    <button mat-icon-button [routerLink]="['/player']">
+        <mat-icon>arrow_back</mat-icon>
+    </button>
+    <div class="spacer"></div>
+</mat-toolbar>
+
+<ng-container *ngIf="shortWorlds$ | async as worlds">
+    <div class="center" *ngFor="let world of worlds;">
+        <div class="card-container">
+            <mat-checkbox class="card-checbox" *ngIf="isSelectionModeEnabled" [ngModel]="isItemSelected(world)"
+                (change)="toggleSelection(world)"></mat-checkbox>
+            <mat-card class="card pointer" [routerLink]="['/player/world', 1]">
+                <mat-card-title>{{world.name}}</mat-card-title>
+                <mat-card-subtitle>
+                    {{world.description}}
+                </mat-card-subtitle>
+            </mat-card>
+        </div>
+    </div>
+</ng-container>

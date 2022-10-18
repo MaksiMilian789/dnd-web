@@ -38,13 +38,11 @@ export class CharactersComponent {
   }
 
   toggleSelection(character: ShortCharacter): void {
-    console.log("kk")
     if (this._selectedItems.has(character)) {
       this._selectedItems.delete(character);
     } else {
       this._selectedItems.add(character);
     }
-    console.log(this._selectedItems);
   }
 
   deleteSelectedItems(): void {
