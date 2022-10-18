@@ -1,0 +1,59 @@
+.center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 15px;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.card-checbox {
+  margin: 15px;
+}
+
+.card-remove {
+  height: 50px;
+  width: 15px;
+  margin-left: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.button-remove {
+  width: 15px;
+}
+
+.card-img {
+  height: 72px;
+  width: 72px;
+  margin-right: 5px;
+  padding: 5px;
+}
+
+.card-icon {
+  height: 72px;
+  width: 72px;
+}
+
+.red {
+  background-color: red;
+}
+
+.green {
+  background-color: green;
+}
+
+.yellow {
+  background-color: yellow;
+}
+
+.card {
+  min-width: 200px;
+  width: 50vw;
+  height: 50px;
+}

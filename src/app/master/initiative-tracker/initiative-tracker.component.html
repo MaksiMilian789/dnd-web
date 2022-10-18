@@ -4,3 +4,28 @@
     </button>
     <div class="spacer"></div>
 </mat-toolbar>
+
+<div class="center" *ngFor="let unit of units;">
+    <div class="card-container">
+        <mat-card class="card-img">
+            <div class="card-icon" [ngClass]="{
+            red: unit.color === 'red',
+            green: unit.color === 'green',
+            yellow: unit.color === 'yellow'
+            }">
+            </div>
+        </mat-card>
+        <mat-card class="card">
+            <mat-card-title>{{unit.name}}</mat-card-title>
+            <mat-card-subtitle>
+                Инициатива:
+                <div style="float: right;">{{unit.initiative}}</div>
+            </mat-card-subtitle>
+        </mat-card>
+        <mat-card class="card-remove">
+            <button mat-icon-button class="button-remove">
+                <mat-icon [inline]="true">remove</mat-icon>
+            </button>
+        </mat-card>
+    </div>
+</div>
