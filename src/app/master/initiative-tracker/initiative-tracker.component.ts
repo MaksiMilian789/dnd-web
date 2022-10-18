@@ -24,7 +24,9 @@ export class InitiativeTrackerComponent implements OnInit {
     this.units.sort((a, b) => parseInt(b.initiative) - parseInt(a.initiative));
   }
 
-  next(): void{
-    
+  next(): void {
+    let temp = this.units[0];
+    this.units.shift();
+    if (temp) this.units = [...this.units, temp];
   }
 }
