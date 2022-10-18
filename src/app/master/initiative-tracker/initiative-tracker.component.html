@@ -5,27 +5,57 @@
     <div class="spacer"></div>
 </mat-toolbar>
 
-<div class="center" *ngFor="let unit of units;">
-    <div class="card-container">
-        <mat-card class="card-img">
-            <div class="card-icon" [ngClass]="{
+<div class="tracker-container">
+    <div class="center first">
+        <div class="card-container">
+            <mat-card class="card-img">
+                <div class="card-icon" [ngClass]="{
+            red: units[0].color === 'red',
+            green: units[0].color === 'green',
+            yellow: units[0].color === 'yellow'
+            }">
+                </div>
+            </mat-card>
+            <mat-card class="card">
+                <mat-card-title>{{units[0].name}}</mat-card-title>
+                <mat-card-subtitle>
+                    Инициатива:
+                    <div style="float: right;">{{units[0].initiative}}</div>
+                </mat-card-subtitle>
+            </mat-card>
+            <mat-card class="card-remove">
+                <button mat-icon-button class="button-remove">
+                    <mat-icon [inline]="true">remove</mat-icon>
+                </button>
+            </mat-card>
+        </div>
+    </div>
+    <button mat-raised-button class="next" (click)="next()">Следующий</button>
+    <mat-divider class="divider"></mat-divider>
+
+    <div class="center" *ngFor="let unit of units; let i = index">
+        <div *ngIf="!(i === 0)" class="card-container">
+            <mat-card class="card-img">
+                <div class="card-icon" [ngClass]="{
             red: unit.color === 'red',
             green: unit.color === 'green',
             yellow: unit.color === 'yellow'
             }">
-            </div>
-        </mat-card>
-        <mat-card class="card">
-            <mat-card-title>{{unit.name}}</mat-card-title>
-            <mat-card-subtitle>
-                Инициатива:
-                <div style="float: right;">{{unit.initiative}}</div>
-            </mat-card-subtitle>
-        </mat-card>
-        <mat-card class="card-remove">
-            <button mat-icon-button class="button-remove">
-                <mat-icon [inline]="true">remove</mat-icon>
-            </button>
-        </mat-card>
+                </div>
+            </mat-card>
+            <mat-card class="card">
+                <mat-card-title>{{unit.name}}</mat-card-title>
+                <mat-card-subtitle>
+                    Инициатива:
+                    <div style="float: right;">{{unit.initiative}}</div>
+                </mat-card-subtitle>
+            </mat-card>
+            <mat-card class="card-remove">
+                <button mat-icon-button class="button-remove">
+                    <mat-icon [inline]="true">remove</mat-icon>
+                </button>
+            </mat-card>
+        </div>
     </div>
+    <button mat-raised-button class="sort" (click)="sort()">Отсортировать</button>
 </div>

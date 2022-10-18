@@ -19,4 +19,12 @@ export class InitiativeTrackerComponent implements OnInit {
       { name: 'Слизь', initiative: '3', color: 'red' },
     ];
   }
+
+  sort(): void {
+    this.units.sort((a, b) => parseInt(b.initiative) - parseInt(a.initiative));
+  }
+
+  next(): void{
+    
+  }
 }
