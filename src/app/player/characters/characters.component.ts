@@ -13,5 +13,41 @@ export class CharactersComponent {
   shortCharacters$: Observable<ShortCharacter[]> =
     this._http.loadShortCharacters('maksim');
 
+  public isSelectionModeEnabled: boolean = false;
+
+  private _selectedItems = new Set<ShortCharacter>();
+
   constructor(private _http: HttpService) {}
+
+  enableSelectionMode(): void {
+    this.isSelectionModeEnabled = true;
+  }
+
+  disableSelectionMode(): void {
+    this.isSelectionModeEnabled = false;
+    this._selectedItems.clear();
+  }
+
+  get canDelete(): boolean {
+    const selected = [...this._selectedItems];
+    return selected.length > 0;
+  }
+
+  isItemSelected(character: ShortCharacter): boolean {
+    return this._selectedItems.has(character);
+  }
+
+  toggleSelection(character: ShortCharacter): void {
+    console.log("kk")
+    if (this._selectedItems.has(character)) {
+      this._selectedItems.delete(character);
+    } else {
+      this._selectedItems.add(character);
+    }
+    console.log(this._selectedItems);
+  }
+
+  deleteSelectedItems(): void {
+    console.log(this._selectedItems);
+  }
 }

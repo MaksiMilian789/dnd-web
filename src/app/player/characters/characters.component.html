@@ -3,19 +3,36 @@
         <mat-icon>arrow_back</mat-icon>
     </button>
     <div class="spacer"></div>
+    <button mat-icon-button (click)="enableSelectionMode()" matTooltip="Включить режим выбора"
+        *ngIf="!isSelectionModeEnabled; else selectionButtons">
+        <mat-icon>checklist</mat-icon>
+    </button>
+    <ng-template #selectionButtons>
+        <button mat-icon-button (click)="disableSelectionMode()" matTooltip="Отменить">
+            <mat-icon>cancel</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deleteSelectedItems()" matTooltip="Удалить выбранное"
+            [disabled]="!canDelete">
+            <mat-icon>delete_forever</mat-icon>
+        </button>
+    </ng-template>
     <button mat-icon-button>
         <mat-icon>person_add</mat-icon>
     </button>
 </mat-toolbar>
 
 <ng-container *ngIf="shortCharacters$ | async as characters">
-    <div class="center pointer" *ngFor="let character of characters;" [routerLink]="['/player/character', 1]">
-        <mat-card class="card">
-            <mat-card-title>{{character.name}}</mat-card-title>
-            <mat-card-subtitle>
-                {{character.class}}
-                <div style="float: right;">Уровень: {{character.level}}</div>
-            </mat-card-subtitle>
-        </mat-card>
+    <div class="center" *ngFor="let character of characters;">
+        <div class="card-container">
+            <mat-checkbox class="card-checbox" *ngIf="isSelectionModeEnabled" [ngModel]="isItemSelected(character)"
+                (change)="toggleSelection(character)"></mat-checkbox>
+            <mat-card class="card pointer" [routerLink]="['/player/character', 1]">
+                <mat-card-title>{{character.name}}</mat-card-title>
+                <mat-card-subtitle>
+                    {{character.class}}
+                    <div style="float: right;">Уровень: {{character.level}}</div>
+                </mat-card-subtitle>
+            </mat-card>
+        </div>
     </div>
 </ng-container>
