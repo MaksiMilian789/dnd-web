@@ -5,10 +5,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './material.module';
 import { WorldsComponent } from './components/worlds/worlds.component';
 import { RouterModule } from '@angular/router';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 
 @NgModule({
   declarations: [WorldsComponent],
-  imports: [CommonModule, MaterialModule, RouterModule, FormsModule],
-  exports: [CommonModule, FormsModule, ReactiveFormsModule, MaterialModule, WorldsComponent],
+  imports: [CommonModule, MaterialModule, RouterModule, FormsModule, ScrollingModule],
+  exports: [CommonModule, FormsModule, ReactiveFormsModule, MaterialModule, WorldsComponent, ScrollingModule],
 })
 export class SharedModule {}
