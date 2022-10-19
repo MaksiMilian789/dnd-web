@@ -40,7 +40,7 @@ export class AuthService {
       {}
     );*/
     let res: User = {
-      login: 'maksim',
+      login: 'Maksim',
     };
     return of(res);
   }
