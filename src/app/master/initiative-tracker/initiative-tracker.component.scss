@@ -6,6 +6,17 @@
   margin: 15px;
 }
 
+@media screen and (max-width: 365px) {
+  .card {
+    min-width: 110px !important;
+    width: 25vw !important;
+  }
+
+  .mat-card-title {
+    font-size: medium !important;
+  }
+}
+
 .card-container {
   display: flex;
   flex-direction: row;
