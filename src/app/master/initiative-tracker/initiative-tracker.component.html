@@ -33,8 +33,8 @@
     <button mat-raised-button class="next" (click)="next()">Следующий</button>
     <mat-divider class="divider"></mat-divider>
 
-    <cdk-virtual-scroll-viewport itemSize="30" class="viewport">
-        <div class="center scroll-container list" *cdkVirtualFor="let unit of units | slice:1; let i = index">
+    <cdk-virtual-scroll-viewport itemSize="50" class="viewport">
+        <div class="center list" *cdkVirtualFor="let unit of units | slice:1; let i = index">
             <div class="card-container">
                 <mat-card class="card-img">
                     <div class="card-icon" [ngClass]="{
