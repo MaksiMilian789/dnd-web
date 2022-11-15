@@ -13,6 +13,10 @@ import { CharacterMainComponent } from './player/character/character-main/charac
 import { MasterShellComponent } from './master/master-shell/master-shell.component';
 import { MasterHomeComponent } from './master/master-home/master-home.component';
 import { AccessPlayersComponent } from './master/access-players/access-players.component';
+import { AddCharacter1NameComponent } from './player/add-character/add-character1-name/add-character1-name.component';
+import { AddCharacter2ClassComponent } from './player/add-character/add-character2-class/add-character2-class.component';
+import { AddCharacter3RaceComponent } from './player/add-character/add-character3-race/add-character3-race.component';
+import { AddCharacter4BackgroundComponent } from './player/add-character/add-character4-background/add-character4-background.component';
 
 const routes: Routes = [
   {
@@ -32,6 +36,22 @@ const routes: Routes = [
       {
         path: 'characters',
         component: CharactersComponent,
+      },
+      {
+        path: 'createCharacterName',
+        component: AddCharacter1NameComponent,
+      },
+      {
+        path: 'createCharacterClass',
+        component: AddCharacter2ClassComponent,
+      },
+      {
+        path: 'createCharacterRace',
+        component: AddCharacter3RaceComponent,
+      },
+      {
+        path: 'createCharacterBackground',
+        component: AddCharacter4BackgroundComponent,
       },
       {
         path: 'character/:characterId',

@@ -21,7 +21,10 @@ import { MasterShellComponent } from './master/master-shell/master-shell.compone
 import { MasterHomeComponent } from './master/master-home/master-home.component';
 import { AccessPlayersComponent } from './master/access-players/access-players.component';
 import { AddTrackerDialogComponent } from './master/initiative-tracker/add-tracker-dialog/add-tracker-dialog.component';
-import { ColorPipe } from './shared/pipes/color.pipe';
+import { AddCharacter1NameComponent } from './player/add-character/add-character1-name/add-character1-name.component';
+import { AddCharacter2ClassComponent } from './player/add-character/add-character2-class/add-character2-class.component';
+import { AddCharacter3RaceComponent } from './player/add-character/add-character3-race/add-character3-race.component';
+import { AddCharacter4BackgroundComponent } from './player/add-character/add-character4-background/add-character4-background.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,11 @@ import { ColorPipe } from './shared/pipes/color.pipe';
     MasterShellComponent,
     MasterHomeComponent,
     AccessPlayersComponent,
-    AddTrackerDialogComponent
+    AddTrackerDialogComponent,
+    AddCharacter1NameComponent,
+    AddCharacter2ClassComponent,
+    AddCharacter3RaceComponent,
+    AddCharacter4BackgroundComponent
   ],
   imports: [
     HttpClientModule,

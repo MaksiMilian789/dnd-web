@@ -16,9 +16,9 @@
             <mat-icon>delete_forever</mat-icon>
         </button>
     </ng-template>
-    <button mat-icon-button>
+    <a mat-icon-button [routerLink]="['/player/createCharacterName']">
         <mat-icon>person_add</mat-icon>
-    </button>
+    </a>
 </mat-toolbar>
 
 <ng-container *ngIf="shortCharacters$ | async as characters">
