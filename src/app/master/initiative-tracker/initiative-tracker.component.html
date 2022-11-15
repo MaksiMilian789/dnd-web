@@ -7,7 +7,7 @@
 
 <div class="tracker-container">
     <div class="center first">
-        <div class="card-container">
+        <div class="card-container" *ngIf="units.length != 0">
             <mat-card class="card-img">
                 <div class="card-icon" [ngClass]="{
             red: units[0].color === 'red',
@@ -24,7 +24,7 @@
                 </mat-card-subtitle>
             </mat-card>
             <mat-card class="card-remove">
-                <button mat-icon-button class="button-remove">
+                <button mat-icon-button class="button-remove" (click)="remove(units[0])">
                     <mat-icon [inline]="true">remove</mat-icon>
                 </button>
             </mat-card>
@@ -52,7 +52,7 @@
                     </mat-card-subtitle>
                 </mat-card>
                 <mat-card class="card-remove">
-                    <button mat-icon-button class="button-remove">
+                    <button mat-icon-button class="button-remove" (click)="remove(unit)">
                         <mat-icon [inline]="true">remove</mat-icon>
                     </button>
                 </mat-card>

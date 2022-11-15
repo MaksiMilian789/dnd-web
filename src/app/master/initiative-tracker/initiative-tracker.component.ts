@@ -9,7 +9,7 @@ import { Unit } from 'src/app/shared/models/unit';
 })
 export class InitiativeTrackerComponent implements OnInit {
   @ViewChild(CdkVirtualScrollViewport) virtualScroll!: CdkVirtualScrollViewport;
-  
+
   units: Unit[] = [];
 
   constructor() {}
@@ -37,5 +37,10 @@ export class InitiativeTrackerComponent implements OnInit {
     let temp = this.units[0];
     this.units.shift();
     if (temp) this.units = [...this.units, temp];
+  }
+
+  remove(unit: Unit): void {
+    this.units = this.units.filter((val) => val != unit);
+    console.log(this.units)
   }
 }
