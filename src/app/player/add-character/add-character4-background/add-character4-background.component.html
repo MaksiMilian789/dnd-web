@@ -1,1 +1,50 @@
-<p>add-character4-background works!</p>
+<mat-toolbar color="primary" class="toolbar mat-elevation-z6 secondary-toolbar">
+    <a mat-icon-button [routerLink]="['/player/characters']">
+        <mat-icon>arrow_back</mat-icon>
+    </a>
+</mat-toolbar>
+<div class="center">
+    <form [formGroup]="addForm">
+        <mat-form-field appearance="outline">
+            <mat-label>Предыстория</mat-label>
+            <mat-select formControlName="background">
+                <mat-option *ngFor="let background of backgrounds" [value]="background">
+                    {{ background }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Мировозрение</mat-label>
+            <mat-select formControlName="ideology">
+                <mat-option *ngFor="let ideology of ideologies" [value]="ideology">
+                    {{ ideology }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <!--Навыки и владения-->
+    </form>
+
+    <button mat-raised-button class="button-next" (click)="save()" [disabled]="!addForm.valid"
+        [routerLink]="['/player/characters']">
+        Завершить создание персонажа
+    </button>
+</div>
+<mat-toolbar color="primary" class="toolbar steps-toolbar">
+    <div class="steps">
+        <a mat-icon-button [routerLink]="['/player/characters']">
+            <mat-icon>arrow_back</mat-icon>
+        </a>
+        <button mat-icon-button (click)="save()" [routerLink]="['/player/createCharacterName']" class="previous">
+            <span>1</span>
+        </button>
+        <button mat-icon-button (click)="save()" [routerLink]="['/player/createCharacterClass']" class="previous">
+            <span>2</span>
+        </button>
+        <button mat-icon-button (click)="save()" [routerLink]="['/player/createCharacterRace']" class="previous">
+            <span>3</span>
+        </button>
+        <button mat-icon-button disableRipple="true">
+            <span class="current">4</span>
+        </button>
+    </div>
+</mat-toolbar>
