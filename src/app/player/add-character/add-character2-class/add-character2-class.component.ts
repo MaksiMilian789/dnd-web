@@ -36,7 +36,6 @@ export class AddCharacter2ClassComponent {
   save(): void {}
 
   changeDescription(selectClass: string): void {
-    console.log("change")
     switch (selectClass) {
       case 'Бард':
         this.description = 'Неважно, кем является бард: учёным, скальдом или проходимцем; он плетёт магию из слов и музыки, вдохновляя союзников, деморализуя противников, манипулируя сознанием, создавая иллюзии, и даже исцеляя раны.';
