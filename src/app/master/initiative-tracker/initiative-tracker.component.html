@@ -1,8 +1,11 @@
 <mat-toolbar color="primary" class="toolbar mat-elevation-z6 secondary-toolbar">
-    <button mat-icon-button [routerLink]="['/master']">
+    <a mat-icon-button [routerLink]="['/master']">
         <mat-icon>arrow_back</mat-icon>
-    </button>
+    </a>
     <div class="spacer"></div>
+    <button mat-icon-button (click)="add()">
+        <mat-icon>person_add</mat-icon>
+    </button>
 </mat-toolbar>
 
 <div class="tracker-container">

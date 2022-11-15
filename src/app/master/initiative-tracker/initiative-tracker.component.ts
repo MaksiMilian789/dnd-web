@@ -1,6 +1,8 @@
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Unit } from 'src/app/shared/models/unit';
+import { AddTrackerDialogComponent } from './add-tracker-dialog/add-tracker-dialog/add-tracker-dialog.component';
 
 @Component({
   selector: 'app-initiative-tracker',
@@ -12,7 +14,7 @@ export class InitiativeTrackerComponent implements OnInit {
 
   units: Unit[] = [];
 
-  constructor() {}
+  constructor(private _dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.units = [
@@ -41,6 +43,14 @@ export class InitiativeTrackerComponent implements OnInit {
 
   remove(unit: Unit): void {
     this.units = this.units.filter((val) => val != unit);
-    console.log(this.units)
+  }
+
+  add(): void {
+    this._dialog
+      .open(AddTrackerDialogComponent, { width: '300px' })
+      .afterClosed()
+      .subscribe((res: Unit) => {
+        if (res) this.units.push(res);
+      });
   }
 }

@@ -1,0 +1,37 @@
+<h3 mat-dialog-title>Добавление персонажа в трекер</h3>
+<mat-dialog-content>
+    <form [formGroup]="addForm">
+        <mat-form-field appearance="outline">
+            <mat-label>Имя персонажа</mat-label>
+            <input matInput formControlName="name" />
+            <button *ngIf="addForm.get('name')?.value" matSuffix mat-icon-button (click)="addForm.get('name')?.reset()"
+                type="button">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Инициатива</mat-label>
+            <input type="number" matInput formControlName="initiative" />
+            <button *ngIf="addForm.get('initiative')?.value" matSuffix mat-icon-button
+                (click)="addForm.get('initiative')?.reset()" type="button">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Цвет</mat-label>
+            <mat-select formControlName="color">
+                <mat-option *ngFor="let color of colors" [value]="color">
+                    {{ color | color }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <div class="spacer"></div>
+    <button mat-button color="primary" [disabled]="!addForm.valid" (click)="add()">
+        Добавить
+    </button>
+</mat-dialog-actions>

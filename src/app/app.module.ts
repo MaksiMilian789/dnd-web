@@ -20,6 +20,8 @@ import { CharacterInventoryComponent } from './player/character/character-invent
 import { MasterShellComponent } from './master/master-shell/master-shell.component';
 import { MasterHomeComponent } from './master/master-home/master-home.component';
 import { AccessPlayersComponent } from './master/access-players/access-players.component';
+import { AddTrackerDialogComponent } from './master/initiative-tracker/add-tracker-dialog/add-tracker-dialog/add-tracker-dialog.component';
+import { ColorPipe } from './shared/pipes/color.pipe';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { AccessPlayersComponent } from './master/access-players/access-players.c
     CharacterInventoryComponent,
     MasterShellComponent,
     MasterHomeComponent,
-    AccessPlayersComponent
+    AccessPlayersComponent,
+    AddTrackerDialogComponent
   ],
   imports: [
     HttpClientModule,
