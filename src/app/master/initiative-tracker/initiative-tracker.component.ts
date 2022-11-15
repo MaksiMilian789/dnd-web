@@ -2,7 +2,7 @@ import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Unit } from 'src/app/shared/models/unit';
-import { AddTrackerDialogComponent } from './add-tracker-dialog/add-tracker-dialog/add-tracker-dialog.component';
+import { AddTrackerDialogComponent } from './add-tracker-dialog/add-tracker-dialog.component';
 
 @Component({
   selector: 'app-initiative-tracker',
