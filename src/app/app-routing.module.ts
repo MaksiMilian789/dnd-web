@@ -17,6 +17,7 @@ import { AddCharacter1NameComponent } from './player/add-character/add-character
 import { AddCharacter2ClassComponent } from './player/add-character/add-character2-class/add-character2-class.component';
 import { AddCharacter3RaceComponent } from './player/add-character/add-character3-race/add-character3-race.component';
 import { AddCharacter4BackgroundComponent } from './player/add-character/add-character4-background/add-character4-background.component';
+import { RegistrationComponent } from './registration/registration.component';
 
 const routes: Routes = [
   {
@@ -89,6 +90,10 @@ const routes: Routes = [
   {
     path: 'auth',
     component: AuthComponent,
+  },
+  {
+    path: 'registration',
+    component: RegistrationComponent,
   },
   {
     path: '**',
