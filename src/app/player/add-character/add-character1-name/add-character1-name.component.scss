@@ -36,10 +36,14 @@ form {
 
 .steps-toolbar {
   background: linear-gradient(to right, #5b0000 20%, transparent 35%);
-  position: absolute;
-  bottom: 0;
+  flex-shrink: 0;
 
   button {
     color: black;
   }
+}
+
+.add-container{
+  flex-grow: 1;
+  height: calc(100vh - 128px)
 }
