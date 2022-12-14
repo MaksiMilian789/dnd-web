@@ -1,49 +1,49 @@
-  :host {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-  }
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
 
-  .center {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-  }
-  
-  .example-container {
-    flex: 1 1 auto;
-  }
-  
-  .sidenav {
-    min-width: 300px;
-  }
-  
-  :host::ng-deep.mat-drawer-inner-container {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .drawer-content {
-    overflow: auto;
-    flex: 1 1 auto;
-  }
-  
-  .sidenav-content {
-    height: 100%;
-  }
-  
-  .home-button{
-    font-size: 5vh;
-    min-width: 300px;
-    width: 55vw;
-    min-height: 10vh;
-    display: flex;
+.center {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  }
+  height: 100%;
+}
 
-  .home-icon{
-    margin-bottom: 1vh;
-  }
+.example-container {
+  flex: 1 1 auto;
+}
+
+.sidenav {
+  min-width: 300px;
+}
+
+:host::ng-deep.mat-drawer-inner-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.drawer-content {
+  overflow: auto;
+  flex: 1 1 auto;
+}
+
+.sidenav-content {
+  height: 100%;
+}
+
+.home-button {
+  font-size: 5vh;
+  min-width: 300px;
+  width: 55vw;
+  min-height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-icon {
+  margin-bottom: 1vh;
+}

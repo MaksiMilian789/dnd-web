@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ShortCharacter } from '../models/character';
+import { Character, ShortCharacter } from '../models/character';
 import { Observable, of } from 'rxjs';
 import { ShortWorld } from '../models/world';
 
@@ -18,15 +18,45 @@ export class HttpService {
     let res: ShortCharacter[] = [
       {
         name: 'Максимилиан',
-        class: 'Волшебник',
+        className: 'Волшебник',
         level: 10,
       },
       {
         name: 'Элейна',
-        class: 'Бард',
+        className: 'Бард',
         level: 17,
       },
     ];
+    return of(res);
+  }
+
+  public loadCharacter(id: number): Observable<Character> {
+    /*return this._http.get(
+      `${this._baseUrl}/Users/${idUser}/group/${idGroup}`,
+      {}
+    );*/
+    let res: Character = 
+      {
+        name: 'Максимилиан',
+        className: 'Волшебник',
+        level: 10,
+        age: 28,
+        gender: 'Мужской',
+        race: 'Человек',
+        background: 'Мудрец',
+        ideology: 'Хаотично-нейтральный',
+        strength: 14,
+        dexterity: 12,
+        constitution: 14,
+        intelligence: 20,
+        wisdom: 10,
+        charisma: 8,
+        hp: 100,
+        addHp: 20,
+        maxHp: 150,
+        classArmor: 25,
+        proficiencyBonus: 6
+      };
     return of(res);
   }
 

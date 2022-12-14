@@ -1,6 +1,98 @@
-<mat-toolbar color="primary" class="toolbar mat-elevation-z6 secondary-toolbar">
-    <button mat-icon-button [routerLink]="['/player/characters']">
-        <mat-icon>arrow_back</mat-icon>
-    </button>
-    <div class="spacer"></div>
-</mat-toolbar>
+<ng-container *ngIf="character$ | async as character">
+    <mat-toolbar color="primary" class="toolbar mat-elevation-z6 secondary-toolbar">
+        <button mat-icon-button [routerLink]="['/player/characters']">
+            <mat-icon>arrow_back</mat-icon>
+        </button>
+        <div class="spacer"></div>
+        <h1>{{character.name}}</h1>
+    </mat-toolbar>
+    <mat-divider></mat-divider>
+    <div class="card-container stats">
+        <mat-card class="card-stat">
+            <mat-form-field appearance="outline">
+                <input matInput type="number" value="{{character.classArmor}}"/>
+            </mat-form-field>
+            <mat-card-subtitle class="card-stat-subtext">Класс брони</mat-card-subtitle>
+        </mat-card>
+        <mat-divider vertical class="divider-vertical"></mat-divider>
+        <mat-card class="card-stat">
+            <mat-form-field appearance="outline">
+                <input matInput type="number" value="{{character.maxHp}}"/>
+            </mat-form-field>
+            <mat-card-subtitle class="card-stat-subtext">Max Хиты</mat-card-subtitle>
+        </mat-card>
+        <mat-divider vertical class="divider-vertical"></mat-divider>
+        <mat-card class="card-stat">
+            <mat-form-field appearance="outline">
+                <input matInput type="number" value="{{character.hp}}"/>
+            </mat-form-field>
+            <mat-card-subtitle class="card-stat-subtext">Текущ. Хиты</mat-card-subtitle>
+        </mat-card>
+        <mat-divider vertical class="divider-vertical"></mat-divider>
+        <mat-card class="card-stat">
+            <mat-form-field appearance="outline">
+                <input matInput type="number" value="{{character.addHp}}" />
+            </mat-form-field>
+            <mat-card-subtitle class="card-stat-subtext">Врем. Хиты</mat-card-subtitle>
+        </mat-card>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="center">
+        <div class="six-stats">
+            <div>
+                <mat-card>
+                    <mat-card-content>
+                        Сила
+                        <mat-form-field appearance="outline">
+                            <input matInput type="number" value="{{character.strength}}" />
+                        </mat-form-field>
+                    </mat-card-content>
+                </mat-card>
+                <mat-card>
+                    <mat-card-content>
+                        Интеллект
+                        <mat-form-field appearance="outline">
+                            <input matInput type="number" value="{{character.intelligence}}" />
+                        </mat-form-field>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            <div>
+                <mat-card>
+                    <mat-card-content>
+                        Ловкость
+                        <mat-form-field appearance="outline">
+                            <input matInput type="number" value="{{character.dexterity}}" />
+                        </mat-form-field>
+                    </mat-card-content>
+                </mat-card>
+                <mat-card>
+                    <mat-card-content>
+                        Мудрость
+                        <mat-form-field appearance="outline">
+                            <input matInput type="number" value="{{character.wisdom}}" />
+                        </mat-form-field>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            <div>
+                <mat-card>
+                    <mat-card-content>
+                        Телосложение
+                        <mat-form-field appearance="outline">
+                            <input matInput type="number" value="{{character.constitution}}" />
+                        </mat-form-field>
+                    </mat-card-content>
+                </mat-card>
+                <mat-card>
+                    <mat-card-content>
+                        Харизма
+                        <mat-form-field appearance="outline">
+                            <input matInput type="number" value="{{character.charisma}}" />
+                        </mat-form-field>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</ng-container>
