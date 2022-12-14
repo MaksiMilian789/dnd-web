@@ -11,8 +11,7 @@ import { HttpService } from '../../services/http-service.service';
   styleUrls: ['./worlds.component.scss']
 })
 export class WorldsComponent{
-  shortWorlds$: Observable<ShortWorld[]> =
-    this._http.loadShortWorlds('maksim');
+  shortWorlds$!: Observable<ShortWorld[]>;
 
 public isSelectionModeEnabled: boolean = false;
 
@@ -20,8 +19,16 @@ private _selectedItems = new Set<ShortWorld>();
 
 public role: string = "";
 
+userLogin: string = '';
+
 constructor(private _http: HttpService, private _router: Router) {
   this.role = this._router.url.split('/')[1];
+
+  if (sessionStorage.getItem('auth') != null) {
+    // Получение информации о пользователе
+    this.userLogin = sessionStorage.getItem('auth') as string;
+    this.shortWorlds$ = this._http.loadShortWorlds(this.userLogin);
+  }
 }
 
 enableSelectionMode(): void {

@@ -17,6 +17,5 @@ export class CharacterMainComponent implements OnInit {
   constructor(private _http: HttpService, private _route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.character$.subscribe(val => console.log(val))
   }
 }
