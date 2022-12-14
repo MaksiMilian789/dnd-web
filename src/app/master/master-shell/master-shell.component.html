@@ -6,12 +6,10 @@
       <span [routerLink]="['']" class="pointer truncate">DnD компаньон</span>
     </div>
     <div class="spacer"></div>
-    <ng-container *ngIf="user$ | async as user">
-      <span>{{ user.login }}</span>
+      <span>{{ userLogin }}</span>
       <button mat-icon-button (click)="logout()" matTooltip="Выйти">
         <mat-icon>logout</mat-icon>
       </button>
-    </ng-container>
   </mat-toolbar>
   <mat-drawer-container class="example-container" autosize>
     <mat-drawer #drawer class="sidenav mat-elevation-z4" [mode]="drawlerMode" [(opened)]="openDrawer">

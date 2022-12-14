@@ -3,12 +3,10 @@
         <span [routerLink]="['']" class="pointer">DnD компаньон</span>
     </div>
     <div class="spacer"></div>
-    <ng-container *ngIf="user$ | async as user">
-        <span>{{ user.login }}</span>
+        <span>{{ userLogin }}</span>
         <button mat-icon-button (click)="logout()" matTooltip="Выйти">
             <mat-icon>logout</mat-icon>
         </button>
-    </ng-container>
 </mat-toolbar>
 <div class="center">
     <a mat-raised-button [routerLink]="['player']" class="home-button">

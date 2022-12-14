@@ -1,8 +1,9 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -10,24 +11,41 @@ import { Subject } from 'rxjs';
 export class RegistrationService {
   registrationMessage: Subject<boolean> = new Subject<boolean>();
 
-  constructor(private _router: Router, private _snackbar: MatSnackBar) {}
+  _baseUrl: string = 'http://localhost:8081';
 
-  registration(login: string, password: string, passwordRepeat: string): void {
-    if (this.httpReg(login, password, passwordRepeat)) {
-      this._router.navigate(['/auth']);
-      this.registrationMessage.next(true);
-      this._snackbar.open('Регистрация успешна');
-    } else {
-      this.registrationMessage.next(false);
-      this._snackbar.open('Такой логин уже существует');
-    }
+  constructor(
+    private _router: Router,
+    private _snackbar: MatSnackBar,
+    private _http: HttpClient
+  ) {}
+
+  registration(login: string, password: string): void {
+    this.httpReg(login, password).subscribe({
+      complete: () => {
+        this._router.navigate(['/auth']);
+        this.registrationMessage.next(true);
+        this._snackbar.open('Регистрация успешна');
+      },
+      error: () => {
+        this.registrationMessage.next(false);
+        this._snackbar.open('Такой логин уже существует');
+      },
+    });
   }
 
-  httpReg(login: string, password: string, passwordRepeat: string): boolean {
-    /*return this._http.post(
-      `${this._baseUrl}/Users/${idUser}/group/${idGroup}`,
-      {}
-    );*/
-    return true;
+  httpReg(login: string, password: string): Observable<void> {
+    let headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': '*'
+    });
+    return this._http.post<void>(
+      `${this._baseUrl}/registration`,
+      {
+        login: login,
+        password: password,
+      },
+      {
+        headers: headers,
+      }
+    );
   }
 }

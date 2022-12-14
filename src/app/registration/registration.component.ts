@@ -34,11 +34,10 @@ export class RegistrationComponent {
     if (this.form.value.password != this.form.value.passwordRepeat) {
       this._snackbar.open('Введённые пароли не совпадают');
     } else {
-      //проверка в базе по Http
+      // Проверка в базе по Http
       this._registration.registration(
         this.form.value.login,
-        this.form.value.password,
-        this.form.value.passwordRepeat
+        this.form.value.password
       );
     }
   }

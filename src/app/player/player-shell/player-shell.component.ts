@@ -5,18 +5,18 @@ import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { PwaService } from 'src/app/shared/services/pwa-service.service';
 import { AuthService } from '../../auth/auth.service';
-import { User } from '../../shared/models/user';
 
 @Component({
   templateUrl: './player-shell.component.html',
   styleUrls: ['./player-shell.component.scss'],
 })
 export class PlayerShellComponent implements OnDestroy {
-  user$!: Observable<User>;
   showShadow: boolean = false;
   shadowCheck: Subscription;
   drawlerMode: MatDrawerMode = 'side';
   openDrawer: boolean = false;
+  
+  userLogin: string = "";
 
   constructor(
     public pwa: PwaService,
@@ -24,8 +24,8 @@ export class PlayerShellComponent implements OnDestroy {
     private _router: Router
   ) {
     if (sessionStorage.getItem('auth') != null) {
-      //получение информации о пользователе
-      this.user$ = this._auth.httpGetUser();
+      // Получение информации о пользователе
+      this.userLogin = sessionStorage.getItem('auth') as string;
     }
 
     this.shadowCheck = this._router.events.subscribe(() => {

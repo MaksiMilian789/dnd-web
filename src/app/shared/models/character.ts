@@ -1,4 +1,5 @@
 export interface ShortCharacter {
+  charID: number;
   name: string;
   className: string;
   level: number;

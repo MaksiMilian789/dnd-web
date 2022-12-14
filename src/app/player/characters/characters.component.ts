@@ -13,18 +13,25 @@ import { ShortCharacter } from 'src/app/shared/models/character';
   styleUrls: ['./characters.component.scss'],
 })
 export class CharactersComponent {
-  shortCharacters$: Observable<ShortCharacter[]> =
-    this._http.loadShortCharacters('maksim');
+  shortCharacters$!: Observable<ShortCharacter[]>;
 
   public isSelectionModeEnabled: boolean = false;
 
   private _selectedItems = new Set<ShortCharacter>();
 
+  userLogin: string = '';
+
   constructor(
     private _http: HttpService,
     private _dialog: MatDialog,
     private _router: Router
-  ) {}
+  ) {
+    if (sessionStorage.getItem('auth') != null) {
+      // Получение информации о пользователе
+      this.userLogin = sessionStorage.getItem('auth') as string;
+      this.shortCharacters$ = this._http.loadShortCharacters(this.userLogin);
+    }
+  }
 
   enableSelectionMode(): void {
     this.isSelectionModeEnabled = true;
