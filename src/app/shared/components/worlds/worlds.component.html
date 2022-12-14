@@ -12,7 +12,7 @@
                 (change)="toggleSelection(world)"></mat-checkbox>
             <mat-card class="card pointer" [routerLink]="role == 'master' ? ['/master/world', world.id] : ['/player/world', world.id]">
                 <mat-card-title>{{world.name}}</mat-card-title>
-                <mat-card-subtitle>
+                <mat-card-subtitle class="truncate">
                     {{world.description}}
                 </mat-card-subtitle>
             </mat-card>
