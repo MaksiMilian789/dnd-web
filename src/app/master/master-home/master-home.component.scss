@@ -11,8 +11,7 @@
   min-width: 330px;
   width: 55vw;
   min-height: 10vh;
-}
-
-.home-icon {
-  margin-bottom: 1vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

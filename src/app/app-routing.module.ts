@@ -18,6 +18,7 @@ import { AddCharacter2ClassComponent } from './player/add-character/add-characte
 import { AddCharacter3RaceComponent } from './player/add-character/add-character3-race/add-character3-race.component';
 import { AddCharacter4BackgroundComponent } from './player/add-character/add-character4-background/add-character4-background.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { WorldComponent } from './shared/components/world/world.component';
 
 const routes: Routes = [
   {
@@ -62,6 +63,10 @@ const routes: Routes = [
         path: 'worlds',
         component: WorldsComponent,
       },
+      {
+        path: 'world/:worldId',
+        component: WorldComponent,
+      },
     ],
   },
   {
@@ -82,7 +87,11 @@ const routes: Routes = [
         component: WorldsComponent,
       },
       {
-        path: 'tracker',
+        path: 'world/:worldId',
+        component: WorldComponent,
+      },
+      {
+        path: 'world/:worldId/tracker',
         component: InitiativeTrackerComponent,
       },
     ],

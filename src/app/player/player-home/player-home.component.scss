@@ -11,8 +11,11 @@
   min-width: 330px;
   width: 55vw;
   min-height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .home-icon {
-  margin-bottom: 1vh;
+  margin-bottom: 0.5vh;
 }

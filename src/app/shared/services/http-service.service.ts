@@ -37,14 +37,30 @@ export class HttpService {
     );*/
     let res: ShortWorld[] = [
       {
+        id: 1,
         name: 'Sapience',
         description: 'Наш основной мир'
       },
       {
+        id: 2,
         name: 'Новый Мир',
         description: 'Какой-то рандомный новый мир'
       },
     ];
+    return of(res);
+  }
+
+  public loadWorld(id: number): Observable<ShortWorld> {
+    /*return this._http.get(
+      `${this._baseUrl}/Users/${idUser}/group/${idGroup}`,
+      {}
+    );*/
+    let res: ShortWorld =
+      {
+        id: 1,
+        name: 'Sapience',
+        description: 'Мир Тьмы – это полный аналог современного мира, в котором тайно обитают вампиры, оборотни, призраки, мумии, духи, зомби, колдуны, феи и прочая нечисть. Вампиры не умирают от старости, уязвимы по большей части только для огнестрельного оружия (особенно с разрывными пулями), мистических сил и огня. Солнечный свет убивает вампира почти мгновенно вне зависимости от его возраста и могущества.'
+      };
     return of(res);
   }
 }

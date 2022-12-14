@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { ShortWorld } from '../../models/world';
@@ -17,7 +18,11 @@ public isSelectionModeEnabled: boolean = false;
 
 private _selectedItems = new Set<ShortWorld>();
 
-constructor(private _http: HttpService) {}
+public role: string = "";
+
+constructor(private _http: HttpService, private _router: Router) {
+  this.role = this._router.url.split('/')[1];
+}
 
 enableSelectionMode(): void {
   this.isSelectionModeEnabled = true;

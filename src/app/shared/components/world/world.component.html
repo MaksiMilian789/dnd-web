@@ -1,0 +1,24 @@
+<mat-toolbar color="primary" class="toolbar mat-elevation-z6 secondary-toolbar">
+    <a mat-icon-button [routerLink]="role == 'master' ? ['/master/worlds'] : ['/player/worlds']">
+        <mat-icon>arrow_back</mat-icon>
+    </a>
+    <div class="spacer"></div>
+</mat-toolbar>
+
+<ng-container *ngIf="world$ | async as world">
+    <div class="card-container center">
+        <mat-card class="card">
+            <mat-card-title>{{world.name}}</mat-card-title>
+            <mat-card-content>
+                {{world.description}}
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+    <div class="center" *ngIf="role == 'master'">
+        <a mat-raised-button [routerLink]="['tracker']" class="home-button">
+            <mat-icon [inline]="true">directions_run</mat-icon>
+            Трекер инициативы
+        </a>
+    </div>
+</ng-container>

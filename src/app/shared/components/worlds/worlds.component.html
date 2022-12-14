@@ -10,7 +10,7 @@
         <div class="card-container">
             <mat-checkbox class="card-checbox" *ngIf="isSelectionModeEnabled" [ngModel]="isItemSelected(world)"
                 (change)="toggleSelection(world)"></mat-checkbox>
-            <mat-card class="card pointer" [routerLink]="['/player/world', 1]">
+            <mat-card class="card pointer" [routerLink]="role == 'master' ? ['/master/world', world.id] : ['/player/world', world.id]">
                 <mat-card-title>{{world.name}}</mat-card-title>
                 <mat-card-subtitle>
                     {{world.description}}
