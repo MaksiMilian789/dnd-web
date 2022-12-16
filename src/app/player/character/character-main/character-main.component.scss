@@ -4,6 +4,7 @@
   justify-content: center;
   align-items: center;
   margin: 30px;
+  margin-top: 10px;
 }
 
 .divider-vertical {
@@ -28,42 +29,45 @@
 
   mat-card {
     margin-bottom: 20px;
+    padding: 10px;
+    padding-bottom: 3px;
   }
 
   mat-card-content {
     font-size: 13.5px;
     height: 70px;
     text-align: center;
+    margin-bottom: 5px;
 
     mat-form-field {
-        margin-left: 5px;
-        margin-right: 5px;
-        width: 60px;
-        text-align: center;
-        font-size: 30px;
-      }
-    
-      ::ng-deep .mat-form-field-wrapper {
-        margin-bottom: -1em;
-      }
-    
-      ::ng-deep .mat-form-field-infix {
-        padding: 0;
-        border: 10px;
-      }
-    
-      ::ng-deep .mat-form-field-flex {
-        padding: 0;
-      }
-    
-      ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-end {
-        border-radius: 0px !important;
-        color: white;
-      }
-      ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-start {
-        border-radius: 0px !important;
-        color: white;
-      }
+      margin-left: 5px;
+      margin-right: 5px;
+      width: 60px;
+      text-align: center;
+      font-size: 30px;
+    }
+
+    ::ng-deep .mat-form-field-wrapper {
+      margin-bottom: -1em;
+    }
+
+    ::ng-deep .mat-form-field-infix {
+      padding: 0;
+      border: 10px;
+    }
+
+    ::ng-deep .mat-form-field-flex {
+      padding: 0;
+    }
+
+    ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-end {
+      border-radius: 0px !important;
+      color: white;
+    }
+    ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-start {
+      border-radius: 0px !important;
+      color: white;
+    }
   }
 }
 
@@ -137,4 +141,43 @@ input::-webkit-inner-spin-button {
 .form-stats {
   font-size: medium;
   width: 100%;
+}
+
+.save {
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.stat-skill {
+  padding-top: 5px;
+  padding-bottom: 3px;
+  font-size: small;
+}
+
+.descr {
+  display: flex;
+  flex-direction: row;
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
+.edit-stat {
+  margin-top: -10px !important;
+}
+
+.buttons-skill-magic {
+  margin-bottom: 10px;
+}
+
+.button-skill {
+  margin-right: 10px;
+  width: 30vw;
+}
+
+.button-magic {
+  width: 50vw;
+}
+
+.button-inventory {
+  width: 82vw;
 }
