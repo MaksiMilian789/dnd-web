@@ -3,6 +3,9 @@
         <mat-icon>arrow_back</mat-icon>
     </button>
     <div class="spacer"></div>
+    <button mat-icon-button *ngIf="role == 'master'" (click)="addWorld()">
+        <mat-icon>add</mat-icon>
+    </button>
 </mat-toolbar>
 
 <ng-container *ngIf="shortWorlds$ | async as worlds">

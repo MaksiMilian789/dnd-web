@@ -49,6 +49,36 @@ export class HttpService {
     });
   }
 
+  public loadWorld(id: number): Observable<ShortWorld> {
+    let headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': '*',
+      Authorization: sessionStorage.getItem('jwt') as string,
+    });
+    var params = new HttpParams().append('id', id);
+    return this._http.get<ShortWorld>(`${this._baseUrl}/getWorld`, {
+      params: params,
+      headers: headers,
+    });
+  }
+
+  public createWorld(
+    login: string,
+    name: string,
+    description: string
+  ): Observable<void> {
+    let headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': '*',
+      Authorization: sessionStorage.getItem('jwt') as string,
+    });
+    return this._http.post<void>(
+      `${this._baseUrl}/createWorld`,
+      { login: login, name: name, description: description },
+      {
+        headers: headers,
+      }
+    );
+  }
+
   public getTracker(id: number): Observable<TrackerUnit[]> {
     let headers = new HttpHeaders({
       'Access-Control-Allow-Origin': '*',
@@ -68,22 +98,10 @@ export class HttpService {
     });
     return this._http.put<void>(
       `${this._baseUrl}/editTracker`,
-      { id:id, tracker: tracker },
+      { id: id, tracker: tracker },
       {
         headers: headers,
       }
     );
-  }
-
-  public loadWorld(id: number): Observable<ShortWorld> {
-    let headers = new HttpHeaders({
-      'Access-Control-Allow-Origin': '*',
-      Authorization: sessionStorage.getItem('jwt') as string,
-    });
-    var params = new HttpParams().append('id', id);
-    return this._http.get<ShortWorld>(`${this._baseUrl}/getWorld`, {
-      params: params,
-      headers: headers,
-    });
   }
 }

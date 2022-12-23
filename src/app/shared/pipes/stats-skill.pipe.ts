@@ -3,7 +3,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({
   name: 'statsSkill',
 })
-export class StatsSkill implements PipeTransform {
+export class StatsSkillPipe implements PipeTransform {
   transform(stat: number, bonus: number): number {
     switch (stat) {
       case 0:
