@@ -4,7 +4,6 @@ import { Character, ShortCharacter } from '../models/character.model';
 import { Observable, of } from 'rxjs';
 import { ShortWorld } from '../models/world.model';
 import { TrackerUnit } from '../models/tracker-unit';
-import { TrackerRequest } from '../models/tracker-request.model';
 
 @Injectable({
   providedIn: 'root',

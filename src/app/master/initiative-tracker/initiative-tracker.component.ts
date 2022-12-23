@@ -4,7 +4,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { HttpService } from 'src/app/shared';
-import { TrackerRequest } from 'src/app/shared/models/tracker-request.model';
 import { TrackerUnit } from 'src/app/shared/models/tracker-unit';
 import { AddTrackerDialogComponent } from './add-tracker-dialog/add-tracker-dialog.component';
 
@@ -49,11 +48,6 @@ export class InitiativeTrackerComponent {
       .afterClosed()
       .subscribe((res: TrackerUnit) => {
         if (res) this.units.push(res);
-
-        let req: TrackerRequest = {
-          id: this.worldId,
-          tracker: this.units,
-        };
         this._http.setTracker(this.worldId, this.units).subscribe({
           complete: () => {
             this._snackbar.open('Добавление успешно.');
