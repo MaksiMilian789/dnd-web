@@ -4,7 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 
-import { httpLogin } from '../shared/models/httpLogin';
+import { Token } from '../shared/models/token.model';
 
 @Injectable({
   providedIn: 'root',
@@ -40,8 +40,8 @@ export class AuthService {
     );
   }
 
-  httpAuth(login: string, password: string): Observable<httpLogin> {
-    return this._http.post<httpLogin>(`${this._baseUrl}/login`, {
+  httpAuth(login: string, password: string): Observable<Token> {
+    return this._http.post<Token>(`${this._baseUrl}/login`, {
       login: login,
       password: password,
     });

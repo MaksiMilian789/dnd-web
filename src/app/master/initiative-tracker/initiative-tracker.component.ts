@@ -1,7 +1,11 @@
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Unit } from 'src/app/shared/models/unit';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute } from '@angular/router';
+import { HttpService } from 'src/app/shared';
+import { TrackerRequest } from 'src/app/shared/models/tracker-request.model';
+import { TrackerUnit } from 'src/app/shared/models/tracker-unit';
 import { AddTrackerDialogComponent } from './add-tracker-dialog/add-tracker-dialog.component';
 
 @Component({
@@ -9,25 +13,18 @@ import { AddTrackerDialogComponent } from './add-tracker-dialog/add-tracker-dial
   templateUrl: './initiative-tracker.component.html',
   styleUrls: ['./initiative-tracker.component.scss'],
 })
-export class InitiativeTrackerComponent implements OnInit {
+export class InitiativeTrackerComponent {
   @ViewChild(CdkVirtualScrollViewport) virtualScroll!: CdkVirtualScrollViewport;
 
-  units: Unit[] = [];
-
-  constructor(private _dialog: MatDialog) {}
-
-  ngOnInit(): void {
-    this.units = [
-      { name: 'Варвар', initiative: '10', color: 'green' },
-      { name: 'Лучник', initiative: '20', color: 'green' },
-      { name: 'Воин чемпион союзник', initiative: '12', color: 'yellow' },
-      { name: 'Слизь', initiative: '3', color: 'red' },
-      { name: 'Мара', initiative: '12', color: 'green' },
-      { name: 'Элейна Лиадон', initiative: '13', color: 'green' },
-      { name: 'Гоблин', initiative: '18', color: 'red' },
-      { name: 'Алазар', initiative: '8', color: 'green' },
-      { name: 'Маг союзник', initiative: '7', color: 'yellow' },
-    ];
+  units: TrackerUnit[] = [];
+  worldId: number = Number(this._route.snapshot.paramMap.get('worldId'));
+  constructor(
+    private _dialog: MatDialog,
+    private _http: HttpService,
+    private _route: ActivatedRoute,
+    private _snackbar: MatSnackBar
+  ) {
+    this._http.getTracker(this.worldId).subscribe((res) => (this.units = res));
   }
 
   sort(): void {
@@ -41,7 +38,7 @@ export class InitiativeTrackerComponent implements OnInit {
     if (temp) this.units = [...this.units, temp];
   }
 
-  remove(unit: Unit): void {
+  remove(unit: TrackerUnit): void {
     this.units = this.units.filter((val) => val != unit);
   }
 
@@ -49,8 +46,18 @@ export class InitiativeTrackerComponent implements OnInit {
     this._dialog
       .open(AddTrackerDialogComponent, { width: '300px' })
       .afterClosed()
-      .subscribe((res: Unit) => {
+      .subscribe((res: TrackerUnit) => {
         if (res) this.units.push(res);
+
+        let req: TrackerRequest = {
+          id: this.worldId,
+          tracker: this.units,
+        };
+        this._http.setTracker(req).subscribe({
+          complete: () => {
+            this._snackbar.open('Добавление успешно.');
+          },
+        });
       });
   }
 }

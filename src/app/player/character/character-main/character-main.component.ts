@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { HttpService } from 'src/app/shared';
-import { Character } from 'src/app/shared/models/character';
+import { Character } from 'src/app/shared/models/character.model';
 
 @Component({
   selector: 'app-character-main',

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { Unit } from 'src/app/shared/models/unit';
+import { TrackerUnit } from 'src/app/shared/models/tracker-unit';
 
 @Component({
   selector: 'app-add-tracker-dialog',
@@ -22,7 +22,7 @@ export class AddTrackerDialogComponent {
   }
 
   add() {
-    let newUnit: Unit = {
+    let newUnit: TrackerUnit = {
       name: this.addForm.value.name,
       initiative: this.addForm.value.initiative,
       color: this.addForm.value.color,

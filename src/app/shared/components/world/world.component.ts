@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { ShortWorld } from '../../models/world';
+import { ShortWorld } from '../../models/world.model';
 import { HttpService } from '../../services/http-service.service';
 
 @Component({
