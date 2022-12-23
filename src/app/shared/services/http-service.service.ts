@@ -4,6 +4,7 @@ import { Character, ShortCharacter } from '../models/character.model';
 import { Observable, of } from 'rxjs';
 import { ShortWorld } from '../models/world.model';
 import { TrackerUnit } from '../models/tracker-unit';
+import { Gender } from '../models/gender.model';
 
 @Injectable({
   providedIn: 'root',
@@ -102,5 +103,29 @@ export class HttpService {
         headers: headers,
       }
     );
+  }
+
+  public deleteCharacters(ids: number[]): Observable<void> {
+    let headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': '*',
+      Authorization: sessionStorage.getItem('jwt') as string,
+    });
+    return this._http.delete<void>(
+      `${this._baseUrl}/deleteCharacter`,
+      {
+        headers: headers,
+        body: { id: ids }
+      }
+    );
+  }
+
+  public getGenders(): Observable<Gender[]> {
+    let headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': '*',
+      Authorization: sessionStorage.getItem('jwt') as string,
+    });
+    return this._http.get<Gender[]>(`${this._baseUrl}/listGenders`, {
+      headers: headers,
+    });
   }
 }

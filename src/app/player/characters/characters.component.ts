@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
@@ -24,7 +25,8 @@ export class CharactersComponent {
   constructor(
     private _http: HttpService,
     private _dialog: MatDialog,
-    private _router: Router
+    private _router: Router,
+    private _snackbar: MatSnackBar
   ) {
     if (sessionStorage.getItem('auth') != null) {
       // Получение информации о пользователе
@@ -60,7 +62,18 @@ export class CharactersComponent {
   }
 
   deleteSelectedItems(): void {
-    console.log(this._selectedItems);
+    let ids: number[] = [];
+    this._selectedItems.forEach((element) => {
+      ids.push(element.charID as number);
+    });
+    console.log(ids)
+    this._http.deleteCharacters(ids)
+    .subscribe({
+      complete: () => {
+        this._snackbar.open('Удаление успешно.');
+        this.shortCharacters$ = this._http.loadShortCharacters(this.userLogin);
+      },
+    });
   }
 
   addCharacter(): void {
