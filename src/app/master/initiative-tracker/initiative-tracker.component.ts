@@ -18,6 +18,7 @@ export class InitiativeTrackerComponent {
 
   units: TrackerUnit[] = [];
   worldId: number = Number(this._route.snapshot.paramMap.get('worldId'));
+
   constructor(
     private _dialog: MatDialog,
     private _http: HttpService,
@@ -53,7 +54,7 @@ export class InitiativeTrackerComponent {
           id: this.worldId,
           tracker: this.units,
         };
-        this._http.setTracker(req).subscribe({
+        this._http.setTracker(this.worldId, this.units).subscribe({
           complete: () => {
             this._snackbar.open('Добавление успешно.');
           },
