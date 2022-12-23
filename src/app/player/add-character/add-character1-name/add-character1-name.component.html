@@ -15,14 +15,14 @@
                 </button>
             </mat-form-field>
             <mat-form-field appearance="outline">
-                <mat-label>Пол персонажа</mat-label>
-                <mat-select formControlName="sex">
-                    <mat-option *ngFor="let sex of sexes" [value]="sex">
-                        {{ sex }}
+                <mat-label>Пол персонажа</mat-label>                
+                <mat-select formControlName="gender">
+                    <mat-option *ngFor="let gender of genders$ |async" [value]="gender.gender">
+                        {{ gender.gender }}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
-            <input type="file" class="file-upload" onchange="console.log(event.target.files)">
+            <!--><input type="file" class="file-upload" onchange="console.log(event.target.files)"><-->
         </form>
 
         <button mat-raised-button class="button-next" (click)="save()" [disabled]="!addForm.valid"
