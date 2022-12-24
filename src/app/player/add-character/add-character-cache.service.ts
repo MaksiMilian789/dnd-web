@@ -7,9 +7,13 @@ import { CharacterWithId } from 'src/app/shared/models/character.model';
   providedIn: 'root',
 })
 export class AddCharacterCacheService {
-  public character: CharacterWithId;
+  public character!: CharacterWithId;
 
   constructor(private _http: HttpService, private _snackbar: MatSnackBar) {
+    this.reload();
+  }
+
+  reload(): void{
     this.character = {
       name: '',
       level: 0,

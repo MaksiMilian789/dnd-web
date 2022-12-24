@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { HttpService } from 'src/app/shared';
 import { SimpleDialogComponent } from 'src/app/shared/components/simple-dialog';
 import { ShortCharacter } from 'src/app/shared/models/character.model';
+import { AddCharacterCacheService } from '../add-character/add-character-cache.service';
 
 @Component({
   selector: 'app-characters',
@@ -26,7 +27,8 @@ export class CharactersComponent {
     private _http: HttpService,
     private _dialog: MatDialog,
     private _router: Router,
-    private _snackbar: MatSnackBar
+    private _snackbar: MatSnackBar,
+    private _cacheService: AddCharacterCacheService,
   ) {
     if (sessionStorage.getItem('auth') != null) {
       // Получение информации о пользователе
@@ -85,6 +87,7 @@ export class CharactersComponent {
       })
       .afterClosed()
       .subscribe((res) => {
+        this._cacheService.reload();
         if (res) this._router.navigate(['/player/createCharacterName']);
       });
   }
