@@ -15,16 +15,34 @@ export class AddCharacter1NameComponent {
 
   genders$: Observable<Gender[]>;
 
-  constructor(private _cacheService: AddCharacterCacheService, private _http: HttpService) {
+  constructor(
+    private _cacheService: AddCharacterCacheService,
+    private _http: HttpService
+  ) {
     this.addForm = new FormGroup({
       name: new FormControl('', Validators.required),
       gender: new FormControl('', Validators.required),
     });
 
     this.genders$ = this._http.getGenders();
+
+    if (this._cacheService.character.name != '') {
+      this.genders$.subscribe((val) => {
+        let gender = val.find(
+          (x) => x.id === this._cacheService.character.genderId
+        )?.id;
+        this.addForm.patchValue({
+          name: this._cacheService.character.name,
+          gender: gender,
+        });
+      });
+    }
   }
 
-  save(): void{
-    this._cacheService.firstStage();
+  save(): void {
+    this._cacheService.firstStage(
+      this.addForm.value.name,
+      this.addForm.value.gender
+    );
   }
 }

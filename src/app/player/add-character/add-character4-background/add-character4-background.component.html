@@ -1,6 +1,6 @@
 <mat-toolbar color="primary" class="toolbar mat-elevation-z6 secondary-toolbar">
     <a mat-icon-button [routerLink]="['/player/characters']">
-        <mat-icon>arrow_back</mat-icon>
+        <mat-icon>close</mat-icon>
     </a>
 </mat-toolbar>
 <div class="center">
@@ -8,22 +8,34 @@
         <mat-form-field appearance="outline">
             <mat-label>Предыстория</mat-label>
             <mat-select formControlName="background">
-                <mat-option *ngFor="let background of backgrounds" [value]="background">
-                    {{ background }}
+                <mat-option *ngFor="let background of backgrounds$ | async" [value]="background.id"
+                    (click)="changeDescriptionBackground(background.description)">
+                    {{ background.background }}
                 </mat-option>
             </mat-select>
         </mat-form-field>
+
         <mat-form-field appearance="outline">
             <mat-label>Мировозрение</mat-label>
             <mat-select formControlName="ideology">
-                <mat-option *ngFor="let ideology of ideologies" [value]="ideology">
-                    {{ ideology }}
+                <mat-option *ngFor="let ideology of ideologies$ | async" [value]="ideology.id"
+                    (click)="changeDescriptionIdeology(ideology.description)">
+                    {{ ideology.ideologiesName }}
                 </mat-option>
             </mat-select>
         </mat-form-field>
         <!--Навыки и владения-->
     </form>
-
+    <mat-card class="descr">
+        <mat-card-content>
+            {{descriptionBackground}}
+        </mat-card-content>
+    </mat-card>
+    <mat-card class="descr">
+        <mat-card-content>
+            {{descriptionIdeology}}
+        </mat-card-content>
+    </mat-card>
     <button mat-raised-button class="button-next" (click)="save()" [disabled]="!addForm.valid"
         [routerLink]="['/player/characters']">
         Завершить создание персонажа
@@ -34,13 +46,13 @@
         <a mat-icon-button [routerLink]="['/player/characters']">
             <mat-icon>arrow_back</mat-icon>
         </a>
-        <button mat-icon-button (click)="save()" [routerLink]="['/player/createCharacterName']" class="previous">
+        <button mat-icon-button [routerLink]="['/player/createCharacterName']" class="previous">
             <span>1</span>
         </button>
-        <button mat-icon-button (click)="save()" [routerLink]="['/player/createCharacterClass']" class="previous">
+        <button mat-icon-button [routerLink]="['/player/createCharacterClass']" class="previous">
             <span>2</span>
         </button>
-        <button mat-icon-button (click)="save()" [routerLink]="['/player/createCharacterRace']" class="previous">
+        <button mat-icon-button [routerLink]="['/player/createCharacterRace']" class="previous">
             <span>3</span>
         </button>
         <button mat-icon-button disableRipple="true">

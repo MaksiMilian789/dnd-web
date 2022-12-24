@@ -1,45 +1,57 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { merge, Observable } from 'rxjs';
+import { HttpService } from 'src/app/shared';
+import { Background } from 'src/app/shared/models/background.model';
+import { Ideology } from 'src/app/shared/models/ideology.model';
+import { AddCharacterCacheService } from '../add-character-cache.service';
 
 @Component({
   selector: 'app-add-character4-background',
   templateUrl: './add-character4-background.component.html',
-  styleUrls: ['./add-character4-background.component.scss']
+  styleUrls: ['./add-character4-background.component.scss'],
 })
 export class AddCharacter4BackgroundComponent {
   addForm: FormGroup;
 
-  backgrounds = [
-    'Артист',
-    'Беспризорник',
-    'Благородный',
-    'Гильдейский ремесленник',
-    'Моряк',
-    'Мудрец',
-    'Народный герой',
-    'Отшельник',
-    'Преступник',
-    'Прислужник',
-    'Солдат',
-    'Чужеземец',
-    'Шарлатан',
-  ];
+  backgrounds$: Observable<Background[]>;
 
-  ideologies = [
-    'Законный',
-    'Нейтральный',
-    'Злой',
-  ];
+  ideologies$: Observable<Ideology[]>;
 
-  maxAge: number = -1;
+  descriptionBackground: string = 'Описание выбранной предыстории';
+  descriptionIdeology: string = 'Описание выбранного мировозрения';
 
-  constructor() {
+  constructor(
+    private _cacheService: AddCharacterCacheService,
+    private _http: HttpService,
+    private _router: Router
+  ) {
     this.addForm = new FormGroup({
       background: new FormControl('', Validators.required),
       ideology: new FormControl('', Validators.required),
     });
-    //TODO: доделать распределение навыков
+
+    this.backgrounds$ = this._http.getBackgrounds();
+    this.ideologies$ = this._http.getIdeologies();
+
+    if(this._cacheService.character.name == '') this._router.navigate(['/player/createCharacterName']);
   }
 
-  save(): void {}
+  save(): void {
+    this._cacheService.fourthStage(
+      this.addForm.value.background,
+      this.addForm.value.ideology,
+    );
+
+    this._cacheService.save();
+  }
+
+  changeDescriptionBackground(description: string): void {
+    this.descriptionBackground = "Предыстория: " + description;
+  }
+
+  changeDescriptionIdeology(description: string): void {
+    this.descriptionIdeology = "Мировозрение: " + description;
+  }
 }

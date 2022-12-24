@@ -66,7 +66,6 @@ export class CharactersComponent {
     this._selectedItems.forEach((element) => {
       ids.push(element.charID as number);
     });
-    console.log(ids)
     this._http.deleteCharacters(ids)
     .subscribe({
       complete: () => {

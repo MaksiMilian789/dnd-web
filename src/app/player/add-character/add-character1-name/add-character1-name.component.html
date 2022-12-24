@@ -1,7 +1,7 @@
 <div class="add-container">
     <mat-toolbar color="primary" class="toolbar mat-elevation-z6 secondary-toolbar">
         <a mat-icon-button [routerLink]="['/player/characters']">
-            <mat-icon>arrow_back</mat-icon>
+            <mat-icon>close</mat-icon>
         </a>
     </mat-toolbar>
     <div class="center">
@@ -15,9 +15,9 @@
                 </button>
             </mat-form-field>
             <mat-form-field appearance="outline">
-                <mat-label>Пол персонажа</mat-label>                
+                <mat-label>Пол персонажа</mat-label>
                 <mat-select formControlName="gender">
-                    <mat-option *ngFor="let gender of genders$ |async" [value]="gender.gender">
+                    <mat-option *ngFor="let gender of genders$ |async" [value]="gender.id">
                         {{ gender.gender }}
                     </mat-option>
                 </mat-select>
@@ -39,16 +39,13 @@
         <a mat-icon-button disableRipple="true">
             <span class="current">1</span>
         </a>
-        <button mat-icon-button [disabled]="!addForm.valid" (click)="save()"
-            [routerLink]="['/player/createCharacterClass']">
+        <button mat-icon-button [disabled]="!addForm.valid" [routerLink]="['/player/createCharacterClass']">
             <span>2</span>
         </button>
-        <button mat-icon-button [disabled]="!addForm.valid" (click)="save()"
-            [routerLink]="['/player/createCharacterRace']">
+        <button mat-icon-button [disabled]="true" [routerLink]="['/player/createCharacterRace']">
             <span>3</span>
         </button>
-        <button mat-icon-button [disabled]="!addForm.valid" (click)="save()"
-            [routerLink]="['/player/createCharacterBackground']">
+        <button mat-icon-button [disabled]="true" [routerLink]="['/player/createCharacterBackground']">
             <span>4</span>
         </button>
     </div>

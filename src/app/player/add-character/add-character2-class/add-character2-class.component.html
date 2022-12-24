@@ -1,15 +1,15 @@
 <mat-toolbar color="primary" class="toolbar mat-elevation-z6 secondary-toolbar">
     <a mat-icon-button [routerLink]="['/player/characters']">
-        <mat-icon>arrow_back</mat-icon>
+        <mat-icon>close</mat-icon>
     </a>
 </mat-toolbar>
 <div class="center">
     <form [formGroup]="addForm">
         <mat-form-field appearance="outline">
             <mat-label>Класс персонажа</mat-label>
-            <mat-select formControlName="class" (selectionChange)="changeDescription($event.value)">
-                <mat-option *ngFor="let class of classes" [value]="class">
-                    {{ class }}
+            <mat-select formControlName="charClass">
+                <mat-option *ngFor="let class of classes$ | async" [value]="class.id" (click)="changeDescription(class.description)"> 
+                    {{ class.className }}
                 </mat-option>
             </mat-select>
         </mat-form-field>
@@ -31,18 +31,16 @@
         <a mat-icon-button [routerLink]="['/player/characters']">
             <mat-icon>arrow_back</mat-icon>
         </a>
-        <button mat-icon-button (click)="save()" [routerLink]="['/player/createCharacterName']" class="previous">
+        <button mat-icon-button [routerLink]="['/player/createCharacterName']" class="previous">
             <span>1</span>
         </button>
         <button mat-icon-button disableRipple="true">
             <span class="current">2</span>
         </button>
-        <button mat-icon-button [disabled]="!addForm.valid" (click)="save()"
-            [routerLink]="['/player/createCharacterRace']">
+        <button mat-icon-button [disabled]="!addForm.valid" [routerLink]="['/player/createCharacterRace']">
             <span>3</span>
         </button>
-        <button mat-icon-button [disabled]="!addForm.valid" (click)="save()"
-            [routerLink]="['/player/createCharacterBackground']">
+        <button mat-icon-button [disabled]="true" [routerLink]="['/player/createCharacterBackground']">
             <span>4</span>
         </button>
     </div>

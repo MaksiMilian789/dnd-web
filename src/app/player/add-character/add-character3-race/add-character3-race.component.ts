@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { HttpService } from 'src/app/shared';
+import { Race } from 'src/app/shared/models/race.model';
+import { AddCharacterCacheService } from '../add-character-cache.service';
 
 @Component({
   selector: 'app-add-character3-race',
@@ -8,30 +13,115 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class AddCharacter3RaceComponent {
   addForm: FormGroup;
+  statsForm: FormGroup;
 
-  races = [
-    'Дварф',
-    'Драконорожденный',
-    'Полуорк',
-    'Полуэльф',
-    'Эльф',
-    'Человек',
-  ];
+  races$: Observable<Race[]>;
+
+  description: string = 'Описание выбранной расы';
 
   maxAge: number = -1;
 
-  constructor() {
+  constructor(
+    private _cacheService: AddCharacterCacheService,
+    private _http: HttpService,
+    private _router: Router
+  ) {
     this.addForm = new FormGroup({
-      class: new FormControl('', Validators.required),
+      race: new FormControl('', Validators.required),
       age: new FormControl('', Validators.required),
     });
-    //TODO: доделать распределение характеристик
+
+    this.statsForm = new FormGroup({
+      strength: new FormControl('', [
+        Validators.required,
+        Validators.min(0),
+        Validators.max(30),
+      ]),
+      dexterity: new FormControl('', [
+        Validators.required,
+        Validators.min(0),
+        Validators.max(30),
+      ]),
+      constitution: new FormControl('', [
+        Validators.required,
+        Validators.min(0),
+        Validators.max(30),
+      ]),
+      intelligence: new FormControl('', [
+        Validators.required,
+        Validators.min(0),
+        Validators.max(30),
+      ]),
+      wisdom: new FormControl('', [
+        Validators.required,
+        Validators.min(0),
+        Validators.max(30),
+      ]),
+      charisma: new FormControl('', [
+        Validators.required,
+        Validators.min(0),
+        Validators.max(30),
+      ]),
+    });
+
+    this.races$ = this._http.getRaces();
+
+    if(this._cacheService.character.name == '') this._router.navigate(['/player/createCharacterName']);
+
+    if (this._cacheService.character.raceId != 0) {
+      this.races$.subscribe((val) => {
+        let race = val.find(
+          (x) => x.id === this._cacheService.character.raceId
+        );
+        this.addForm.setValue({
+          race: race?.id,
+          age: this._cacheService.character.age,
+        });
+        this.changeMaxAge(race?.raceName as string);
+        this.description = race?.description as string;
+        this.statsForm.setValue({
+          strength: this._cacheService.character.strength,
+          dexterity: this._cacheService.character.dexterity,
+          constitution: this._cacheService.character.constitution,
+          intelligence: this._cacheService.character.intelligence,
+          wisdom: this._cacheService.character.wisdom,
+          charisma: this._cacheService.character.charisma,
+        });
+      });
+    }
   }
 
-  save(): void {}
+  save(): void {
+    this._cacheService.thirdStage(
+      this.addForm.value.race,
+      this.addForm.value.age,
+      this.statsForm.value.strength,
+      this.statsForm.value.dexterity,
+      this.statsForm.value.constitution,
+      this.statsForm.value.intelligence,
+      this.statsForm.value.wisdom,
+      this.statsForm.value.charisma
+    );
+  }
 
-  changeMaxAge(maxAge: string): void {
-    switch (maxAge) {
+  changeDescription(description: string): void {
+    this.description = description;
+  }
+
+  changeMaxAge(race: string): void {
+    switch (race) {
+      case 'Аасимар':
+        this.maxAge = 1000;
+        break;
+      case 'Гном':
+        this.maxAge = 200;
+        break;
+      case 'Тифлинг':
+        this.maxAge = 100;
+        break;
+      case 'Фирболг':
+        this.maxAge = 250;
+        break;
       case 'Дварф':
         this.maxAge = 250;
         break;

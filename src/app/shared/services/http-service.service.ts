@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Character, ShortCharacter } from '../models/character.model';
+import { Character, CharacterWithId, ShortCharacter } from '../models/character.model';
 import { Observable, of } from 'rxjs';
 import { ShortWorld } from '../models/world.model';
 import { TrackerUnit } from '../models/tracker-unit';
 import { Gender } from '../models/gender.model';
+import { Class } from '../models/class.model';
+import { Race } from '../models/race.model';
+import { Background } from '../models/background.model';
+import { Ideology } from '../models/ideology.model';
 
 @Injectable({
   providedIn: 'root',
@@ -110,13 +114,10 @@ export class HttpService {
       'Access-Control-Allow-Origin': '*',
       Authorization: sessionStorage.getItem('jwt') as string,
     });
-    return this._http.delete<void>(
-      `${this._baseUrl}/deleteCharacter`,
-      {
-        headers: headers,
-        body: { id: ids }
-      }
-    );
+    return this._http.delete<void>(`${this._baseUrl}/deleteCharacter`, {
+      headers: headers,
+      body: { id: ids },
+    });
   }
 
   public getGenders(): Observable<Gender[]> {
@@ -127,5 +128,62 @@ export class HttpService {
     return this._http.get<Gender[]>(`${this._baseUrl}/listGenders`, {
       headers: headers,
     });
+  }
+
+  public getClasses(): Observable<Class[]> {
+    let headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': '*',
+      Authorization: sessionStorage.getItem('jwt') as string,
+    });
+    return this._http.get<Class[]>(`${this._baseUrl}/listClasses`, {
+      headers: headers,
+    });
+  }
+
+  public getRaces(): Observable<Race[]> {
+    let headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': '*',
+      Authorization: sessionStorage.getItem('jwt') as string,
+    });
+    return this._http.get<Race[]>(`${this._baseUrl}/listRaces`, {
+      headers: headers,
+    });
+  }
+
+  public getBackgrounds(): Observable<Background[]> {
+    let headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': '*',
+      Authorization: sessionStorage.getItem('jwt') as string,
+    });
+    return this._http.get<Background[]>(`${this._baseUrl}/listBackgrounds`, {
+      headers: headers,
+    });
+  }
+
+  public getIdeologies(): Observable<Ideology[]> {
+    let headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': '*',
+      Authorization: sessionStorage.getItem('jwt') as string,
+    });
+    return this._http.get<Ideology[]>(`${this._baseUrl}/listIdeologies`, {
+      headers: headers,
+    });
+  }
+
+  public createCharacter(
+    req: CharacterWithId,
+    login: string
+  ): Observable<void> {
+    let headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': '*',
+      Authorization: sessionStorage.getItem('jwt') as string,
+    });
+    return this._http.post<void>(
+      `${this._baseUrl}/createCharacter`,
+      { login: login, charStructure: req },
+      {
+        headers: headers,
+      }
+    );
   }
 }

@@ -1,15 +1,16 @@
 <mat-toolbar color="primary" class="toolbar mat-elevation-z6 secondary-toolbar">
     <a mat-icon-button [routerLink]="['/player/characters']">
-        <mat-icon>arrow_back</mat-icon>
+        <mat-icon>close</mat-icon>
     </a>
 </mat-toolbar>
 <div class="center">
     <form [formGroup]="addForm">
         <mat-form-field appearance="outline">
             <mat-label>Раса персонажа</mat-label>
-            <mat-select formControlName="class" (selectionChange)="changeMaxAge($event.value)" #race>
-                <mat-option *ngFor="let race of races" [value]="race">
-                    {{ race }}
+            <mat-select formControlName="race">
+                <mat-option *ngFor="let race of races$ | async" [value]="race.id"
+                    (click)="changeMaxAge(race.raceName); changeDescription(race.description)">
+                    {{ race.raceName }}
                 </mat-option>
             </mat-select>
         </mat-form-field>
@@ -19,13 +20,19 @@
         </mat-form-field>
     </form>
 
-    <div class="stats">
+    <mat-card class="descr">
+        <mat-card-content>
+            {{description}}
+        </mat-card-content>
+    </mat-card>
+
+    <div class="stats" [formGroup]="statsForm">
         <div>
             <mat-card>
                 <mat-card-content>
                     Сила
                     <mat-form-field appearance="outline">
-                        <input matInput type="number" [min]="1" [max]="30" />
+                        <input matInput type="number" [min]="1" [max]="30" formControlName="strength" />
                     </mat-form-field>
                 </mat-card-content>
             </mat-card>
@@ -33,7 +40,7 @@
                 <mat-card-content>
                     Интеллект
                     <mat-form-field appearance="outline">
-                        <input matInput type="number" [min]="1" [max]="30" />
+                        <input matInput type="number" [min]="1" [max]="30" formControlName="intelligence" />
                     </mat-form-field>
                 </mat-card-content>
             </mat-card>
@@ -43,7 +50,7 @@
                 <mat-card-content>
                     Ловкость
                     <mat-form-field appearance="outline">
-                        <input matInput type="number" [min]="1" [max]="30" />
+                        <input matInput type="number" [min]="1" [max]="30" formControlName="dexterity" />
                     </mat-form-field>
                 </mat-card-content>
             </mat-card>
@@ -51,7 +58,7 @@
                 <mat-card-content>
                     Мудрость
                     <mat-form-field appearance="outline">
-                        <input matInput type="number" [min]="1" [max]="30" />
+                        <input matInput type="number" [min]="1" [max]="30" formControlName="wisdom" />
                     </mat-form-field>
                 </mat-card-content>
             </mat-card>
@@ -61,7 +68,7 @@
                 <mat-card-content>
                     Телосложение
                     <mat-form-field appearance="outline">
-                        <input matInput type="number" [min]="1" [max]="30" />
+                        <input matInput type="number" [min]="1" [max]="30" formControlName="constitution" />
                     </mat-form-field>
                 </mat-card-content>
             </mat-card>
@@ -69,14 +76,14 @@
                 <mat-card-content>
                     Харизма
                     <mat-form-field appearance="outline">
-                        <input matInput type="number" [min]="1" [max]="30" />
+                        <input matInput type="number" [min]="1" [max]="30" formControlName="charisma" />
                     </mat-form-field>
                 </mat-card-content>
             </mat-card>
         </div>
     </div>
 
-    <button mat-raised-button class="button-next" (click)="save()" [disabled]="!addForm.valid"
+    <button mat-raised-button class="button-next" (click)="save()" [disabled]="!addForm.valid || !statsForm.valid"
         [routerLink]="['/player/createCharacterBackground']">
         Далее
     </button>
@@ -86,16 +93,16 @@
         <a mat-icon-button [routerLink]="['/player/characters']">
             <mat-icon>arrow_back</mat-icon>
         </a>
-        <button mat-icon-button (click)="save()" [routerLink]="['/player/createCharacterName']" class="previous">
+        <button mat-icon-button [routerLink]="['/player/createCharacterName']" class="previous">
             <span>1</span>
         </button>
-        <button mat-icon-button (click)="save()" [routerLink]="['/player/createCharacterClass']" class="previous">
+        <button mat-icon-button [routerLink]="['/player/createCharacterClass']" class="previous">
             <span>2</span>
         </button>
         <button mat-icon-button disableRipple="true">
             <span class="current">3</span>
         </button>
-        <button mat-icon-button [disabled]="!addForm.valid" (click)="save()"
+        <button mat-icon-button [disabled]="!addForm.valid || !statsForm.valid"
             [routerLink]="['/player/createCharacterBackground']">
             <span>4</span>
         </button>
