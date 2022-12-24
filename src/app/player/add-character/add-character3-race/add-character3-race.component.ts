@@ -66,7 +66,7 @@ export class AddCharacter3RaceComponent {
 
     this.races$ = this._http.getRaces();
 
-    if(this._cacheService.character.name == '') this._router.navigate(['/player/createCharacterName']);
+    if(this._cacheService.character.charName == '') this._router.navigate(['/player/createCharacterName']);
 
     if (this._cacheService.character.raceId != 0) {
       this.races$.subscribe((val) => {

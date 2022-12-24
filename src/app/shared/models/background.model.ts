@@ -1,5 +1,5 @@
 export interface Background {
   id: number;
-  background: string;
+  backgroundName: string;
   description: string;
 }

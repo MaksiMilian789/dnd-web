@@ -18,7 +18,7 @@
                 <mat-label>Пол персонажа</mat-label>
                 <mat-select formControlName="gender">
                     <mat-option *ngFor="let gender of genders$ |async" [value]="gender.id">
-                        {{ gender.gender }}
+                        {{ gender.genderName }}
                     </mat-option>
                 </mat-select>
             </mat-form-field>

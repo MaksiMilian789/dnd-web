@@ -1,16 +1,16 @@
 export interface ShortCharacter {
-  charID?: number;
-  name: string;
+  charId?: number;
+  charName: string;
   className: string;
   level: number;
 }
 
 export interface Character extends ShortCharacter {
   age: number;
-  gender: string;
-  race: string;
-  background: string;
-  ideology: string;
+  genderName: string;
+  raceName: string;
+  backgroundName: string;
+  ideologyName: string;
   strength: number;
   dexterity: number;
   constitution: number;
@@ -25,7 +25,7 @@ export interface Character extends ShortCharacter {
 }
 
 export interface CharacterWithId {
-  name: string;
+  charName: string;
   level: number;
   age: number;
   classId: number;

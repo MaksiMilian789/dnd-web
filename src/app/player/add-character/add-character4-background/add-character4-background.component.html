@@ -10,7 +10,7 @@
             <mat-select formControlName="background">
                 <mat-option *ngFor="let background of backgrounds$ | async" [value]="background.id"
                     (click)="changeDescriptionBackground(background.description)">
-                    {{ background.background }}
+                    {{ background.backgroundName }}
                 </mat-option>
             </mat-select>
         </mat-form-field>
@@ -20,7 +20,7 @@
             <mat-select formControlName="ideology">
                 <mat-option *ngFor="let ideology of ideologies$ | async" [value]="ideology.id"
                     (click)="changeDescriptionIdeology(ideology.description)">
-                    {{ ideology.ideologiesName }}
+                    {{ ideology.ideologyName }}
                 </mat-option>
             </mat-select>
         </mat-form-field>

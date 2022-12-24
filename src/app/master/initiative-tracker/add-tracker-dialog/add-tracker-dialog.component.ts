@@ -15,7 +15,7 @@ export class AddTrackerDialogComponent {
 
   constructor(private _dialogRef: MatDialogRef<AddTrackerDialogComponent>) {
     this.addForm = new FormGroup({
-      name: new FormControl('', Validators.required),
+      charName: new FormControl('', Validators.required),
       initiative: new FormControl('', Validators.required),
       color: new FormControl('', Validators.required),
     });
@@ -23,7 +23,7 @@ export class AddTrackerDialogComponent {
 
   add() {
     let newUnit: TrackerUnit = {
-      name: this.addForm.value.name,
+      charName: this.addForm.value.charName,
       initiative: this.addForm.value.initiative,
       color: this.addForm.value.color,
     };
