@@ -3,5 +3,5 @@ export interface Inventory {
   name: string;
   description: string;
   objectId: number;
-  type: string;
+  type: number;
 }

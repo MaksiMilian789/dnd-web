@@ -520,4 +520,18 @@ export class HttpService {
       }
     );
   }
+
+  public editPriorityObject(id: number, type: number): Observable<void> {
+    let headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': '*',
+      Authorization: sessionStorage.getItem('jwt') as string,
+    });
+    return this._http.put<void>(
+      `${this._baseUrl}/priorityObject`,
+      { id: id, type: type },
+      {
+        headers: headers,
+      }
+    );
+  }
 }

@@ -16,6 +16,7 @@ import { Character } from 'src/app/shared/models/character.model';
 import { Condition } from 'src/app/shared/models/condition.model';
 import { CharacterInfoDialogComponent } from '../character-info-dialog/character-info-dialog.component';
 import { AddConditionDialogComponent } from './add-condition-dialog/add-condition-dialog.component';
+import { EditPriorityItemComponent } from './edit-priority-item/edit-priority-item.component';
 
 @Component({
   selector: 'app-character-fight',
@@ -26,6 +27,11 @@ export class CharacterFightComponent {
   charId: number = Number(this._route.snapshot.paramMap.get('characterId'));
   character$: Observable<Character> = this._http.loadCharacter(this.charId);
   hpForm: FormGroup;
+
+  firstItem: string = '';
+  firstItemId: number = 0;
+  secondItem: string = '';
+  secondItemId: number = 0;
 
   condition$: Observable<Condition[]> = this._http.getCharacterConditions(
     this.charId
@@ -44,6 +50,8 @@ export class CharacterFightComponent {
     });
 
     this.refreshHits();
+
+    this.reloadItems();
   }
 
   refreshHits(): void {
@@ -102,6 +110,22 @@ export class CharacterFightComponent {
     this.condition$ = this._http.getCharacterConditions(this.charId);
   }
 
+  reloadItems(): void {
+    this._http.getInventory(this.charId).subscribe((data) => {
+      data.forEach((element) => {
+        if (element.type == 0) {
+          this.firstItem = element.name;
+          this.firstItemId = element.id;
+        }
+
+        if (element.type == 1) {
+          this.secondItem = element.name;
+          this.secondItemId = element.id;
+        }
+      });
+    });
+  }
+
   info(character: Character): void {
     this._dialog
       .open(CharacterInfoDialogComponent, {
@@ -125,15 +149,25 @@ export class CharacterFightComponent {
   }
 
   deleteCond(condId: number): void {
-    this._http
-    .deleteCharacterCondition(
-      this.charId,
-      condId
-    )
-    .subscribe({
+    this._http.deleteCharacterCondition(this.charId, condId).subscribe({
       complete: () => {
         this._snackbar.open('Удаление успешно.');
         this.reloadCond();
       },
-    });}
+    });
+  }
+
+  editPriorityItems(): void {
+    this._dialog
+      .open(EditPriorityItemComponent, {
+        data: {
+          charId: this.charId,
+          firstItem: this.firstItemId,
+          secondItem: this.secondItemId,
+        },
+        width: '300px',
+      })
+      .afterClosed()
+      .subscribe(() => this.reloadItems());
+  }
 }

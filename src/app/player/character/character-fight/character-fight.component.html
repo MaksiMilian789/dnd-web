@@ -125,16 +125,35 @@
                 </div>
             </mat-card>
         </div>
-        <mat-card class="item">Основной предмет: {{character.name}}</mat-card>
-        <mat-card class="item">Вторичный предмет: {{character.name}}</mat-card>
+        <mat-card class="item">
+            <ng-container *ngIf="firstItem.length == 0">
+                Основной предмет:
+                <button mat-icon-button class="spec-button" (click)="editPriorityItems()"><mat-icon>add</mat-icon></button>
+            </ng-container>
+            <ng-container *ngIf="firstItem.length != 0">
+                <button mat-icon-button class="spec-button" (click)="editPriorityItems()"><mat-icon>more_vert</mat-icon></button>
+                {{firstItem}}
+            </ng-container>
+        </mat-card>
+        <mat-card class="item">
+            <ng-container *ngIf="secondItem.length == 0">
+                Вторичный предмет:
+                <button mat-icon-button class="spec-button" (click)="editPriorityItems()"><mat-icon>add</mat-icon></button>
+            </ng-container>
+            <ng-container *ngIf="secondItem.length != 0">
+                <button mat-icon-button class="spec-button" (click)="editPriorityItems()"><mat-icon>more_vert</mat-icon></button>
+                {{secondItem}}
+            </ng-container>
+        </mat-card>
         <ng-container *ngIf="condition$ | async as condition">
             <mat-card class="cond">
                 <ng-container *ngIf="condition.length == 0">
-                    <button mat-icon-button (click)="addCond()"><mat-icon>add</mat-icon></button>
+                    <button mat-icon-button (click)="addCond()" class="spec-button"><mat-icon>add</mat-icon></button>
                     Текущее состояние персонажа
                 </ng-container>
                 <ng-container *ngIf="condition.length != 0">
-                    <button mat-icon-button (click)="deleteCond(condition[0].id)"><mat-icon>close</mat-icon></button>
+                    <button mat-icon-button (click)="deleteCond(condition[0].id)"
+                        class="spec-button"><mat-icon>close</mat-icon></button>
                     {{condition[0].name}}
                 </ng-container>
             </mat-card>
