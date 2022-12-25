@@ -19,7 +19,7 @@ export class AddCharacterCacheService {
       level: 0,
       age: 0,
       classId: 0,
-      genderId: 0,
+      gendersId: 0,
       raceId: 0,
       backgroundId: 0,
       ideologyId: 0,
@@ -37,9 +37,9 @@ export class AddCharacterCacheService {
     };
   }
 
-  firstStage(name: string, genderId: number) {
+  firstStage(name: string, gendersId: number) {
     this.character.name = name;
-    this.character.genderId = genderId;
+    this.character.gendersId = gendersId;
   }
 
   secondStage(classId: number) {

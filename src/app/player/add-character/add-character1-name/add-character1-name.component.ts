@@ -29,7 +29,7 @@ export class AddCharacter1NameComponent {
     if (this._cacheService.character.name != '') {
       this.genders$.subscribe((val) => {
         let gender = val.find(
-          (x) => x.id === this._cacheService.character.genderId
+          (x) => x.id === this._cacheService.character.gendersId
         )?.id;
         this.addForm.patchValue({
           name: this._cacheService.character.name,

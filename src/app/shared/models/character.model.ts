@@ -29,7 +29,7 @@ export interface CharacterWithId {
   level: number;
   age: number;
   classId: number;
-  genderId: number;
+  gendersId: number;
   raceId: number;
   backgroundId: number;
   ideologyId: number;
