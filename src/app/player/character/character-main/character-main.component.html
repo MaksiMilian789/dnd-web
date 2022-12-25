@@ -13,7 +13,7 @@
     <div class="card-container stats" [formGroup]="hpForm">
         <mat-card class="card-stat">
             <mat-form-field appearance="outline">
-                <input matInput type="number" value="{{character.maxHp}}" [disabled]="true" />
+                <input matInput type="number" [(ngModel)]="character.maxHp" formControlName="maxHp"/>
             </mat-form-field>
             <mat-card-subtitle class="card-stat-subtext">Max Хиты</mat-card-subtitle>
         </mat-card>

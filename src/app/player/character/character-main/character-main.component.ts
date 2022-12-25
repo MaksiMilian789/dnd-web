@@ -7,6 +7,7 @@ import {
   debounceTime,
   distinctUntilChanged,
   map,
+  merge,
   Observable,
   startWith,
 } from 'rxjs';
@@ -34,6 +35,7 @@ export class CharacterMainComponent {
     this.hpForm = new FormGroup({
       hp: new FormControl(0, [Validators.required, Validators.min(0)]),
       addHp: new FormControl(0, [Validators.required, Validators.min(0)]),
+      maxHp: new FormControl({ value: 0, disabled: true }),
     });
 
     this.statsForm = new FormGroup({
@@ -73,16 +75,50 @@ export class CharacterMainComponent {
   }
 
   refreshHits(): void {
-    this.hpForm.valueChanges
-      .pipe(startWith(undefined), debounceTime(1000), distinctUntilChanged())
+    this.hpForm
+      .get('hp')
+      ?.valueChanges.pipe(
+        startWith(undefined),
+        debounceTime(1000),
+        distinctUntilChanged()
+      )
       .subscribe(() => {
-        this._http
-          .editCharacterHp(
-            this.charId,
-            this.hpForm.value.hp,
-            this.hpForm.value.addHp
-          )
-          .subscribe();
+        this.hpForm.get('maxHp')?.enable();
+        if (this.hpForm.value.hp > this.hpForm.value.maxHp) {
+          this.hpForm.patchValue({ hp: this.hpForm.value.maxHp });
+        } else {
+          this._http
+            .editCharacterHp(
+              this.charId,
+              this.hpForm.value.hp,
+              this.hpForm.value.addHp
+            )
+            .subscribe();
+        }
+        this.hpForm.get('maxHp')?.disable();
+      });
+
+      this.hpForm
+      .get('addHp')
+      ?.valueChanges.pipe(
+        startWith(undefined),
+        debounceTime(1000),
+        distinctUntilChanged()
+      )
+      .subscribe(() => {
+        this.hpForm.get('maxHp')?.enable();
+        if (this.hpForm.value.hp > this.hpForm.value.maxHp) {
+          this.hpForm.patchValue({ hp: this.hpForm.value.maxHp });
+        } else {
+          this._http
+            .editCharacterHp(
+              this.charId,
+              this.hpForm.value.hp,
+              this.hpForm.value.addHp
+            )
+            .subscribe();
+        }
+        this.hpForm.get('maxHp')?.disable();
       });
   }
 
