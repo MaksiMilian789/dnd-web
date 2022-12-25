@@ -35,7 +35,7 @@ export class AddCharacter4BackgroundComponent {
     this.backgrounds$ = this._http.getBackgrounds();
     this.ideologies$ = this._http.getIdeologies();
 
-    if(this._cacheService.character.charName == '') this._router.navigate(['/player/createCharacterName']);
+    if(this._cacheService.character.name == '') this._router.navigate(['/player/createCharacterName']);
   }
 
   save(): void {

@@ -1,5 +1,5 @@
 export interface Race {
   id: number;
-  raceName: string;
+  name: string;
   description: string;
 }

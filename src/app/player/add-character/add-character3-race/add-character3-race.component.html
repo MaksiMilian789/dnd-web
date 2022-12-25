@@ -9,8 +9,8 @@
             <mat-label>Раса персонажа</mat-label>
             <mat-select formControlName="race">
                 <mat-option *ngFor="let race of races$ | async" [value]="race.id"
-                    (click)="changeMaxAge(race.raceName); changeDescription(race.description)">
-                    {{ race.raceName }}
+                    (click)="changeMaxAge(race.name); changeDescription(race.description)">
+                    {{ race.name }}
                 </mat-option>
             </mat-select>
         </mat-form-field>

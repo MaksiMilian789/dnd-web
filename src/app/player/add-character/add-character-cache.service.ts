@@ -15,7 +15,7 @@ export class AddCharacterCacheService {
 
   reload(): void{
     this.character = {
-      charName: '',
+      name: '',
       level: 0,
       age: 0,
       classId: 0,
@@ -38,7 +38,7 @@ export class AddCharacterCacheService {
   }
 
   firstStage(name: string, genderId: number) {
-    this.character.charName = name;
+    this.character.name = name;
     this.character.genderId = genderId;
   }
 

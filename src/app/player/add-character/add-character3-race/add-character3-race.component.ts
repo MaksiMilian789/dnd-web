@@ -66,7 +66,7 @@ export class AddCharacter3RaceComponent {
 
     this.races$ = this._http.getRaces();
 
-    if(this._cacheService.character.charName == '') this._router.navigate(['/player/createCharacterName']);
+    if(this._cacheService.character.name == '') this._router.navigate(['/player/createCharacterName']);
 
     if (this._cacheService.character.raceId != 0) {
       this.races$.subscribe((val) => {
@@ -77,7 +77,7 @@ export class AddCharacter3RaceComponent {
           race: race?.id,
           age: this._cacheService.character.age,
         });
-        this.changeMaxAge(race?.raceName as string);
+        this.changeMaxAge(race?.name as string);
         this.description = race?.description as string;
         this.statsForm.setValue({
           strength: this._cacheService.character.strength,

@@ -1,5 +1,5 @@
 export interface TrackerUnit {
-  charName: string;
+  name: string;
   initiative: string;
   color: string;
 }

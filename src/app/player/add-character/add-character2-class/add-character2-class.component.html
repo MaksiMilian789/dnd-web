@@ -9,7 +9,7 @@
             <mat-label>Класс персонажа</mat-label>
             <mat-select formControlName="charClass">
                 <mat-option *ngFor="let class of classes$ | async" [value]="class.id" (click)="changeDescription(class.description)"> 
-                    {{ class.className }}
+                    {{ class.name }}
                 </mat-option>
             </mat-select>
         </mat-form-field>

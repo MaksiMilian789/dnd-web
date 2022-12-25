@@ -1,5 +1,5 @@
 export interface Ideology {
   id: number;
-  ideologyName: string;
+  name: string;
   description: string;
 }

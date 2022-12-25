@@ -3,8 +3,8 @@
     <form [formGroup]="addForm">
         <mat-form-field appearance="outline">
             <mat-label>Имя персонажа</mat-label>
-            <input matInput formControlName="charName" />
-            <button *ngIf="addForm.get('charName')?.value" matSuffix mat-icon-button (click)="addForm.get('charName')?.reset()"
+            <input matInput formControlName="name" />
+            <button *ngIf="addForm.get('name')?.value" matSuffix mat-icon-button (click)="addForm.get('name')?.reset()"
                 type="button">
                 <mat-icon>close</mat-icon>
             </button>

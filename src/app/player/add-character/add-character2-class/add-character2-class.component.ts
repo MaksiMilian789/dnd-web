@@ -29,7 +29,7 @@ export class AddCharacter2ClassComponent {
 
     this.classes$ = this._http.getClasses();
 
-    if (this._cacheService.character.charName == '')
+    if (this._cacheService.character.name == '')
       this._router.navigate(['/player/createCharacterName']);
 
     if (this._cacheService.character.classId != 0) {

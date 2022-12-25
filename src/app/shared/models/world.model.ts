@@ -1,6 +1,6 @@
 export interface ShortWorld {
   id: number;
-  worldName: string;
+  name: string;
   description: string;
 }
 

@@ -26,13 +26,13 @@ export class AddCharacter1NameComponent {
 
     this.genders$ = this._http.getGenders();
 
-    if (this._cacheService.character.charName != '') {
+    if (this._cacheService.character.name != '') {
       this.genders$.subscribe((val) => {
         let gender = val.find(
           (x) => x.id === this._cacheService.character.genderId
         )?.id;
         this.addForm.patchValue({
-          name: this._cacheService.character.charName,
+          name: this._cacheService.character.name,
           gender: gender,
         });
       });

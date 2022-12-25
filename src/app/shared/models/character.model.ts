@@ -1,6 +1,6 @@
 export interface ShortCharacter {
-  charId?: number;
-  charName: string;
+  id?: number;
+  name: string;
   className: string;
   level: number;
 }
@@ -25,7 +25,7 @@ export interface Character extends ShortCharacter {
 }
 
 export interface CharacterWithId {
-  charName: string;
+  name: string;
   level: number;
   age: number;
   classId: number;
