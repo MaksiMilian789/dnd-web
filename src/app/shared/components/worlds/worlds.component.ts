@@ -27,7 +27,8 @@ export class WorldsComponent {
   constructor(
     private _http: HttpService,
     private _router: Router,
-    private _dialog: MatDialog
+    private _dialog: MatDialog,
+    private _snackbar: MatSnackBar
   ) {
     this.role = this._router.url.split('/')[1];
 
@@ -65,7 +66,18 @@ export class WorldsComponent {
   }
 
   deleteSelectedItems(): void {
-    console.log(this._selectedItems);
+    let ids: number[] = [];
+    this._selectedItems.forEach((element) => {
+      ids.push(element.id as number);
+    });
+    this._http.deleteWorlds(ids)
+    .subscribe({
+      complete: () => {
+        this._snackbar.open('Удаление успешно.');
+        this.shortWorlds$ = this._http.loadShortWorlds(this.userLogin);
+        this.disableSelectionMode();
+      },
+    });
   }
 
   addWorld(): void {

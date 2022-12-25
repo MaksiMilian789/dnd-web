@@ -73,6 +73,7 @@ export class CharactersComponent {
       complete: () => {
         this._snackbar.open('Удаление успешно.');
         this.shortCharacters$ = this._http.loadShortCharacters(this.userLogin);
+        this.disableSelectionMode();
       },
     });
   }
@@ -82,7 +83,7 @@ export class CharactersComponent {
       .open(SimpleDialogComponent, {
         data: {
           title: 'Инструкция',
-          text: 'Вы начали создание своего персонажа. Создание происходит в 4 этапа. Переключаться между этапами можно используя кнопки навигации в тулбаре.',
+          text: 'Вы начали создание своего персонажа. Создание происходит в 4 этапа. Переключаться между этапами можно используя кнопки навигации в нижнем тулбаре.',
         },
       })
       .afterClosed()

@@ -91,6 +91,17 @@ export class HttpService {
     );
   }
 
+  public deleteWorlds(ids: number[]): Observable<void> {
+    let headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': '*',
+      Authorization: sessionStorage.getItem('jwt') as string,
+    });
+    return this._http.delete<void>(`${this._baseUrl}/deleteWorld`, {
+      headers: headers,
+      body: { id: ids },
+    });
+  }
+
   public getTracker(id: number): Observable<TrackerUnit[]> {
     let headers = new HttpHeaders({
       'Access-Control-Allow-Origin': '*',

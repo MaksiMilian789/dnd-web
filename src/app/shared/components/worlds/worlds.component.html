@@ -3,6 +3,19 @@
         <mat-icon>arrow_back</mat-icon>
     </button>
     <div class="spacer"></div>
+    <button mat-icon-button (click)="enableSelectionMode()" matTooltip="Включить режим выбора"
+        *ngIf="!isSelectionModeEnabled; else selectionButtons">
+        <mat-icon>checklist</mat-icon>
+    </button>
+    <ng-template #selectionButtons>
+        <button mat-icon-button (click)="disableSelectionMode()" matTooltip="Отменить">
+            <mat-icon>cancel</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deleteSelectedItems()" matTooltip="Удалить выбранное"
+            [disabled]="!canDelete">
+            <mat-icon>delete_forever</mat-icon>
+        </button>
+    </ng-template>
     <button mat-icon-button *ngIf="role == 'master'" (click)="addWorld()">
         <mat-icon>add</mat-icon>
     </button>
