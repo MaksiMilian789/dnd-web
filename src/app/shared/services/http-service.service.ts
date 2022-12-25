@@ -91,6 +91,24 @@ export class HttpService {
     );
   }
 
+  public editWorld(
+    id: number,
+    name: string,
+    description: string
+  ): Observable<void> {
+    let headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': '*',
+      Authorization: sessionStorage.getItem('jwt') as string,
+    });
+    return this._http.put<void>(
+      `${this._baseUrl}/editWorld`,
+      { id: id, name: name, description: description },
+      {
+        headers: headers,
+      }
+    );
+  }
+
   public deleteWorlds(ids: number[]): Observable<void> {
     let headers = new HttpHeaders({
       'Access-Control-Allow-Origin': '*',

@@ -10,6 +10,7 @@ import { ColorPipe } from './pipes/color.pipe';
 import { WorldComponent } from './components/world/world.component';
 import { StatsSkillPipe } from './pipes/stats-skill.pipe';
 import { AddWorldDialogComponent } from './components/worlds/add-world-dialog/add-world-dialog.component';
+import { EditWorldDialogComponent } from './components/world/edit-world-dialog/edit-world-dialog.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { AddWorldDialogComponent } from './components/worlds/add-world-dialog/ad
     ColorPipe,
     WorldComponent,
     StatsSkillPipe,
-    AddWorldDialogComponent,    
+    AddWorldDialogComponent,
+    EditWorldDialogComponent  
   ],
   imports: [
     CommonModule,
@@ -37,6 +39,7 @@ import { AddWorldDialogComponent } from './components/worlds/add-world-dialog/ad
     ColorPipe,
     StatsSkillPipe,
     AddWorldDialogComponent,
+    EditWorldDialogComponent
   ],
 })
 export class SharedModule {}

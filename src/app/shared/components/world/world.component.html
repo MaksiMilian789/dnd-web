@@ -1,11 +1,15 @@
-<mat-toolbar color="primary" class="toolbar mat-elevation-z6 secondary-toolbar">
+
+<ng-container *ngIf="world$ | async as world">
+    <mat-toolbar color="primary" class="toolbar mat-elevation-z6 secondary-toolbar">
     <a mat-icon-button [routerLink]="role == 'master' ? ['/master/worlds'] : ['/player/worlds']">
         <mat-icon>arrow_back</mat-icon>
     </a>
     <div class="spacer"></div>
+    <button mat-icon-button *ngIf="role == 'master'" (click)="editWorld(world)">
+        <mat-icon>edit</mat-icon>
+    </button>
 </mat-toolbar>
 
-<ng-container *ngIf="world$ | async as world">
     <div class="card-container center">
         <mat-card class="card">
             <mat-card-title>{{world.name}}</mat-card-title>
