@@ -1,0 +1,197 @@
+.center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 30px;
+  margin-top: 10px;
+}
+
+.divider-vertical {
+  height: 100px;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.card {
+  min-width: 200px;
+  width: 70vw;
+}
+
+.six-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 122px);
+  grid-column-gap: 15px;
+
+  mat-card {
+    margin-bottom: 20px;
+    padding: 10px;
+    padding-bottom: 3px;
+  }
+
+  mat-card-content {
+    font-size: 13.5px;
+    height: 70px;
+    text-align: center;
+    margin-bottom: 5px;
+
+    mat-form-field {
+      margin-left: 5px;
+      margin-right: 5px;
+      width: 60px;
+      text-align: center;
+      font-size: 30px;
+    }
+
+    ::ng-deep .mat-form-field-wrapper {
+      margin-bottom: -1em;
+    }
+
+    ::ng-deep .mat-form-field-infix {
+      padding: 0;
+      border: 10px;
+    }
+
+    ::ng-deep .mat-form-field-flex {
+      padding: 0;
+    }
+
+    ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-end {
+      border-radius: 0px !important;
+      color: white;
+    }
+    ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-start {
+      border-radius: 0px !important;
+      color: white;
+    }
+  }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.stats {
+  display: flex;
+  justify-content: center;
+  margin: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.card-stats {
+  min-width: 145px;
+  width: 60vw;
+  height: 50px;
+  margin-right: 5vw;
+}
+
+.card-stat {
+  display: flex;
+  flex-direction: column;
+  height: 70px;
+  width: 70px;
+  padding: 5px;
+
+  mat-form-field {
+    margin-left: 5px;
+    margin-right: 5px;
+    width: 60px;
+    text-align: center;
+    font-size: 30px;
+  }
+
+  ::ng-deep .mat-form-field-wrapper {
+    margin-bottom: -1em;
+  }
+
+  ::ng-deep .mat-form-field-infix {
+    padding: 0;
+    border: 10px;
+  }
+
+  ::ng-deep .mat-form-field-flex {
+    padding: 0;
+  }
+
+  ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-end {
+    border-radius: 0px !important;
+    color: white;
+  }
+  ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-start {
+    border-radius: 0px !important;
+    color: white;
+  }
+}
+
+.card-stat-subtext {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: smaller;
+}
+
+.form-stats {
+  font-size: medium;
+  width: 100%;
+}
+
+.save {
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.stat-skill {
+  padding-top: 5px;
+  padding-bottom: 3px;
+  font-size: small;
+}
+
+.descr {
+  display: flex;
+  flex-direction: row;
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
+.edit-stat {
+  margin-top: -10px !important;
+}
+
+.buttons-skill-magic {
+  margin-bottom: 10px;
+}
+
+.button-skill {
+  margin-right: 10px;
+  width: 30vw;
+}
+
+.button-magic {
+  width: 50vw;
+}
+
+.button-inventory {
+  width: 82vw;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.item {
+  width: 80%;
+  margin-bottom: 10px;
+}
+
+.cond {
+  width: 80%;
+  margin-bottom: 10px;
+}

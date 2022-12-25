@@ -17,6 +17,7 @@ import { Inventory } from '../models/inventory.model';
 import { Item } from '../models/item.model';
 import { Skill } from '../models/skill.model';
 import { Spell } from '../models/spell.model';
+import { Condition } from '../models/condition.model';
 
 @Injectable({
   providedIn: 'root',
@@ -456,10 +457,66 @@ export class HttpService {
         id: id,
         level: level,
         maxHp: maxHp,
-        proficiencyBonus: proficiencyBonus
+        proficiencyBonus: proficiencyBonus,
       },
       {
         headers: headers,
+      }
+    );
+  }
+
+  public getConditions(): Observable<Condition[]> {
+    let headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': '*',
+      Authorization: sessionStorage.getItem('jwt') as string,
+    });
+    return this._http.get<Condition[]>(`${this._baseUrl}/listConditions`, {
+      headers: headers,
+    });
+  }
+
+  public getCharacterConditions(id: number): Observable<Condition[]> {
+    let headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': '*',
+      Authorization: sessionStorage.getItem('jwt') as string,
+    });
+    var params = new HttpParams().append('id', id);
+    return this._http.get<Condition[]>(`${this._baseUrl}/characterConditions`, {
+      params: params,
+      headers: headers,
+    });
+  }
+
+  public addCharacterCondition(
+    charId: number,
+    conditionId: number
+  ): Observable<void> {
+    let headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': '*',
+      Authorization: sessionStorage.getItem('jwt') as string,
+    });
+    return this._http.post<void>(
+      `${this._baseUrl}/addCharacterCondition`,
+      { charId: charId, conditionId: conditionId },
+      {
+        headers: headers,
+      }
+    );
+  }
+
+  public deleteCharacterCondition(
+    charId: number,
+    conditionId: number
+  ): Observable<void> {
+    let headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': '*',
+      Authorization: sessionStorage.getItem('jwt') as string,
+    });
+    return this._http.delete<void>(
+      `${this._baseUrl}/deleteCharacterCondition`,
+      {
+        headers: headers,
+        body: { charId: charId, conditionId: conditionId },
       }
     );
   }

@@ -22,6 +22,7 @@ import { WorldComponent } from './shared/components/world/world.component';
 import { CharacterInventoryComponent } from './player/character/character-inventory/character-inventory.component';
 import { CharacterSkillsComponent } from './player/character/character-skills/character-skills.component';
 import { CharacterSpellsComponent } from './player/character/character-spells/character-spells.component';
+import { CharacterFightComponent } from './player/character/character-fight/character-fight.component';
 
 const routes: Routes = [
   {
@@ -61,6 +62,10 @@ const routes: Routes = [
       {
         path: 'character/:characterId',
         component: CharacterMainComponent,
+      },
+      {
+        path: 'character/:characterId/fight',
+        component: CharacterFightComponent,
       },
       {
         path: 'character/:characterId/inventory',

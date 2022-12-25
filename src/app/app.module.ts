@@ -33,6 +33,7 @@ import { CharacterSpellsComponent } from './player/character/character-spells/ch
 import { AddSpellDialogComponent } from './player/character/character-spells/add-spell-dialog/add-spell-dialog.component';
 import { CharacterFightComponent } from './player/character/character-fight/character-fight.component';
 import { CharacterInfoDialogComponent } from './player/character/character-info-dialog/character-info-dialog.component';
+import { AddConditionDialogComponent } from './player/character/character-fight/add-condition-dialog/add-condition-dialog.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { CharacterInfoDialogComponent } from './player/character/character-info-
     CharacterSpellsComponent,
     AddSpellDialogComponent,
     CharacterFightComponent,
-    CharacterInfoDialogComponent
+    CharacterInfoDialogComponent,
+    AddConditionDialogComponent
   ],
   imports: [
     HttpClientModule,

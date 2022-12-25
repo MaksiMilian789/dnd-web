@@ -4,6 +4,10 @@
             <mat-icon>arrow_back</mat-icon>
         </button>
         <div class="spacer"></div>
+        <button mat-icon-button [routerLink]="['fight']">
+            <mat-icon>shield</mat-icon>
+        </button>
+        <div class="spacer"></div>
         <h1>{{character.name}}</h1>
         <button mat-icon-button (click)="info(character)">
             <mat-icon>info</mat-icon>
