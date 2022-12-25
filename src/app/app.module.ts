@@ -31,6 +31,8 @@ import { CharacterSkillsComponent } from './player/character/character-skills/ch
 import { AddSkillDialogComponent } from './player/character/character-skills/add-skill-dialog/add-skill-dialog.component';
 import { CharacterSpellsComponent } from './player/character/character-spells/character-spells.component';
 import { AddSpellDialogComponent } from './player/character/character-spells/add-spell-dialog/add-spell-dialog.component';
+import { CharacterFightComponent } from './player/character/character-fight/character-fight.component';
+import { CharacterInfoDialogComponent } from './player/character/character-info-dialog/character-info-dialog.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +58,9 @@ import { AddSpellDialogComponent } from './player/character/character-spells/add
     CharacterSkillsComponent,
     AddSkillDialogComponent,
     CharacterSpellsComponent,
-    AddSpellDialogComponent
+    AddSpellDialogComponent,
+    CharacterFightComponent,
+    CharacterInfoDialogComponent
   ],
   imports: [
     HttpClientModule,

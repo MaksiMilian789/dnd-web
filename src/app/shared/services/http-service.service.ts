@@ -365,4 +365,102 @@ export class HttpService {
       body: { charId: charId, skillId: id },
     });
   }
+
+  public editCharacterStats(
+    id: number,
+    strength: number,
+    dexterity: number,
+    constitution: number,
+    intelligence: number,
+    wisdom: number,
+    charisma: number
+  ): Observable<void> {
+    let headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': '*',
+      Authorization: sessionStorage.getItem('jwt') as string,
+    });
+    return this._http.put<void>(
+      `${this._baseUrl}/editCharacterStats`,
+      {
+        id: id,
+        strength: strength,
+        dexterity: dexterity,
+        constitution: constitution,
+        intelligence: intelligence,
+        wisdom: wisdom,
+        charisma: charisma,
+      },
+      {
+        headers: headers,
+      }
+    );
+  }
+
+  public editCharacterHp(
+    id: number,
+    hp: number,
+    addHp: number
+  ): Observable<void> {
+    let headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': '*',
+      Authorization: sessionStorage.getItem('jwt') as string,
+    });
+    return this._http.put<void>(
+      `${this._baseUrl}/editCharacterHp`,
+      {
+        id: id,
+        hp: hp,
+        addHp: addHp,
+      },
+      {
+        headers: headers,
+      }
+    );
+  }
+
+  public editCharacterInfo(
+    id: number,
+    name: string,
+    age: number
+  ): Observable<void> {
+    let headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': '*',
+      Authorization: sessionStorage.getItem('jwt') as string,
+    });
+    return this._http.put<void>(
+      `${this._baseUrl}/editCharacterInfo`,
+      {
+        id: id,
+        name: name,
+        age: age,
+      },
+      {
+        headers: headers,
+      }
+    );
+  }
+
+  public editCharacterLevel(
+    id: number,
+    level: number,
+    maxHp: number,
+    proficiencyBonus: number
+  ): Observable<void> {
+    let headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': '*',
+      Authorization: sessionStorage.getItem('jwt') as string,
+    });
+    return this._http.put<void>(
+      `${this._baseUrl}/editCharacterLevel`,
+      {
+        id: id,
+        level: level,
+        maxHp: maxHp,
+        proficiencyBonus: proficiencyBonus
+      },
+      {
+        headers: headers,
+      }
+    );
+  }
 }

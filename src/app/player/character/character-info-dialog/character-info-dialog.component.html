@@ -1,0 +1,54 @@
+<h3 mat-dialog-title>Информация о персонаже</h3>
+<mat-dialog-content>
+    <form [formGroup]="infoForm">
+        <mat-form-field appearance="outline">
+            <mat-label>Имя персонажа</mat-label>
+            <input matInput formControlName="name" />
+            <button *ngIf="infoForm.get('name')?.value" matSuffix mat-icon-button
+                (click)="infoForm.get('name')?.reset()" type="button">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Класс персонажа</mat-label>
+            <input matInput formControlName="class" readonly="true" />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Раса персонажа</mat-label>
+            <input matInput formControlName="race" readonly="true" />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Мировозрение персонажа</mat-label>
+            <input matInput formControlName="ideology" readonly="true" />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Предыстория персонажа</mat-label>
+            <input matInput formControlName="background" readonly="true" />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Уровень персонажа</mat-label>
+            <input matInput type="number" formControlName="level" />
+            <button *ngIf="infoForm.get('level')?.value" matSuffix mat-icon-button
+                (click)="infoForm.get('level')?.reset()" type="button">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Возраст персонажа</mat-label>
+            <input matInput type="number" formControlName="age" />
+            <button *ngIf="infoForm.get('age')?.value" matSuffix mat-icon-button (click)="infoForm.get('age')?.reset()"
+                type="button">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-icon-button color="primary" [disabled]="!infoForm.valid" (click)="save()" class="icon">
+        <mat-icon inline="true">save</mat-icon>
+    </button>
+    <div class="spacer"></div>
+    <button mat-button color="primary" [disabled]="!infoForm.valid" (click)="close()">
+        Закрыть
+    </button>
+</mat-dialog-actions>
