@@ -40,6 +40,11 @@ export class InitiativeTrackerComponent {
 
   remove(unit: TrackerUnit): void {
     this.units = this.units.filter((val) => val != unit);
+    this._http.setTracker(this.worldId, this.units).subscribe({
+      complete: () => {
+        this._snackbar.open('Удаление успешно.');
+      },
+    });
   }
 
   add(): void {
