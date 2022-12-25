@@ -7,9 +7,7 @@ import {
   trigger,
 } from '@angular/animations';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
 import { HttpService } from 'src/app/shared';
-import { Character } from 'src/app/shared/models/character.model';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -18,9 +16,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddItemDialogComponent } from './add-item-dialog/add-item-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-/**
- * @title Table with expandable rows
- */
 @Component({
   selector: 'app-character-inventory',
   templateUrl: './character-inventory.component.html',

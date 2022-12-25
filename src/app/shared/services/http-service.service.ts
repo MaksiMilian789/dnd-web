@@ -15,6 +15,7 @@ import { Background } from '../models/background.model';
 import { Ideology } from '../models/ideology.model';
 import { Inventory } from '../models/inventory.model';
 import { Item } from '../models/item.model';
+import { Skill } from '../models/skill.model';
 
 @Injectable({
   providedIn: 'root',
@@ -238,6 +239,53 @@ export class HttpService {
     return this._http.delete<void>(`${this._baseUrl}/deleteCharacterItem`, {
       params: params,
       headers: headers,
+    });
+  }
+
+  public getCharacterSkills(id: number): Observable<Skill[]> {
+    let headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': '*',
+      Authorization: sessionStorage.getItem('jwt') as string,
+    });
+    var params = new HttpParams().append('id', id);
+    return this._http.get<Skill[]>(`${this._baseUrl}/characterSkills`, {
+      params: params,
+      headers: headers,
+    });
+  }
+
+  public getSkills(): Observable<Skill[]> {
+    let headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': '*',
+      Authorization: sessionStorage.getItem('jwt') as string,
+    });
+    return this._http.get<Skill[]>(`${this._baseUrl}/listSkills`, {
+      headers: headers,
+    });
+  }
+
+  public addCharacterSkill(charId: number, skillId: number): Observable<void> {
+    let headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': '*',
+      Authorization: sessionStorage.getItem('jwt') as string,
+    });
+    return this._http.post<void>(
+      `${this._baseUrl}/addCharacterSkill`,
+      { charId: charId, skillId: skillId },
+      {
+        headers: headers,
+      }
+    );
+  }
+
+  public deleteCharacterSkill(charId: number, id: number): Observable<void> {
+    let headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': '*',
+      Authorization: sessionStorage.getItem('jwt') as string,
+    });
+    return this._http.delete<void>(`${this._baseUrl}/deleteCharacterSkill`, {
+      headers: headers,
+      body: { charId: charId, skillId: id },
     });
   }
 }

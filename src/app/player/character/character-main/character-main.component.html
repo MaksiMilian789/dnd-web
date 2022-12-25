@@ -162,8 +162,8 @@
             </mat-card>
         </div>
         <div class="buttons-skill-magic">
-            <button mat-raised-button class="button-skill">Умения</button>
-            <button mat-raised-button class="button-magic">Заклинания</button>
+            <button mat-raised-button class="button-skill" [routerLink]="['skills']">Умения</button>
+            <button mat-raised-button class="button-magic" [routerLink]="['spells']">Заклинания</button>
         </div>
         <button mat-raised-button class="button-inventory" [routerLink]="['inventory']">Инвентарь</button>
     </div>
