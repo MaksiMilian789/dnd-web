@@ -16,6 +16,7 @@ import { Ideology } from '../models/ideology.model';
 import { Inventory } from '../models/inventory.model';
 import { Item } from '../models/item.model';
 import { Skill } from '../models/skill.model';
+import { Spell } from '../models/spell.model';
 
 @Injectable({
   providedIn: 'root',
@@ -239,6 +240,53 @@ export class HttpService {
     return this._http.delete<void>(`${this._baseUrl}/deleteCharacterItem`, {
       params: params,
       headers: headers,
+    });
+  }
+
+  public getCharacterSpells(id: number): Observable<Spell[]> {
+    let headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': '*',
+      Authorization: sessionStorage.getItem('jwt') as string,
+    });
+    var params = new HttpParams().append('id', id);
+    return this._http.get<Spell[]>(`${this._baseUrl}/characterSpells`, {
+      params: params,
+      headers: headers,
+    });
+  }
+
+  public getSpells(): Observable<Spell[]> {
+    let headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': '*',
+      Authorization: sessionStorage.getItem('jwt') as string,
+    });
+    return this._http.get<Spell[]>(`${this._baseUrl}/listSpells`, {
+      headers: headers,
+    });
+  }
+
+  public addCharacterSpell(charId: number, spellId: number): Observable<void> {
+    let headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': '*',
+      Authorization: sessionStorage.getItem('jwt') as string,
+    });
+    return this._http.post<void>(
+      `${this._baseUrl}/addCharacterSpell`,
+      { charId: charId, spellId: spellId },
+      {
+        headers: headers,
+      }
+    );
+  }
+
+  public deleteCharacterSpell(charId: number, id: number): Observable<void> {
+    let headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': '*',
+      Authorization: sessionStorage.getItem('jwt') as string,
+    });
+    return this._http.delete<void>(`${this._baseUrl}/deleteCharacterSpell`, {
+      headers: headers,
+      body: { charId: charId, spellId: id },
     });
   }
 

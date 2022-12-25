@@ -1,1 +1,27 @@
-<p>add-spell-dialog works!</p>
+<h3 mat-dialog-title>Добавление заклинания</h3>
+<mat-dialog-content>
+    <form [formGroup]="addForm">
+        <mat-form-field appearance="outline">
+            <mat-label>Название заклинания</mat-label>
+            <mat-select formControlName="spell">
+                <mat-option *ngFor="let spell of spells$ | async" [value]="spell.id"
+                    (click)="changeDescription(spell.description)">
+                    {{ spell.name }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </form>
+
+    <mat-card>
+        <mat-card-content>
+            {{description}}
+        </mat-card-content>
+    </mat-card>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+    <div class="spacer"></div>
+    <button mat-button color="primary" [disabled]="!addForm.valid" (click)="add()">
+        Добавить
+    </button>
+</mat-dialog-actions>
