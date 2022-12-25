@@ -19,6 +19,7 @@ import { AddCharacter3RaceComponent } from './player/add-character/add-character
 import { AddCharacter4BackgroundComponent } from './player/add-character/add-character4-background/add-character4-background.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { WorldComponent } from './shared/components/world/world.component';
+import { CharacterInventoryComponent } from './player/character/character-inventory/character-inventory.component';
 
 const routes: Routes = [
   {
@@ -58,6 +59,10 @@ const routes: Routes = [
       {
         path: 'character/:characterId',
         component: CharacterMainComponent,
+      },
+      {
+        path: 'character/:characterId/inventory',
+        component: CharacterInventoryComponent,
       },
       {
         path: 'worlds',

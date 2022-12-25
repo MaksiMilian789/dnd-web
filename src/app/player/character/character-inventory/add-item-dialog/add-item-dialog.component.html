@@ -1,0 +1,26 @@
+<h3 mat-dialog-title>Добавление предмета</h3>
+<mat-dialog-content>
+    <form [formGroup]="addForm">
+        <mat-form-field appearance="outline">
+            <mat-label>Название предмета</mat-label>
+            <mat-select formControlName="item">
+                <mat-option *ngFor="let item of items$ | async" [value]="item.id" (click)="changeDescription(item.description)"> 
+                    {{ item.name }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </form>
+
+    <mat-card>
+        <mat-card-content>
+            {{description}}
+        </mat-card-content>
+    </mat-card>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+    <div class="spacer"></div>
+    <button mat-button color="primary" [disabled]="!addForm.valid" (click)="add()">
+        Добавить
+    </button>
+</mat-dialog-actions>

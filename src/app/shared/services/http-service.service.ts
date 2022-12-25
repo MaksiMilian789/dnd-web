@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Character, CharacterWithId, ShortCharacter } from '../models/character.model';
+import {
+  Character,
+  CharacterWithId,
+  ShortCharacter,
+} from '../models/character.model';
 import { Observable, of } from 'rxjs';
 import { ShortWorld } from '../models/world.model';
 import { TrackerUnit } from '../models/tracker-unit';
@@ -9,6 +13,8 @@ import { Class } from '../models/class.model';
 import { Race } from '../models/race.model';
 import { Background } from '../models/background.model';
 import { Ideology } from '../models/ideology.model';
+import { Inventory } from '../models/inventory.model';
+import { Item } from '../models/item.model';
 
 @Injectable({
   providedIn: 'root',
@@ -185,5 +191,53 @@ export class HttpService {
         headers: headers,
       }
     );
+  }
+
+  public getInventory(id: number): Observable<Inventory[]> {
+    let headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': '*',
+      Authorization: sessionStorage.getItem('jwt') as string,
+    });
+    var params = new HttpParams().append('id', id);
+    return this._http.get<Inventory[]>(`${this._baseUrl}/characterInventory`, {
+      params: params,
+      headers: headers,
+    });
+  }
+
+  public getItems(): Observable<Item[]> {
+    let headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': '*',
+      Authorization: sessionStorage.getItem('jwt') as string,
+    });
+    return this._http.get<Item[]>(`${this._baseUrl}/listItems`, {
+      headers: headers,
+    });
+  }
+
+  public addCharacterItem(charId: number, objectId: number): Observable<void> {
+    let headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': '*',
+      Authorization: sessionStorage.getItem('jwt') as string,
+    });
+    return this._http.post<void>(
+      `${this._baseUrl}/addCharacterItem`,
+      { charId: charId, objectId: objectId },
+      {
+        headers: headers,
+      }
+    );
+  }
+
+  public deleteCharacterItem(id: number): Observable<void> {
+    let headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': '*',
+      Authorization: sessionStorage.getItem('jwt') as string,
+    });
+    var params = new HttpParams().append('id', id);
+    return this._http.delete<void>(`${this._baseUrl}/deleteCharacterItem`, {
+      params: params,
+      headers: headers,
+    });
   }
 }

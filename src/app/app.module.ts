@@ -26,6 +26,11 @@ import { AddCharacter2ClassComponent } from './player/add-character/add-characte
 import { AddCharacter3RaceComponent } from './player/add-character/add-character3-race/add-character3-race.component';
 import { AddCharacter4BackgroundComponent } from './player/add-character/add-character4-background/add-character4-background.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { AddItemDialogComponent } from './player/character/character-inventory/add-item-dialog/add-item-dialog.component';
+import { CharacterSkillsComponent } from './player/character/character-skills/character-skills.component';
+import { AddSkillDialogComponent } from './player/character/character-skills/add-skill-dialog/add-skill-dialog.component';
+import { CharacterSpellsComponent } from './player/character/character-spells/character-spells.component';
+import { AddSpellDialogComponent } from './player/character/character-spells/add-spell-dialog/add-spell-dialog.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +51,12 @@ import { RegistrationComponent } from './registration/registration.component';
     AddCharacter1NameComponent,
     AddCharacter2ClassComponent,
     AddCharacter3RaceComponent,
-    AddCharacter4BackgroundComponent
+    AddCharacter4BackgroundComponent,
+    AddItemDialogComponent,
+    CharacterSkillsComponent,
+    AddSkillDialogComponent,
+    CharacterSpellsComponent,
+    AddSpellDialogComponent
   ],
   imports: [
     HttpClientModule,
