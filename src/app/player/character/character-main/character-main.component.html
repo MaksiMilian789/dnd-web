@@ -4,10 +4,6 @@
             <mat-icon>arrow_back</mat-icon>
         </button>
         <div class="spacer"></div>
-        <button mat-icon-button [routerLink]="['fight']">
-            <mat-icon>shield</mat-icon>
-        </button>
-        <div class="spacer"></div>
         <h1>{{character.name}}</h1>
         <button mat-icon-button (click)="info(character)">
             <mat-icon>info</mat-icon>
@@ -17,7 +13,7 @@
     <div class="card-container stats" [formGroup]="hpForm">
         <mat-card class="card-stat">
             <mat-form-field appearance="outline">
-                <input matInput type="number" [(ngModel)]="character.maxHp" formControlName="maxHp"/>
+                <input matInput type="number" value="{{character.maxHp + character.level * pipe.transform(character.constitution, 0)}}" [disabled]="true" #maxHp/>
             </mat-form-field>
             <mat-card-subtitle class="card-stat-subtext">Max Хиты</mat-card-subtitle>
         </mat-card>
@@ -41,6 +37,36 @@
                 <input matInput type="number" value="{{character.proficiencyBonus}}" [disabled]="true" />
             </mat-form-field>
             <mat-card-subtitle class="card-stat-subtext">Бонус Мастр</mat-card-subtitle>
+        </mat-card>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="card-container stats">
+        <mat-card class="card-stat">
+            <mat-form-field appearance="outline">
+                <input matInput type="number" value="{{character.classArmor}}" [disabled]="true" />
+            </mat-form-field>
+            <mat-card-subtitle class="card-stat-subtext">Класс брони</mat-card-subtitle>
+        </mat-card>
+        <mat-divider vertical class="divider-vertical"></mat-divider>
+        <mat-card class="card-stat">
+            <mat-form-field appearance="outline">
+                <input matInput type="number" value="30" [disabled]="true" />
+            </mat-form-field>
+            <mat-card-subtitle class="card-stat-subtext">Скорость</mat-card-subtitle>
+        </mat-card>
+        <mat-divider vertical class="divider-vertical"></mat-divider>
+        <mat-card class="card-stat">
+            <mat-form-field appearance="outline">
+                <input matInput type="number" value="{{character.dexterity | statsSkill: 0}}" [disabled]="true" />
+            </mat-form-field>
+            <mat-card-subtitle class=" card-stat-subtext">Инициатива</mat-card-subtitle>
+        </mat-card>
+        <mat-divider vertical class="divider-vertical"></mat-divider>
+        <mat-card class="card-stat">
+            <mat-form-field appearance="outline">
+                <input matInput value="-" [disabled]="true" />
+            </mat-form-field>
+            <mat-card-subtitle class="card-stat-subtext">Концентрация</mat-card-subtitle>
         </mat-card>
     </div>
     <mat-divider></mat-divider>
@@ -167,6 +193,39 @@
                 </div>
             </mat-card>
         </div>
+        <mat-card class="item">
+            <ng-container *ngIf="firstItem.length == 0">
+                Основной предмет:
+                <button mat-icon-button class="spec-button" (click)="editPriorityItems()"><mat-icon>add</mat-icon></button>
+            </ng-container>
+            <ng-container *ngIf="firstItem.length != 0">
+                <button mat-icon-button class="spec-button" (click)="editPriorityItems()"><mat-icon>more_vert</mat-icon></button>
+                {{firstItem}}
+            </ng-container>
+        </mat-card>
+        <mat-card class="item">
+            <ng-container *ngIf="secondItem.length == 0">
+                Вторичный предмет:
+                <button mat-icon-button class="spec-button" (click)="editPriorityItems()"><mat-icon>add</mat-icon></button>
+            </ng-container>
+            <ng-container *ngIf="secondItem.length != 0">
+                <button mat-icon-button class="spec-button" (click)="editPriorityItems()"><mat-icon>more_vert</mat-icon></button>
+                {{secondItem}}
+            </ng-container>
+        </mat-card>
+        <ng-container *ngIf="condition$ | async as condition">
+            <mat-card class="cond">
+                <ng-container *ngIf="condition.length == 0">
+                    <button mat-icon-button (click)="addCond()" class="spec-button"><mat-icon>add</mat-icon></button>
+                    Текущее состояние персонажа
+                </ng-container>
+                <ng-container *ngIf="condition.length != 0">
+                    <button mat-icon-button (click)="deleteCond(condition[0].id)"
+                        class="spec-button"><mat-icon>close</mat-icon></button>
+                    {{condition[0].name}}
+                </ng-container>
+            </mat-card>
+        </ng-container>
         <div class="buttons-skill-magic">
             <button mat-raised-button class="button-skill" [routerLink]="['skills']">Умения</button>
             <button mat-raised-button class="button-magic" [routerLink]="['spells']">Заклинания</button>

@@ -1,8 +1,22 @@
 <div class="add-container">
     <mat-toolbar color="primary" class="toolbar mat-elevation-z6 secondary-toolbar">
-        <a mat-icon-button [routerLink]="['/player/characters']">
-            <mat-icon>close</mat-icon>
-        </a>
+        <div class="steps">
+            <a mat-icon-button [routerLink]="['/player/characters']">
+                <mat-icon>close</mat-icon>
+            </a>
+            <a mat-icon-button disableRipple="true">
+                <span class="current">1</span>
+            </a>
+            <button mat-icon-button [disabled]="!addForm.valid" [routerLink]="['/player/createCharacterClass']">
+                <span>2</span>
+            </button>
+            <button mat-icon-button [disabled]="true" [routerLink]="['/player/createCharacterRace']">
+                <span>3</span>
+            </button>
+            <button mat-icon-button [disabled]="true" [routerLink]="['/player/createCharacterBackground']">
+                <span>4</span>
+            </button>
+        </div>
     </mat-toolbar>
     <div class="center">
         <form [formGroup]="addForm">
@@ -31,22 +45,3 @@
         </button>
     </div>
 </div>
-<mat-toolbar color="primary" class="toolbar steps-toolbar">
-    <div class="steps">
-        <a mat-icon-button [routerLink]="['/player/characters']">
-            <mat-icon>arrow_back</mat-icon>
-        </a>
-        <a mat-icon-button disableRipple="true">
-            <span class="current">1</span>
-        </a>
-        <button mat-icon-button [disabled]="!addForm.valid" [routerLink]="['/player/createCharacterClass']">
-            <span>2</span>
-        </button>
-        <button mat-icon-button [disabled]="true" [routerLink]="['/player/createCharacterRace']">
-            <span>3</span>
-        </button>
-        <button mat-icon-button [disabled]="true" [routerLink]="['/player/createCharacterBackground']">
-            <span>4</span>
-        </button>
-    </div>
-</mat-toolbar>

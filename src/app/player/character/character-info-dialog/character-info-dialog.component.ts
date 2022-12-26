@@ -11,13 +11,11 @@ import { HttpService } from 'src/app/shared/services/http-service.service';
   selector: 'app-character-info-dialog',
   templateUrl: './character-info-dialog.component.html',
   styleUrls: ['./character-info-dialog.component.scss'],
-  providers: [StatsSkillPipe],
 })
 export class CharacterInfoDialogComponent {
   infoForm: FormGroup;
 
   constructor(
-    private _pipe: StatsSkillPipe,
     private _dialogRef: MatDialogRef<CharacterInfoDialogComponent>,
     private _http: HttpService,
     private _snackbar: MatSnackBar,
@@ -90,11 +88,7 @@ export class CharacterInfoDialogComponent {
   }
 
   calcMaxHp(): number {
-    return (
-      5 +
-      this.infoForm.value.level *
-        (5 + this._pipe.transform(this.data.character.constitution, 0))
-    );
+    return 5 + this.infoForm.value.level * 5;
   }
 
   close(): void {

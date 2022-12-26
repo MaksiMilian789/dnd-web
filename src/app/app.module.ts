@@ -31,10 +31,9 @@ import { CharacterSkillsComponent } from './player/character/character-skills/ch
 import { AddSkillDialogComponent } from './player/character/character-skills/add-skill-dialog/add-skill-dialog.component';
 import { CharacterSpellsComponent } from './player/character/character-spells/character-spells.component';
 import { AddSpellDialogComponent } from './player/character/character-spells/add-spell-dialog/add-spell-dialog.component';
-import { CharacterFightComponent } from './player/character/character-fight/character-fight.component';
 import { CharacterInfoDialogComponent } from './player/character/character-info-dialog/character-info-dialog.component';
-import { AddConditionDialogComponent } from './player/character/character-fight/add-condition-dialog/add-condition-dialog.component';
-import { EditPriorityItemComponent } from './player/character/character-fight/edit-priority-item/edit-priority-item.component';
+import { AddConditionDialogComponent } from './player/character/character-main/add-condition-dialog/add-condition-dialog.component';
+import { EditPriorityItemComponent } from './player/character/character-main/edit-priority-item/edit-priority-item.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +60,6 @@ import { EditPriorityItemComponent } from './player/character/character-fight/ed
     AddSkillDialogComponent,
     CharacterSpellsComponent,
     AddSpellDialogComponent,
-    CharacterFightComponent,
     CharacterInfoDialogComponent,
     AddConditionDialogComponent,
     EditPriorityItemComponent

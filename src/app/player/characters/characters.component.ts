@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterContentInit, Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -14,7 +14,7 @@ import { AddCharacterCacheService } from '../add-character/add-character-cache.s
   templateUrl: './characters.component.html',
   styleUrls: ['./characters.component.scss'],
 })
-export class CharactersComponent {
+export class CharactersComponent implements AfterContentInit {
   shortCharacters$!: Observable<ShortCharacter[]>;
 
   public isSelectionModeEnabled: boolean = false;
@@ -35,6 +35,10 @@ export class CharactersComponent {
       this.userLogin = sessionStorage.getItem('auth') as string;
       this.shortCharacters$ = this._http.loadShortCharacters(this.userLogin);
     }
+  }
+  
+  ngAfterContentInit(): void {
+    this.shortCharacters$ = this._http.loadShortCharacters(this.userLogin);
   }
 
   enableSelectionMode(): void {

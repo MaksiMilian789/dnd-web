@@ -1,7 +1,21 @@
 <mat-toolbar color="primary" class="toolbar mat-elevation-z6 secondary-toolbar">
-    <a mat-icon-button [routerLink]="['/player/characters']">
-        <mat-icon>close</mat-icon>
-    </a>
+    <div class="steps">
+        <a mat-icon-button [routerLink]="['/player/characters']">
+            <mat-icon>close</mat-icon>
+        </a>
+        <button mat-icon-button [routerLink]="['/player/createCharacterName']" class="previous">
+            <span>1</span>
+        </button>
+        <button mat-icon-button [routerLink]="['/player/createCharacterClass']" class="previous">
+            <span>2</span>
+        </button>
+        <button mat-icon-button [routerLink]="['/player/createCharacterRace']" class="previous">
+            <span>3</span>
+        </button>
+        <button mat-icon-button disableRipple="true">
+            <span class="current">4</span>
+        </button>
+    </div>
 </mat-toolbar>
 <div class="center">
     <form [formGroup]="addForm">
@@ -41,22 +55,3 @@
         Завершить создание персонажа
     </button>
 </div>
-<mat-toolbar color="primary" class="toolbar steps-toolbar">
-    <div class="steps">
-        <a mat-icon-button [routerLink]="['/player/characters']">
-            <mat-icon>arrow_back</mat-icon>
-        </a>
-        <button mat-icon-button [routerLink]="['/player/createCharacterName']" class="previous">
-            <span>1</span>
-        </button>
-        <button mat-icon-button [routerLink]="['/player/createCharacterClass']" class="previous">
-            <span>2</span>
-        </button>
-        <button mat-icon-button [routerLink]="['/player/createCharacterRace']" class="previous">
-            <span>3</span>
-        </button>
-        <button mat-icon-button disableRipple="true">
-            <span class="current">4</span>
-        </button>
-    </div>
-</mat-toolbar>

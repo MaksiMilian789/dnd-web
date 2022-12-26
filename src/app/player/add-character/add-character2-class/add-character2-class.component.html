@@ -1,14 +1,29 @@
 <mat-toolbar color="primary" class="toolbar mat-elevation-z6 secondary-toolbar">
-    <a mat-icon-button [routerLink]="['/player/characters']">
-        <mat-icon>close</mat-icon>
-    </a>
+    <div class="steps">
+        <a mat-icon-button [routerLink]="['/player/characters']">
+            <mat-icon>close</mat-icon>
+        </a>
+        <button mat-icon-button [routerLink]="['/player/createCharacterName']" class="previous">
+            <span>1</span>
+        </button>
+        <button mat-icon-button disableRipple="true">
+            <span class="current">2</span>
+        </button>
+        <button mat-icon-button [disabled]="!addForm.valid" [routerLink]="['/player/createCharacterRace']">
+            <span>3</span>
+        </button>
+        <button mat-icon-button [disabled]="true" [routerLink]="['/player/createCharacterBackground']">
+            <span>4</span>
+        </button>
+    </div>
 </mat-toolbar>
 <div class="center">
     <form [formGroup]="addForm">
         <mat-form-field appearance="outline">
             <mat-label>Класс персонажа</mat-label>
             <mat-select formControlName="charClass">
-                <mat-option *ngFor="let class of classes$ | async" [value]="class.id" (click)="changeDescription(class.description)"> 
+                <mat-option *ngFor="let class of classes$ | async" [value]="class.id"
+                    (click)="changeDescription(class.description)">
                     {{ class.name }}
                 </mat-option>
             </mat-select>
@@ -26,22 +41,3 @@
         Далее
     </button>
 </div>
-<mat-toolbar color="primary" class="toolbar steps-toolbar">
-    <div class="steps">
-        <a mat-icon-button [routerLink]="['/player/characters']">
-            <mat-icon>arrow_back</mat-icon>
-        </a>
-        <button mat-icon-button [routerLink]="['/player/createCharacterName']" class="previous">
-            <span>1</span>
-        </button>
-        <button mat-icon-button disableRipple="true">
-            <span class="current">2</span>
-        </button>
-        <button mat-icon-button [disabled]="!addForm.valid" [routerLink]="['/player/createCharacterRace']">
-            <span>3</span>
-        </button>
-        <button mat-icon-button [disabled]="true" [routerLink]="['/player/createCharacterBackground']">
-            <span>4</span>
-        </button>
-    </div>
-</mat-toolbar>

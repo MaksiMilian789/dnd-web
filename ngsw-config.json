@@ -11,7 +11,8 @@
           "/index.html",
           "/manifest.webmanifest",
           "/*.css",
-          "/*.js"
+          "/*.js",
+          "/**/*.html"
         ]
       }
     },
@@ -26,5 +27,14 @@
         ]
       }
     }
-  ]
+  ],
+  "dataGroups": [{
+    "name": "localhost",
+    "urls": ["http://localhost:8081/*"],
+    "cacheConfig": {
+      "maxSize": 100,
+      "maxAge": "1d",
+      "strategy": "performance"
+    }
+  }]
 }
