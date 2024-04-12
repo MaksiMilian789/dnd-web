@@ -14,7 +14,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AddSkillDialogComponent } from './add-skill-dialog/add-skill-dialog.component';
-import { Skill } from 'src/app/shared/models/skill.model';
+import { Skill } from 'src/app/core/models/skill.model';
 
 @Component({
   selector: 'app-character-skills',

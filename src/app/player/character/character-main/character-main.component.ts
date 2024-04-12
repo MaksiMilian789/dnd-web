@@ -12,8 +12,8 @@ import {
   startWith,
 } from 'rxjs';
 import { HttpService } from 'src/app/shared';
-import { Character } from 'src/app/shared/models/character.model';
-import { Condition } from 'src/app/shared/models/condition.model';
+import { Character } from 'src/app/core/models/character.model';
+import { Condition } from 'src/app/core/models/condition.model';
 import { StatsSkillPipe } from 'src/app/shared/pipes/stats-skill.pipe';
 import { CharacterInfoDialogComponent } from '../character-info-dialog/character-info-dialog.component';
 import { AddConditionDialogComponent } from './add-condition-dialog/add-condition-dialog.component';

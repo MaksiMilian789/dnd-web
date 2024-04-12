@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { HttpService } from 'src/app/shared';
-import { Gender } from 'src/app/shared/models/gender.model';
+import { Gender } from 'src/app/core/models/gender.model';
 import { AddCharacterCacheService } from '../add-character-cache.service';
 
 @Component({

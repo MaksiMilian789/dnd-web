@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { ShortWorld } from '../../models/world.model';
-import { HttpService } from '../../services/http-service.service';
+import { ShortWorld } from '../../../core/models/world.model';
+import { HttpService } from '../../../core/services/api/http-service.service';
 import { EditWorldDialogComponent } from './edit-world-dialog/edit-world-dialog.component';
 
 @Component({

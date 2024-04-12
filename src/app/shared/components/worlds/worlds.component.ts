@@ -4,8 +4,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { ShortWorld } from '../../models/world.model';
-import { HttpService } from '../../services/http-service.service';
+import { ShortWorld } from '../../../core/models/world.model';
+import { HttpService } from '../../../core/services/api/http-service.service';
 import { AddWorldDialogComponent } from './add-world-dialog/add-world-dialog.component';
 
 @Component({

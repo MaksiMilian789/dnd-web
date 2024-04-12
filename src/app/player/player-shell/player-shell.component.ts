@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 import { Observable, Subscription } from 'rxjs';
 import { PwaService } from 'src/app/shared/services/pwa-service.service';
-import { AuthService } from '../../auth/auth.service';
+import { AuthService } from '../../core/services/auth/auth.service';
 
 @Component({
   templateUrl: './player-shell.component.html',

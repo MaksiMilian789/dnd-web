@@ -3,8 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { merge, Observable } from 'rxjs';
 import { HttpService } from 'src/app/shared';
-import { Background } from 'src/app/shared/models/background.model';
-import { Ideology } from 'src/app/shared/models/ideology.model';
+import { Background } from 'src/app/core/models/background.model';
+import { Ideology } from 'src/app/core/models/ideology.model';
 import { AddCharacterCacheService } from '../add-character-cache.service';
 
 @Component({

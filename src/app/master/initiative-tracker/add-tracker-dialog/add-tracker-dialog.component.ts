@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { TrackerUnit } from 'src/app/shared/models/tracker-unit';
+import { TrackerUnit } from 'src/app/core/models/tracker-unit.model';
 
 @Component({
   selector: 'app-add-tracker-dialog',

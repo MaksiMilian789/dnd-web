@@ -3,9 +3,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { forkJoin, merge } from 'rxjs';
-import { Character } from 'src/app/shared/models/character.model';
+import { Character } from 'src/app/core/models/character.model';
 import { StatsSkillPipe } from 'src/app/shared/pipes/stats-skill.pipe';
-import { HttpService } from 'src/app/shared/services/http-service.service';
+import { HttpService } from 'src/app/core/services/api/http-service.service';
 
 @Component({
   selector: 'app-character-info-dialog',

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpService } from 'src/app/shared';
-import { CharacterWithId } from 'src/app/shared/models/character.model';
+import { CharacterWithId } from 'src/app/core/models/character.model';
 
 @Injectable({
   providedIn: 'root',

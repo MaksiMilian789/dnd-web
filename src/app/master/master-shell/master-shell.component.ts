@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { MatDrawerMode } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { AuthService } from '@core/services/auth/auth.service';
+import { Subscription } from 'rxjs';
 
-import { AuthService } from 'src/app/auth/auth.service';
 import { PwaService } from 'src/app/shared/services/pwa-service.service';
 
 @Component({

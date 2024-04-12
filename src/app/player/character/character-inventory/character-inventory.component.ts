@@ -11,7 +11,7 @@ import { HttpService } from 'src/app/shared';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { Inventory } from 'src/app/shared/models/inventory.model';
+import { Inventory } from 'src/app/core/models/inventory.model';
 import { MatDialog } from '@angular/material/dialog';
 import { AddItemDialogComponent } from './add-item-dialog/add-item-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';

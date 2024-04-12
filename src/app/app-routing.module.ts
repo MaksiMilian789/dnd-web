@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { PlayerShellComponent } from './player/player-shell/player-shell.component';
 import { AuthComponent } from './auth/auth.component';
-import { AuthGuard } from './auth/auth.guard';
 import { HomeComponent } from './home/home.component';
 import { PlayerHomeComponent } from './player/player-home/player-home.component';
 import { WorldsComponent } from './shared/components/worlds/worlds.component';
@@ -22,17 +21,18 @@ import { WorldComponent } from './shared/components/world/world.component';
 import { CharacterInventoryComponent } from './player/character/character-inventory/character-inventory.component';
 import { CharacterSkillsComponent } from './player/character/character-skills/character-skills.component';
 import { CharacterSpellsComponent } from './player/character/character-spells/character-spells.component';
+import { authGuard } from './auth/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    canActivate: [AuthGuard],
+    canActivate: [authGuard],
   },
   {
     path: 'player',
     component: PlayerShellComponent,
-    canActivate: [AuthGuard],
+    canActivate: [authGuard],
     children: [
       {
         path: '',
@@ -87,7 +87,7 @@ const routes: Routes = [
   {
     path: 'master',
     component: MasterShellComponent,
-    canActivate: [AuthGuard],
+    canActivate: [authGuard],
     children: [
       {
         path: '',

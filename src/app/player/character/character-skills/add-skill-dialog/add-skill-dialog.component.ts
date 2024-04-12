@@ -4,10 +4,10 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, filter, map } from 'rxjs';
-import { Inventory } from 'src/app/shared/models/inventory.model';
-import { Item } from 'src/app/shared/models/item.model';
-import { Skill } from 'src/app/shared/models/skill.model';
-import { HttpService } from 'src/app/shared/services/http-service.service';
+import { Inventory } from 'src/app/core/models/inventory.model';
+import { Item } from 'src/app/core/models/item.model';
+import { Skill } from 'src/app/core/models/skill.model';
+import { HttpService } from 'src/app/core/services/api/http-service.service';
 
 @Component({
   selector: 'app-add-skill-dialog',

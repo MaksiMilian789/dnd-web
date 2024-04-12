@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { HttpService } from 'src/app/shared';
-import { Race } from 'src/app/shared/models/race.model';
+import { Race } from 'src/app/core/models/race.model';
 import { AddCharacterCacheService } from '../add-character-cache.service';
 
 @Component({

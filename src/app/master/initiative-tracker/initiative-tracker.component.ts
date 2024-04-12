@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { HttpService } from 'src/app/shared';
-import { TrackerUnit } from 'src/app/shared/models/tracker-unit';
+import { TrackerUnit } from 'src/app/core/models/tracker-unit.model';
 import { AddTrackerDialogComponent } from './add-tracker-dialog/add-tracker-dialog.component';
 
 @Component({

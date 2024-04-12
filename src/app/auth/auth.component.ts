@@ -5,7 +5,8 @@ import { Subscription } from 'rxjs';
 
 import { RegistrationService } from '../registration/registration.service';
 import { PwaService } from '../shared/services/pwa-service.service';
-import { AuthService } from './auth.service';
+import { AuthService } from '../core/services/auth/auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   templateUrl: './auth.component.html',
@@ -18,10 +19,14 @@ export class AuthComponent {
 
   checkRegistration: Subscription;
 
+  private _returnUrl: string | null;
+
   constructor(
     public pwa: PwaService,
     private _snackbar: MatSnackBar,
     private _auth: AuthService,
+    private route: ActivatedRoute,
+    private router: Router,
     private _registration: RegistrationService
   ) {
     this.form = new FormGroup({
@@ -34,6 +39,8 @@ export class AuthComponent {
         if (val) this._snackbar.open('Регистрация успешна');
       }
     );
+
+    this._returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
   }
 
   auth(): void {
@@ -42,6 +49,9 @@ export class AuthComponent {
     }
 
     // Проверка на логин/пароль через сервис (с оповещением о неверном через snackbar)
-    this._auth.login(this.form.value.login, this.form.value.password);
+    this._auth.auth(this.form.value.login, this.form.value.password, true)
+    .subscribe(() =>
+      this.router.navigateByUrl(this._returnUrl ?? '/')
+    );;
   }
 }

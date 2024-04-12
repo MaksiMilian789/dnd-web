@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 
 import { HttpService } from 'src/app/shared';
 import { SimpleDialogComponent } from 'src/app/shared/components/simple-dialog';
-import { ShortCharacter } from 'src/app/shared/models/character.model';
+import { ShortCharacter } from 'src/app/core/models/character.model';
 import { AddCharacterCacheService } from '../add-character/add-character-cache.service';
 
 @Component({

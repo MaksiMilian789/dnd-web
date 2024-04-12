@@ -1,3 +1,5 @@
+import { NgDompurifySanitizer } from "@tinkoff/ng-dompurify";
+import { TuiRootModule, TuiDialogModule, TuiAlertModule, TUI_SANITIZER } from "@taiga-ui/core";
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -7,7 +9,6 @@ import { AuthComponent } from './auth/auth.component';
 import { SharedModule } from './shared';
 import { PlayerShellComponent } from './player/player-shell/player-shell.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AuthGuard } from './auth/auth.guard';
 import { HomeComponent } from './home/home.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
@@ -34,6 +35,7 @@ import { AddSpellDialogComponent } from './player/character/character-spells/add
 import { CharacterInfoDialogComponent } from './player/character/character-info-dialog/character-info-dialog.component';
 import { AddConditionDialogComponent } from './player/character/character-main/add-condition-dialog/add-condition-dialog.component';
 import { EditPriorityItemComponent } from './player/character/character-main/edit-priority-item/edit-priority-item.component';
+import { CoreModule } from "./core";
 
 @NgModule({
   declarations: [
@@ -65,6 +67,7 @@ import { EditPriorityItemComponent } from './player/character/character-main/edi
     EditPriorityItemComponent
   ],
   imports: [
+    CoreModule,
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
@@ -76,8 +79,11 @@ import { EditPriorityItemComponent } from './player/character/character-main/edi
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000',
     }),
-  ],
-  providers: [AuthGuard],
+      TuiRootModule,
+      TuiDialogModule,
+      TuiAlertModule
+],
+  providers: [{provide: TUI_SANITIZER, useClass: NgDompurifySanitizer}],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

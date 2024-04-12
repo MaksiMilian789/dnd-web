@@ -4,9 +4,9 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, map } from 'rxjs';
-import { Item } from 'src/app/shared/models/item.model';
-import { Spell } from 'src/app/shared/models/spell.model';
-import { HttpService } from 'src/app/shared/services/http-service.service';
+import { Item } from 'src/app/core/models/item.model';
+import { Spell } from 'src/app/core/models/spell.model';
+import { HttpService } from 'src/app/core/services/api/http-service.service';
 
 @Component({
   selector: 'app-add-spell-dialog',

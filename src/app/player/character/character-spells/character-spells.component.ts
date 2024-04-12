@@ -13,9 +13,9 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Skill } from 'src/app/shared/models/skill.model';
+import { Skill } from 'src/app/core/models/skill.model';
 import { AddSpellDialogComponent } from './add-spell-dialog/add-spell-dialog.component';
-import { Spell } from 'src/app/shared/models/spell.model';
+import { Spell } from 'src/app/core/models/spell.model';
 
 @Component({
   selector: 'app-character-spells',
