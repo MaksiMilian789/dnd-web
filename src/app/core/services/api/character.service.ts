@@ -61,7 +61,7 @@ export class CharacterService {
   }
 
   public createClass(req: ClassCreate): Observable<void> {
-    return this._http.post<void>(`${this._baseUrl}/class`, { req });
+    return this._http.post<void>(`${this._baseUrl}/class`, { classs: req });
   }
 
   public getRaces(): Observable<Race[]> {
@@ -69,7 +69,7 @@ export class CharacterService {
   }
 
   public createRace(req: RaceCreate): Observable<void> {
-    return this._http.post<void>(`${this._baseUrl}/race`, { req });
+    return this._http.post<void>(`${this._baseUrl}/race`, { race: req });
   }
 
   public getBackgrounds(): Observable<Background[]> {
@@ -77,7 +77,7 @@ export class CharacterService {
   }
 
   public createBackground(req: BackgroundCreate): Observable<void> {
-    return this._http.post<void>(`${this._baseUrl}/background`, { req });
+    return this._http.post<void>(`${this._baseUrl}/background`, { background: req });
   }
 
   /*public deleteCharacters(ids: number[]): Observable<void> {
