@@ -5,144 +5,85 @@ import { Observable } from 'rxjs';
 import { APP_CONFIG, AppConfig } from '@core/config';
 import {
   Background,
+  BackgroundCreate,
   Character,
   CharacterWithId,
   Class,
-  Condition,
-  Gender,
-  Ideology,
-  Inventory,
-  Item,
+  ClassCreate,
   Race,
+  RaceCreate,
   ShortCharacter,
-  ShortWorld,
-  Skill,
-  Spell,
-  TrackerUnit,
 } from '@core/models';
 
 @Injectable({
   providedIn: 'root',
 })
-export class HttpService {
+export class CharacterService {
   _baseUrl: string;
 
   constructor(
     private _http: HttpClient,
     @Inject(APP_CONFIG) config: AppConfig
   ) {
-    this._baseUrl = `${config.api}/api`;
+    this._baseUrl = `${config.api}/api/character`;
   }
 
-  public loadShortCharacters(login: string): Observable<ShortCharacter[]> {
-    var params = new HttpParams().append('login', login);
+  public loadShortCharacters(id: number): Observable<ShortCharacter[]> {
+    var params = new HttpParams().append('id', id);
     return this._http.get<ShortCharacter[]>(
       `${this._baseUrl}/getListCharacters`,
-      { params: params }
+      {
+        params: params,
+      }
     );
   }
 
   public loadCharacter(id: number): Observable<Character> {
     var params = new HttpParams().append('id', id);
-    return this._http.get<Character>(`${this._baseUrl}/characterInfo`, {
+    return this._http.get<Character>(`${this._baseUrl}`, {
       params: params,
     });
-  }
-
-  public loadShortWorlds(login: string): Observable<ShortWorld[]> {
-    var params = new HttpParams().append('login', login);
-    return this._http.get<ShortWorld[]>(`${this._baseUrl}/getListWorlds`, {
-      params: params,
-    });
-  }
-
-  public loadWorld(id: number): Observable<ShortWorld> {
-    var params = new HttpParams().append('id', id);
-    return this._http.get<ShortWorld>(`${this._baseUrl}/getWorld`, {
-      params: params,
-    });
-  }
-
-  public createWorld(
-    login: string,
-    name: string,
-    description: string
-  ): Observable<void> {
-    return this._http.post<void>(
-      `${this._baseUrl}/createWorld`,
-      { login: login, name: name, description: description },
-      {}
-    );
-  }
-
-  public editWorld(
-    id: number,
-    name: string,
-    description: string
-  ): Observable<void> {
-    return this._http.put<void>(
-      `${this._baseUrl}/editWorld`,
-      { id: id, name: name, description: description },
-      {}
-    );
-  }
-
-  public deleteWorlds(ids: number[]): Observable<void> {
-    return this._http.delete<void>(`${this._baseUrl}/deleteWorld`, {
-      body: { id: ids },
-    });
-  }
-
-  public getTracker(id: number): Observable<TrackerUnit[]> {
-    var params = new HttpParams().append('id', id);
-    return this._http.get<TrackerUnit[]>(`${this._baseUrl}/getTracker`, {
-      params: params,
-    });
-  }
-
-  public setTracker(id: number, tracker: TrackerUnit[]): Observable<void> {
-    return this._http.put<void>(
-      `${this._baseUrl}/editTracker`,
-      { id: id, tracker: tracker },
-      {}
-    );
-  }
-
-  public deleteCharacters(ids: number[]): Observable<void> {
-    return this._http.delete<void>(`${this._baseUrl}/deleteCharacter`, {
-      body: { id: ids },
-    });
-  }
-
-  public getGenders(): Observable<Gender[]> {
-    return this._http.get<Gender[]>(`${this._baseUrl}/listGenders`, {});
-  }
-
-  public getClasses(): Observable<Class[]> {
-    return this._http.get<Class[]>(`${this._baseUrl}/listClasses`, {});
-  }
-
-  public getRaces(): Observable<Race[]> {
-    return this._http.get<Race[]>(`${this._baseUrl}/listRaces`, {});
-  }
-
-  public getBackgrounds(): Observable<Background[]> {
-    return this._http.get<Background[]>(`${this._baseUrl}/listBackgrounds`, {});
-  }
-
-  public getIdeologies(): Observable<Ideology[]> {
-    return this._http.get<Ideology[]>(`${this._baseUrl}/listIdeologies`, {});
   }
 
   public createCharacter(
-    req: CharacterWithId,
-    login: string
+    character: CharacterWithId,
+    id: number
   ): Observable<void> {
     return this._http.post<void>(
-      `${this._baseUrl}/createCharacter`,
-      { login: login, charStructure: req },
+      `${this._baseUrl}`,
+      { id: id, character: character },
       {}
     );
+  }
+
+  public getClasses(): Observable<Class[]> {
+    return this._http.get<Class[]>(`${this._baseUrl}/getClasses`, {});
+  }
+
+  public createClass(req: ClassCreate): Observable<void> {
+    return this._http.post<void>(`${this._baseUrl}/class`, { req });
+  }
+
+  public getRaces(): Observable<Race[]> {
+    return this._http.get<Race[]>(`${this._baseUrl}/getRaces`, {});
+  }
+
+  public createRace(req: RaceCreate): Observable<void> {
+    return this._http.post<void>(`${this._baseUrl}/race`, { req });
+  }
+
+  public getBackgrounds(): Observable<Background[]> {
+    return this._http.get<Background[]>(`${this._baseUrl}/getBackgrounds`, {});
+  }
+
+  public createBackground(req: BackgroundCreate): Observable<void> {
+    return this._http.post<void>(`${this._baseUrl}/background`, { req });
+  }
+
+  /*public deleteCharacters(ids: number[]): Observable<void> {
+    return this._http.delete<void>(`${this._baseUrl}/deleteCharacter`, {
+      body: { id: ids },
+    });
   }
 
   public getInventory(id: number): Observable<Inventory[]> {
@@ -335,5 +276,5 @@ export class HttpService {
       { id: id, type: type },
       {}
     );
-  }
+  }*/
 }

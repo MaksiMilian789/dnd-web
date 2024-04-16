@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { HttpService } from 'src/app/core/services/api/http-service.service';
+import { HttpService } from '@core/services/api/world.service';
 
 @Component({
   selector: 'app-add-world-dialog',

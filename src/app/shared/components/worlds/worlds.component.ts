@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { ShortWorld } from '../../../core/models/world.model';
-import { HttpService } from '../../../core/services/api/http-service.service';
+import { HttpService } from '../../../core/services/api/world.service';
 import { AddWorldDialogComponent } from './add-world-dialog/add-world-dialog.component';
 
 @Component({

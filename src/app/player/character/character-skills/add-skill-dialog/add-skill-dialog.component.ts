@@ -7,7 +7,7 @@ import { Observable, filter, map } from 'rxjs';
 import { Inventory } from 'src/app/core/models/inventory.model';
 import { Item } from 'src/app/core/models/item.model';
 import { Skill } from 'src/app/core/models/skill.model';
-import { HttpService } from 'src/app/core/services/api/http-service.service';
+import { HttpService } from '@core/services/api/world.service';
 
 @Component({
   selector: 'app-add-skill-dialog',

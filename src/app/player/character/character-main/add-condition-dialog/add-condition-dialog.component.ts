@@ -3,9 +3,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
-import { Character } from 'src/app/core/models/character.model';
+import { Character } from '@core/models/character/character.model';
 import { Condition } from 'src/app/core/models/condition.model';
-import { HttpService } from 'src/app/core/services/api/http-service.service';
+import { HttpService } from '@core/services/api/world.service';
 
 @Component({
   selector: 'app-add-condition-dialog',

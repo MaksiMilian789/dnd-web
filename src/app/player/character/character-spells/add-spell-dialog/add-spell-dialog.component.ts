@@ -6,7 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable, map } from 'rxjs';
 import { Item } from 'src/app/core/models/item.model';
 import { Spell } from 'src/app/core/models/spell.model';
-import { HttpService } from 'src/app/core/services/api/http-service.service';
+import { HttpService } from '@core/services/api/world.service';
 
 @Component({
   selector: 'app-add-spell-dialog',

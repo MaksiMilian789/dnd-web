@@ -11,6 +11,7 @@ import { WorldComponent } from './components/world/world.component';
 import { StatsSkillPipe } from './pipes/stats-skill.pipe';
 import { AddWorldDialogComponent } from './components/worlds/add-world-dialog/add-world-dialog.component';
 import { EditWorldDialogComponent } from './components/world/edit-world-dialog/edit-world-dialog.component';
+import { TaigaModule } from './taiga.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { EditWorldDialogComponent } from './components/world/edit-world-dialog/e
     RouterModule,
     FormsModule,
     ScrollingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TaigaModule
   ],
   exports: [
     CommonModule,
@@ -39,7 +41,8 @@ import { EditWorldDialogComponent } from './components/world/edit-world-dialog/e
     ColorPipe,
     StatsSkillPipe,
     AddWorldDialogComponent,
-    EditWorldDialogComponent
+    EditWorldDialogComponent,
+    TaigaModule
   ],
 })
 export class SharedModule {}

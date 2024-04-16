@@ -6,8 +6,9 @@ import { Observable } from 'rxjs';
 
 import { HttpService } from 'src/app/shared';
 import { SimpleDialogComponent } from 'src/app/shared/components/simple-dialog';
-import { ShortCharacter } from 'src/app/core/models/character.model';
+import { ShortCharacter } from '@core/models/character/character.model';
 import { AddCharacterCacheService } from '../add-character/add-character-cache.service';
+import { AuthService } from '@core/services/auth/auth.service';
 
 @Component({
   selector: 'app-characters',
@@ -25,18 +26,16 @@ export class CharactersComponent implements AfterContentInit {
 
   constructor(
     private _http: HttpService,
+    private _auth: AuthService,
     private _dialog: MatDialog,
     private _router: Router,
     private _snackbar: MatSnackBar,
-    private _cacheService: AddCharacterCacheService,
+    private _cacheService: AddCharacterCacheService
   ) {
-    if (sessionStorage.getItem('auth') != null) {
-      // Получение информации о пользователе
-      this.userLogin = sessionStorage.getItem('auth') as string;
-      this.shortCharacters$ = this._http.loadShortCharacters(this.userLogin);
-    }
+    this.userLogin = _auth.currentUser?.login ?? '';
+    this.shortCharacters$ = this._http.loadShortCharacters(this.userLogin);
   }
-  
+
   ngAfterContentInit(): void {
     this.shortCharacters$ = this._http.loadShortCharacters(this.userLogin);
   }
@@ -72,8 +71,7 @@ export class CharactersComponent implements AfterContentInit {
     this._selectedItems.forEach((element) => {
       ids.push(element.id as number);
     });
-    this._http.deleteCharacters(ids)
-    .subscribe({
+    this._http.deleteCharacters(ids).subscribe({
       complete: () => {
         this._snackbar.open('Удаление успешно.');
         this.shortCharacters$ = this._http.loadShortCharacters(this.userLogin);

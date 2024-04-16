@@ -12,7 +12,7 @@ import {
   startWith,
 } from 'rxjs';
 import { HttpService } from 'src/app/shared';
-import { Character } from 'src/app/core/models/character.model';
+import { Character } from '@core/models/character/character.model';
 import { Condition } from 'src/app/core/models/condition.model';
 import { StatsSkillPipe } from 'src/app/shared/pipes/stats-skill.pipe';
 import { CharacterInfoDialogComponent } from '../character-info-dialog/character-info-dialog.component';
