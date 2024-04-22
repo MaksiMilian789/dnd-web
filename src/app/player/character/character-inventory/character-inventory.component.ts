@@ -7,7 +7,6 @@ import {
   trigger,
 } from '@angular/animations';
 import { ActivatedRoute } from '@angular/router';
-import { HttpService } from 'src/app/shared';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -43,7 +42,7 @@ export class CharacterInventoryComponent implements AfterViewInit {
   expandedElement!: Inventory;
 
   constructor(
-    private _http: HttpService,
+    //private _http: HttpService,
     private _route: ActivatedRoute,
     private _dialog: MatDialog,
     private _snackbar: MatSnackBar
@@ -54,14 +53,14 @@ export class CharacterInventoryComponent implements AfterViewInit {
   }
 
   loadData(): void {
-    this._http
+    /*this._http
       .getInventory(Number(this._route.snapshot.paramMap.get('characterId')))
       .subscribe((data) => {
         this.dataSource = new MatTableDataSource(data);
         this.paginator._intl.itemsPerPageLabel = '';
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
-      });
+      });*/
   }
 
   addItem(): void {
@@ -78,11 +77,11 @@ export class CharacterInventoryComponent implements AfterViewInit {
   }
 
   deleteItem(id: number): void {
-    this._http.deleteCharacterItem(id).subscribe({
+    /*this._http.deleteCharacterItem(id).subscribe({
       complete: () => {
         this._snackbar.open('Удаление успешно.');
         this.loadData();
       },
-    });
+    });*/
   }
 }

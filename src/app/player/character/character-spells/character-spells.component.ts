@@ -7,13 +7,12 @@ import {
   trigger,
 } from '@angular/animations';
 import { ActivatedRoute } from '@angular/router';
-import { HttpService } from 'src/app/shared';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Skill } from 'src/app/core/models/skill.model';
+
 import { AddSpellDialogComponent } from './add-spell-dialog/add-spell-dialog.component';
 import { Spell } from 'src/app/core/models/spell.model';
 
@@ -44,7 +43,7 @@ export class CharacterSpellsComponent implements AfterViewInit {
   expandedElement!: Spell;
 
   constructor(
-    private _http: HttpService,
+    //private _http: HttpService,
     private _route: ActivatedRoute,
     private _dialog: MatDialog,
     private _snackbar: MatSnackBar
@@ -55,7 +54,7 @@ export class CharacterSpellsComponent implements AfterViewInit {
   }
 
   loadData(): void {
-    this._http
+    /*this._http
       .getCharacterSpells(
         Number(this._route.snapshot.paramMap.get('characterId'))
       )
@@ -64,7 +63,7 @@ export class CharacterSpellsComponent implements AfterViewInit {
         this.paginator._intl.itemsPerPageLabel = '';
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
-      });
+      });*/
   }
 
   addItem(): void {
@@ -81,7 +80,7 @@ export class CharacterSpellsComponent implements AfterViewInit {
   }
 
   deleteItem(id: number): void {
-    this._http
+    /*this._http
       .deleteCharacterSpell(
         Number(this._route.snapshot.paramMap.get('characterId')),
         id
@@ -91,6 +90,6 @@ export class CharacterSpellsComponent implements AfterViewInit {
           this._snackbar.open('Удаление успешно.');
           this.loadData();
         },
-      });
+      });*/
   }
 }

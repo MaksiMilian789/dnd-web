@@ -6,18 +6,16 @@ import { ActivatedRoute } from '@angular/router';
 import {
   debounceTime,
   distinctUntilChanged,
-  map,
-  merge,
   Observable,
   startWith,
 } from 'rxjs';
-import { HttpService } from 'src/app/shared';
+
 import { Character } from '@core/models/character/character.model';
-import { Condition } from 'src/app/core/models/condition.model';
 import { StatsSkillPipe } from 'src/app/shared/pipes/stats-skill.pipe';
 import { CharacterInfoDialogComponent } from '../character-info-dialog/character-info-dialog.component';
 import { AddConditionDialogComponent } from './add-condition-dialog/add-condition-dialog.component';
 import { EditPriorityItemComponent } from './edit-priority-item/edit-priority-item.component';
+import { CharacterService } from '@core/services/api/character.service';
 
 @Component({
   selector: 'app-character-main',
@@ -29,7 +27,7 @@ export class CharacterMainComponent {
   @ViewChild("maxHp", {static: false}) maxHp!: ElementRef;
 
   charId: number = Number(this._route.snapshot.paramMap.get('characterId'));
-  character$: Observable<Character> = this._http.loadCharacter(this.charId);
+  character$: Observable<Character> = this._characterService.loadCharacter(this.charId);
   statsForm: FormGroup;
   hpForm: FormGroup;
 
@@ -38,12 +36,12 @@ export class CharacterMainComponent {
   secondItem: string = '';
   secondItemId: number = 0;
 
-  condition$: Observable<Condition[]> = this._http.getCharacterConditions(
+  /*condition$: Observable<Condition[]> = this._characterService.getCharacterConditions(
     this.charId
-  );
+  );*/
 
   constructor(
-    private _http: HttpService,
+    private _characterService: CharacterService,
     private _route: ActivatedRoute,
     private _snackbar: MatSnackBar,
     private _dialog: MatDialog,
@@ -104,13 +102,13 @@ export class CharacterMainComponent {
         if (this.hpForm.value.hp > this.maxHp.nativeElement.value) {
           this.hpForm.patchValue({ hp: this.maxHp.nativeElement.value });
         } else {
-          this._http
+          /*this._characterService
             .editCharacterHp(
               this.charId,
               this.hpForm.value.hp,
               this.hpForm.value.addHp
             )
-            .subscribe();
+            .subscribe();*/
         }
       });
 
@@ -125,27 +123,27 @@ export class CharacterMainComponent {
         if (this.hpForm.value.hp > this.maxHp.nativeElement.value) {
           this.hpForm.patchValue({ hp: this.maxHp.nativeElement.value });
         } else {
-          this._http
+          /*this._http
             .editCharacterHp(
               this.charId,
               this.hpForm.value.hp,
               this.hpForm.value.addHp
             )
-            .subscribe();
+            .subscribe();*/
         }
       });
   }
 
   reload(): void {
-    this.character$ = this._http.loadCharacter(this.charId);
+    this.character$ = this._characterService.loadCharacter(this.charId);
   }
 
   reloadCond(): void {
-    this.condition$ = this._http.getCharacterConditions(this.charId);
+    //this.condition$ = this._characterService.getCharacterConditions(this.charId);
   }
 
   reloadItems(): void {
-    this._http.getInventory(this.charId).subscribe((data) => {
+    /*this._http.getInventory(this.charId).subscribe((data) => {
       data.forEach((element) => {
         if (element.type == 0) {
           this.firstItem = element.name;
@@ -157,11 +155,11 @@ export class CharacterMainComponent {
           this.secondItemId = element.id;
         }
       });
-    });
+    });*/
   }
 
   editStats(): void {
-    this._http
+    /*this._http
       .editCharacterStats(
         this.charId,
         this.statsForm.value.strength,
@@ -176,7 +174,7 @@ export class CharacterMainComponent {
           this._snackbar.open('Изменение успешно.');
           this.reload();
         },
-      });
+      });*/
   }
 
   info(character: Character): void {
@@ -202,12 +200,12 @@ export class CharacterMainComponent {
   }
 
   deleteCond(condId: number): void {
-    this._http.deleteCharacterCondition(this.charId, condId).subscribe({
+    /*this._characterService.deleteCharacterCondition(this.charId, condId).subscribe({
       complete: () => {
         this._snackbar.open('Удаление успешно.');
         this.reloadCond();
       },
-    });
+    });*/
   }
 
   editPriorityItems(): void {

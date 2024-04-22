@@ -4,11 +4,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { HttpService } from 'src/app/shared';
 import { SimpleDialogComponent } from 'src/app/shared/components/simple-dialog';
 import { ShortCharacter } from '@core/models/character/character.model';
 import { AddCharacterCacheService } from '../add-character/add-character-cache.service';
 import { AuthService } from '@core/services/auth/auth.service';
+import { CharacterService } from '@core/services/api/character.service';
 
 @Component({
   selector: 'app-characters',
@@ -22,22 +22,22 @@ export class CharactersComponent implements AfterContentInit {
 
   private _selectedItems = new Set<ShortCharacter>();
 
-  userLogin: string = '';
+  userId: number;
 
   constructor(
-    private _http: HttpService,
+    private _characterService: CharacterService,
     private _auth: AuthService,
     private _dialog: MatDialog,
     private _router: Router,
     private _snackbar: MatSnackBar,
     private _cacheService: AddCharacterCacheService
   ) {
-    this.userLogin = _auth.currentUser?.login ?? '';
-    this.shortCharacters$ = this._http.loadShortCharacters(this.userLogin);
+    this.userId = _auth.currentUser?.id ?? 0;
+    this.shortCharacters$ = this._characterService.loadShortCharacters(this.userId);
   }
 
   ngAfterContentInit(): void {
-    this.shortCharacters$ = this._http.loadShortCharacters(this.userLogin);
+    this.shortCharacters$ = this._characterService.loadShortCharacters(this.userId);
   }
 
   enableSelectionMode(): void {
@@ -67,17 +67,17 @@ export class CharactersComponent implements AfterContentInit {
   }
 
   deleteSelectedItems(): void {
-    let ids: number[] = [];
+    /*let ids: number[] = [];
     this._selectedItems.forEach((element) => {
       ids.push(element.id as number);
     });
-    this._http.deleteCharacters(ids).subscribe({
+    this._characterService.deleteCharacters(ids).subscribe({
       complete: () => {
         this._snackbar.open('Удаление успешно.');
-        this.shortCharacters$ = this._http.loadShortCharacters(this.userLogin);
+        this.shortCharacters$ = this._characterService.loadShortCharacters(this.userId);
         this.disableSelectionMode();
       },
-    });
+    });*/
   }
 
   addCharacter(): void {

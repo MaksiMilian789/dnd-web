@@ -6,7 +6,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable, filter, map, forkJoin } from 'rxjs';
 import { Inventory } from 'src/app/core/models/inventory.model';
 import { Item } from 'src/app/core/models/item.model';
-import { HttpService } from '@core/services/api/world.service';
 
 @Component({
   selector: 'app-edit-priority-item',
@@ -16,13 +15,13 @@ import { HttpService } from '@core/services/api/world.service';
 export class EditPriorityItemComponent {
   addForm: FormGroup;
 
-  items$: Observable<Item[]>;
+  //items$: Observable<Item[]>;
 
   description: string = 'Описание выбранного предмета';
 
   constructor(
     private _dialogRef: MatDialogRef<EditPriorityItemComponent>,
-    private _http: HttpService,
+    //private _http: HttpService,
     private _snackbar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA)
     public data: { charId: number, firstItem: number, secondItem: number }
@@ -32,9 +31,9 @@ export class EditPriorityItemComponent {
       secondItem: new FormControl(0),
     });
 
-    this.items$ = this._http.getInventory(this.data.charId);
+    //this.items$ = this._http.getInventory(this.data.charId);
 
-    this.items$.subscribe((data) => {
+    /*this.items$.subscribe((data) => {
       data.forEach((element) => {
         if (element.id == this.data.firstItem) {
           this.addForm.patchValue({firtsItem: element.id});
@@ -44,11 +43,11 @@ export class EditPriorityItemComponent {
           this.addForm.patchValue({secondItem: element.id});
         }
       });
-    });
+    });*/
   }
 
   save() {
-    if (
+    /*if (
       this.addForm.value.firtsItem != 0 &&
       this.addForm.value.secondItem != 0
     ) {
@@ -74,7 +73,7 @@ export class EditPriorityItemComponent {
             this._snackbar.open('Изменение успешно.');
           },
         });
-    }
+    }*/
     this._dialogRef.close(true);
   }
 }

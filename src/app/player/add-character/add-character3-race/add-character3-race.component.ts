@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { HttpService } from 'src/app/shared';
-import { Race } from '@core/models/character/race.model';
+
 import { AddCharacterCacheService } from '../add-character-cache.service';
+import { CharacterService } from '@core/services/api/character.service';
+import { Race } from '@core/models';
 
 @Component({
   selector: 'app-add-character3-race',
@@ -23,7 +24,7 @@ export class AddCharacter3RaceComponent {
 
   constructor(
     private _cacheService: AddCharacterCacheService,
-    private _http: HttpService,
+    private _characterService: CharacterService,
     private _router: Router
   ) {
     this.addForm = new FormGroup({
@@ -64,7 +65,7 @@ export class AddCharacter3RaceComponent {
       ]),
     });
 
-    this.races$ = this._http.getRaces();
+    this.races$ = this._characterService.getRaces();
 
     if(this._cacheService.character.name == '') this._router.navigate(['/player/createCharacterName']);
 
@@ -80,12 +81,12 @@ export class AddCharacter3RaceComponent {
         this.changeMaxAge(race?.name as string);
         this.description = race?.description as string;
         this.statsForm.setValue({
-          strength: this._cacheService.character.strength,
-          dexterity: this._cacheService.character.dexterity,
-          constitution: this._cacheService.character.constitution,
-          intelligence: this._cacheService.character.intelligence,
-          wisdom: this._cacheService.character.wisdom,
-          charisma: this._cacheService.character.charisma,
+          strength: this._cacheService.character.characteristics.strength,
+          dexterity: this._cacheService.character.characteristics.dexterity,
+          constitution: this._cacheService.character.characteristics.constitution,
+          intelligence: this._cacheService.character.characteristics.intelligence,
+          wisdom: this._cacheService.character.characteristics.wisdom,
+          charisma: this._cacheService.character.characteristics.charisma,
         });
       });
     }

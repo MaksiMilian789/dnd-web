@@ -1,6 +1,11 @@
-import { NgDompurifySanitizer } from "@tinkoff/ng-dompurify";
-import { TuiRootModule, TuiDialogModule, TuiAlertModule, TUI_SANITIZER } from "@taiga-ui/core";
-import { NgModule } from '@angular/core';
+import { NgDompurifySanitizer } from '@tinkoff/ng-dompurify';
+import {
+  TuiRootModule,
+  TuiDialogModule,
+  TuiAlertModule,
+  TUI_SANITIZER,
+} from '@taiga-ui/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -15,7 +20,7 @@ import { environment } from '../environments/environment';
 import { PlayerHomeComponent } from './player/player-home/player-home.component';
 import { CharactersComponent } from './player/characters/characters.component';
 import { InitiativeTrackerComponent } from './master/initiative-tracker/initiative-tracker.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { CharacterMainComponent } from './player/character/character-main/character-main.component';
 import { CharacterInventoryComponent } from './player/character/character-inventory/character-inventory.component';
 import { MasterShellComponent } from './master/master-shell/master-shell.component';
@@ -35,7 +40,8 @@ import { AddSpellDialogComponent } from './player/character/character-spells/add
 import { CharacterInfoDialogComponent } from './player/character/character-info-dialog/character-info-dialog.component';
 import { AddConditionDialogComponent } from './player/character/character-main/add-condition-dialog/add-condition-dialog.component';
 import { EditPriorityItemComponent } from './player/character/character-main/edit-priority-item/edit-priority-item.component';
-import { CoreModule } from "./core";
+import { CoreModule } from './core';
+import { AuthInterceptor } from '@core/services/auth/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -64,7 +70,7 @@ import { CoreModule } from "./core";
     AddSpellDialogComponent,
     CharacterInfoDialogComponent,
     AddConditionDialogComponent,
-    EditPriorityItemComponent
+    EditPriorityItemComponent,
   ],
   imports: [
     CoreModule,
@@ -79,11 +85,23 @@ import { CoreModule } from "./core";
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000',
     }),
-      TuiRootModule,
-      TuiDialogModule,
-      TuiAlertModule
-],
-  providers: [{provide: TUI_SANITIZER, useClass: NgDompurifySanitizer}],
+    TuiRootModule,
+    TuiDialogModule,
+    TuiAlertModule,
+  ],
+  providers: [
+    { provide: TUI_SANITIZER, useClass: NgDompurifySanitizer },
+
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+    {
+      provide: LOCALE_ID,
+      useValue: 'ru',
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

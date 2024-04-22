@@ -24,10 +24,7 @@ export class MasterShellComponent {
     private _auth: AuthService,
     private _router: Router
   ) {
-    if (sessionStorage.getItem('auth') != null) {
-      // Получение информации о пользователе
-      this.userLogin = sessionStorage.getItem('auth') as string;
-    }
+    this.userLogin = _auth.currentUser?.login ?? '';
 
     this.shadowCheck = this._router.events.subscribe(() => {
       if (this._router.url == '/player') {

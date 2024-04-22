@@ -13,28 +13,28 @@
     <div class="card-container stats" [formGroup]="hpForm">
         <mat-card class="card-stat">
             <mat-form-field appearance="outline">
-                <input matInput type="number" value="{{character.maxHp + character.level * pipe.transform(character.constitution, 0)}}" [disabled]="true" #maxHp/>
+                <!--><input matInput type="number" value="{{character.maxHp + character.level * pipe.transform(character.constitution, 0)}}" [disabled]="true" #maxHp/><!-->
             </mat-form-field>
             <mat-card-subtitle class="card-stat-subtext">Max Хиты</mat-card-subtitle>
         </mat-card>
         <mat-divider vertical class="divider-vertical"></mat-divider>
         <mat-card class="card-stat">
             <mat-form-field appearance="outline">
-                <input matInput type="number" [(ngModel)]="character.hp" formControlName="hp" />
+                <!--><input matInput type="number" [(ngModel)]="character.hp" formControlName="hp" /><!-->
             </mat-form-field>
             <mat-card-subtitle class="card-stat-subtext">Текущ. Хиты</mat-card-subtitle>
         </mat-card>
         <mat-divider vertical class="divider-vertical"></mat-divider>
         <mat-card class="card-stat">
             <mat-form-field appearance="outline">
-                <input matInput type="number" [(ngModel)]="character.addHp" formControlName="addHp" />
+                <!--><input matInput type="number" [(ngModel)]="character.addHp" formControlName="addHp" /><!-->
             </mat-form-field>
             <mat-card-subtitle class=" card-stat-subtext">Врем. Хиты</mat-card-subtitle>
         </mat-card>
         <mat-divider vertical class="divider-vertical"></mat-divider>
         <mat-card class="card-stat">
             <mat-form-field appearance="outline">
-                <input matInput type="number" value="{{character.proficiencyBonus}}" [disabled]="true" />
+                <!--><input matInput type="number" value="{{character.proficiencyBonus}}" [disabled]="true" /><!-->
             </mat-form-field>
             <mat-card-subtitle class="card-stat-subtext">Бонус Мастр</mat-card-subtitle>
         </mat-card>
@@ -43,7 +43,7 @@
     <div class="card-container stats">
         <mat-card class="card-stat">
             <mat-form-field appearance="outline">
-                <input matInput type="number" value="{{character.classArmor}}" [disabled]="true" />
+                <!--><input matInput type="number" value="{{character.classArmor}}" [disabled]="true" /><!-->
             </mat-form-field>
             <mat-card-subtitle class="card-stat-subtext">Класс брони</mat-card-subtitle>
         </mat-card>
@@ -57,7 +57,7 @@
         <mat-divider vertical class="divider-vertical"></mat-divider>
         <mat-card class="card-stat">
             <mat-form-field appearance="outline">
-                <input matInput type="number" value="{{character.dexterity | statsSkill: 0}}" [disabled]="true" />
+                <input matInput type="number" value="{{character.characteristics.dexterity| statsSkill: 0}}" [disabled]="true" />
             </mat-form-field>
             <mat-card-subtitle class=" card-stat-subtext">Инициатива</mat-card-subtitle>
         </mat-card>
@@ -83,113 +83,113 @@
                 <mat-card-content>
                     Сила
                     <mat-form-field appearance="outline">
-                        <input matInput type="number" [(ngModel)]="character.strength" formControlName="strength" />
+                        <input matInput type="number" [(ngModel)]="character.characteristics.strength" formControlName="strength" />
                     </mat-form-field>
                 </mat-card-content>
                 <mat-divider></mat-divider>
                 <div class="save">
-                    Модиф-тор: {{character.strength | statsSkill: 0}}
-                    Спасбросок: {{character.strength | statsSkill: 0 }}
+                    Модиф-тор: {{character.characteristics.strength | statsSkill: 0}}
+                    Спасбросок: {{character.characteristics.strength | statsSkill: 0 }}
                 </div>
                 <mat-divider></mat-divider>
                 <div class="stat-skill">
-                    Атлетика: {{character.strength | statsSkill: character.proficiencyBonus }}
+                    Атлетика: {{character.characteristics.strength | statsSkill: 0 }}
                 </div>
             </mat-card>
             <mat-card>
                 <mat-card-content>
                     Ловкость
                     <mat-form-field appearance="outline">
-                        <input matInput type="number" [(ngModel)]="character.dexterity" formControlName="dexterity" />
+                        <input matInput type="number" [(ngModel)]="character.characteristics.dexterity" formControlName="dexterity" />
                     </mat-form-field>
                 </mat-card-content>
                 <mat-divider></mat-divider>
                 <div class="save">
-                    Модиф-тор: {{character.dexterity | statsSkill: 0}}
-                    Спасбросок: {{character.dexterity | statsSkill: 0 }}
+                    Модиф-тор: {{character.characteristics.dexterity | statsSkill: 0}}
+                    Спасбросок: {{character.characteristics.dexterity | statsSkill: 0 }}
                 </div>
                 <mat-divider></mat-divider>
                 <div class="stat-skill">
-                    Акробатика: {{character.dexterity | statsSkill: character.proficiencyBonus }}
-                    Ловкость рук: {{character.dexterity | statsSkill: 0 }}
-                    Скрытность: {{character.dexterity | statsSkill: character.proficiencyBonus }}
+                    Акробатика: {{character.characteristics.dexterity | statsSkill: 0 }}
+                    Ловкость рук: {{character.characteristics.dexterity | statsSkill: 0 }}
+                    Скрытность: {{character.characteristics.dexterity | statsSkill: 0 }}
                 </div>
             </mat-card>
             <mat-card>
                 <mat-card-content>
                     Телосложение
                     <mat-form-field appearance="outline">
-                        <input matInput type="number" [(ngModel)]="character.constitution"
+                        <input matInput type="number" [(ngModel)]="character.characteristics.constitution"
                             formControlName="constitution" />
                     </mat-form-field>
                 </mat-card-content>
                 <mat-divider></mat-divider>
                 <div class="save">
-                    Модиф-тор: {{character.constitution | statsSkill: 0}}
-                    Спасбросок: {{character.constitution | statsSkill: 0 }}
+                    Модиф-тор: {{character.characteristics.constitution | statsSkill: 0}}
+                    Спасбросок: {{character.characteristics.constitution | statsSkill: 0 }}
                 </div>
             </mat-card>
             <mat-card>
                 <mat-card-content>
                     Интеллект
                     <mat-form-field appearance="outline">
-                        <input matInput type="number" [(ngModel)]="character.intelligence"
+                        <input matInput type="number" [(ngModel)]="character.characteristics.intelligence"
                             formControlName="intelligence" />
                     </mat-form-field>
                 </mat-card-content>
                 <mat-divider></mat-divider>
                 <div class="save">
-                    Модиф-тор: {{character.intelligence | statsSkill: 0}}
-                    Спасбросок: {{character.intelligence | statsSkill: character.proficiencyBonus }}
+                    Модиф-тор: {{character.characteristics.intelligence | statsSkill: 0}}
+                    Спасбросок: {{character.characteristics.intelligence | statsSkill: 0 }}
                 </div>
                 <mat-divider></mat-divider>
                 <div class="stat-skill">
-                    Анализ: {{character.intelligence | statsSkill: character.proficiencyBonus }}
-                    История: {{character.intelligence | statsSkill: 0 }}
-                    Магия: {{character.intelligence | statsSkill: character.proficiencyBonus }}
-                    Природа: {{character.intelligence | statsSkill: character.proficiencyBonus }}
-                    Религия: {{character.intelligence | statsSkill: 0 }}
+                    Анализ: {{character.characteristics.intelligence | statsSkill: 0 }}
+                    История: {{character.characteristics.intelligence | statsSkill: 0 }}
+                    Магия: {{character.characteristics.intelligence | statsSkill: 0 }}
+                    Природа: {{character.characteristics.intelligence | statsSkill: 0 }}
+                    Религия: {{character.characteristics.intelligence | statsSkill: 0 }}
                 </div>
             </mat-card>
             <mat-card>
                 <mat-card-content>
                     Мудрость
                     <mat-form-field appearance="outline">
-                        <input matInput type="number" [(ngModel)]="character.wisdom" formControlName="wisdom" />
+                        <input matInput type="number" [(ngModel)]="character.characteristics.wisdom" formControlName="wisdom" />
                     </mat-form-field>
                 </mat-card-content>
                 <mat-divider></mat-divider>
                 <div class="save">
-                    Модиф-тор: {{character.wisdom | statsSkill: 0}}
-                    Спасбросок: {{character.wisdom | statsSkill: character.proficiencyBonus }}
+                    Модиф-тор: {{character.characteristics.wisdom | statsSkill: 0}}
+                    Спасбросок: {{character.characteristics.wisdom | statsSkill: 0 }}
                 </div>
                 <mat-divider></mat-divider>
                 <div class="stat-skill">
-                    Внимат-сть: {{character.wisdom | statsSkill: character.proficiencyBonus }}
-                    Выживание: {{character.wisdom | statsSkill: 0 }}
-                    Медицина: {{character.wisdom | statsSkill: character.proficiencyBonus }}
-                    Прониц-сть: {{character.wisdom | statsSkill: character.proficiencyBonus }}
-                    Уход за жив: {{character.wisdom | statsSkill: character.proficiencyBonus }}
+                    Внимат-сть: {{character.characteristics.wisdom | statsSkill: 0 }}
+                    Выживание: {{character.characteristics.wisdom | statsSkill: 0 }}
+                    Медицина: {{character.characteristics.wisdom | statsSkill: 0 }}
+                    Прониц-сть: {{character.characteristics.wisdom | statsSkill: 0 }}
+                    Уход за жив: {{character.characteristics.wisdom | statsSkill: 0 }}
                 </div>
             </mat-card>
             <mat-card>
                 <mat-card-content>
                     Харизма
                     <mat-form-field appearance="outline">
-                        <input matInput type="number" [(ngModel)]="character.charisma" formControlName="charisma" />
+                        <input matInput type="number" [(ngModel)]="character.characteristics.charisma" formControlName="charisma" />
                     </mat-form-field>
                 </mat-card-content>
                 <mat-divider></mat-divider>
                 <div class="save">
-                    Модиф-тор: {{character.charisma | statsSkill: 0}}
-                    Спасбросок: {{character.charisma | statsSkill: 0 }}
+                    Модиф-тор: {{character.characteristics.charisma | statsSkill: 0}}
+                    Спасбросок: {{character.characteristics.charisma | statsSkill: 0 }}
                 </div>
                 <mat-divider></mat-divider>
                 <div class="stat-skill">
-                    Выступление: {{character.charisma | statsSkill: character.proficiencyBonus }}
-                    Запугивание: {{character.charisma | statsSkill: 0 }}
-                    Обман: {{character.charisma | statsSkill: character.proficiencyBonus }}
-                    Убеждение: {{character.charisma | statsSkill: character.proficiencyBonus }}
+                    Выступление: {{character.characteristics.charisma | statsSkill: 0 }}
+                    Запугивание: {{character.characteristics.charisma | statsSkill: 0 }}
+                    Обман: {{character.characteristics.charisma | statsSkill: 0 }}
+                    Убеждение: {{character.characteristics.charisma | statsSkill: 0 }}
                 </div>
             </mat-card>
         </div>
@@ -213,7 +213,7 @@
                 {{secondItem}}
             </ng-container>
         </mat-card>
-        <ng-container *ngIf="condition$ | async as condition">
+        <!--><ng-container *ngIf="condition$ | async as condition">
             <mat-card class="cond">
                 <ng-container *ngIf="condition.length == 0">
                     <button mat-icon-button (click)="addCond()" class="spec-button"><mat-icon>add</mat-icon></button>
@@ -225,7 +225,7 @@
                     {{condition[0].name}}
                 </ng-container>
             </mat-card>
-        </ng-container>
+        </ng-container><!-->
         <div class="buttons-skill-magic">
             <button mat-raised-button class="button-skill" [routerLink]="['skills']">Умения</button>
             <button mat-raised-button class="button-magic" [routerLink]="['spells']">Заклинания</button>

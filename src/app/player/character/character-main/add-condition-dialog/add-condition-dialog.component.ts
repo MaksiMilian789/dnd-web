@@ -3,9 +3,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
+
 import { Character } from '@core/models/character/character.model';
 import { Condition } from 'src/app/core/models/condition.model';
-import { HttpService } from '@core/services/api/world.service';
 
 @Component({
   selector: 'app-add-condition-dialog',
@@ -15,13 +15,13 @@ import { HttpService } from '@core/services/api/world.service';
 export class AddConditionDialogComponent {
   addForm: FormGroup;
 
-  conditions$: Observable<Condition[]>;
+  //conditions$: Observable<Condition[]>;
 
   description: string = 'Описание состояния.';
 
   constructor(
     private _dialogRef: MatDialogRef<AddConditionDialogComponent>,
-    private _http: HttpService,
+    //private _http: HttpService,
     private _snackbar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA)
     public data: { charId: number }
@@ -30,17 +30,17 @@ export class AddConditionDialogComponent {
       cond: new FormControl('', Validators.required),
     });
 
-    this.conditions$ = this._http.getConditions();
+    //this.conditions$ = this._http.getConditions();
   }
 
   add() {
-    this._http
+    /*this._http
       .addCharacterCondition(this.data.charId, this.addForm.value.cond)
       .subscribe({
         complete: () => {
           this._snackbar.open('Добавление успешно.');
         },
-      });
+      });*/
     this._dialogRef.close(true);
   }
 

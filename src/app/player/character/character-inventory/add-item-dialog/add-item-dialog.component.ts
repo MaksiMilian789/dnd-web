@@ -3,10 +3,11 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, filter, map } from 'rxjs';
+import { Observable, map } from 'rxjs';
+
 import { Inventory } from 'src/app/core/models/inventory.model';
 import { Item } from 'src/app/core/models/item.model';
-import { HttpService } from '@core/services/api/world.service';
+import { CharacterService } from '@core/services/api/character.service';
 
 @Component({
   selector: 'app-add-item-dialog',
@@ -16,13 +17,13 @@ import { HttpService } from '@core/services/api/world.service';
 export class AddItemDialogComponent {
   addForm: FormGroup;
 
-  items$: Observable<Item[]>;
+  //items$: Observable<Item[]>;
 
   description: string = 'Описание выбранного предмета';
 
   constructor(
     private _dialogRef: MatDialogRef<AddItemDialogComponent>,
-    private _http: HttpService,
+    private _characterService: CharacterService,
     private _snackbar: MatSnackBar,
     private _route: ActivatedRoute,
     @Inject(MAT_DIALOG_DATA)
@@ -32,9 +33,9 @@ export class AddItemDialogComponent {
       item: new FormControl('', Validators.required),
     });
 
-    this.items$ = this._http
+    /*this.items$ = this._characterService
       .getItems()
-      .pipe(map((res) => res.filter((val) => this.filterItems(val))));
+      .pipe(map((res) => res.filter((val) => this.filterItems(val))));*/
   }
 
   filterItems(val: Item): boolean {
@@ -44,13 +45,13 @@ export class AddItemDialogComponent {
   }
 
   add() {
-    this._http
+    /*this._http
       .addCharacterItem(this.data.charId, this.addForm.value.item)
       .subscribe({
         complete: () => {
           this._snackbar.open('Добавление успешно.');
         },
-      });
+      });*/
     this._dialogRef.close(true);
   }
 

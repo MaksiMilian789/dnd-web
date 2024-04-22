@@ -3,12 +3,12 @@
     <form [formGroup]="addForm">
         <mat-form-field appearance="outline">
             <mat-label>Название заклинания</mat-label>
-            <mat-select formControlName="spell">
+            <!--><mat-select formControlName="spell">
                 <mat-option *ngFor="let spell of spells$ | async" [value]="spell.id"
                     (click)="changeDescription(spell.description)">
                     {{ spell.name }}
                 </mat-option>
-            </mat-select>
+            </mat-select><!-->
         </mat-form-field>
     </form>
 

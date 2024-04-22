@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { merge, Observable } from 'rxjs';
-import { HttpService } from 'src/app/shared';
-import { Background } from '@core/models/character/background.model';
-import { Ideology } from 'src/app/core/models/ideology.model';
+import { Observable } from 'rxjs';
+
 import { AddCharacterCacheService } from '../add-character-cache.service';
+import { CharacterService } from '@core/services/api/character.service';
+import { Ideology, IDEOLOGY_LOCALIZATION } from '@core/enums';
+import { Background } from '@core/models';
 
 @Component({
   selector: 'app-add-character4-background',
@@ -17,14 +18,14 @@ export class AddCharacter4BackgroundComponent {
 
   backgrounds$: Observable<Background[]>;
 
-  ideologies$: Observable<Ideology[]>;
+  ideologies = IDEOLOGY_LOCALIZATION;
 
   descriptionBackground: string = 'Описание выбранной предыстории';
   descriptionIdeology: string = 'Описание выбранного мировозрения';
 
   constructor(
     private _cacheService: AddCharacterCacheService,
-    private _http: HttpService,
+    private _characterService: CharacterService,
     private _router: Router
   ) {
     this.addForm = new FormGroup({
@@ -32,8 +33,7 @@ export class AddCharacter4BackgroundComponent {
       ideology: new FormControl('', Validators.required),
     });
 
-    this.backgrounds$ = this._http.getBackgrounds();
-    this.ideologies$ = this._http.getIdeologies();
+    this.backgrounds$ = this._characterService.getBackgrounds();
 
     if(this._cacheService.character.name == '') this._router.navigate(['/player/createCharacterName']);
   }

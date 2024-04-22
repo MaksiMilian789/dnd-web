@@ -4,9 +4,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { ShortWorld } from '../../../core/models/world.model';
-import { HttpService } from '../../../core/services/api/world.service';
 import { AddWorldDialogComponent } from './add-world-dialog/add-world-dialog.component';
+import { WorldService } from '@core/services/api/world.service';
+import { ShortWorld } from '@core/models';
+import { AuthService } from '@core/services/auth/auth.service';
 
 @Component({
   selector: 'app-worlds',
@@ -22,21 +23,19 @@ export class WorldsComponent {
 
   public role: string = '';
 
-  userLogin: string = '';
+  userId: number;
 
   constructor(
-    private _http: HttpService,
+    private _worldService: WorldService,
+    private _auth: AuthService,
     private _router: Router,
     private _dialog: MatDialog,
     private _snackbar: MatSnackBar
   ) {
     this.role = this._router.url.split('/')[1];
-
-    if (sessionStorage.getItem('auth') != null) {
-      // Получение информации о пользователе
-      this.userLogin = sessionStorage.getItem('auth') as string;
-      this.shortWorlds$ = this._http.loadShortWorlds(this.userLogin);
-    }
+    // Получение информации о пользователе
+    this.userId = _auth.currentUser?.id ?? 0;
+    this.shortWorlds$ = this._worldService.loadShortWorlds(this.userId, 0);
   }
 
   enableSelectionMode(): void {
@@ -66,18 +65,17 @@ export class WorldsComponent {
   }
 
   deleteSelectedItems(): void {
-    let ids: number[] = [];
+    /*let ids: number[] = [];
     this._selectedItems.forEach((element) => {
       ids.push(element.id as number);
     });
-    this._http.deleteWorlds(ids)
-    .subscribe({
+    this._http.deleteWorlds(ids).subscribe({
       complete: () => {
         this._snackbar.open('Удаление успешно.');
         this.shortWorlds$ = this._http.loadShortWorlds(this.userLogin);
         this.disableSelectionMode();
       },
-    });
+    });*/
   }
 
   addWorld(): void {
@@ -85,7 +83,7 @@ export class WorldsComponent {
       .open(AddWorldDialogComponent, { width: '300px' })
       .afterClosed()
       .subscribe(
-        () => (this.shortWorlds$ = this._http.loadShortWorlds(this.userLogin))
+        () => (this.shortWorlds$ = this._worldService.loadShortWorlds(this.userId, 0))
       );
   }
 }

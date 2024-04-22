@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { HttpService } from '@core/services/api/world.service';
+
+import { WorldService } from '@core/services/api/world.service';
+import { AuthService } from '@core/services/auth/auth.service';
 
 @Component({
   selector: 'app-add-world-dialog',
@@ -14,7 +16,8 @@ export class AddWorldDialogComponent {
 
   constructor(
     private _dialogRef: MatDialogRef<AddWorldDialogComponent>,
-    private _http: HttpService,
+    private _worldService: WorldService,
+    private _auth: AuthService,
     private _snackbar: MatSnackBar
   ) {
     this.addForm = new FormGroup({
@@ -24,9 +27,9 @@ export class AddWorldDialogComponent {
   }
 
   add() {
-    this._http
+    this._worldService
       .createWorld(
-        sessionStorage.getItem('auth') as string,
+        this._auth.currentUser?.id ?? 0,
         this.addForm.value.name,
         this.addForm.value.description
       )

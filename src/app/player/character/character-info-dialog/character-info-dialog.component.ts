@@ -3,9 +3,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { forkJoin, merge } from 'rxjs';
+
 import { Character } from '@core/models/character/character.model';
-import { StatsSkillPipe } from 'src/app/shared/pipes/stats-skill.pipe';
-import { HttpService } from '@core/services/api/world.service';
+import { CharacterService } from '@core/services/api/character.service';
 
 @Component({
   selector: 'app-character-info-dialog',
@@ -17,7 +17,7 @@ export class CharacterInfoDialogComponent {
 
   constructor(
     private _dialogRef: MatDialogRef<CharacterInfoDialogComponent>,
-    private _http: HttpService,
+    private _characterService: CharacterService,
     private _snackbar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA)
     public data: { character: Character }
@@ -25,24 +25,24 @@ export class CharacterInfoDialogComponent {
     this.infoForm = new FormGroup({
       name: new FormControl(this.data.character.name, Validators.required),
       class: new FormControl(this.data.character.className),
-      race: new FormControl(this.data.character.raceName),
-      ideology: new FormControl(this.data.character.ideologyName),
-      background: new FormControl(this.data.character.backgroundName),
+      race: new FormControl(this.data.character.raceInstance.name),
+      ideology: new FormControl(this.data.character.ideology),
+      background: new FormControl(this.data.character.backgroundInstance.name),
       level: new FormControl(this.data.character.level, Validators.required),
       age: new FormControl(this.data.character.age, Validators.required),
     });
   }
 
   save(): void {
-    let proficiencyBonus = this.calcProficiencyBonus();
+    /*let proficiencyBonus = this.calcProficiencyBonus();
     let maxHp = this.calcMaxHp();
     forkJoin([
-      this._http.editCharacterInfo(
+      this._characterService.editCharacterInfo(
         this.data.character.id as number,
         this.infoForm.value.name,
         this.infoForm.value.age
       ),
-      this._http.editCharacterLevel(
+      this._characterService.editCharacterLevel(
         this.data.character.id as number,
         this.infoForm.value.level,
         maxHp,
@@ -52,7 +52,7 @@ export class CharacterInfoDialogComponent {
       complete: () => {
         this._snackbar.open('Изменение успешно.');
       },
-    });
+    });*/
   }
 
   calcProficiencyBonus(): number {

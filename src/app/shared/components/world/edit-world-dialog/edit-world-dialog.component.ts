@@ -2,7 +2,8 @@ import { Component, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { HttpService } from '@core/services/api/world.service';
+
+import { WorldService } from '@core/services/api/world.service';
 
 @Component({
   selector: 'app-edit-world-dialog',
@@ -14,7 +15,7 @@ export class EditWorldDialogComponent {
 
   constructor(
     private _dialogRef: MatDialogRef<EditWorldDialogComponent>,
-    private _http: HttpService,
+    private _worldService: WorldService,
     private _snackbar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA)
     public data: { id: number, name: string; description: string }
@@ -26,7 +27,7 @@ export class EditWorldDialogComponent {
   }
 
   edit() {
-    this._http
+    /*this._worldService
       .editWorld(
         this.data.id,
         this.addForm.value.name,
@@ -36,7 +37,7 @@ export class EditWorldDialogComponent {
         complete: () => {
           this._snackbar.open('Изменение успешно.');
         },
-      });
+      });*/
     this._dialogRef.close(true);
   }
 }

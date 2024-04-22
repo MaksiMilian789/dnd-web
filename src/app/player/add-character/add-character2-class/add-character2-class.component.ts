@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { HttpService } from 'src/app/shared';
-import { Class } from '@core/models/character/class.model';
+
 import { AddCharacterCacheService } from '../add-character-cache.service';
+import { CharacterService } from '@core/services/api/character.service';
+import { Class } from '@core/models';
 
 @Component({
   selector: 'app-add-character2-class',
@@ -20,14 +21,14 @@ export class AddCharacter2ClassComponent {
 
   constructor(
     private _cacheService: AddCharacterCacheService,
-    private _http: HttpService,
+    private _characterService: CharacterService,
     private _router: Router
   ) {
     this.addForm = new FormGroup({
       charClass: new FormControl('', Validators.required),
     });
 
-    this.classes$ = this._http.getClasses();
+    this.classes$ = this._characterService.getClasses();
 
     if (this._cacheService.character.name == '')
       this._router.navigate(['/player/createCharacterName']);

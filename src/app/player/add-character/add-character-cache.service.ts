@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { HttpService } from 'src/app/shared';
+import { Gender, Ideology, System } from '@core/enums';
+
 import { CharacterWithId } from '@core/models/character/character.model';
+import { Characteristics } from '@core/models/character/characteristics.model';
+import { CharacterService } from '@core/services/api/character.service';
+import { AuthService } from '@core/services/auth/auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -9,37 +13,41 @@ import { CharacterWithId } from '@core/models/character/character.model';
 export class AddCharacterCacheService {
   public character!: CharacterWithId;
 
-  constructor(private _http: HttpService, private _snackbar: MatSnackBar) {
+  constructor(
+    private _characterService: CharacterService,
+    private _auth: AuthService,
+    private _snackbar: MatSnackBar
+  ) {
     this.reload();
   }
 
-  reload(): void{
-    this.character = {
-      name: '',
-      level: 0,
-      age: 0,
-      classId: 0,
-      gendersId: 0,
-      raceId: 0,
-      backgroundId: 0,
-      ideologyId: 0,
+  reload(): void {
+    let characteristics: Characteristics = {
       strength: 0,
       dexterity: 0,
       constitution: 0,
       intelligence: 0,
       wisdom: 0,
       charisma: 0,
-      hp: 0,
-      addHp: 0,
-      maxHp: 0,
-      classArmor: 0,
-      proficiencyBonus: 0,
+    };
+
+    this.character = {
+      name: '',
+      level: 0,
+      age: 0,
+      classId: 0,
+      gender: 0,
+      raceId: 0,
+      backgroundId: 0,
+      ideology: 0,
+      characteristics: characteristics,
+      system: System.Dnd,
     };
   }
 
-  firstStage(name: string, gendersId: number) {
+  firstStage(name: string, gender: Gender) {
     this.character.name = name;
-    this.character.gendersId = gendersId;
+    this.character.gender = gender;
   }
 
   secondStage(classId: number) {
@@ -58,22 +66,22 @@ export class AddCharacterCacheService {
   ) {
     this.character.raceId = raceId;
     this.character.age = age;
-    this.character.strength = strength;
-    this.character.dexterity = dexterity;
-    this.character.constitution = constitution;
-    this.character.intelligence = intelligence;
-    this.character.wisdom = wisdom;
-    this.character.charisma = charisma;
+    this.character.characteristics.strength = strength;
+    this.character.characteristics.dexterity = dexterity;
+    this.character.characteristics.constitution = constitution;
+    this.character.characteristics.intelligence = intelligence;
+    this.character.characteristics.wisdom = wisdom;
+    this.character.characteristics.charisma = charisma;
   }
 
-  fourthStage(backgroundId: number, ideologyId: number) {
+  fourthStage(backgroundId: number, ideology: Ideology) {
     this.character.backgroundId = backgroundId;
-    this.character.ideologyId = ideologyId;
+    this.character.ideology = ideology;
   }
 
   save(): void {
-    this._http
-      .createCharacter(this.character, sessionStorage.getItem('auth') as string)
+    this._characterService
+      .createCharacter(this.character, this._auth.currentUser?.id ?? 0)
       .subscribe({
         complete: () => {
           this._snackbar.open('Создание успешно.');

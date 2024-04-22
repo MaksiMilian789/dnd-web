@@ -7,14 +7,15 @@ import {
   trigger,
 } from '@angular/animations';
 import { ActivatedRoute } from '@angular/router';
-import { HttpService } from 'src/app/shared';
+
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AddSkillDialogComponent } from './add-skill-dialog/add-skill-dialog.component';
-import { Skill } from 'src/app/core/models/skill.model';
+import { CharacterService } from '@core/services/api/character.service';
+import { Skill } from '@core/models';
 
 @Component({
   selector: 'app-character-skills',
@@ -43,7 +44,7 @@ export class CharacterSkillsComponent implements AfterViewInit {
   expandedElement!: Skill;
 
   constructor(
-    private _http: HttpService,
+    //private _http: CharacterService,
     private _route: ActivatedRoute,
     private _dialog: MatDialog,
     private _snackbar: MatSnackBar
@@ -54,7 +55,7 @@ export class CharacterSkillsComponent implements AfterViewInit {
   }
 
   loadData(): void {
-    this._http
+    /*this._http
       .getCharacterSkills(
         Number(this._route.snapshot.paramMap.get('characterId'))
       )
@@ -63,7 +64,7 @@ export class CharacterSkillsComponent implements AfterViewInit {
         this.paginator._intl.itemsPerPageLabel = '';
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
-      });
+      });*/
   }
 
   addItem(): void {
@@ -80,7 +81,7 @@ export class CharacterSkillsComponent implements AfterViewInit {
   }
 
   deleteItem(id: number): void {
-    this._http
+    /*this._http
       .deleteCharacterSkill(
         Number(this._route.snapshot.paramMap.get('characterId')),
         id
@@ -90,6 +91,6 @@ export class CharacterSkillsComponent implements AfterViewInit {
           this._snackbar.open('Удаление успешно.');
           this.loadData();
         },
-      });
+      });*/
   }
 }

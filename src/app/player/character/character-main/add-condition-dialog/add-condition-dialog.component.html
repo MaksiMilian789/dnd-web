@@ -4,11 +4,11 @@
         <form [formGroup]="addForm">
             <mat-form-field appearance="outline">
                 <mat-label>Состояние</mat-label>
-                <mat-select formControlName="cond">
+                <!--><mat-select formControlName="cond">
                     <mat-option *ngFor="let cond of conditions$ | async" [value]="cond.id" (click)="changeDescription(cond.description)"> 
                         {{ cond.name }}
                     </mat-option>
-                </mat-select>
+                </mat-select><!-->
             </mat-form-field>
         </form>    
         <mat-card>

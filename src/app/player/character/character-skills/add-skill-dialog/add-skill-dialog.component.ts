@@ -3,11 +3,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, filter, map } from 'rxjs';
-import { Inventory } from 'src/app/core/models/inventory.model';
+
+import { Skill } from '@core/models';
 import { Item } from 'src/app/core/models/item.model';
-import { Skill } from 'src/app/core/models/skill.model';
-import { HttpService } from '@core/services/api/world.service';
 
 @Component({
   selector: 'app-add-skill-dialog',
@@ -17,13 +15,13 @@ import { HttpService } from '@core/services/api/world.service';
 export class AddSkillDialogComponent {
   addForm: FormGroup;
 
-  skills$: Observable<Skill[]>;
+  //skills$: Observable<Skill[]>;
 
   description: string = 'Описание выбранного умения';
 
   constructor(
     private _dialogRef: MatDialogRef<AddSkillDialogComponent>,
-    private _http: HttpService,
+    //private _http: HttpService,
     private _snackbar: MatSnackBar,
     private _route: ActivatedRoute,
     @Inject(MAT_DIALOG_DATA)
@@ -33,9 +31,9 @@ export class AddSkillDialogComponent {
       skill: new FormControl('', Validators.required),
     });
 
-    this.skills$ = this._http
+    /*this.skills$ = this._http
       .getSkills()
-      .pipe(map((res) => res.filter((val) => this.filterItems(val))));
+      .pipe(map((res) => res.filter((val) => this.filterItems(val))));*/
   }
 
   filterItems(val: Item): boolean {
@@ -43,13 +41,13 @@ export class AddSkillDialogComponent {
   }
 
   add() {
-    this._http
+    /*this._http
       .addCharacterSkill(this.data.charId, this.addForm.value.skill)
       .subscribe({
         complete: () => {
           this._snackbar.open('Добавление успешно.');
         },
-      });
+      });*/
     this._dialogRef.close(true);
   }
 

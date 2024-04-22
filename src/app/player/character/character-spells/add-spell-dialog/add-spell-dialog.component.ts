@@ -6,7 +6,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable, map } from 'rxjs';
 import { Item } from 'src/app/core/models/item.model';
 import { Spell } from 'src/app/core/models/spell.model';
-import { HttpService } from '@core/services/api/world.service';
 
 @Component({
   selector: 'app-add-spell-dialog',
@@ -16,13 +15,13 @@ import { HttpService } from '@core/services/api/world.service';
 export class AddSpellDialogComponent {
   addForm: FormGroup;
 
-  spells$: Observable<Spell[]>;
+  //spells$: Observable<Spell[]>;
 
   description: string = 'Описание выбранного заклинания';
 
   constructor(
     private _dialogRef: MatDialogRef<AddSpellDialogComponent>,
-    private _http: HttpService,
+    //private _http: HttpService,
     private _snackbar: MatSnackBar,
     private _route: ActivatedRoute,
     @Inject(MAT_DIALOG_DATA)
@@ -32,9 +31,9 @@ export class AddSpellDialogComponent {
       spell: new FormControl('', Validators.required),
     });
 
-    this.spells$ = this._http
+    /*this.spells$ = this._http
       .getSpells()
-      .pipe(map((res) => res.filter((val) => this.filterItems(val))));
+      .pipe(map((res) => res.filter((val) => this.filterItems(val))));*/
   }
 
   filterItems(val: Item): boolean {
@@ -42,13 +41,13 @@ export class AddSpellDialogComponent {
   }
 
   add() {
-    this._http
+    /*this._http
       .addCharacterSpell(this.data.charId, this.addForm.value.spell)
       .subscribe({
         complete: () => {
           this._snackbar.open('Добавление успешно.');
         },
-      });
+      });*/
     this._dialogRef.close(true);
   }
 

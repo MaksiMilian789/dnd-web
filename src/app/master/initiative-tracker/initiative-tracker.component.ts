@@ -3,9 +3,8 @@ import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
-import { HttpService } from 'src/app/shared';
+
 import { TrackerUnit } from 'src/app/core/models/tracker-unit.model';
-import { AddTrackerDialogComponent } from './add-tracker-dialog/add-tracker-dialog.component';
 
 @Component({
   selector: 'app-initiative-tracker',
@@ -20,11 +19,11 @@ export class InitiativeTrackerComponent {
 
   constructor(
     private _dialog: MatDialog,
-    private _http: HttpService,
+    //private _http: HttpService,
     private _route: ActivatedRoute,
     private _snackbar: MatSnackBar
   ) {
-    this._http.getTracker(this.worldId).subscribe((res) => (this.units = res));
+    //this._http.getTracker(this.worldId).subscribe((res) => (this.units = res));
   }
 
   sort(): void {
@@ -39,16 +38,16 @@ export class InitiativeTrackerComponent {
   }
 
   remove(unit: TrackerUnit): void {
-    this.units = this.units.filter((val) => val != unit);
+    /*this.units = this.units.filter((val) => val != unit);
     this._http.setTracker(this.worldId, this.units).subscribe({
       complete: () => {
         this._snackbar.open('Удаление успешно.');
       },
-    });
+    });*/
   }
 
   add(): void {
-    this._dialog
+    /*this._dialog
       .open(AddTrackerDialogComponent, { width: '300px' })
       .afterClosed()
       .subscribe((res: TrackerUnit) => {
@@ -58,6 +57,6 @@ export class InitiativeTrackerComponent {
             this._snackbar.open('Добавление успешно.');
           },
         });
-      });
+      });*/
   }
 }

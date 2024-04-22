@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 
 import { APP_CONFIG, AppConfig } from '@core/config';
 import { ShortWorld, TrackerUnit } from '@core/models';
+import { Role } from '@core/enums';
 
 @Injectable({
   providedIn: 'root',
@@ -18,8 +19,8 @@ export class WorldService {
     this._baseUrl = `${config.api}/api/world`;
   }
 
-  public loadShortWorlds(login: string): Observable<ShortWorld[]> {
-    var params = new HttpParams().append('login', login);
+  public loadShortWorlds(userId: number, role: Role): Observable<ShortWorld[]> {
+    var params = new HttpParams().append('userId', userId);
     return this._http.get<ShortWorld[]>(`${this._baseUrl}/getListWorlds`, {
       params: params,
     });
@@ -33,13 +34,13 @@ export class WorldService {
   }
 
   public createWorld(
-    login: string,
+    userId: number,
     name: string,
     description: string
   ): Observable<void> {
     return this._http.post<void>(
       `${this._baseUrl}/createWorld`,
-      { login: login, name: name, description: description },
+      { userId: userId, name: name, description: description },
       {}
     );
   }
