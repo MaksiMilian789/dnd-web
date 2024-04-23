@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
 
-import { RegistrationService } from '../registration/registration.service';
+import { RegistrationService } from '../core/services/api/registration.service';
 import { PwaService } from '../shared/services/pwa-service.service';
 import { AuthService } from '../core/services/auth/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';

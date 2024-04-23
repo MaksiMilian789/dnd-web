@@ -16,6 +16,7 @@ export class GlobalErrorHandler implements ErrorHandler {
 
   async handleError(error: Error | HttpErrorResponse): Promise<void> {
     if (error instanceof HttpErrorResponse) {
+      console.log(error)
       // Server error
       if (error.status == 0 || error.status == 504) {
         this.showErrorDialog(

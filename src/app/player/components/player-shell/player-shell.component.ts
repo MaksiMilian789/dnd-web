@@ -1,10 +1,10 @@
 import { Component, OnDestroy } from '@angular/core';
 import { MatDrawerMode } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
+import { AuthService } from '@core/services/auth/auth.service';
 
 import { Observable, Subscription } from 'rxjs';
 import { PwaService } from 'src/app/shared/services/pwa-service.service';
-import { AuthService } from '../../core/services/auth/auth.service';
 
 @Component({
   templateUrl: './player-shell.component.html',

@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { ShortWorld } from '../../../core/models/world.model';
-import { WorldService } from '../../../core/services/api/world.service';
-import { EditWorldDialogComponent } from './edit-world-dialog/edit-world-dialog.component';
+
+import { WorldService } from '@core/services/api/world.service';
+import { ShortWorld } from '@core/models';
+import { EditWorldDialogComponent } from 'src/app/master/world/components/edit-world-dialog/edit-world-dialog.component';
 
 @Component({
   selector: 'app-world',

@@ -13,13 +13,13 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { AddSpellDialogComponent } from './add-spell-dialog/add-spell-dialog.component';
-import { Spell } from 'src/app/core/models/spell.model';
+import { Inventory } from 'src/app/core/models/inventory.model';
+import { AddItemDialogComponent } from '../add-item-dialog/add-item-dialog.component';
 
 @Component({
-  selector: 'app-character-spells',
-  templateUrl: './character-spells.component.html',
-  styleUrls: ['./character-spells.component.scss'],
+  selector: 'app-character-inventory',
+  templateUrl: './character-inventory.component.html',
+  styleUrls: ['./character-inventory.component.scss'],
   animations: [
     trigger('detailExpand', [
       state(
@@ -34,13 +34,13 @@ import { Spell } from 'src/app/core/models/spell.model';
     ]),
   ],
 })
-export class CharacterSpellsComponent implements AfterViewInit {
+export class CharacterInventoryComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  dataSource!: MatTableDataSource<Spell>;
-  columnsToDisplay = ['name', 'level', 'actions'];
-  expandedElement!: Spell;
+  dataSource!: MatTableDataSource<Inventory>;
+  columnsToDisplay = ['name', 'description', 'actions'];
+  expandedElement!: Inventory;
 
   constructor(
     //private _http: HttpService,
@@ -55,9 +55,7 @@ export class CharacterSpellsComponent implements AfterViewInit {
 
   loadData(): void {
     /*this._http
-      .getCharacterSpells(
-        Number(this._route.snapshot.paramMap.get('characterId'))
-      )
+      .getInventory(Number(this._route.snapshot.paramMap.get('characterId')))
       .subscribe((data) => {
         this.dataSource = new MatTableDataSource(data);
         this.paginator._intl.itemsPerPageLabel = '';
@@ -68,10 +66,10 @@ export class CharacterSpellsComponent implements AfterViewInit {
 
   addItem(): void {
     this._dialog
-      .open(AddSpellDialogComponent, {
+      .open(AddItemDialogComponent, {
         data: {
           charId: Number(this._route.snapshot.paramMap.get('characterId')),
-          actualSpells: this.dataSource.data,
+          actualItems: this.dataSource.data
         },
         width: '80%',
       })
@@ -80,16 +78,11 @@ export class CharacterSpellsComponent implements AfterViewInit {
   }
 
   deleteItem(id: number): void {
-    /*this._http
-      .deleteCharacterSpell(
-        Number(this._route.snapshot.paramMap.get('characterId')),
-        id
-      )
-      .subscribe({
-        complete: () => {
-          this._snackbar.open('Удаление успешно.');
-          this.loadData();
-        },
-      });*/
+    /*this._http.deleteCharacterItem(id).subscribe({
+      complete: () => {
+        this._snackbar.open('Удаление успешно.');
+        this.loadData();
+      },
+    });*/
   }
 }

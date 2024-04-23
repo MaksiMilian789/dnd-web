@@ -4,10 +4,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { AddWorldDialogComponent } from './add-world-dialog/add-world-dialog.component';
 import { WorldService } from '@core/services/api/world.service';
 import { ShortWorld } from '@core/models';
 import { AuthService } from '@core/services/auth/auth.service';
+import { AddWorldDialogComponent } from 'src/app/master/world/components/add-world-dialog/add-world-dialog.component';
 
 @Component({
   selector: 'app-worlds',

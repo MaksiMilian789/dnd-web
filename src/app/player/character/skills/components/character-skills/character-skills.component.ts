@@ -10,15 +10,16 @@ import { ActivatedRoute } from '@angular/router';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { Inventory } from 'src/app/core/models/inventory.model';
 import { MatDialog } from '@angular/material/dialog';
-import { AddItemDialogComponent } from './add-item-dialog/add-item-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+import { Skill } from '@core/models';
+import { AddSkillDialogComponent } from '../add-skill-dialog/add-skill-dialog.component';
+
 @Component({
-  selector: 'app-character-inventory',
-  templateUrl: './character-inventory.component.html',
-  styleUrls: ['./character-inventory.component.scss'],
+  selector: 'app-character-skills',
+  templateUrl: './character-skills.component.html',
+  styleUrls: ['./character-skills.component.scss'],
   animations: [
     trigger('detailExpand', [
       state(
@@ -33,16 +34,16 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     ]),
   ],
 })
-export class CharacterInventoryComponent implements AfterViewInit {
+export class CharacterSkillsComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  dataSource!: MatTableDataSource<Inventory>;
+  dataSource!: MatTableDataSource<Skill>;
   columnsToDisplay = ['name', 'description', 'actions'];
-  expandedElement!: Inventory;
+  expandedElement!: Skill;
 
   constructor(
-    //private _http: HttpService,
+    //private _http: CharacterService,
     private _route: ActivatedRoute,
     private _dialog: MatDialog,
     private _snackbar: MatSnackBar
@@ -54,7 +55,9 @@ export class CharacterInventoryComponent implements AfterViewInit {
 
   loadData(): void {
     /*this._http
-      .getInventory(Number(this._route.snapshot.paramMap.get('characterId')))
+      .getCharacterSkills(
+        Number(this._route.snapshot.paramMap.get('characterId'))
+      )
       .subscribe((data) => {
         this.dataSource = new MatTableDataSource(data);
         this.paginator._intl.itemsPerPageLabel = '';
@@ -65,10 +68,10 @@ export class CharacterInventoryComponent implements AfterViewInit {
 
   addItem(): void {
     this._dialog
-      .open(AddItemDialogComponent, {
+      .open(AddSkillDialogComponent, {
         data: {
           charId: Number(this._route.snapshot.paramMap.get('characterId')),
-          actualItems: this.dataSource.data
+          actualSkills: this.dataSource.data,
         },
         width: '80%',
       })
@@ -77,11 +80,16 @@ export class CharacterInventoryComponent implements AfterViewInit {
   }
 
   deleteItem(id: number): void {
-    /*this._http.deleteCharacterItem(id).subscribe({
-      complete: () => {
-        this._snackbar.open('Удаление успешно.');
-        this.loadData();
-      },
-    });*/
+    /*this._http
+      .deleteCharacterSkill(
+        Number(this._route.snapshot.paramMap.get('characterId')),
+        id
+      )
+      .subscribe({
+        complete: () => {
+          this._snackbar.open('Удаление успешно.');
+          this.loadData();
+        },
+      });*/
   }
 }

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { RegistrationService } from './registration.service';
+import { RegistrationService } from '../core/services/api/registration.service';
 
 @Component({
   selector: 'app-registration',

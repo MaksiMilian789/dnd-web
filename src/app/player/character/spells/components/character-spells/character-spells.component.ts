@@ -7,20 +7,19 @@ import {
   trigger,
 } from '@angular/animations';
 import { ActivatedRoute } from '@angular/router';
-
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { AddSkillDialogComponent } from './add-skill-dialog/add-skill-dialog.component';
-import { CharacterService } from '@core/services/api/character.service';
-import { Skill } from '@core/models';
+
+import { Spell } from 'src/app/core/models/spell.model';
+import { AddSpellDialogComponent } from '../add-spell-dialog/add-spell-dialog.component';
 
 @Component({
-  selector: 'app-character-skills',
-  templateUrl: './character-skills.component.html',
-  styleUrls: ['./character-skills.component.scss'],
+  selector: 'app-character-spells',
+  templateUrl: './character-spells.component.html',
+  styleUrls: ['./character-spells.component.scss'],
   animations: [
     trigger('detailExpand', [
       state(
@@ -35,16 +34,16 @@ import { Skill } from '@core/models';
     ]),
   ],
 })
-export class CharacterSkillsComponent implements AfterViewInit {
+export class CharacterSpellsComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  dataSource!: MatTableDataSource<Skill>;
-  columnsToDisplay = ['name', 'description', 'actions'];
-  expandedElement!: Skill;
+  dataSource!: MatTableDataSource<Spell>;
+  columnsToDisplay = ['name', 'level', 'actions'];
+  expandedElement!: Spell;
 
   constructor(
-    //private _http: CharacterService,
+    //private _http: HttpService,
     private _route: ActivatedRoute,
     private _dialog: MatDialog,
     private _snackbar: MatSnackBar
@@ -56,7 +55,7 @@ export class CharacterSkillsComponent implements AfterViewInit {
 
   loadData(): void {
     /*this._http
-      .getCharacterSkills(
+      .getCharacterSpells(
         Number(this._route.snapshot.paramMap.get('characterId'))
       )
       .subscribe((data) => {
@@ -69,10 +68,10 @@ export class CharacterSkillsComponent implements AfterViewInit {
 
   addItem(): void {
     this._dialog
-      .open(AddSkillDialogComponent, {
+      .open(AddSpellDialogComponent, {
         data: {
           charId: Number(this._route.snapshot.paramMap.get('characterId')),
-          actualSkills: this.dataSource.data,
+          actualSpells: this.dataSource.data,
         },
         width: '80%',
       })
@@ -82,7 +81,7 @@ export class CharacterSkillsComponent implements AfterViewInit {
 
   deleteItem(id: number): void {
     /*this._http
-      .deleteCharacterSkill(
+      .deleteCharacterSpell(
         Number(this._route.snapshot.paramMap.get('characterId')),
         id
       )
