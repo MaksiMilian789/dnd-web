@@ -1,12 +1,18 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
-import { Subscription } from 'rxjs';
+import { Subscription, finalize } from 'rxjs';
 
 import { RegistrationService } from '../core/services/api/registration.service';
 import { PwaService } from '../shared/services/pwa-service.service';
 import { AuthService } from '../core/services/auth/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
+
+interface AuthForm {
+  username: FormControl<string>;
+  password: FormControl<string>;  
+  rememberMe: FormControl<boolean>;
+}
 
 @Component({
   templateUrl: './auth.component.html',
@@ -14,44 +20,52 @@ import { ActivatedRoute, Router } from '@angular/router';
   providers: [],
 })
 export class AuthComponent {
-  form: FormGroup;
-  hide = true;
+  protected readonly form: FormGroup<AuthForm>;
 
-  checkRegistration: Subscription;
+  protected isAuthInProcess = false;
+  protected error: string | null = null;
 
   private _returnUrl: string | null;
-
   constructor(
-    public pwa: PwaService,
-    private _snackbar: MatSnackBar,
-    private _auth: AuthService,
+    protected pwa: PwaService,
+    private authService: AuthService,
     private route: ActivatedRoute,
-    private router: Router,
-    private _registration: RegistrationService
+    private router: Router
   ) {
-    this.form = new FormGroup({
-      login: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required),
+    this.form = new FormGroup<AuthForm>({
+      username: new FormControl('', { nonNullable: true, validators: Validators.required }),
+      password: new FormControl('', { nonNullable: true, validators: Validators.required }),
+      rememberMe: new FormControl(true, { nonNullable: true }),
     });
 
-    this.checkRegistration = this._registration.registrationMessage.subscribe(
+    /*this.checkRegistration = this._registration.registrationMessage.subscribe(
       (val) => {
         if (val) this._snackbar.open('Регистрация успешна');
       }
-    );
+    );*/
 
     this._returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
   }
 
-  auth(): void {
+  submit(): void {
     if (this.form.invalid) {
       return;
     }
 
-    // Проверка на логин/пароль через сервис (с оповещением о неверном через snackbar)
-    this._auth.auth(this.form.value.login, this.form.value.password, true)
-    .subscribe(() =>
-      this.router.navigateByUrl(this._returnUrl ?? '/')
-    );;
+    const formState = this.form.value;
+
+    this.form.disable();
+    this.isAuthInProcess = true;
+    this.authService
+      .auth(formState.username!, formState.password!, formState.rememberMe!)
+      .pipe(
+        finalize(() => {
+          this.form.enable();
+          this.isAuthInProcess = false;
+        })
+      )
+      .subscribe(() =>
+        this.router.navigateByUrl(this._returnUrl ?? '/')
+      );
   }
 }

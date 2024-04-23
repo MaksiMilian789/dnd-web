@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { TuiElementModule } from '@taiga-ui/cdk';
 import {
   TuiScrollbarModule,
   TuiLoaderModule,
@@ -9,6 +10,7 @@ import {
   TuiDropdownModule,
   TuiGroupModule,
   TuiHintModule,
+  TuiErrorModule,
 } from '@taiga-ui/core';
 import {
   TuiDataListDropdownManagerModule,
@@ -16,6 +18,7 @@ import {
   TuiInputFilesModule,
   TuiInputModule,
   TuiInputNumberModule,
+  TuiIslandModule,
   TuiSelectModule,
 } from '@taiga-ui/kit';
 
@@ -36,6 +39,9 @@ import {
     TuiInputDateTimeModule,
     TuiGroupModule,
     TuiHintModule,
+    TuiIslandModule,
+    TuiErrorModule,    
+    TuiElementModule,
   ],
 })
 export class TaigaModule {}

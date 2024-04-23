@@ -15,7 +15,7 @@
         <tui-input-password formControlName="password">
           Пароль
           <input tuiTextfield autocomplete="current-password" #passwordElement="elementRef" tuiElement
-            (keyup.enter.stop)="auth()" />
+            (keyup.enter.stop)="submit()" />
         </tui-input-password>
         <tui-error [error]="error"></tui-error>
       </div>
@@ -31,14 +31,13 @@
         Регистрация
       </button>
       <div class="spacer"></div>
-      <button tuiButton [showLoader]="isAuthInProcess" [disabled]="form.invalid" (click)="auth()">
+      <button tuiButton [showLoader]="isAuthInProcess" [disabled]="form.invalid" (click)="submit()">
         Войти
       </button>
     </div>
-</div>
-</tui-island>
-@if(pwa.showInstallPromotion){
-<button tuiButton (click)="pwa.addToHomeScreen()" class="pwa-button">
-  Добавить на домашний экран
-</button>
-}
+  </tui-island>
+  @if(pwa.showInstallPromotion){
+  <button tuiButton (click)="pwa.addToHomeScreen()" class="pwa-button">
+    Добавить на домашний экран
+  </button>
+  }
