@@ -8,13 +8,13 @@ import {
 } from '@angular/animations';
 import { ActivatedRoute } from '@angular/router';
 import { MatSort } from '@angular/material/sort';
-import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-paginator';
-import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 
 import { Spell } from 'src/app/core/models/spell.model';
 import { AddSpellDialogComponent } from '../add-spell-dialog/add-spell-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-character-spells',

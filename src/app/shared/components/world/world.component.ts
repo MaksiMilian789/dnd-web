@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { WorldService } from '@core/services/api/world.service';
 import { ShortWorld } from '@core/models';
 import { EditWorldDialogComponent } from 'src/app/master/world/components/edit-world-dialog/edit-world-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-world',

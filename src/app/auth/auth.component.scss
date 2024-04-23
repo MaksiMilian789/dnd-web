@@ -1,5 +1,5 @@
 :host {
-  height: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -11,17 +11,21 @@
   align-items: center;
 }
 
-.login-form {
-  display: flex;
-  flex-direction: column;
-  width: 300px;
+.login-island {
+  width: 350px;
+
+  .remember-me-checkbox {
+    text-align: start;
+  }
+
+  .actions {
+    display: flex;
+    margin-top: 24px;
+  }
 }
 
-.actions {
-  display: flex;
-}
-
-.pwa-button {
-  display: flex;
-  justify-content: center;
+.theme-switcher-container {
+  position: fixed;
+  bottom: 12px;
+  right: 12px;
 }

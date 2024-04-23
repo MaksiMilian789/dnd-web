@@ -13,11 +13,13 @@ import {
   TuiErrorModule,
 } from '@taiga-ui/core';
 import {
+  TuiCheckboxLabeledModule,
   TuiDataListDropdownManagerModule,
   TuiInputDateTimeModule,
   TuiInputFilesModule,
   TuiInputModule,
   TuiInputNumberModule,
+  TuiInputPasswordModule,
   TuiIslandModule,
   TuiSelectModule,
 } from '@taiga-ui/kit';
@@ -29,6 +31,7 @@ import {
     TuiSvgModule,
     TuiButtonModule,
     TuiInputModule,
+    TuiInputPasswordModule,
     TuiInputFilesModule,
     TuiInputNumberModule,
     TuiDataListModule,
@@ -42,6 +45,7 @@ import {
     TuiIslandModule,
     TuiErrorModule,    
     TuiElementModule,
+    TuiCheckboxLabeledModule,
   ],
 })
 export class TaigaModule {}

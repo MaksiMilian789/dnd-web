@@ -54,8 +54,8 @@ import { MasterModule } from './master/master.module';
     }),
   ],
   providers: [
+    { provide: ErrorHandler, useClass: GlobalErrorHandler },
     { provide: TUI_SANITIZER, useClass: NgDompurifySanitizer },
-
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

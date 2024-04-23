@@ -3,41 +3,46 @@
 </mat-toolbar>
 <div class="container">
   <tui-island size="m" textAlign="center" class="login-island">
-    <form class="tui-space_top-4" [formGroup]="form">
-      <div class="tui-form__row">
-        <tui-input formControlName="username">
-          Логин
-          <input tuiTextfield (keyup.enter.stop)="passwordElement.nativeElement.focus()" />
-        </tui-input>
+    <div class="tui-island__content">
+      <div class="header">
+        <img src="/assets/icons/icon-96x96.png" alt="" srcset="" />
+        <div>
+          <h3 class="tui-island__title">Компаньон</h3>
+          <h4 class="tui-island__paragraph">Вход в систему</h4>
+        </div>
       </div>
 
-      <div class="tui-form__row">
-        <tui-input-password formControlName="password">
-          Пароль
-          <input tuiTextfield autocomplete="current-password" #passwordElement="elementRef" tuiElement
-            (keyup.enter.stop)="submit()" />
-        </tui-input-password>
-        <tui-error [error]="error"></tui-error>
-      </div>
-      <div class="tui-form__row remember-me-checkbox">
-        <tui-checkbox-labeled size="l" formControlName="rememberMe">
-          Запомнить меня этом устройстве
-        </tui-checkbox-labeled>
-      </div>
-    </form>
+      <form class="tui-space_top-4" [formGroup]="form">
+        <div class="tui-form__row">
+          <tui-input formControlName="username">
+            Логин
+            <input tuiTextfield (keyup.enter.stop)="passwordElement.nativeElement.focus()" />
+          </tui-input>
+        </div>
 
-    <div class="actions">
-      <button tuiButton [routerLink]="['/registration']">
-        Регистрация
-      </button>
-      <div class="spacer"></div>
-      <button tuiButton [showLoader]="isAuthInProcess" [disabled]="form.invalid" (click)="submit()">
-        Войти
-      </button>
+        <div class="tui-form__row">
+          <tui-input-password formControlName="password">
+            Пароль
+            <input tuiTextfield autocomplete="current-password" #passwordElement="elementRef" tuiElement
+              (keyup.enter.stop)="submit()" />
+          </tui-input-password>
+          <tui-error [error]="error"></tui-error>
+        </div>
+        <div class="tui-form__row remember-me-checkbox">
+          <tui-checkbox-labeled size="l" formControlName="rememberMe">
+            Запомнить меня этом устройстве
+          </tui-checkbox-labeled>
+        </div>
+      </form>
+
+      <div class="actions">
+        <button tuiButton [routerLink]="['/registration']">Регистрация</button>
+        <div class="spacer"></div>
+        <button tuiButton [showLoader]="isAuthInProcess" [disabled]="form.invalid" (click)="submit()">Войти</button>
+      </div>
     </div>
   </tui-island>
-  @if(pwa.showInstallPromotion){
-  <button tuiButton (click)="pwa.addToHomeScreen()" class="pwa-button">
-    Добавить на домашний экран
-  </button>
+  @if (pwa.showInstallPromotion) {
+  <button tuiButton (click)="pwa.addToHomeScreen()" class="pwa-button">Добавить на домашний экран</button>
   }
+</div>

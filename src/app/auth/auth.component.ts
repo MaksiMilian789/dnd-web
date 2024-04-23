@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
-import { Subscription, finalize } from 'rxjs';
+import { finalize } from 'rxjs';
 
 import { RegistrationService } from '../core/services/api/registration.service';
 import { PwaService } from '../shared/services/pwa-service.service';
