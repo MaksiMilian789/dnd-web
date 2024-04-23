@@ -11,7 +11,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class RegistrationComponent {
   form: FormGroup;
-  hide = true;
 
   constructor(
     private _registration: RegistrationService,

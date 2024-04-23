@@ -2,41 +2,54 @@
   <span [routerLink]="['']" class="pointer">DnD Компаньон</span>
 </mat-toolbar>
 <div class="container">
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>Регистрация</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <form class="reg-form" [formGroup]="form">
-        <mat-form-field appearance="fill">
-          <mat-label>Логин</mat-label>
-          <input matInput formControlName="login" (keyup.enter)="password.focus()" />
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-          <mat-label>Пароль</mat-label>
-          <input matInput [type]="hide ? 'password' : 'text'" formControlName="password"
-            (keyup.enter)="passwordRepeat.focus()" #password />
-          <mat-icon matSuffix (click)="hide = !hide">{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
-          <mat-error class="error-valid"
-            *ngIf="form.controls['password'].invalid && (form.controls['password'].dirty || form.controls['password'].touched) ">
-            Введите минимум 6 символов
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-          <mat-label>Подтвердите пароль</mat-label>
-          <input matInput [type]="hide ? 'password' : 'text'" formControlName="passwordRepeat" #passwordRepeat />
-          <mat-icon matSuffix (click)="hide = !hide">{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
-          <mat-error class="error-valid"
-            *ngIf="form.controls['passwordRepeat'].invalid && (form.controls['passwordRepeat'].dirty || form.controls['passwordRepeat'].touched)">
-            Введите минимум 6 символов
-          </mat-error>
-        </mat-form-field>
+  <tui-island size="m" textAlign="center" class="login-island">
+    <div class="tui-island__content">
+      <div class="header">
+        <img src="/assets/icons/icon-96x96.png" alt="" srcset="" />
+        <div>
+          <h3 class="tui-island__title">Компаньон</h3>
+          <h4 class="tui-island__paragraph">Регистрация</h4>
+        </div>
+      </div>
+
+      <form class="tui-space_top-4" [formGroup]="form">
+        <div class="tui-form__row">
+          <tui-input formControlName="login">
+            Логин
+            <input tuiTextfield (keyup.enter.stop)="password.nativeElement.focus()" />
+          </tui-input>
+        </div>
+
+        <div class="tui-form__row">
+          <tui-input-password formControlName="password">
+            Пароль
+            <input tuiTextfield autocomplete="current-password" #password="elementRef" tuiElement
+              (keyup.enter.stop)="passwordRepeat.nativeElement.focus()" />
+          </tui-input-password>
+          @if(form.controls['password'].invalid && (form.controls['password'].dirty ||
+          form.controls['password'].touched)){
+          <tui-error error="Введите минимум 6 символов"></tui-error>
+          }
+        </div>
+
+        <div class="tui-form__row">
+          <tui-input-password formControlName="passwordRepeat">
+            Повторите пароль
+            <input tuiTextfield autocomplete="current-password" (keyup.enter.stop)="registration()"
+              #passwordRepeat="elementRef" tuiElement />
+          </tui-input-password>
+          @if(form.controls['passwordRepeat'].value != form.controls['password'].value &&
+          (form.controls['passwordRepeat'].dirty || form.controls['passwordRepeat'].touched)){
+          <tui-error error="Пароли не совпадают"></tui-error>
+          }
+        </div>
       </form>
-    </mat-card-content>
-    <mat-card-actions class="actions">
-      <button mat-stroked-button color="accent" [routerLink]="['/auth']">Назад к авторизации</button>
-      <div class="spacer"></div>
-      <button mat-stroked-button color="accent" (click)="registration()" [disabled]="form.invalid">Регистрация</button>
-    </mat-card-actions>
-  </mat-card>
+
+      <div class="actions">
+        <button tuiButton [routerLink]="['/auth']">Назад к авторизации</button>
+        <div class="spacer"></div>
+        <button tuiButton [disabled]="form.invalid" (click)="registration()">Регистрация</button>
+      </div>
+    </div>
+  </tui-island>
 </div>

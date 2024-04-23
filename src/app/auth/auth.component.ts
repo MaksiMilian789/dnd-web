@@ -8,7 +8,7 @@ import { AuthService } from '../core/services/auth/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 interface AuthForm {
-  username: FormControl<string>;
+  login: FormControl<string>;
   password: FormControl<string>;  
   rememberMe: FormControl<boolean>;
 }
@@ -32,7 +32,7 @@ export class AuthComponent {
     private router: Router
   ) {
     this.form = new FormGroup<AuthForm>({
-      username: new FormControl('', { nonNullable: true, validators: Validators.required }),
+      login: new FormControl('', { nonNullable: true, validators: Validators.required }),
       password: new FormControl('', { nonNullable: true, validators: Validators.required }),
       rememberMe: new FormControl(true, { nonNullable: true }),
     });
@@ -56,7 +56,7 @@ export class AuthComponent {
     this.form.disable();
     this.isAuthInProcess = true;
     this.authService
-      .auth(formState.username!, formState.password!, formState.rememberMe!)
+      .auth(formState.login!, formState.password!, formState.rememberMe!)
       .pipe(
         finalize(() => {
           this.form.enable();
