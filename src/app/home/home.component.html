@@ -3,23 +3,24 @@
         <span [routerLink]="['']" class="pointer">DnD компаньон</span>
     </div>
     <div class="spacer"></div>
-        <span>{{ userLogin }}</span>
-        <button mat-icon-button (click)="logout()" matTooltip="Выйти">
-            <mat-icon>logout</mat-icon>
-        </button>
-</mat-toolbar>
-<div class="center">
-    <a mat-raised-button [routerLink]="['player']" class="home-button">
-        <mat-icon [inline]="true" class="home-icon">person</mat-icon>
-        Игрок
-    </a>
-    <br>
-    <a mat-raised-button [routerLink]="['master']" class="home-button">
-        <mat-icon [inline]="true" class="home-icon">engineering</mat-icon>
-        Мастер
-    </a>
-    <br>
-    <button mat-raised-button *ngIf="pwa.showInstallPromotion" (click)="pwa.addToHomeScreen()" class="pwa-button">
-        Добавить на домашний экран
+    <span>{{ userLogin }}</span>
+    <button mat-icon-button (click)="logout()" matTooltip="Выйти">
+        <mat-icon>logout</mat-icon>
     </button>
+</mat-toolbar>
+<div class="container">
+    <tui-island size="m" textAlign="center">
+        <h3 class="tui-island__title">Выбор роли</h3>
+        <a mat-raised-button [routerLink]="['player']" class="home-button">
+            Игрок
+        </a>
+        <br>
+        <a mat-raised-button [routerLink]="['master']" class="home-button">
+            Мастер
+        </a>
+        <br>
+        <button mat-raised-button *ngIf="pwa.showInstallPromotion" (click)="pwa.addToHomeScreen()" class="pwa-button">
+            Добавить на домашний экран
+        </button>
+    </tui-island>
 </div>

@@ -2,18 +2,27 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+  background:
+    url('/assets/backgrounds/d20.png') no-repeat,
+    url('/assets/backgrounds/d12.png') right bottom no-repeat;
+  background-size: 200px, 200px;
+  animation-name: cloud1;
+    animation-duration: 25s;top: 100px;
+    left: 100px;
 }
 
-.center {
+@media screen and (max-width: 400px) {
+  :host {
+    background-size: 150px, 150px;
+  }
+}
+
+.container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100%;
-}
-
-.example-container {
-  flex: 1 1 auto;
 }
 
 .sidenav {
@@ -42,10 +51,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.home-icon {
-  margin-bottom: 1vh;
+  border-radius: 30px;
 }
 
 .pwa-button {

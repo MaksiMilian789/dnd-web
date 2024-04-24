@@ -16,13 +16,21 @@
     <div class="drawer-content">
       <mat-nav-list>
         <a mat-list-item [routerLink]="['characters']" routerLinkActive="active" (click)="openDrawer = !openDrawer">
-          <mat-icon matListIcon>group</mat-icon>
+          <mat-icon matListItemIcon>group</mat-icon>
           <p matLine class="nav-list-text">Персонажи</p>
         </a>
         <a mat-list-item [routerLink]="['worlds']" routerLinkActive="active" (click)="openDrawer = !openDrawer">
-          <mat-icon matListIcon>public</mat-icon>
+          <mat-icon matListItemIcon>public</mat-icon>
           <p matLine class="nav-list-text">Игровые миры</p>
         </a>
+        
+    <button tuiButton size="xl" [routerLink]="['player']" class="home-button">
+      Игрок
+  </button>
+  <br>
+  <button tuiButton size="xl" [routerLink]="['master']" class="home-button">
+      Мастер
+  </button>
       </mat-nav-list>
     </div>
   </mat-drawer>
