@@ -2,14 +2,18 @@
   <button mat-icon-button (click)="drawer.toggle()">
     <mat-icon>menu</mat-icon>
   </button>
+  <div matTooltip="На главную">
+    <img src="/assets/icons/icon-96x96.png" alt="" srcset="" style="height: 48px; width: 48px;" [routerLink]="['']"
+      class="clickable logo" />
+  </div>
   <div>
-    <span [routerLink]="['']" class="pointer truncate">DnD компаньон</span>
+    <span [routerLink]="['']" class="clickable logo-name">DnD компаньон</span>
   </div>
   <div class="spacer"></div>
-    <span>{{ userLogin }}</span>
-    <button mat-icon-button (click)="logout()" matTooltip="Выйти">
-      <mat-icon>logout</mat-icon>
-    </button>
+  <span>{{ userLogin }}</span>
+  <button mat-icon-button (click)="logout()" matTooltip="Выйти">
+    <mat-icon>logout</mat-icon>
+  </button>
 </mat-toolbar>
 <mat-drawer-container class="example-container" autosize>
   <mat-drawer #drawer class="sidenav mat-elevation-z4" [mode]="drawlerMode" [(opened)]="openDrawer">
@@ -23,14 +27,6 @@
           <mat-icon matListItemIcon>public</mat-icon>
           <p matLine class="nav-list-text">Игровые миры</p>
         </a>
-        
-    <button tuiButton size="xl" [routerLink]="['player']" class="home-button">
-      Игрок
-  </button>
-  <br>
-  <button tuiButton size="xl" [routerLink]="['master']" class="home-button">
-      Мастер
-  </button>
       </mat-nav-list>
     </div>
   </mat-drawer>

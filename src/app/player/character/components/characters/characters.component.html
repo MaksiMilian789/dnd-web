@@ -24,13 +24,18 @@
 <ng-container *ngIf="shortCharacters$ | async as characters">
     <div class="center" *ngFor="let character of characters;">
         <div class="card-container">
-            <mat-checkbox class="card-checbox" *ngIf="isSelectionModeEnabled" [ngModel]="isItemSelected(character)"
+            <mat-checkbox class="card-checkbox" *ngIf="isSelectionModeEnabled" [ngModel]="isItemSelected(character)"
                 (change)="toggleSelection(character)"></mat-checkbox>
             <mat-card class="card pointer" [routerLink]="['/player/character', character.id]">
-                <mat-card-title>{{character.name}}</mat-card-title>
+                <mat-card-title>
+                    <span class="character-info">
+                        {{character.name}}
+                    </span>
+                </mat-card-title>
                 <mat-card-subtitle>
-                    {{character.className}}
-                    <div style="float: right;">Уровень: {{character.level}}</div>
+                    <span class="character-info">
+                        {{character.className}}</span>
+                    <div class="level">Уровень: {{character.level}}</div>
                 </mat-card-subtitle>
             </mat-card>
         </div>

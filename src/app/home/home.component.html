@@ -1,6 +1,8 @@
 <mat-toolbar color="primary" class="toolbar mat-elevation-z8 primary-toolbar">
+    <img src="/assets/icons/icon-96x96.png" alt="" srcset="" style="height: 48px; width: 48px;" [routerLink]="['']"
+        class="clickable logo" />
     <div>
-        <span [routerLink]="['']" class="pointer">DnD компаньон</span>
+        <span [routerLink]="['']" class="clickable logo-name">DnD компаньон</span>
     </div>
     <div class="spacer"></div>
     <span>{{ userLogin }}</span>
@@ -10,12 +12,12 @@
 </mat-toolbar>
 <div class="container">
     <tui-island size="m" textAlign="center">
-        <h3 class="tui-island__title">Выбор роли</h3>
-        <a mat-raised-button [routerLink]="['player']" class="home-button">
+        <h3 class="tui-island__title player">Выбор роли</h3>
+        <a mat-raised-button [routerLink]="['player']" class="player home-button ">
             Игрок
         </a>
         <br>
-        <a mat-raised-button [routerLink]="['master']" class="home-button">
+        <a mat-raised-button [routerLink]="['master']" class="master home-button ">
             Мастер
         </a>
         <br>

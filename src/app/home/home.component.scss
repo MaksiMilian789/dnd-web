@@ -2,19 +2,6 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  background:
-    url('/assets/backgrounds/d20.png') no-repeat,
-    url('/assets/backgrounds/d12.png') right bottom no-repeat;
-  background-size: 200px, 200px;
-  animation-name: cloud1;
-    animation-duration: 25s;top: 100px;
-    left: 100px;
-}
-
-@media screen and (max-width: 400px) {
-  :host {
-    background-size: 150px, 150px;
-  }
 }
 
 .container {
@@ -23,6 +10,67 @@
   justify-content: center;
   align-items: center;
   height: 100%;
+  background:
+    url('/assets/backgrounds/d20.png') no-repeat,
+    url('/assets/backgrounds/dragon.svg') right bottom no-repeat;
+  transition: background-size 1s ease-in-out 100ms;
+}
+
+@media screen and (max-width: 4096px) {
+  .container {
+    animation: appear 1s ease;
+    background-size: 200px, 220px;
+  }
+
+  .container:has(.player:hover) {
+    background-size: 220px, 170px;
+  }
+
+  .container:has(.master:hover) {
+    background-size: 150px, 240px;
+  }
+}
+
+
+@media screen and (max-width: 400px) {
+  .container {
+    animation: appearMobile 1s ease;
+    background-size: 150px, 170px;
+  }
+    
+  .container:has(.player:hover, .player:active) {
+    background-size: 180px, 140px;
+  }
+
+  .container:has(.master:hover, .master:active) {
+    background-size: 120px, 200px;
+  }
+
+  .logo-name {
+    display: none;
+  }
+}
+
+@keyframes appearMobile {
+  0% {
+    background-size: 0px, 0px;
+  }
+  100% {
+    background-size: 150px, 170px;
+  }
+}
+
+@keyframes appear {
+  0% {
+    background-size: 0px, 0px;
+  }
+  100% {
+    background-size: 200px, 220px;
+  }
+}
+
+.logo {
+  margin-right: 1rem;
 }
 
 .sidenav {

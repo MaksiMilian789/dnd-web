@@ -6,17 +6,31 @@
   margin: 30px;
 }
 
-.card-container{
+.card-container {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
 }
 
-.card-checbox{
+.card-checkbox {
   margin: 15px;
 }
 
 .card {
   min-width: 200px;
   width: 70vw;
+}
+
+.level {
+  float: right;
+  margin-right: 3px;
+}
+
+.character-info {
+  margin-left: 3px;
+}
+
+.mat-mdc-checkbox {
+  margin: 0px;
 }
