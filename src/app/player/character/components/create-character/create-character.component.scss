@@ -1,9 +1,3 @@
-:host {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
 .container {
   flex: 1 1 auto;
   display: flex;
@@ -11,8 +5,8 @@
   align-items: center;
 }
 
-.login-island {
-  width: 350px;
+.island {
+  width: 300px;
 
   .remember-me-checkbox {
     text-align: start;
@@ -22,4 +16,9 @@
     display: flex;
     margin-top: 24px;
   }
+}
+
+.description {
+  margin-top: 1rem;
+  width: 100%;
 }

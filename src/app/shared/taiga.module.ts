@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { TuiElementModule } from '@taiga-ui/cdk';
+import { TuiElementModule, TuiLetModule } from '@taiga-ui/cdk';
 import {
   TuiScrollbarModule,
   TuiLoaderModule,
@@ -22,6 +22,8 @@ import {
   TuiInputPasswordModule,
   TuiIslandModule,
   TuiSelectModule,
+  TuiStepperModule,
+  TuiTextareaModule,
 } from '@taiga-ui/kit';
 
 @NgModule({
@@ -46,6 +48,9 @@ import {
     TuiErrorModule,    
     TuiElementModule,
     TuiCheckboxLabeledModule,
+    TuiStepperModule,
+    TuiLetModule,
+    TuiTextareaModule
   ],
 })
 export class TaigaModule {}

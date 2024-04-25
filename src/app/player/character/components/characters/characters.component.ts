@@ -6,7 +6,6 @@ import { Observable } from 'rxjs';
 
 import { SimpleDialogComponent } from 'src/app/shared/components/simple-dialog';
 import { ShortCharacter } from '@core/models/character/character.model';
-import { AddCharacterCacheService } from '../add-character/add-character-cache.service';
 import { AuthService } from '@core/services/auth/auth.service';
 import { CharacterService } from '@core/services/api/character.service';
 
@@ -30,7 +29,6 @@ export class CharactersComponent implements AfterContentInit {
     private _dialog: MatDialog,
     private _router: Router,
     private _snackbar: MatSnackBar,
-    private _cacheService: AddCharacterCacheService
   ) {
     this.userId = _auth.currentUser?.id ?? 0;
     this.shortCharacters$ = this._characterService.loadShortCharacters(this.userId);
@@ -90,8 +88,7 @@ export class CharactersComponent implements AfterContentInit {
       })
       .afterClosed()
       .subscribe((res) => {
-        this._cacheService.reload();
-        if (res) this._router.navigate(['/player/createCharacterName']);
+        if (res) this._router.navigate(['/player/createCharacter']);
       });
   }
 }
