@@ -1,11 +1,19 @@
-import { Component, Signal } from '@angular/core';
+import { Component, Inject, Signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
-import { GENDER_LOCALIZATION, Gender, IDEOLOGY_LOCALIZATION, Ideology } from '@core/enums';
-import { Class, Race } from '@core/models';
-import { CharacterService } from '@core/services/api/character.service';
 import { tuiPure, TuiStringHandler } from '@taiga-ui/cdk';
+import { TuiDialogService } from '@taiga-ui/core';
+import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
+
+import { GENDER_LOCALIZATION, Gender, IDEOLOGY_LOCALIZATION, Ideology, System } from '@core/enums';
+import { Background, CharacterWithId, Class, Race } from '@core/models';
+import { CharacterService } from '@core/services/api/character.service';
+import { CharacteristicsDialogComponent } from '../characteristics-dialog/characteristics-dialog.component';
+import { Characteristics } from '@core/models/character/characteristics.model';
+import { AuthService } from '@core/services/auth/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-character',
@@ -25,12 +33,21 @@ export class CreateCharacterComponent {
   protected readonly ideologies = IDEOLOGY_LOCALIZATION;
 
   protected readonly races: Signal<Race[]>;
-  protected raceDescription: string = "";
+  protected raceDescription: string = '';
+
+  protected readonly backgrounds: Signal<Background[]>;
+  protected backgroundDescription: string = '';
 
   protected readonly classes: Signal<Class[]>;
-  protected classDescription: string = "";
+  protected classDescription: string = '';
 
-  constructor(private _characterService: CharacterService) {
+  constructor(
+    private _characterService: CharacterService,
+    private _auth: AuthService,
+    private _snackbar: MatSnackBar,
+    private _router: Router,
+    @Inject(TuiDialogService) private readonly _dialogs: TuiDialogService,
+  ) {
     this.form1 = new FormGroup({
       name: new FormControl('', { nonNullable: true, validators: Validators.required }),
       gender: new FormControl(0, { nonNullable: true, validators: Validators.required }),
@@ -39,23 +56,32 @@ export class CreateCharacterComponent {
     });
 
     this.form2 = new FormGroup({
-      class: new FormControl(null, { validators: Validators.required }),
       race: new FormControl(null, { validators: Validators.required }),
+      background: new FormControl(null, { validators: Validators.required }),
     });
 
-    this.form3 = new FormGroup({});
+    this.form3 = new FormGroup({
+      class: new FormControl(null, { validators: Validators.required }),
+    });
 
+    this.backgrounds = toSignal(this._characterService.getBackgrounds(), { initialValue: [] });
     this.races = toSignal(this._characterService.getRaces(), { initialValue: [] });
     this.classes = toSignal(this._characterService.getClasses(), { initialValue: [] });
 
     this.form2.valueChanges.subscribe((val) => {
-      if(val.race){
+      if (val.race) {
         this.raceDescription = this.races().find((x) => x.id == val.race)?.description || '';
       }
-      if(val.class){
-        this.classDescription = this.classes().find((x) => x.id == val.class)?.description || '';
+      if (val.background) {
+        this.backgroundDescription = this.classes().find((x) => x.id == val.background)?.description || '';
       }
-    })
+    });
+
+    this.form3.valueChanges.subscribe((val) => {
+      if (val.class) {
+        this.classDescription = this.races().find((x) => x.id == val.class)?.description || '';
+      }
+    });
   }
 
   step1(stepper: MatStepper): void {
@@ -75,7 +101,40 @@ export class CreateCharacterComponent {
     }, 10);
   }
 
-  createCharacter(): void {}
+  createCharacteristics(): void {
+    //TODO: учесть бонусы от расы из скиллов
+    this._dialogs
+      .open<Characteristics | null>(new PolymorpheusComponent(CharacteristicsDialogComponent), {
+        size: 'page',
+        closeable: true,
+        dismissible: true,
+      })
+      .subscribe((val) => {
+        if (val != null) {
+          this.createCharacter(val as Characteristics);
+        }
+      });
+  }
+
+  createCharacter(characteristics: Characteristics): void {
+    const character: CharacterWithId = {
+      age: this.form1.controls['age'].value,
+      gender: this.form1.controls['gender'].value,
+      ideology: this.form1.controls['ideology'].value,
+      characteristics: characteristics,
+      classId: this.form3.controls['class'].value,
+      raceId: this.form2.controls['race'].value,
+      backgroundId: this.form2.controls['background'].value,
+      name: this.form1.controls['name'].value,
+      level: 1,
+      system: System.Dnd,
+    };
+
+    this._characterService.createCharacter(character, this._auth.currentUser?.id!).subscribe(() => {
+      this._snackbar.open('Создание персонажа успешно');
+      this._router.navigate(['/player/characters']);
+    });
+  }
 
   @tuiPure
   protected stringifyGender(): TuiStringHandler<Gender> {
@@ -95,5 +154,10 @@ export class CreateCharacterComponent {
   @tuiPure
   protected stringifyClass(): TuiStringHandler<number> {
     return (value: number) => this.classes().find((x) => x.id == value)?.name || '';
+  }
+
+  @tuiPure
+  protected stringifyBackground(): TuiStringHandler<number> {
+    return (value: number) => this.backgrounds().find((x) => x.id == value)?.name || '';
   }
 }

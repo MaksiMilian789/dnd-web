@@ -15,6 +15,7 @@ import { CharacterSpellsComponent } from './character/spells/components/characte
 import { PlayerHomeComponent } from './components/player-home/player-home.component';
 import { PlayerShellComponent } from './components/player-shell/player-shell.component';
 import { CreateCharacterComponent } from './character/components/create-character/create-character.component';
+import { CharacteristicsDialogComponent } from './character/components/characteristics-dialog/characteristics-dialog.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { CreateCharacterComponent } from './character/components/create-characte
     CharacterInfoDialogComponent,
     AddConditionDialogComponent,
     EditPriorityItemComponent,
-    CreateCharacterComponent
+    CreateCharacterComponent,
+    CharacteristicsDialogComponent
   ],
   imports: [
     SharedModule,

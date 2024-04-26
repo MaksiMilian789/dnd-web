@@ -11,6 +11,8 @@ import {
   TuiGroupModule,
   TuiHintModule,
   TuiErrorModule,
+  TuiPrimitiveTextfieldModule,
+  TuiTooltipModule,
 } from '@taiga-ui/core';
 import {
   TuiCheckboxLabeledModule,
@@ -20,6 +22,7 @@ import {
   TuiInputModule,
   TuiInputNumberModule,
   TuiInputPasswordModule,
+  TuiInputSliderModule,
   TuiIslandModule,
   TuiSelectModule,
   TuiStepperModule,
@@ -50,7 +53,9 @@ import {
     TuiCheckboxLabeledModule,
     TuiStepperModule,
     TuiLetModule,
-    TuiTextareaModule
+    TuiTextareaModule,
+    TuiInputSliderModule,
+    TuiTooltipModule
   ],
 })
 export class TaigaModule {}

@@ -23,19 +23,16 @@ export class CharacterService {
 
   constructor(
     private _http: HttpClient,
-    @Inject(APP_CONFIG) config: AppConfig
+    @Inject(APP_CONFIG) config: AppConfig,
   ) {
     this._baseUrl = `${config.api}/api/character`;
   }
 
   public loadShortCharacters(id: number): Observable<ShortCharacter[]> {
     var params = new HttpParams().append('id', id);
-    return this._http.get<ShortCharacter[]>(
-      `${this._baseUrl}/getListCharacters`,
-      {
-        params: params,
-      }
-    );
+    return this._http.get<ShortCharacter[]>(`${this._baseUrl}/getListCharacters`, {
+      params: params,
+    });
   }
 
   public loadCharacter(id: number): Observable<Character> {
@@ -45,15 +42,11 @@ export class CharacterService {
     });
   }
 
-  public createCharacter(
-    character: CharacterWithId,
-    id: number
-  ): Observable<void> {
-    return this._http.post<void>(
-      `${this._baseUrl}`,
-      { id: id, character: character },
-      {}
-    );
+  public createCharacter(character: CharacterWithId, id: number): Observable<void> {
+    var params = new HttpParams().append('userId', id);
+    return this._http.post<void>(`${this._baseUrl}`, character, {
+      params: params,
+    });
   }
 
   public getClasses(): Observable<Class[]> {
