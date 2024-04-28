@@ -1,10 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from '@shared/shared.module';
-import { CharacterInfoDialogComponent } from './character/components/character-info-dialog/character-info-dialog.component';
-import { AddConditionDialogComponent } from './character/components/character-main/add-condition-dialog/add-condition-dialog.component';
 import { CharacterMainComponent } from './character/components/character-main/character-main.component';
-import { EditPriorityItemComponent } from './character/components/character-main/edit-priority-item/edit-priority-item.component';
 import { CharactersComponent } from './character/components/characters/characters.component';
 import { AddItemDialogComponent } from './character/inventory/components/add-item-dialog/add-item-dialog.component';
 import { CharacterInventoryComponent } from './character/inventory/components/character-inventory/character-inventory.component';
@@ -16,6 +13,7 @@ import { PlayerHomeComponent } from './components/player-home/player-home.compon
 import { PlayerShellComponent } from './components/player-shell/player-shell.component';
 import { CreateCharacterComponent } from './character/components/create-character/create-character.component';
 import { CharacteristicsDialogComponent } from './character/components/characteristics-dialog/characteristics-dialog.component';
+import { CharInfoDialogComponent } from './character/components/char-info-dialog/char-info-dialog.component';
 
 @NgModule({
   declarations: [
@@ -29,11 +27,9 @@ import { CharacteristicsDialogComponent } from './character/components/character
     AddSkillDialogComponent,
     CharacterSpellsComponent,
     AddSpellDialogComponent,
-    CharacterInfoDialogComponent,
-    AddConditionDialogComponent,
-    EditPriorityItemComponent,
     CreateCharacterComponent,
-    CharacteristicsDialogComponent
+    CharacteristicsDialogComponent,    
+    CharInfoDialogComponent
   ],
   imports: [
     SharedModule,

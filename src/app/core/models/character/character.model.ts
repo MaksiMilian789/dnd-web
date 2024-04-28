@@ -3,6 +3,8 @@ import { Characteristics } from "./characteristics.model";
 import { Race } from "./races/race.model";
 import { Background } from "./backgrounds/background.model";
 import { Class } from "./classes/class.model";
+import { SpellSlot } from "./spells/spell-slot.model";
+import { EnergySlot } from "./energy-slot.model";
 
 export interface ShortCharacter {
   id?: number;
@@ -14,6 +16,10 @@ export interface ShortCharacter {
 
 export interface Character extends ShortCharacter {
   age: number;
+  hp: number;
+  addHp: number;
+  spellSlots: SpellSlot[];
+  energySlots: EnergySlot[];
   gender: Gender;
   ideology: Ideology;
   characteristics: Characteristics;

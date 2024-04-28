@@ -19,16 +19,16 @@
         </div>
         <div>
             <tui-input-number [(ngModel)]="bonus.strength" class="tui-group__inherit-item"
-                [ngModelOptions]="{standalone: true}">
+                [ngModelOptions]="{standalone: true}" [readOnly]="true">
                 Бонус
-                <input placeholder="Бонус" tuiTextfield [readOnly]="true" />
+                <input placeholder="Бонус" tuiTextfield />
             </tui-input-number>
         </div>
         <div>
             <tui-input-number [(ngModel)]="strength" class="tui-group__inherit-item"
-                [ngModelOptions]="{standalone: true}">
+                [ngModelOptions]="{standalone: true}" [readOnly]="true">
                 Итого
-                <input placeholder="Итого" tuiTextfield [readOnly]="true" />
+                <input placeholder="Итого" tuiTextfield />
             </tui-input-number>
             <tui-error [error]="'Модиф-ор: ' + modificator.strength.toString()"></tui-error>
         </div>
@@ -41,16 +41,16 @@
         </div>
         <div>
             <tui-input-number [(ngModel)]="bonus.dexterity" class="tui-group__inherit-item"
-                [ngModelOptions]="{standalone: true}">
+                [ngModelOptions]="{standalone: true}" [readOnly]="true">
                 Бонус
-                <input placeholder="Бонус" tuiTextfield [readOnly]="true" />
+                <input placeholder="Бонус" tuiTextfield />
             </tui-input-number>
         </div>
         <div>
             <tui-input-number [(ngModel)]="dexterity" class="tui-group__inherit-item"
-                [ngModelOptions]="{standalone: true}">
+                [ngModelOptions]="{standalone: true}" [readOnly]="true">
                 Итого
-                <input placeholder="Итого" tuiTextfield [readOnly]="true" />
+                <input placeholder="Итого" tuiTextfield />
             </tui-input-number>
             <tui-error [error]="'Модиф-ор: ' + modificator.dexterity.toString()"></tui-error>
         </div>
@@ -63,16 +63,16 @@
         </div>
         <div>
             <tui-input-number [(ngModel)]="bonus.constitution" class="tui-group__inherit-item"
-                [ngModelOptions]="{standalone: true}">
+                [ngModelOptions]="{standalone: true}" [readOnly]="true">
                 Бонус
-                <input placeholder="Бонус" tuiTextfield [readOnly]="true" />
+                <input placeholder="Бонус" tuiTextfield />
             </tui-input-number>
         </div>
         <div>
             <tui-input-number [(ngModel)]="constitution" class="tui-group__inherit-item"
-                [ngModelOptions]="{standalone: true}">
+                [ngModelOptions]="{standalone: true}" [readOnly]="true">
                 Итого
-                <input placeholder="Итого" tuiTextfield [readOnly]="true" />
+                <input placeholder="Итого" tuiTextfield />
             </tui-input-number>
             <tui-error [error]="'Модиф-ор: ' + modificator.constitution"></tui-error>
         </div>
@@ -85,16 +85,16 @@
         </div>
         <div>
             <tui-input-number [(ngModel)]="bonus.intelligence" class="tui-group__inherit-item"
-                [ngModelOptions]="{standalone: true}">
+                [ngModelOptions]="{standalone: true}" [readOnly]="true">
                 Бонус
-                <input placeholder="Бонус" tuiTextfield [readOnly]="true" />
+                <input placeholder="Бонус" tuiTextfield />
             </tui-input-number>
         </div>
         <div>
             <tui-input-number [(ngModel)]="intelligence" class="tui-group__inherit-item"
-                [ngModelOptions]="{standalone: true}">
+                [ngModelOptions]="{standalone: true}" [readOnly]="true">
                 Итого
-                <input placeholder="Итого" tuiTextfield [readOnly]="true" />
+                <input placeholder="Итого" tuiTextfield />
             </tui-input-number>
             <tui-error [error]="'Модиф-ор: ' + modificator.intelligence"></tui-error>
         </div>
@@ -107,16 +107,16 @@
         </div>
         <div>
             <tui-input-number [(ngModel)]="bonus.wisdom" class="tui-group__inherit-item"
-                [ngModelOptions]="{standalone: true}">
+                [ngModelOptions]="{standalone: true}" [readOnly]="true">
                 Бонус
-                <input placeholder="Бонус" tuiTextfield [readOnly]="true" />
+                <input placeholder="Бонус" tuiTextfield />
             </tui-input-number>
         </div>
         <div>
-            <tui-input-number [(ngModel)]="wisdom" class="tui-group__inherit-item"
-                [ngModelOptions]="{standalone: true}">
+            <tui-input-number [(ngModel)]="wisdom" class="tui-group__inherit-item" [ngModelOptions]="{standalone: true}"
+                [readOnly]="true">
                 Итого
-                <input placeholder="Итого" tuiTextfield [readOnly]="true" />
+                <input placeholder="Итого" tuiTextfield />
             </tui-input-number>
             <tui-error [error]="'Модиф-ор: ' + modificator.wisdom"></tui-error>
         </div>
@@ -129,16 +129,16 @@
         </div>
         <div>
             <tui-input-number [(ngModel)]="bonus.charisma" class="tui-group__inherit-item"
-                [ngModelOptions]="{standalone: true}">
+                [ngModelOptions]="{standalone: true}" [readOnly]="true">
                 Бонус
-                <input placeholder="Бонус" tuiTextfield [readOnly]="true" />
+                <input placeholder="Бонус" tuiTextfield />
             </tui-input-number>
         </div>
         <div>
             <tui-input-number [(ngModel)]="charisma" class="tui-group__inherit-item"
-                [ngModelOptions]="{standalone: true}">
+                [ngModelOptions]="{standalone: true}" [readOnly]="true">
                 Итого
-                <input placeholder="Итого" tuiTextfield [readOnly]="true" />
+                <input placeholder="Итого" tuiTextfield />
             </tui-input-number>
             <tui-error [error]="'Модиф-ор: ' + modificator.charisma"></tui-error>
         </div>
