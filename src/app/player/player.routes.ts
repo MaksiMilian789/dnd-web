@@ -11,6 +11,7 @@ import { CharacterSpellsComponent } from './character/spells/components/characte
 import { PlayerHomeComponent } from './components/player-home/player-home.component';
 import { PlayerShellComponent } from './components/player-shell/player-shell.component';
 import { CreateCharacterComponent } from './character/components/create-character/create-character.component';
+import { CharacterBattleComponent } from './character/components/character-battle/character-battle.component';
 
 export const PLAYER_ROUTES: Routes = [
   {
@@ -33,6 +34,10 @@ export const PLAYER_ROUTES: Routes = [
       {
         path: 'character/:characterId',
         component: CharacterMainComponent,
+      },
+      {
+        path: 'character/:characterId/battle',
+        component: CharacterBattleComponent,
       },
       {
         path: 'character/:characterId/inventory',

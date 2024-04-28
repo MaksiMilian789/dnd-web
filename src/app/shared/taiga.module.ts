@@ -15,6 +15,7 @@ import {
   TuiTooltipModule,
 } from '@taiga-ui/core';
 import {
+  TuiCheckboxBlockModule,
   TuiCheckboxLabeledModule,
   TuiDataListDropdownManagerModule,
   TuiInputDateTimeModule,
@@ -55,7 +56,8 @@ import {
     TuiLetModule,
     TuiTextareaModule,
     TuiInputSliderModule,
-    TuiTooltipModule
+    TuiTooltipModule,
+    TuiCheckboxBlockModule
   ],
 })
 export class TaigaModule {}

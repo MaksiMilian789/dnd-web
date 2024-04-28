@@ -14,17 +14,19 @@ import { modificator } from '@shared/utils/modificator';
 import { CharInfoDialogComponent, CharInfoDialogData } from '../char-info-dialog/char-info-dialog.component';
 
 @Component({
-  selector: 'app-character-main',
-  templateUrl: './character-main.component.html',
-  styleUrls: ['./character-main.component.scss'],
+  selector: 'app-character-battle',
+  templateUrl: './character-battle.component.html',
+  styleUrls: ['./character-battle.component.scss'],
   providers: [StatsSkillPipe],
 })
-export class CharacterMainComponent {
+export class CharacterBattleComponent {
   charId: number = Number(this._route.snapshot.paramMap.get('characterId'));
   character: Signal<Character | null> = toSignal(this._characterService.loadCharacter(this.charId), {
     initialValue: null,
   });
   hpForm: FormGroup;
+
+  concentration: boolean = false;
 
   constructor(
     @Inject(TuiDialogService) private readonly _dialogs: TuiDialogService,
@@ -100,11 +102,11 @@ export class CharacterMainComponent {
     return 6;
   }
 
-  get getPerception(): number {
-    return 12;
+  get getSpeed(): number {
+    return 30;
   }
 
-  get getView(): string {
-    return 'Обычное';
+  get getInitiative(): number {
+    return 15;
   }
 }

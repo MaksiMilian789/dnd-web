@@ -14,6 +14,7 @@ import { PlayerShellComponent } from './components/player-shell/player-shell.com
 import { CreateCharacterComponent } from './character/components/create-character/create-character.component';
 import { CharacteristicsDialogComponent } from './character/components/characteristics-dialog/characteristics-dialog.component';
 import { CharInfoDialogComponent } from './character/components/char-info-dialog/char-info-dialog.component';
+import { CharacterBattleComponent } from './character/components/character-battle/character-battle.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { CharInfoDialogComponent } from './character/components/char-info-dialog
     AddSpellDialogComponent,
     CreateCharacterComponent,
     CharacteristicsDialogComponent,    
-    CharInfoDialogComponent
+    CharInfoDialogComponent,    
+    CharacterBattleComponent
   ],
   imports: [
     SharedModule,

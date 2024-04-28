@@ -1,6 +1,6 @@
 <ng-container *ngIf="character()">
     <mat-toolbar color="primary" class="toolbar mat-elevation-z6 secondary-toolbar">
-        <button mat-icon-button [routerLink]="['/player/characters']">
+        <button mat-icon-button [routerLink]="['..']">
             <mat-icon>arrow_back</mat-icon>
         </button>
         <div class="name-container">
@@ -11,9 +11,6 @@
         <div class="spacer"></div>
         <button mat-icon-button (click)="charInfo()">
             <mat-icon>info</mat-icon>
-        </button>
-        <button mat-icon-button [routerLink]="['battle']">
-            <mat-icon>swords</mat-icon>
         </button>
         <button mat-icon-button (click)="true">
             <mat-icon>menu</mat-icon>
@@ -67,10 +64,6 @@
             <div class="descr">
                 <tui-error [error]="'Стат: ' + character()!.characteristics.strength"></tui-error>
                 <tui-error [error]="'Спас: ' + 0"></tui-error>
-                <div class="stat-skill">
-                    <mat-divider></mat-divider>
-                    <div>Атлетика: {{10}}</div>
-                </div>
             </div>
         </div>
         <div>
@@ -82,12 +75,6 @@
             <div class="descr">
                 <tui-error [error]="'Стат: ' + character()!.characteristics.dexterity"></tui-error>
                 <tui-error [error]="'Спас: ' + 0"></tui-error>
-                <div class="stat-skill">
-                    <mat-divider></mat-divider>
-                    <div>Акробатика: {{ 10 }}</div>
-                    <div>Ловкость рук: {{ 10 }}</div>
-                    <div>Скрытность: {{ 10 }}</div>
-                </div>
             </div>
         </div>
         <div>
@@ -99,9 +86,6 @@
             <div class="descr">
                 <tui-error [error]="'Стат: ' + character()!.characteristics.constitution"></tui-error>
                 <tui-error [error]="'Спас: ' + 0"></tui-error>
-                <div class="stat-skill">
-                    <mat-divider></mat-divider>
-                </div>
             </div>
         </div>
     </div>
@@ -115,14 +99,6 @@
             <div class="descr">
                 <tui-error [error]="'Стат: ' + character()!.characteristics.intelligence"></tui-error>
                 <tui-error [error]="'Спас: ' + 0"></tui-error>
-                <div class="stat-skill">
-                    <mat-divider></mat-divider>
-                    <div>Анализ: {{ 10 }}</div>
-                    <div>История: {{ 10 }}</div>
-                    <div>Магия: {{ 10 }}</div>
-                    <div>Природа: {{ 10 }}</div>
-                    <div>Религия: {{ 10 }}</div>
-                </div>
             </div>
         </div>
         <div>
@@ -134,14 +110,6 @@
             <div class="descr">
                 <tui-error [error]="'Стат: ' + character()!.characteristics.wisdom"></tui-error>
                 <tui-error [error]="'Спас: ' + 0"></tui-error>
-                <div class="stat-skill">
-                    <mat-divider></mat-divider>
-                    <div>Внимат-сть: {{ 10 }}</div>
-                    <div>Выживание: {{ 10 }}</div>
-                    <div>Медицина: {{ 10 }}</div>
-                    <div>Прониц-сть: {{ 10 }}</div>
-                    <div>Уход за жив: {{ 10 }}</div>
-                </div>
             </div>
         </div>
         <div>
@@ -153,29 +121,27 @@
             <div class="descr">
                 <tui-error [error]="'Стат: ' + character()!.characteristics.charisma"></tui-error>
                 <tui-error [error]="'Спас: ' + 0"></tui-error>
-                <div class="stat-skill">
-                    <mat-divider></mat-divider>
-                    <div>Выступление: {{ 10 }}</div>
-                    <div>Запугивание: {{ 10 }}</div>
-                    <div>Обман: {{ 10 }}</div>
-                    <div>Убеждение: {{ 10 }}</div>
-                </div>
             </div>
         </div>
     </div>
     <mat-divider></mat-divider>
     <div class="container">
         <div>
-            <tui-input-number [(ngModel)]="getPerception" class="perception" [readOnly]="true">
-                Пассивная внимательность
-                <input placeholder="Пассивная внимательность" tuiTextfield />
+            <tui-input-number [(ngModel)]="getSpeed" class="speed" [readOnly]="true">
+                Скорость
+                <input placeholder="Скорость" tuiTextfield />
             </tui-input-number>
         </div>
         <div>
-            <tui-input [(ngModel)]="getView" class="view" [readOnly]="true">
-                Тип зрения
-                <input placeholder="Тип зрения" tuiTextfield />
-            </tui-input>
+            <tui-input-number [(ngModel)]="getInitiative" class="initiative" [readOnly]="true">
+                Инициатива
+                <input placeholder="Инициатива" tuiTextfield />
+            </tui-input-number>
+        </div>
+        <div>
+            <tui-checkbox-block contentAlign="right" [(ngModel)]="concentration" class="concentration">
+                <span class="concentration-text">Концентрация</span>
+            </tui-checkbox-block>
         </div>
     </div>
 </ng-container>
