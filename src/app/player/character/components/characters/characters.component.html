@@ -29,13 +29,14 @@
                     (change)="toggleSelection(character)"></mat-checkbox>
                 <mat-card class="card pointer" [routerLink]="['/player/character', character.id]">
                     <mat-card-title>
-                        <span class="character-info">
-                            {{character.name}}
-                        </span>
+                        <div class="name-container">
+                            <span class="truncate block">{{character.name}}</span>
+                        </div>
                     </mat-card-title>
                     <mat-card-subtitle>
-                        <span class="character-info">
-                            {{character.className}}</span>
+                        <div class="class-name-container">
+                            <span class="truncate block">{{character.className}}</span>
+                        </div>
                         <div class="level">Уровень: {{character.level}}</div>
                     </mat-card-subtitle>
                 </mat-card>

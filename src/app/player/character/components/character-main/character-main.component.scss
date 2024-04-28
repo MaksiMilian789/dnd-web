@@ -43,8 +43,19 @@
   width: 34vw;
 }
 
-.descr{
+.descr {
   text-align: center;
+}
+
+.name-container {
+  width: calc(100vw - 250px);
+  font-size: medium;
+  margin-top: 4px;
+}
+
+.stat-skill {
+  display: flex;
+  flex-direction: column;
 }
 
 @media screen and (max-height: 775px) {
@@ -70,4 +81,8 @@
     margin-top: 10px;
     margin-bottom: 10px;
   }
+}
+
+.block {
+  display: block;
 }

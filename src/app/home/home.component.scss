@@ -31,13 +31,12 @@
   }
 }
 
-
 @media screen and (max-width: 400px) {
   .container {
     animation: appearMobile 1s ease;
     background-size: 150px, 170px;
   }
-    
+
   .container:has(.player:hover, .player:active) {
     background-size: 180px, 140px;
   }

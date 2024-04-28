@@ -14,6 +14,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  font-size: medium;
 }
 
 .card-checkbox {
@@ -23,17 +24,32 @@
 .card {
   min-width: 200px;
   width: 70vw;
+  height: 60px;
 }
 
 .level {
-  float: right;
-  margin-right: 3px;
-}
-
-.character-info {
-  margin-left: 3px;
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
 }
 
 .mat-mdc-checkbox {
   margin: 0px;
+}
+
+.mat-mdc-card-title,
+.mat-mdc-card-subtitle {
+  margin: 5px;
+}
+
+.class-name-container {
+  width: 30vw;
+}
+
+.name-container {
+  width: 50vw;
+}
+
+.block {
+  display: block;
 }

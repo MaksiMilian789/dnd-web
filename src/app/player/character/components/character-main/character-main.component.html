@@ -3,13 +3,17 @@
         <button mat-icon-button [routerLink]="['/player/characters']">
             <mat-icon>arrow_back</mat-icon>
         </button>
+        <div class="name-container">
+            <span class="truncate block">
+                {{character()!.name}}
+            </span>
+        </div>
         <div class="spacer"></div>
-        <h1>{{character()!.name}}</h1>
         <button mat-icon-button (click)="charInfo()">
             <mat-icon>info</mat-icon>
         </button>
         <button mat-icon-button (click)="charInfo()">
-            <mat-icon>sword</mat-icon>
+            <mat-icon>swords</mat-icon>
         </button>
         <button mat-icon-button (click)="true">
             <mat-icon>menu</mat-icon>
@@ -65,7 +69,7 @@
                 <tui-error [error]="'Спас: ' + 0"></tui-error>
                 <div class="stat-skill">
                     <mat-divider></mat-divider>
-                    Атлетика: {{10}}
+                    <div>Атлетика: {{10}}</div>
                 </div>
             </div>
         </div>
@@ -80,9 +84,9 @@
                 <tui-error [error]="'Спас: ' + 0"></tui-error>
                 <div class="stat-skill">
                     <mat-divider></mat-divider>
-                    Акробатика: {{ 10 }}
-                    Ловкость рук: {{ 10 }}
-                    Скрытность: {{ 10 }}
+                    <div>Акробатика: {{ 10 }}</div>
+                    <div>Ловкость рук: {{ 10 }}</div>
+                    <div>Скрытность: {{ 10 }}</div>
                 </div>
             </div>
         </div>
@@ -113,11 +117,11 @@
                 <tui-error [error]="'Спас: ' + 0"></tui-error>
                 <div class="stat-skill">
                     <mat-divider></mat-divider>
-                    Анализ: {{ 10 }}
-                    История: {{ 10 }}
-                    Магия: {{ 10 }}
-                    Природа: {{ 10 }}
-                    Религия: {{ 10 }}
+                    <div>Анализ: {{ 10 }}</div>
+                    <div>История: {{ 10 }}</div>
+                    <div>Магия: {{ 10 }}</div>
+                    <div>Природа: {{ 10 }}</div>
+                    <div>Религия: {{ 10 }}</div>
                 </div>
             </div>
         </div>
@@ -132,11 +136,11 @@
                 <tui-error [error]="'Спас: ' + 0"></tui-error>
                 <div class="stat-skill">
                     <mat-divider></mat-divider>
-                    Внимат-сть: {{ 10 }}
-                    Выживание: {{ 10 }}
-                    Медицина: {{ 10 }}
-                    Прониц-сть: {{ 10 }}
-                    Уход за жив: {{ 10 }}
+                    <div>Внимат-сть: {{ 10 }}</div>
+                    <div>Выживание: {{ 10 }}</div>
+                    <div>Медицина: {{ 10 }}</div>
+                    <div>Прониц-сть: {{ 10 }}</div>
+                    <div>Уход за жив: {{ 10 }}</div>
                 </div>
             </div>
         </div>
@@ -151,10 +155,10 @@
                 <tui-error [error]="'Спас: ' + 0"></tui-error>
                 <div class="stat-skill">
                     <mat-divider></mat-divider>
-                    Выступление: {{ 10 }}
-                    Запугивание: {{ 10 }}
-                    Обман: {{ 10 }}
-                    Убеждение: {{ 10 }}
+                    <div>Выступление: {{ 10 }}</div>
+                    <div>Запугивание: {{ 10 }}</div>
+                    <div>Обман: {{ 10 }}</div>
+                    <div>Убеждение: {{ 10 }}</div>
                 </div>
             </div>
         </div>
