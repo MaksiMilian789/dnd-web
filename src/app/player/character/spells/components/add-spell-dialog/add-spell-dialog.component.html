@@ -1,27 +1,60 @@
-<h3 mat-dialog-title>Добавление заклинания</h3>
-<mat-dialog-content>
-    <form [formGroup]="addForm">
-        <mat-form-field appearance="outline">
-            <mat-label>Название заклинания</mat-label>
-            <!--><mat-select formControlName="spell">
-                <mat-option *ngFor="let spell of spells$ | async" [value]="spell.id"
-                    (click)="changeDescription(spell.description)">
-                    {{ spell.name }}
-                </mat-option>
-            </mat-select><!-->
-        </mat-form-field>
-    </form>
-
-    <mat-card>
-        <mat-card-content>
-            {{description}}
-        </mat-card-content>
-    </mat-card>
-
-</mat-dialog-content>
-<mat-dialog-actions>
-    <div class="spacer"></div>
-    <button mat-button color="primary" [disabled]="!addForm.valid" (click)="add()">
-        Добавить
-    </button>
-</mat-dialog-actions>
+<div class="filter">
+    <tui-input [(ngModel)]="filter" (keyup)="applyTextFilter()" tuiTextfieldIcon="tuiIconSearchLarge" class="search">
+        Поиск
+        <input placeholder="Поиск по всем полям" tuiTextfield />
+    </tui-input><tui-hosted-dropdown #dropdown [content]="content">
+        <button mat-icon-button>
+            <mat-icon>menu</mat-icon>
+        </button>
+    </tui-hosted-dropdown>
+    <ng-template #content let-activeZone let-close="close">
+        <!--><tui-checkbox-labeled [formControl]="hidden" size="m" class="checkbox-menu">
+            Показать скрытые
+        </tui-checkbox-labeled><!-->
+    </ng-template>
+</div>
+<div class="mat-elevation-z2 container">
+    <div class="table-overflow">
+        <table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort>
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Название </th>
+              <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+      
+            <ng-container matColumnDef="level">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Уровень </th>
+              <td mat-cell *matCellDef="let element"> {{element.level}} </td>
+            </ng-container>
+      
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+              <td mat-cell *matCellDef="let element"> <button mat-icon-button
+                  (click)="add(element.id); $event.stopPropagation();"><mat-icon>add</mat-icon></button></td>
+            </ng-container>
+      
+            <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+            <ng-container matColumnDef="expandedDetail">
+              <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+                <div class="element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                  <div class="element-description">
+                    {{element.description}}
+                  </div>
+                </div>
+              </td>
+            </ng-container>
+      
+            <tr mat-header-row *matHeaderRowDef="columnsToDisplay; sticky: true"></tr>
+            <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="element-row"
+              [class.expanded-row]="expandedElement === element" (click)="expandedElement = element">
+            </tr>
+            <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
+      
+            <tr class="mat-row center" *matNoDataRow>
+              <td class="mat-cell no-data mat-hint" colspan="3">Нет заклинаний</td>
+          </tr>
+          </table>
+    </div>
+    <div class="containerBottom">
+        <mat-paginator [pageSize]="25" [pageSizeOptions]="[10, 15, 25, 50, 100]" showFirstLastButtons></mat-paginator>
+    </div>
+</div>

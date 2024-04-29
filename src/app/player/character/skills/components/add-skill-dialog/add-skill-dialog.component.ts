@@ -1,4 +1,4 @@
-import { Component, Inject, Signal, ViewChild } from '@angular/core';
+import { Component, Inject, ViewChild } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -31,8 +31,6 @@ export interface AddSkillDialogComponentData {
 export class AddSkillDialogComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-
-  charId: number = Number(this._route.snapshot.paramMap.get('characterId'));
 
   dataSource!: MatTableDataSource<Skill>;
   columnsToDisplay = ['name', 'type', 'actions'];
@@ -76,6 +74,5 @@ export class AddSkillDialogComponent {
         this._snackbar.open('Добавление успешно.');
       },
     });
-    this.context.completeWith(true);
   }
 }

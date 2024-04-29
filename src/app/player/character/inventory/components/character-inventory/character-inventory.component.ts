@@ -1,19 +1,19 @@
-import { Component, Signal, ViewChild } from '@angular/core';
+import { Component, Inject, Signal, ViewChild } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ActivatedRoute } from '@angular/router';
 import { MatSort } from '@angular/material/sort';
-import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
-import { Subject, tap } from 'rxjs';
+import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
+import { TuiDialogService } from '@taiga-ui/core';
+import { Subject, switchMap, tap } from 'rxjs';
 
 import { Character } from '@core/models';
 import { CharacterService } from '@core/services/api/character.service';
 import { Inventory } from '@core/models/character/inventory.model';
-import { combineReload } from '@shared/utils/rxjs';
-import { AddItemDialogComponent } from '../add-item-dialog/add-item-dialog.component';
+import { AddInventoryDialogComponentData, AddItemDialogComponent } from '../add-item-dialog/add-item-dialog.component';
 
 @Component({
   selector: 'app-character-inventory',
@@ -41,20 +41,21 @@ export class CharacterInventoryComponent {
   private readonly _refresh$ = new Subject<void>();
 
   constructor(
+    @Inject(TuiDialogService) private readonly _dialogs: TuiDialogService,
     private _characterService: CharacterService,
     private _route: ActivatedRoute,
-    private _dialog: MatDialog,
     private _snackbar: MatSnackBar,
   ) {
     this.character = toSignal(
-      combineReload(
-        this._characterService.loadCharacter(this.charId).pipe(tap((val) => this.setData(val))),
-        this._refresh$,
+      this._refresh$.pipe(
+        switchMap(() => this._characterService.loadCharacter(this.charId)),
+        tap((val) => this.setData(val)),
       ),
       {
         initialValue: null,
       },
     );
+    this.refresh();
   }
 
   refresh(): void{    
@@ -69,16 +70,21 @@ export class CharacterInventoryComponent {
   }
 
   addItem(): void {
-    this._dialog
-      .open(AddItemDialogComponent, {
-        data: {
-          charId: this.character()?.id,
-          actualItems: this.dataSource.data,
-        },
-        width: '80%',
+    const data: AddInventoryDialogComponentData = {
+      character: this.character()!,
+    };
+
+    this._dialogs
+      .open<boolean>(new PolymorpheusComponent(AddItemDialogComponent), {
+        data: data,
+        size: 'page',
+        closeable: true,
       })
-      .afterClosed()
-      .subscribe(() => this.refresh());
+      .subscribe({
+        complete: () => {
+            this.refresh();
+        },
+    });
   }
 
   deleteItem(id: number): void {
