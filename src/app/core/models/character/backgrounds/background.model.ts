@@ -4,5 +4,5 @@ export interface Background {
   id: number;
   name: string;
   description: string;
-  skillInstance: Skill[];
+  skillInstances: Skill[];
 }

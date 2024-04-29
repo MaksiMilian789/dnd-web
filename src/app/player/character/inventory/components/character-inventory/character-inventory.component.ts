@@ -57,6 +57,10 @@ export class CharacterInventoryComponent {
     );
   }
 
+  refresh(): void{    
+    this._refresh$.next();
+  }
+
   setData(character: Character): void {
     this.dataSource = new MatTableDataSource(character.objectInstance ?? []);
     this.paginator._intl.itemsPerPageLabel = 'Предметов на страницу';
@@ -74,7 +78,7 @@ export class CharacterInventoryComponent {
         width: '80%',
       })
       .afterClosed()
-      .subscribe(() => this._refresh$.next());
+      .subscribe(() => this.refresh());
   }
 
   deleteItem(id: number): void {

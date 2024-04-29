@@ -56,8 +56,41 @@ export class CharacterSkillsComponent {
     );
   }
 
+  refresh(): void{    
+    this._refresh$.next();
+  }
+
   setData(character: Character): void {
-    this.dataSource = new MatTableDataSource(character.skillInstance ?? []);
+    let data: Skill[] = [];
+    character.skillInstance.forEach(element => {
+      data.push(element);
+    });
+
+    character.backgroundInstance.skillInstances.forEach(element => {
+      data.push(element);
+    });
+
+    character.classInstance.skillInstances.forEach(element => {
+      data.push(element);
+    });
+
+    character.raceInstance.skillInstances.forEach(element => {
+      data.push(element);
+    });
+
+    character.objectInstance.forEach(instance => {
+      instance.skillInstance.forEach(element => {
+        data.push(element);        
+      });
+    });
+
+    character.spellInstance.forEach(instance => {
+      instance.skillInstance.forEach(element => {
+        data.push(element);        
+      });
+    });
+
+    this.dataSource = new MatTableDataSource(data);
     this.paginator._intl.itemsPerPageLabel = 'Способностей на страницу';
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
@@ -73,7 +106,7 @@ export class CharacterSkillsComponent {
         width: '80%',
       })
       .afterClosed()
-      .subscribe(() => this._refresh$.next());
+      .subscribe(() => this.refresh());
   }
 
   deleteItem(id: number): void {
