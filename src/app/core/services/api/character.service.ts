@@ -73,16 +73,22 @@ export class CharacterService {
     return this._http.post<void>(`${this._baseUrl}/background`, { background: req });
   }
 
+  public editCharacterHp(id: number, hp: number, addHp: number): Observable<void> {
+    var params = new HttpParams().append('id', id);
+    params = params.append('hp', hp);
+    params = params.append('addHp', addHp);
+    return this._http.put<void>(
+      `${this._baseUrl}/hp`,
+      {},
+      {
+        params: params,
+      },
+    );
+  }
+
   /*public deleteCharacters(ids: number[]): Observable<void> {
     return this._http.delete<void>(`${this._baseUrl}/deleteCharacter`, {
       body: { id: ids },
-    });
-  }
-
-  public getInventory(id: number): Observable<Inventory[]> {
-    var params = new HttpParams().append('id', id);
-    return this._http.get<Inventory[]>(`${this._baseUrl}/characterInventory`, {
-      params: params,
     });
   }
 
@@ -105,13 +111,6 @@ export class CharacterService {
     });
   }
 
-  public getCharacterSpells(id: number): Observable<Spell[]> {
-    var params = new HttpParams().append('id', id);
-    return this._http.get<Spell[]>(`${this._baseUrl}/characterSpells`, {
-      params: params,
-    });
-  }
-
   public getSpells(): Observable<Spell[]> {
     return this._http.get<Spell[]>(`${this._baseUrl}/listSpells`, {});
   }
@@ -127,13 +126,6 @@ export class CharacterService {
   public deleteCharacterSpell(charId: number, id: number): Observable<void> {
     return this._http.delete<void>(`${this._baseUrl}/deleteCharacterSpell`, {
       body: { charId: charId, spellId: id },
-    });
-  }
-
-  public getCharacterSkills(id: number): Observable<Skill[]> {
-    var params = new HttpParams().append('id', id);
-    return this._http.get<Skill[]>(`${this._baseUrl}/characterSkills`, {
-      params: params,
     });
   }
 
@@ -153,46 +145,6 @@ export class CharacterService {
     return this._http.delete<void>(`${this._baseUrl}/deleteCharacterSkill`, {
       body: { charId: charId, skillId: id },
     });
-  }
-
-  public editCharacterStats(
-    id: number,
-    strength: number,
-    dexterity: number,
-    constitution: number,
-    intelligence: number,
-    wisdom: number,
-    charisma: number
-  ): Observable<void> {
-    return this._http.put<void>(
-      `${this._baseUrl}/editCharacterStats`,
-      {
-        id: id,
-        strength: strength,
-        dexterity: dexterity,
-        constitution: constitution,
-        intelligence: intelligence,
-        wisdom: wisdom,
-        charisma: charisma,
-      },
-      {}
-    );
-  }
-
-  public editCharacterHp(
-    id: number,
-    hp: number,
-    addHp: number
-  ): Observable<void> {
-    return this._http.put<void>(
-      `${this._baseUrl}/editCharacterHp`,
-      {
-        id: id,
-        hp: hp,
-        addHp: addHp,
-      },
-      {}
-    );
   }
 
   public editCharacterInfo(
@@ -260,14 +212,6 @@ export class CharacterService {
       {
         body: { charId: charId, conditionId: conditionId },
       }
-    );
-  }
-
-  public editPriorityObject(id: number, type: number): Observable<void> {
-    return this._http.put<void>(
-      `${this._baseUrl}/priorityObject`,
-      { id: id, type: type },
-      {}
     );
   }*/
 }

@@ -15,167 +15,198 @@
         <button mat-icon-button [routerLink]="['battle']">
             <mat-icon>swords</mat-icon>
         </button>
-        <button mat-icon-button (click)="true">
-            <mat-icon>menu</mat-icon>
-        </button>
+        <tui-hosted-dropdown #dropdown [content]="content">
+            <button mat-icon-button>
+                <mat-icon>menu</mat-icon>
+            </button>
+        </tui-hosted-dropdown>
+        <ng-template #content let-activeZone let-close="close">
+            <tui-data-list role="menu" tuiDataListDropdownManager class="menu">
+                <tui-opt-group>
+                    <button tuiOption size="m" [routerLink]="['inventory']">
+                        Инвентарь
+                        <tui-svg src="tuiIconLayers"></tui-svg>
+                    </button>
+                    <button tuiOption size="m" [routerLink]="['skills']">
+                        Способности
+                        <tui-svg src="tuiIconZap"></tui-svg>
+                    </button>
+                    <button tuiOption size="m" [routerLink]="['spells']">
+                        Заклинания
+                        <tui-svg src="tuiIconSlack"></tui-svg>
+                    </button>
+                    <button tuiOption size="m" [routerLink]="['notes']">
+                        Заметки
+                        <tui-svg src="tuiIconEdit3"></tui-svg>
+                    </button>
+                </tui-opt-group>
+                <tui-opt-group>
+                    <tui-checkbox-block contentAlign="right" [formControl]="showSkills" size="m" class="checkbox-menu">
+                        Grapes
+                    </tui-checkbox-block>
+                </tui-opt-group>
+            </tui-data-list>
+        </ng-template>
     </mat-toolbar>
     <mat-divider></mat-divider>
-    <div class="container">
-        <div>
-            <tui-input-number [(ngModel)]="getArmor" class="info" [ngModelOptions]="{standalone: true}"
-                [readOnly]="true">
-                КД
-                <input placeholder="КД" tuiTextfield />
-            </tui-input-number>
+    <div class="overflow-container">
+        <div class="container">
+            <div>
+                <tui-input-number [(ngModel)]="getArmor" class="info" [ngModelOptions]="{standalone: true}"
+                    [readOnly]="true">
+                    КД
+                    <input placeholder="КД" tuiTextfield />
+                </tui-input-number>
+            </div>
+            <div>
+                <tui-input-number [(ngModel)]="getMaxHp" class="info" [ngModelOptions]="{standalone: true}"
+                    [readOnly]="true">
+                    Max HP
+                    <input placeholder="Max HP" tuiTextfield />
+                </tui-input-number>
+            </div>
+            <div>
+                <tui-input-number [(ngModel)]="getProfBonus" class="info" [ngModelOptions]="{standalone: true}"
+                    [readOnly]="true">
+                    БМ
+                    <input placeholder="БМ" tuiTextfield />
+                </tui-input-number>
+            </div>
         </div>
-        <div>
-            <tui-input-number [(ngModel)]="getMaxHp" class="info" [ngModelOptions]="{standalone: true}"
-                [readOnly]="true">
-                Max HP
-                <input placeholder="Max HP" tuiTextfield />
-            </tui-input-number>
+        <mat-divider></mat-divider>
+        <div class="container" [formGroup]="hpForm">
+            <div>
+                <tui-input-number formControlName="hp" class="hp" [min]="0" [step]="1">
+                    HP
+                </tui-input-number>
+            </div>
+            <div>
+                <tui-input-number formControlName="addHp" class="hp" [min]="0" [step]="1">
+                    Доп HP
+                </tui-input-number>
+            </div>
         </div>
-        <div>
-            <tui-input-number [(ngModel)]="getProfBonus" class="info" [ngModelOptions]="{standalone: true}"
-                [readOnly]="true">
-                БМ
-                <input placeholder="БМ" tuiTextfield />
-            </tui-input-number>
-        </div>
-    </div>
-    <mat-divider></mat-divider>
-    <div class="container" [formGroup]="hpForm">
-        <div>
-            <tui-input-number formControlName="hp" class="hp" [min]="0" [step]="1">
-                HP
-            </tui-input-number>
-        </div>
-        <div>
-            <tui-input-number formControlName="addHp" class="hp" [min]="0" [step]="1">
-                Доп HP
-            </tui-input-number>
-        </div>
-    </div>
-    <mat-divider></mat-divider>
-    <div tuiGroup class="container">
-        <div>
-            <tui-input-number [(ngModel)]="modificator.strength" class="stat" [ngModelOptions]="{standalone: true}"
-                [readOnly]="true">
-                Сила
-                <input placeholder="Сила" tuiTextfield />
-            </tui-input-number>
-            <div class="descr">
-                <tui-error [error]="'Стат: ' + character()!.characteristics.strength"></tui-error>
-                <tui-error [error]="'Спас: ' + 0"></tui-error>
-                <div class="stat-skill">
-                    <mat-divider></mat-divider>
-                    <div>Атлетика: {{10}}</div>
+        <mat-divider></mat-divider>
+        <div tuiGroup class="container">
+            <div>
+                <tui-input-number [(ngModel)]="modificator.strength" class="stat" [ngModelOptions]="{standalone: true}"
+                    [readOnly]="true">
+                    Сила
+                    <input placeholder="Сила" tuiTextfield />
+                </tui-input-number>
+                <div class="descr">
+                    <tui-error [error]="'Стат: ' + character()!.characteristics.strength"></tui-error>
+                    <tui-error [error]="'Спас: ' + 0"></tui-error>
+                    <div class="stat-skill" [class.none]="!showSkills.value">
+                        <mat-divider></mat-divider>
+                        <div>Атлетика: {{10}}</div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <tui-input-number [(ngModel)]="modificator.dexterity" class="stat" [ngModelOptions]="{standalone: true}"
+                    [readOnly]="true">
+                    Ловкость
+                    <input placeholder="Ловкость" tuiTextfield />
+                </tui-input-number>
+                <div class="descr">
+                    <tui-error [error]="'Стат: ' + character()!.characteristics.dexterity"></tui-error>
+                    <tui-error [error]="'Спас: ' + 0"></tui-error>
+                    <div class="stat-skill" [class.none]="!showSkills.value">
+                        <mat-divider></mat-divider>
+                        <div>Акробатика: {{ 10 }}</div>
+                        <div>Ловкость рук: {{ 10 }}</div>
+                        <div>Скрытность: {{ 10 }}</div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <tui-input-number [(ngModel)]="modificator.constitution" class="stat"
+                    [ngModelOptions]="{standalone: true}" [readOnly]="true">
+                    Телосложение
+                    <input placeholder="Телосложение" tuiTextfield />
+                </tui-input-number>
+                <div class="descr">
+                    <tui-error [error]="'Стат: ' + character()!.characteristics.constitution"></tui-error>
+                    <tui-error [error]="'Спас: ' + 0"></tui-error>
+                    <div class="stat-skill" [class.none]="!showSkills.value">
+                        <mat-divider></mat-divider>
+                    </div>
                 </div>
             </div>
         </div>
-        <div>
-            <tui-input-number [(ngModel)]="modificator.dexterity" class="stat" [ngModelOptions]="{standalone: true}"
-                [readOnly]="true">
-                Ловкость
-                <input placeholder="Ловкость" tuiTextfield />
-            </tui-input-number>
-            <div class="descr">
-                <tui-error [error]="'Стат: ' + character()!.characteristics.dexterity"></tui-error>
-                <tui-error [error]="'Спас: ' + 0"></tui-error>
-                <div class="stat-skill">
-                    <mat-divider></mat-divider>
-                    <div>Акробатика: {{ 10 }}</div>
-                    <div>Ловкость рук: {{ 10 }}</div>
-                    <div>Скрытность: {{ 10 }}</div>
+        <div tuiGroup class="container">
+            <div>
+                <tui-input-number [(ngModel)]="modificator.intelligence" class="stat"
+                    [ngModelOptions]="{standalone: true}" [readOnly]="true">
+                    Интеллект
+                    <input placeholder="Интеллект" tuiTextfield />
+                </tui-input-number>
+                <div class="descr">
+                    <tui-error [error]="'Стат: ' + character()!.characteristics.intelligence"></tui-error>
+                    <tui-error [error]="'Спас: ' + 0"></tui-error>
+                    <div class="stat-skill" [class.none]="!showSkills.value">
+                        <mat-divider></mat-divider>
+                        <div>Анализ: {{ 10 }}</div>
+                        <div>История: {{ 10 }}</div>
+                        <div>Магия: {{ 10 }}</div>
+                        <div>Природа: {{ 10 }}</div>
+                        <div>Религия: {{ 10 }}</div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <tui-input-number [(ngModel)]="modificator.wisdom" class="stat" [ngModelOptions]="{standalone: true}"
+                    [readOnly]="true">
+                    Мудрость
+                    <input placeholder="Мудрость" tuiTextfield />
+                </tui-input-number>
+                <div class="descr">
+                    <tui-error [error]="'Стат: ' + character()!.characteristics.wisdom"></tui-error>
+                    <tui-error [error]="'Спас: ' + 0"></tui-error>
+                    <div class="stat-skill" [class.none]="!showSkills.value">
+                        <mat-divider></mat-divider>
+                        <div>Внимат-сть: {{ 10 }}</div>
+                        <div>Выживание: {{ 10 }}</div>
+                        <div>Медицина: {{ 10 }}</div>
+                        <div>Прониц-сть: {{ 10 }}</div>
+                        <div>Уход за жив: {{ 10 }}</div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <tui-input-number [(ngModel)]="modificator.charisma" class="stat" [ngModelOptions]="{standalone: true}"
+                    [readOnly]="true">
+                    Харизма
+                    <input placeholder="Харизма" tuiTextfield />
+                </tui-input-number>
+                <div class="descr">
+                    <tui-error [error]="'Стат: ' + character()!.characteristics.charisma"></tui-error>
+                    <tui-error [error]="'Спас: ' + 0"></tui-error>
+                    <div class="stat-skill" [class.none]="!showSkills.value">
+                        <mat-divider></mat-divider>
+                        <div>Выступление: {{ 10 }}</div>
+                        <div>Запугивание: {{ 10 }}</div>
+                        <div>Обман: {{ 10 }}</div>
+                        <div>Убеждение: {{ 10 }}</div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div>
-            <tui-input-number [(ngModel)]="modificator.constitution" class="stat" [ngModelOptions]="{standalone: true}"
-                [readOnly]="true">
-                Телосложение
-                <input placeholder="Телосложение" tuiTextfield />
-            </tui-input-number>
-            <div class="descr">
-                <tui-error [error]="'Стат: ' + character()!.characteristics.constitution"></tui-error>
-                <tui-error [error]="'Спас: ' + 0"></tui-error>
-                <div class="stat-skill">
-                    <mat-divider></mat-divider>
-                </div>
+        <mat-divider></mat-divider>
+        <div class="container">
+            <div>
+                <tui-input-number [(ngModel)]="getPerception" class="perception" [readOnly]="true">
+                    Пассивная внимательность
+                    <input placeholder="Пассивная внимательность" tuiTextfield />
+                </tui-input-number>
             </div>
-        </div>
-    </div>
-    <div tuiGroup class="container">
-        <div>
-            <tui-input-number [(ngModel)]="modificator.intelligence" class="stat" [ngModelOptions]="{standalone: true}"
-                [readOnly]="true">
-                Интеллект
-                <input placeholder="Интеллект" tuiTextfield />
-            </tui-input-number>
-            <div class="descr">
-                <tui-error [error]="'Стат: ' + character()!.characteristics.intelligence"></tui-error>
-                <tui-error [error]="'Спас: ' + 0"></tui-error>
-                <div class="stat-skill">
-                    <mat-divider></mat-divider>
-                    <div>Анализ: {{ 10 }}</div>
-                    <div>История: {{ 10 }}</div>
-                    <div>Магия: {{ 10 }}</div>
-                    <div>Природа: {{ 10 }}</div>
-                    <div>Религия: {{ 10 }}</div>
-                </div>
+            <div>
+                <tui-input [(ngModel)]="getView" class="view" [readOnly]="true">
+                    Тип зрения
+                    <input placeholder="Тип зрения" tuiTextfield />
+                </tui-input>
             </div>
-        </div>
-        <div>
-            <tui-input-number [(ngModel)]="modificator.wisdom" class="stat" [ngModelOptions]="{standalone: true}"
-                [readOnly]="true">
-                Мудрость
-                <input placeholder="Мудрость" tuiTextfield />
-            </tui-input-number>
-            <div class="descr">
-                <tui-error [error]="'Стат: ' + character()!.characteristics.wisdom"></tui-error>
-                <tui-error [error]="'Спас: ' + 0"></tui-error>
-                <div class="stat-skill">
-                    <mat-divider></mat-divider>
-                    <div>Внимат-сть: {{ 10 }}</div>
-                    <div>Выживание: {{ 10 }}</div>
-                    <div>Медицина: {{ 10 }}</div>
-                    <div>Прониц-сть: {{ 10 }}</div>
-                    <div>Уход за жив: {{ 10 }}</div>
-                </div>
-            </div>
-        </div>
-        <div>
-            <tui-input-number [(ngModel)]="modificator.charisma" class="stat" [ngModelOptions]="{standalone: true}"
-                [readOnly]="true">
-                Харизма
-                <input placeholder="Харизма" tuiTextfield />
-            </tui-input-number>
-            <div class="descr">
-                <tui-error [error]="'Стат: ' + character()!.characteristics.charisma"></tui-error>
-                <tui-error [error]="'Спас: ' + 0"></tui-error>
-                <div class="stat-skill">
-                    <mat-divider></mat-divider>
-                    <div>Выступление: {{ 10 }}</div>
-                    <div>Запугивание: {{ 10 }}</div>
-                    <div>Обман: {{ 10 }}</div>
-                    <div>Убеждение: {{ 10 }}</div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <mat-divider></mat-divider>
-    <div class="container">
-        <div>
-            <tui-input-number [(ngModel)]="getPerception" class="perception" [readOnly]="true">
-                Пассивная внимательность
-                <input placeholder="Пассивная внимательность" tuiTextfield />
-            </tui-input-number>
-        </div>
-        <div>
-            <tui-input [(ngModel)]="getView" class="view" [readOnly]="true">
-                Тип зрения
-                <input placeholder="Тип зрения" tuiTextfield />
-            </tui-input>
         </div>
     </div>
 </ng-container>

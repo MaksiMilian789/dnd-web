@@ -1,10 +1,12 @@
-import { Component, Inject, Signal } from '@angular/core';
+import { Component, HostListener, Inject, Signal, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { LOCAL_STORAGE } from '@ng-web-apis/common';
 import { TuiDialogService } from '@taiga-ui/core';
 import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
+import { debounceTime, tap } from 'rxjs';
 
 import { Character } from '@core/models/character/character.model';
 import { StatsSkillPipe } from 'src/app/shared/pipes/stats-skill.pipe';
@@ -12,6 +14,8 @@ import { CharacterService } from '@core/services/api/character.service';
 import { Characteristics } from '@core/models/character/characteristics.model';
 import { modificator } from '@shared/utils/modificator';
 import { CharInfoDialogComponent, CharInfoDialogData } from '../char-info-dialog/char-info-dialog.component';
+
+const CLOSE_SIZE = 775;
 
 @Component({
   selector: 'app-character-main',
@@ -26,8 +30,11 @@ export class CharacterMainComponent {
   });
   hpForm: FormGroup;
 
+  protected showSkills: FormControl<boolean>;
+
   constructor(
     @Inject(TuiDialogService) private readonly _dialogs: TuiDialogService,
+    @Inject(LOCAL_STORAGE) private readonly _localStorage: Storage,
     private _characterService: CharacterService,
     private _route: ActivatedRoute,
     private _snackbar: MatSnackBar,
@@ -36,6 +43,35 @@ export class CharacterMainComponent {
     this.hpForm = new FormGroup({
       hp: new FormControl(0, [Validators.required, Validators.min(0)]),
       addHp: new FormControl(0, [Validators.required, Validators.min(0)]),
+    });
+
+    const show = this._localStorage.getItem('show_skills_' + this.charId.toString());
+    if (show) {
+      this.showSkills = new FormControl<boolean>(show == 'true', { nonNullable: true });
+    } else {
+      this.showSkills = new FormControl<boolean>(window.innerHeight > 775, { nonNullable: true });
+    }
+
+    this.character = toSignal(
+      this._characterService.loadCharacter(this.charId).pipe(
+        tap((val) => {
+          this.hpForm.setValue({
+            hp: val.hp,
+            addHp: val.addHp,
+          });
+        }),
+      ),
+      {
+        initialValue: null,
+      },
+    );
+
+    this.hpForm.valueChanges.pipe(debounceTime(500)).subscribe((val) => {
+      this._characterService.editCharacterHp(this.charId, val.hp, val.addHp).subscribe();
+    });
+
+    this.showSkills.valueChanges.subscribe((val) => {
+      this._localStorage.setItem('show_skills_' + this.charId.toString(), val.toString());
     });
   }
 

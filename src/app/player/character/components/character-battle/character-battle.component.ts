@@ -3,8 +3,10 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { LOCAL_STORAGE } from '@ng-web-apis/common';
 import { TuiDialogService } from '@taiga-ui/core';
 import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
+import { debounceTime, tap } from 'rxjs';
 
 import { Character } from '@core/models/character/character.model';
 import { StatsSkillPipe } from 'src/app/shared/pipes/stats-skill.pipe';
@@ -21,25 +23,79 @@ import { CharInfoDialogComponent, CharInfoDialogData } from '../char-info-dialog
 })
 export class CharacterBattleComponent {
   charId: number = Number(this._route.snapshot.paramMap.get('characterId'));
-  character: Signal<Character | null> = toSignal(this._characterService.loadCharacter(this.charId), {
-    initialValue: null,
-  });
+  character: Signal<Character | null>;
   hpForm: FormGroup;
 
-  concentration: boolean = false;
+  concentration: FormControl<boolean>;
+  protected showEnergy: FormControl<boolean>;
+  protected showSpellSlots: FormControl<boolean>;
+  protected showConditions: FormControl<boolean>;
 
   constructor(
     @Inject(TuiDialogService) private readonly _dialogs: TuiDialogService,
+    @Inject(LOCAL_STORAGE) private readonly _localStorage: Storage,
     private _characterService: CharacterService,
     private _route: ActivatedRoute,
     private _snackbar: MatSnackBar,
     public pipe: StatsSkillPipe,
   ) {
+    const conc = this._localStorage.getItem('concentration_' + this.charId.toString());
+    this.concentration = new FormControl<boolean>(conc == 'true', { nonNullable: true });
+
     this.hpForm = new FormGroup({
       hp: new FormControl(0, [Validators.required, Validators.min(0)]),
       addHp: new FormControl(0, [Validators.required, Validators.min(0)]),
     });
+
+    const showEnergy = this._localStorage.getItem('show_energy_' + this.charId.toString());
+    this.showEnergy = new FormControl<boolean>(showEnergy == 'true', { nonNullable: true });
+
+    const showSpellSlots = this._localStorage.getItem('show_spell_slots_' + this.charId.toString());
+    this.showSpellSlots = new FormControl<boolean>(showSpellSlots == 'true', { nonNullable: true });
+
+    const showConditions = this._localStorage.getItem('show_conditions_' + this.charId.toString());
+    if (showConditions) {
+      this.showConditions = new FormControl<boolean>(showConditions == 'true', { nonNullable: true });
+    } else {
+      this.showConditions = new FormControl<boolean>(window.innerHeight > 775, { nonNullable: true });
+    }
+
+    this.character = toSignal(
+      this._characterService.loadCharacter(this.charId).pipe(
+        tap((val) => {
+          this.hpForm.setValue({
+            hp: val.hp,
+            addHp: val.addHp,
+          });
+        }),
+      ),
+      {
+        initialValue: null,
+      },
+    );
+
+    this.hpForm.valueChanges.pipe(debounceTime(500)).subscribe((val) => {
+      this._characterService.editCharacterHp(this.charId, val.hp, val.addHp).subscribe();
+    });
+
+    this.concentration.valueChanges.subscribe((val) => {
+      this._localStorage.setItem('concentration_' + this.charId.toString(), val.toString());
+    });
+
+    this.showEnergy.valueChanges.subscribe((val) => {
+      this._localStorage.setItem('show_energy_' + this.charId.toString(), val.toString());
+    });
+
+    this.showSpellSlots.valueChanges.subscribe((val) => {
+      this._localStorage.setItem('show_spell_slots_' + this.charId.toString(), val.toString());
+    });
+
+    this.showConditions.valueChanges.subscribe((val) => {
+      this._localStorage.setItem('show_conditions_' + this.charId.toString(), val.toString());
+    });
   }
+
+  toggleConcentration(): void {}
 
   charInfo(): void {
     const data: CharInfoDialogData = {

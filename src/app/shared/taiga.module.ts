@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { TuiElementModule, TuiLetModule } from '@taiga-ui/cdk';
+import { TuiActiveZoneModule, TuiElementModule, TuiLetModule } from '@taiga-ui/cdk';
 import {
   TuiScrollbarModule,
   TuiLoaderModule,
@@ -13,8 +13,10 @@ import {
   TuiErrorModule,
   TuiPrimitiveTextfieldModule,
   TuiTooltipModule,
+  TuiHostedDropdownModule,
 } from '@taiga-ui/core';
 import {
+  TuiAccordionModule,
   TuiCheckboxBlockModule,
   TuiCheckboxLabeledModule,
   TuiDataListDropdownManagerModule,
@@ -57,7 +59,10 @@ import {
     TuiTextareaModule,
     TuiInputSliderModule,
     TuiTooltipModule,
-    TuiCheckboxBlockModule
+    TuiCheckboxBlockModule,
+    TuiHostedDropdownModule,
+    TuiActiveZoneModule,
+    TuiAccordionModule
   ],
 })
 export class TaigaModule {}

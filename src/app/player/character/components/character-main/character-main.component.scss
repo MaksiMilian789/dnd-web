@@ -59,10 +59,6 @@
 }
 
 @media screen and (max-height: 775px) {
-  .stat-skill {
-    display: none;
-  }
-
   .container {
     margin-top: 20px;
     margin-bottom: 20px;
@@ -85,4 +81,22 @@
 
 .block {
   display: block;
+}
+
+.none {
+  display: none;
+}
+
+.menu {
+  width: 150px;
+}
+
+.overflow-container {
+  overflow: auto;
+  height: calc(100vh - 130px);
+}
+
+.checkbox-menu {
+  margin-top: 5px;
+  margin-bottom: 2px;
 }
