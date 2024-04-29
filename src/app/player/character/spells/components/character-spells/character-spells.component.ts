@@ -72,7 +72,7 @@ export class CharacterSpellsComponent {
       .open(AddSpellDialogComponent, {
         data: {
           charId: this.character()?.id,
-          actualItems: this.dataSource.data,
+          actualSpells: this.dataSource.data,
         },
         width: '80%',
       })

@@ -1,56 +1,81 @@
-import { Component, Inject } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { Component, Inject, Signal, ViewChild } from '@angular/core';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 import { ActivatedRoute } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { TuiDialogContext } from '@taiga-ui/core';
+import { POLYMORPHEUS_CONTEXT } from '@tinkoff/ng-polymorpheus';
 
-import { Skill } from '@core/models';
+import { Character, Skill } from '@core/models';
+import { CharacterService } from '@core/services/api/character.service';
+import { FormControl } from '@angular/forms';
+
+export interface AddSkillDialogComponentData {
+  character: Character;
+}
 
 @Component({
   selector: 'app-add-skill-dialog',
   templateUrl: './add-skill-dialog.component.html',
   styleUrls: ['./add-skill-dialog.component.scss'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({ height: '0px', minHeight: '0', display: 'none' })),
+      state('expanded', style({ height: '*' })),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 export class AddSkillDialogComponent {
-  addForm: FormGroup;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
-  //skills$: Observable<Skill[]>;
+  charId: number = Number(this._route.snapshot.paramMap.get('characterId'));
 
-  description: string = 'Описание выбранного умения';
+  dataSource!: MatTableDataSource<Skill>;
+  columnsToDisplay = ['name', 'type', 'actions'];
+  expandedElement!: Skill;
+
+  filter: string = '';
+  hidden: FormControl<boolean> = new FormControl<boolean>(false, { nonNullable: true });
+
+  allData: Skill[] = [];
 
   constructor(
-    private _dialogRef: MatDialogRef<AddSkillDialogComponent>,
-    //private _http: HttpService,
+    @Inject(POLYMORPHEUS_CONTEXT)
+    protected readonly context: TuiDialogContext<boolean, AddSkillDialogComponentData>,
+    private _characterService: CharacterService,
     private _snackbar: MatSnackBar,
     private _route: ActivatedRoute,
-    @Inject(MAT_DIALOG_DATA)
-    public data: { charId: number; actualSkills: Skill[] }
   ) {
-    this.addForm = new FormGroup({
-      skill: new FormControl('', Validators.required),
+    _characterService.getSkills().subscribe((val) => {
+      this.allData = val;
+      this.setData();
     });
 
-    /*this.skills$ = this._http
-      .getSkills()
-      .pipe(map((res) => res.filter((val) => this.filterItems(val))));*/
+    this.hidden.valueChanges.subscribe(() => this.setData());
   }
 
-  filterItems(val: Skill): boolean {
-    return this.data.actualSkills.find((x) => x.id == val.id) == undefined;
+  applyTextFilter(): void {
+    this.dataSource.filter = this.filter.trim().toLowerCase();
   }
 
-  add() {
-    /*this._http
-      .addCharacterSkill(this.data.charId, this.addForm.value.skill)
-      .subscribe({
-        complete: () => {
-          this._snackbar.open('Добавление успешно.');
-        },
-      });*/
-    this._dialogRef.close(true);
+  setData(): void {
+    let data = this.allData.filter((val) => val.hidden == this.hidden.value);
+    this.dataSource = new MatTableDataSource(data);
+    this.paginator._intl.itemsPerPageLabel = 'Способностей на страницу';
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
 
-  changeDescription(description: string): void {
-    this.description = description;
+  add(skillId: number) {
+    this._characterService.addCharacterSkill(this.context.data.character.id!, skillId).subscribe({
+      complete: () => {
+        this._snackbar.open('Добавление успешно.');
+      },
+    });
+    this.context.completeWith(true);
   }
 }

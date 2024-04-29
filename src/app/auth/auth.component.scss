@@ -7,12 +7,13 @@
 .container {
   flex: 1 1 auto;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
 .login-island {
-  width: 350px;
+  width: 330px;
 
   .remember-me-checkbox {
     text-align: start;
@@ -22,4 +23,8 @@
     display: flex;
     margin-top: 24px;
   }
+}
+
+.pwa-button {
+  margin-top: 10px;
 }

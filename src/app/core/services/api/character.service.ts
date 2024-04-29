@@ -13,6 +13,7 @@ import {
   Race,
   RaceCreate,
   ShortCharacter,
+  Skill,
 } from '@core/models';
 
 @Injectable({
@@ -73,12 +74,28 @@ export class CharacterService {
     return this._http.post<void>(`${this._baseUrl}/background`, { background: req });
   }
 
-  public editCharacterHp(id: number, hp: number, addHp: number): Observable<void> {
-    var params = new HttpParams().append('id', id);
+  public editCharacterHp(charId: number, hp: number, addHp: number): Observable<void> {
+    var params = new HttpParams().append('id', charId);
     params = params.append('hp', hp);
     params = params.append('addHp', addHp);
     return this._http.put<void>(
       `${this._baseUrl}/hp`,
+      {},
+      {
+        params: params,
+      },
+    );
+  }
+
+  public getSkills(): Observable<Skill[]> {
+    return this._http.get<Skill[]>(`${this._baseUrl}/getSkills`, {});
+  }
+
+  public addCharacterSkill(charId: number, skillId: number): Observable<void> {
+    var params = new HttpParams().append('id', charId);
+    params = params.append('skillId', skillId);
+    return this._http.put<void>(
+      `${this._baseUrl}/addSkill`,
       {},
       {
         params: params,
@@ -127,18 +144,6 @@ export class CharacterService {
     return this._http.delete<void>(`${this._baseUrl}/deleteCharacterSpell`, {
       body: { charId: charId, spellId: id },
     });
-  }
-
-  public getSkills(): Observable<Skill[]> {
-    return this._http.get<Skill[]>(`${this._baseUrl}/listSkills`, {});
-  }
-
-  public addCharacterSkill(charId: number, skillId: number): Observable<void> {
-    return this._http.post<void>(
-      `${this._baseUrl}/addCharacterSkill`,
-      { charId: charId, skillId: skillId },
-      {}
-    );
   }
 
   public deleteCharacterSkill(charId: number, id: number): Observable<void> {

@@ -13,5 +13,6 @@ export interface Skill {
   passive: boolean;
   recharge: number;
   charges: number;
+  hidden: boolean;
   system: System;
 }
