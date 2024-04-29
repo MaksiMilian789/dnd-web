@@ -3,10 +3,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, map } from 'rxjs';
 
-import { Inventory } from 'src/app/core/models/inventory.model';
-import { Item } from 'src/app/core/models/item.model';
+import { Inventory } from '@core/models/character/inventory.model';
 import { CharacterService } from '@core/services/api/character.service';
 
 @Component({
@@ -38,11 +36,11 @@ export class AddItemDialogComponent {
       .pipe(map((res) => res.filter((val) => this.filterItems(val))));*/
   }
 
-  filterItems(val: Item): boolean {
+  /*filterItems(val: Inventory): boolean {
     return (
       this.data.actualItems.find((x) => x.objectId == val.id) == undefined
     );
-  }
+  }*/
 
   add() {
     /*this._http

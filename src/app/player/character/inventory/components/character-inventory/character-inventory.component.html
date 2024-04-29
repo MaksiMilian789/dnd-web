@@ -16,13 +16,13 @@
         <td mat-cell *matCellDef="let element"> {{element.name}} </td>
       </ng-container>
 
-      <ng-container matColumnDef="description">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Описание </th>
-        <td mat-cell *matCellDef="let element"> {{element.description.substring(0, 25)}}... </td>
+      <ng-container matColumnDef="quantity">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Количество </th>
+        <td mat-cell *matCellDef="let element"> {{element.quantity ?? 0}}... </td>
       </ng-container>
 
       <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Действия </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
         <td mat-cell *matCellDef="let element"> <button mat-icon-button
             (click)="deleteItem(element.id); $event.stopPropagation();"><mat-icon>delete</mat-icon></button></td>
       </ng-container>
@@ -46,7 +46,7 @@
 
       <tr class="mat-row center" *matNoDataRow>
         <td class="mat-cell no-data mat-hint" colspan="3">Нет предметов</td>
-    </tr>
+      </tr>
     </table>
   </div>
   <div class="containerBottom">

@@ -1,20 +1,18 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
+import { Component, Signal, ViewChild } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ActivatedRoute } from '@angular/router';
 import { MatSort } from '@angular/material/sort';
-
-import { Spell } from 'src/app/core/models/spell.model';
-import { AddSpellDialogComponent } from '../add-spell-dialog/add-spell-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
+import { Subject, tap } from 'rxjs';
+
+import { Character, Spell } from '@core/models';
+import { CharacterService } from '@core/services/api/character.service';
+import { combineReload } from '@shared/utils/rxjs';
+import { AddSpellDialogComponent } from '../add-spell-dialog/add-spell-dialog.component';
 
 @Component({
   selector: 'app-character-spells',
@@ -22,74 +20,68 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./character-spells.component.scss'],
   animations: [
     trigger('detailExpand', [
-      state(
-        'collapsed',
-        style({ height: '0px', minHeight: '0', display: 'none' })
-      ),
+      state('collapsed', style({ height: '0px', minHeight: '0', display: 'none' })),
       state('expanded', style({ height: '*' })),
-      transition(
-        'expanded <=> collapsed',
-        animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')
-      ),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
   ],
 })
-export class CharacterSpellsComponent implements AfterViewInit {
+export class CharacterSpellsComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+
+  charId: number = Number(this._route.snapshot.paramMap.get('characterId'));
+  character: Signal<Character | null>;
 
   dataSource!: MatTableDataSource<Spell>;
   columnsToDisplay = ['name', 'level', 'actions'];
   expandedElement!: Spell;
 
+  private readonly _refresh$ = new Subject<void>();
+
   constructor(
-    //private _http: HttpService,
+    private _characterService: CharacterService,
     private _route: ActivatedRoute,
     private _dialog: MatDialog,
-    private _snackbar: MatSnackBar
-  ) {}
-
-  ngAfterViewInit(): void {
-    this.loadData();
+    private _snackbar: MatSnackBar,
+  ) {
+    this.character = toSignal(
+      combineReload(
+        this._characterService.loadCharacter(this.charId).pipe(tap((val) => this.setData(val))),
+        this._refresh$,
+      ),
+      {
+        initialValue: null,
+      },
+    );
   }
 
-  loadData(): void {
-    /*this._http
-      .getCharacterSpells(
-        Number(this._route.snapshot.paramMap.get('characterId'))
-      )
-      .subscribe((data) => {
-        this.dataSource = new MatTableDataSource(data);
-        this.paginator._intl.itemsPerPageLabel = '';
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
-      });*/
+  setData(character: Character): void {
+    this.dataSource = new MatTableDataSource(character.spellInstance ?? []);
+    this.paginator._intl.itemsPerPageLabel = 'Заклинаний на страницу';
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
 
   addItem(): void {
     this._dialog
       .open(AddSpellDialogComponent, {
         data: {
-          charId: Number(this._route.snapshot.paramMap.get('characterId')),
-          actualSpells: this.dataSource.data,
+          charId: this.character()?.id,
+          actualItems: this.dataSource.data,
         },
         width: '80%',
       })
       .afterClosed()
-      .subscribe(() => this.loadData());
+      .subscribe(() => this._refresh$.next());
   }
 
   deleteItem(id: number): void {
-    /*this._http
-      .deleteCharacterSpell(
-        Number(this._route.snapshot.paramMap.get('characterId')),
-        id
-      )
-      .subscribe({
-        complete: () => {
-          this._snackbar.open('Удаление успешно.');
-          this.loadData();
-        },
-      });*/
+    /*this._http.deleteCharacterItem(id).subscribe({
+      complete: () => {
+        this._snackbar.open('Удаление успешно.');
+        this.loadData();
+      },
+    });*/
   }
 }

@@ -22,7 +22,7 @@
         </ng-container>
   
         <ng-container matColumnDef="actions">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Действия </th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
           <td mat-cell *matCellDef="let element"> <button mat-icon-button
               (click)="deleteItem(element.id); $event.stopPropagation();"><mat-icon>delete</mat-icon></button></td>
         </ng-container>
@@ -45,7 +45,7 @@
         <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
   
         <tr class="mat-row center" *matNoDataRow>
-          <td class="mat-cell no-data mat-hint" colspan="3">Нет предметов</td>
+          <td class="mat-cell no-data mat-hint" colspan="3">Нет заклинаний</td>
       </tr>
       </table>
     </div>

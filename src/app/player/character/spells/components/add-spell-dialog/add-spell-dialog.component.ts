@@ -3,9 +3,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, map } from 'rxjs';
-import { Item } from 'src/app/core/models/item.model';
-import { Spell } from 'src/app/core/models/spell.model';
+import { Spell } from '@core/models';
+
 
 @Component({
   selector: 'app-add-spell-dialog',
@@ -36,7 +35,7 @@ export class AddSpellDialogComponent {
       .pipe(map((res) => res.filter((val) => this.filterItems(val))));*/
   }
 
-  filterItems(val: Item): boolean {
+  filterItems(val: Spell): boolean {
     return this.data.actualSpells.find((x) => x.id == val.id) == undefined;
   }
 

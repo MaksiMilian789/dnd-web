@@ -24,12 +24,19 @@ tr.element-row:not(.expanded-row):active {
   display: flex;
 }
 
-.mat-column-actions {
-  width: 15%;
+.mat-column-name {
+  min-width: 30vw;
+  width: 40vw;
 }
 
-.mat-column-name {
-  width: 55%;
+.mat-column-level {
+  min-width: 15vw;
+  width: 30vw;
+}
+
+.mat-column-actions {
+  min-width: 40px;
+  width: 10vw;
 }
 
 .element-diagram {

@@ -5,7 +5,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 
 import { Skill } from '@core/models';
-import { Item } from 'src/app/core/models/item.model';
 
 @Component({
   selector: 'app-add-skill-dialog',
@@ -36,7 +35,7 @@ export class AddSkillDialogComponent {
       .pipe(map((res) => res.filter((val) => this.filterItems(val))));*/
   }
 
-  filterItems(val: Item): boolean {
+  filterItems(val: Skill): boolean {
     return this.data.actualSkills.find((x) => x.id == val.id) == undefined;
   }
 

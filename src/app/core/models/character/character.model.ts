@@ -5,6 +5,11 @@ import { Background } from "./backgrounds/background.model";
 import { Class } from "./classes/class.model";
 import { SpellSlot } from "./spells/spell-slot.model";
 import { EnergySlot } from "./energy-slot.model";
+import { Condition } from "../condition.model";
+import { Inventory } from "./inventory.model";
+import { Note } from "./note.model";
+import { Skill } from "./skills/skill.model";
+import { Spell } from "./spells/spell.model";
 
 export interface ShortCharacter {
   id?: number;
@@ -26,6 +31,11 @@ export interface Character extends ShortCharacter {
   raceInstance: Race;
   backgroundInstance: Background;
   classInstance: Class;
+  conditions: Condition[];
+  skillInstance: Skill[];
+  objectInstance: Inventory[];
+  spellInstance: Spell[];
+  note: Note[];  
 }
 
 export interface CharacterWithId extends ShortCharacter {
