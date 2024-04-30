@@ -33,7 +33,6 @@ export class RegistrationComponent {
     if (this.form.value.password != this.form.value.passwordRepeat) {
       this._snackbar.open('Введённые пароли не совпадают');
     } else {
-      // Проверка в базе по Http
       this._registration.registration(
         this.form.value.login,
         this.form.value.password

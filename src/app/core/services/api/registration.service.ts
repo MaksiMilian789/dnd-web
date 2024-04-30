@@ -1,9 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-
 import { Observable, Subject } from 'rxjs';
+
+import { APP_CONFIG, AppConfig } from '@core/config';
 
 @Injectable({
   providedIn: 'root',
@@ -11,13 +12,16 @@ import { Observable, Subject } from 'rxjs';
 export class RegistrationService {
   registrationMessage: Subject<boolean> = new Subject<boolean>();
 
-  _baseUrl: string = 'http://localhost:8081';
+  _baseUrl: string;
 
   constructor(
+    private readonly http: HttpClient,
     private _router: Router,
     private _snackbar: MatSnackBar,
-    private _http: HttpClient
-  ) {}
+    @Inject(APP_CONFIG) config: AppConfig,
+  ) {
+    this._baseUrl = `${config.api}/api/auth`;
+  }
 
   registration(login: string, password: string): void {
     this.httpReg(login, password).subscribe({
@@ -34,18 +38,13 @@ export class RegistrationService {
   }
 
   httpReg(login: string, password: string): Observable<void> {
-    let headers = new HttpHeaders({
-      'Access-Control-Allow-Origin': '*'
-    });
-    return this._http.post<void>(
+    return this.http.post<void>(
       `${this._baseUrl}/registration`,
       {
         login: login,
         password: password,
       },
-      {
-        headers: headers,
-      }
+      {},
     );
   }
 }
