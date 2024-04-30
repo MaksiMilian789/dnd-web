@@ -22,9 +22,9 @@
           <td mat-cell *matCellDef="let element"> {{element.name}} </td>
         </ng-container>
   
-        <ng-container matColumnDef="quantity">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Количество </th>
-          <td mat-cell *matCellDef="let element"> {{element.quantity ?? 0}}... </td>
+        <ng-container matColumnDef="attachment">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Настройка </th>
+          <td mat-cell *matCellDef="let element"> {{element.attachment}}... </td>
         </ng-container>
   
         <ng-container matColumnDef="actions">

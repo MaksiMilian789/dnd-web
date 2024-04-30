@@ -46,6 +46,8 @@ export class CharacterInventoryComponent {
     private _route: ActivatedRoute,
     private _snackbar: MatSnackBar,
   ) {
+    //TODO: вывести количество настрое и сколько занято, а также возможность настройки
+
     this.character = toSignal(
       this._refresh$.pipe(
         switchMap(() => this._characterService.loadCharacter(this.charId)),
@@ -58,7 +60,7 @@ export class CharacterInventoryComponent {
     this.refresh();
   }
 
-  refresh(): void{    
+  refresh(): void {
     this._refresh$.next();
   }
 
@@ -82,9 +84,9 @@ export class CharacterInventoryComponent {
       })
       .subscribe({
         complete: () => {
-            this.refresh();
+          this.refresh();
         },
-    });
+      });
   }
 
   deleteItem(id: number): void {

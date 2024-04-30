@@ -33,7 +33,7 @@ export class AddItemDialogComponent {
   @ViewChild(MatSort) sort!: MatSort;
 
   dataSource!: MatTableDataSource<Inventory>;
-  columnsToDisplay = ['name', 'quantity', 'actions'];
+  columnsToDisplay = ['name', 'attachment', 'actions'];
   expandedElement!: Inventory;
 
   filter: string = '';

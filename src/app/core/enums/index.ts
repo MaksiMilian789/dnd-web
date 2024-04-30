@@ -5,3 +5,6 @@ export * from './skill-type.enum';
 export * from './system.enum';
 export * from './role.enum';
 export * from './attack-type.enum';
+export * from './rare.enum';
+export * from './item-type.enum';
+export * from './characteristics.enum';
