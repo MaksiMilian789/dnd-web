@@ -19,60 +19,41 @@ import {
 @Injectable({
   providedIn: 'root',
 })
-export class CharacterService {
+export class WorkshopService {
   _baseUrl: string;
 
   constructor(
     private _http: HttpClient,
     @Inject(APP_CONFIG) config: AppConfig,
   ) {
-    this._baseUrl = `${config.api}/api/character`;
+    this._baseUrl = `${config.api}/api/workshop`;
+  }
+  public getClasses(): Observable<Class[]> {
+    return this._http.get<Class[]>(`${this._baseUrl}/getClasses`, {});
   }
 
-  public loadShortCharacters(id: number): Observable<ShortCharacter[]> {
-    var params = new HttpParams().append('id', id);
-    return this._http.get<ShortCharacter[]>(`${this._baseUrl}/getListCharacters`, {
-      params: params,
-    });
+  public createClass(req: ClassCreate): Observable<void> {
+    return this._http.post<void>(`${this._baseUrl}/class`, { classs: req });
   }
 
-  public loadCharacter(id: number): Observable<Character> {
-    var params = new HttpParams().append('id', id);
-    return this._http.get<Character>(`${this._baseUrl}`, {
-      params: params,
-    });
+  public getRaces(): Observable<Race[]> {
+    return this._http.get<Race[]>(`${this._baseUrl}/getRaces`, {});
   }
 
-  public createCharacter(character: CharacterWithId, id: number): Observable<void> {
-    var params = new HttpParams().append('userId', id);
-    return this._http.post<void>(`${this._baseUrl}`, character, {
-      params: params,
-    });
-  }
-  
-  public editCharacterHp(charId: number, hp: number, addHp: number): Observable<void> {
-    var params = new HttpParams().append('id', charId);
-    params = params.append('hp', hp);
-    params = params.append('addHp', addHp);
-    return this._http.put<void>(
-      `${this._baseUrl}/hp`,
-      {},
-      {
-        params: params,
-      },
-    );
+  public createRace(req: RaceCreate): Observable<void> {
+    return this._http.post<void>(`${this._baseUrl}/race`, { race: req });
   }
 
-  public addCharacterSkill(charId: number, skillId: number): Observable<void> {
-    var params = new HttpParams().append('id', charId);
-    params = params.append('skillId', skillId);
-    return this._http.put<void>(
-      `${this._baseUrl}/addSkill`,
-      {},
-      {
-        params: params,
-      },
-    );
+  public getBackgrounds(): Observable<Background[]> {
+    return this._http.get<Background[]>(`${this._baseUrl}/getBackgrounds`, {});
+  }
+
+  public createBackground(req: BackgroundCreate): Observable<void> {
+    return this._http.post<void>(`${this._baseUrl}/background`, { background: req });
+  }
+
+  public getSkills(): Observable<Skill[]> {
+    return this._http.get<Skill[]>(`${this._baseUrl}/getSkills`, {});
   }
 
   /*public deleteCharacters(ids: number[]): Observable<void> {

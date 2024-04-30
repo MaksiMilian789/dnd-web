@@ -11,6 +11,7 @@ import { POLYMORPHEUS_CONTEXT } from '@tinkoff/ng-polymorpheus';
 import { Character, Skill } from '@core/models';
 import { CharacterService } from '@core/services/api/character.service';
 import { FormControl } from '@angular/forms';
+import { WorkshopService } from '@core/services/api/workshop.service';
 
 export interface AddSkillDialogComponentData {
   character: Character;
@@ -45,10 +46,11 @@ export class AddSkillDialogComponent {
     @Inject(POLYMORPHEUS_CONTEXT)
     protected readonly context: TuiDialogContext<boolean, AddSkillDialogComponentData>,
     private _characterService: CharacterService,
+    private _workshopService: WorkshopService,
     private _snackbar: MatSnackBar,
     private _route: ActivatedRoute,
   ) {
-    _characterService.getSkills().subscribe((val) => {
+    _workshopService.getSkills().subscribe((val) => {
       this.allData = val;
       this.setData();
     });

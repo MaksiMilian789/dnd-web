@@ -14,6 +14,7 @@ import { Characteristics } from '@core/models/character/characteristics.model';
 import { AuthService } from '@core/services/auth/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { WorkshopService } from '@core/services/api/workshop.service';
 
 @Component({
   selector: 'app-create-character',
@@ -42,6 +43,7 @@ export class CreateCharacterComponent {
   protected classDescription: string = '';
 
   constructor(
+    private _workshopService: WorkshopService,
     private _characterService: CharacterService,
     private _auth: AuthService,
     private _snackbar: MatSnackBar,
@@ -64,9 +66,9 @@ export class CreateCharacterComponent {
       class: new FormControl(null, { validators: Validators.required }),
     });
 
-    this.backgrounds = toSignal(this._characterService.getBackgrounds(), { initialValue: [] });
-    this.races = toSignal(this._characterService.getRaces(), { initialValue: [] });
-    this.classes = toSignal(this._characterService.getClasses(), { initialValue: [] });
+    this.backgrounds = toSignal(this._workshopService.getBackgrounds(), { initialValue: [] });
+    this.races = toSignal(this._workshopService.getRaces(), { initialValue: [] });
+    this.classes = toSignal(this._workshopService.getClasses(), { initialValue: [] });
 
     this.form2.valueChanges.subscribe((val) => {
       if (val.race) {
