@@ -23,6 +23,7 @@ import { environment } from '../environments/environment';
 import { RegistrationComponent } from './registration/registration.component';
 import { PlayerModule } from './player/player.module';
 import { MasterModule } from './master/master.module';
+import { WorkshopModule } from './workshop/workshop.module';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { MasterModule } from './master/master.module';
     SharedModule,
     PlayerModule,
     MasterModule,
+    WorkshopModule,
 
     TuiRootModule,
     TuiDialogModule,

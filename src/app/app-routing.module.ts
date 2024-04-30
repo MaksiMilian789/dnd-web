@@ -7,6 +7,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { authGuard } from './auth/auth.guard';
 import { MASTER_ROUTES } from './master/master.routes';
 import { PLAYER_ROUTES } from './player/player.routes';
+import { WORKSHOP_ROUTES } from './workshop/workshop.routes';
 
 const routes: Routes = [
   {
@@ -24,6 +25,7 @@ const routes: Routes = [
   },
   ...PLAYER_ROUTES,
   ...MASTER_ROUTES,
+  ...WORKSHOP_ROUTES,
   {
     path: '**',
     redirectTo: '/',

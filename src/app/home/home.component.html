@@ -21,6 +21,10 @@
             Мастер
         </a>
         <br>
+        <a mat-raised-button [routerLink]="['workshop']" class="workshop home-button ">
+            Мастерская
+        </a>
+        <br>
         @if (pwa.showInstallPromotion) {
         <button tuiButton (click)="pwa.addToHomeScreen()" class="pwa-button" size="s" appearance="outline">Добавить на домашний
             экран</button>

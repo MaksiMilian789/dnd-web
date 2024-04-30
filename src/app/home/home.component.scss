@@ -31,18 +31,18 @@
   }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 500px) {
   .container {
     animation: appearMobile 1s ease;
-    background-size: 150px, 170px;
+    background-size: 130px, 150px;
   }
 
   .container:has(.player:hover, .player:active) {
-    background-size: 180px, 140px;
+    background-size: 160px, 120px;
   }
 
   .container:has(.master:hover, .master:active) {
-    background-size: 120px, 200px;
+    background-size: 100px, 180px;
   }
 
   .logo-name {
@@ -55,7 +55,7 @@
     background-size: 0px, 0px;
   }
   100% {
-    background-size: 150px, 170px;
+    background-size: 120px, 150px;
   }
 }
 
