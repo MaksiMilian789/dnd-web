@@ -6,7 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { LOCAL_STORAGE } from '@ng-web-apis/common';
 import { TuiDialogService } from '@taiga-ui/core';
 import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
-import { debounceTime, tap } from 'rxjs';
+import { Subject, debounceTime, switchMap, tap } from 'rxjs';
 
 import { Character } from '@core/models/character/character.model';
 import { StatsSkillPipe } from 'src/app/shared/pipes/stats-skill.pipe';
@@ -14,6 +14,7 @@ import { CharacterService } from '@core/services/api/character.service';
 import { Characteristics } from '@core/models/character/characteristics.model';
 import { modificator } from '@shared/utils/modificator';
 import { CharInfoDialogComponent, CharInfoDialogData } from '../char-info-dialog/char-info-dialog.component';
+import { AddConditionDialogComponent, AddConditionDialogComponentData } from '../../conditions/components/add-condition-dialog/add-condition-dialog.component';
 
 @Component({
   selector: 'app-character-battle',
@@ -30,6 +31,9 @@ export class CharacterBattleComponent {
   protected showEnergy: FormControl<boolean>;
   protected showSpellSlots: FormControl<boolean>;
   protected showConditions: FormControl<boolean>;
+  protected openConditions: boolean = false;
+
+  private readonly _refresh$ = new Subject<void>();
 
   constructor(
     @Inject(TuiDialogService) private readonly _dialogs: TuiDialogService,
@@ -61,7 +65,8 @@ export class CharacterBattleComponent {
     }
 
     this.character = toSignal(
-      this._characterService.loadCharacter(this.charId).pipe(
+      this._refresh$.pipe(
+        switchMap(() => this._characterService.loadCharacter(this.charId)),
         tap((val) => {
           this.hpForm.setValue({
             hp: val.hp,
@@ -93,6 +98,12 @@ export class CharacterBattleComponent {
     this.showConditions.valueChanges.subscribe((val) => {
       this._localStorage.setItem('show_conditions_' + this.charId.toString(), val.toString());
     });
+
+    this.refresh();
+  }
+
+  refresh(): void {
+    this._refresh$.next();
   }
 
   toggleConcentration(): void {}
@@ -110,6 +121,24 @@ export class CharacterBattleComponent {
         dismissible: true,
       })
       .subscribe();
+  }
+
+  addCondition(): void {
+    const data: AddConditionDialogComponentData = {
+      character: this.character()!,
+    };
+
+    this._dialogs
+      .open<boolean>(new PolymorpheusComponent(AddConditionDialogComponent), {
+        data: data,
+        size: 'page',
+        closeable: true,
+      })
+      .subscribe({
+        complete: () => {
+          this.refresh();
+        },
+      });
   }
 
   get modificator(): Characteristics {

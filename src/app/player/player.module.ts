@@ -15,6 +15,7 @@ import { CreateCharacterComponent } from './character/components/create-characte
 import { CharacteristicsDialogComponent } from './character/components/characteristics-dialog/characteristics-dialog.component';
 import { CharInfoDialogComponent } from './character/components/char-info-dialog/char-info-dialog.component';
 import { CharacterBattleComponent } from './character/components/character-battle/character-battle.component';
+import { AddConditionDialogComponent } from './character/conditions/components/add-condition-dialog/add-condition-dialog.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { CharacterBattleComponent } from './character/components/character-battl
     CreateCharacterComponent,
     CharacteristicsDialogComponent,    
     CharInfoDialogComponent,    
-    CharacterBattleComponent
+    CharacterBattleComponent,
+    AddConditionDialogComponent
   ],
   imports: [
     SharedModule,

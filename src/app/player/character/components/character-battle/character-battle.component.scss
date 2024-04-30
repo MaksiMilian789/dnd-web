@@ -122,3 +122,19 @@
   margin-top: 5px;
   margin-bottom: 2px;
 }
+
+.accordion {
+  width: calc(90vw - 50px);
+}
+
+.full {
+  width: calc(94vw);
+}
+
+.horizontal-overflow {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+}

@@ -75,6 +75,18 @@ export class CharacterService {
     );
   }
 
+  public addCharacterCondition(charId: number, conditionId: number): Observable<void> {
+    var params = new HttpParams().append('id', charId);
+    params = params.append('conditionId', conditionId);
+    return this._http.put<void>(
+      `${this._baseUrl}/addCondition`,
+      {},
+      {
+        params: params,
+      },
+    );
+  }
+
   /*public deleteCharacters(ids: number[]): Observable<void> {
     return this._http.delete<void>(`${this._baseUrl}/deleteCharacter`, {
       body: { id: ids },

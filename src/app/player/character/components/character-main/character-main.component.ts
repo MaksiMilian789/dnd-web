@@ -6,7 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { LOCAL_STORAGE } from '@ng-web-apis/common';
 import { TuiDialogService } from '@taiga-ui/core';
 import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
-import { debounceTime, tap } from 'rxjs';
+import { Subject, debounceTime, switchMap, tap } from 'rxjs';
 
 import { Character } from '@core/models/character/character.model';
 import { StatsSkillPipe } from 'src/app/shared/pipes/stats-skill.pipe';
@@ -31,6 +31,8 @@ export class CharacterMainComponent {
   hpForm: FormGroup;
 
   protected showSkills: FormControl<boolean>;
+  
+  private readonly _refresh$ = new Subject<void>();
 
   constructor(
     @Inject(TuiDialogService) private readonly _dialogs: TuiDialogService,
@@ -51,9 +53,10 @@ export class CharacterMainComponent {
     } else {
       this.showSkills = new FormControl<boolean>(window.innerHeight > 775, { nonNullable: true });
     }
-
+    
     this.character = toSignal(
-      this._characterService.loadCharacter(this.charId).pipe(
+      this._refresh$.pipe(
+        switchMap(() => this._characterService.loadCharacter(this.charId)),
         tap((val) => {
           this.hpForm.setValue({
             hp: val.hp,
@@ -73,6 +76,12 @@ export class CharacterMainComponent {
     this.showSkills.valueChanges.subscribe((val) => {
       this._localStorage.setItem('show_skills_' + this.charId.toString(), val.toString());
     });
+  
+    this.refresh();
+  }
+
+  refresh(): void {
+    this._refresh$.next();
   }
 
   charInfo(): void {
