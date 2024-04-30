@@ -14,13 +14,16 @@ export class WorldService {
 
   constructor(
     private _http: HttpClient,
-    @Inject(APP_CONFIG) config: AppConfig
+    @Inject(APP_CONFIG) config: AppConfig,
   ) {
     this._baseUrl = `${config.api}/api/world`;
   }
 
-  public loadShortWorlds(userId: number, role: Role): Observable<ShortWorld[]> {
+  public loadShortWorlds(userId: number, role?: Role): Observable<ShortWorld[]> {
     var params = new HttpParams().append('userId', userId);
+    if (!!role) {
+      params = params.append('role', role);
+    }
     return this._http.get<ShortWorld[]>(`${this._baseUrl}/getListWorlds`, {
       params: params,
     });
@@ -33,15 +36,11 @@ export class WorldService {
     });
   }
 
-  public createWorld(
-    userId: number,
-    name: string,
-    description: string
-  ): Observable<void> {
+  public createWorld(userId: number, name: string, description: string): Observable<void> {
     return this._http.post<void>(
       `${this._baseUrl}/createWorld`,
       { userId: userId, name: name, description: description },
-      {}
+      {},
     );
   }
 
@@ -53,11 +52,7 @@ export class WorldService {
   }
 
   public setTracker(id: number, tracker: TrackerUnit[]): Observable<void> {
-    return this._http.put<void>(
-      `${this._baseUrl}/editTracker`,
-      { id: id, tracker: tracker },
-      {}
-    );
+    return this._http.put<void>(`${this._baseUrl}/editTracker`, { id: id, tracker: tracker }, {});
   }
 
   /*public editWorld(

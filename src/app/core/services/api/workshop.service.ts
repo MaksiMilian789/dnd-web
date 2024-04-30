@@ -10,6 +10,8 @@ import {
   CharacterWithId,
   Class,
   ClassCreate,
+  Condition,
+  ConditionCreate,
   Race,
   RaceCreate,
   ShortCharacter,
@@ -28,12 +30,21 @@ export class WorkshopService {
   ) {
     this._baseUrl = `${config.api}/api/workshop`;
   }
+  
+  public getConditions(): Observable<Condition[]> {
+    return this._http.get<Condition[]>(`${this._baseUrl}/getConditions`, {});
+  }
+
+  public createCondition(req: ConditionCreate): Observable<void> {
+    return this._http.post<void>(`${this._baseUrl}/condition`, req);
+  }
+
   public getClasses(): Observable<Class[]> {
     return this._http.get<Class[]>(`${this._baseUrl}/getClasses`, {});
   }
 
   public createClass(req: ClassCreate): Observable<void> {
-    return this._http.post<void>(`${this._baseUrl}/class`, { classs: req });
+    return this._http.post<void>(`${this._baseUrl}/class`, req);
   }
 
   public getRaces(): Observable<Race[]> {
@@ -41,7 +52,7 @@ export class WorkshopService {
   }
 
   public createRace(req: RaceCreate): Observable<void> {
-    return this._http.post<void>(`${this._baseUrl}/race`, { race: req });
+    return this._http.post<void>(`${this._baseUrl}/race`, req);
   }
 
   public getBackgrounds(): Observable<Background[]> {
@@ -49,7 +60,7 @@ export class WorkshopService {
   }
 
   public createBackground(req: BackgroundCreate): Observable<void> {
-    return this._http.post<void>(`${this._baseUrl}/background`, { background: req });
+    return this._http.post<void>(`${this._baseUrl}/background`, req);
   }
 
   public getSkills(): Observable<Skill[]> {

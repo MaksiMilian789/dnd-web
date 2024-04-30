@@ -1,5 +1,5 @@
 import { System } from "@core/enums";
-import { Skill } from "./character/skills/skill.model";
+import { Skill } from "../skills/skill.model";
 
 export interface Condition {
   id: number;

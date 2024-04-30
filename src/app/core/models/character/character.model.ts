@@ -5,7 +5,7 @@ import { Background } from "./backgrounds/background.model";
 import { Class } from "./classes/class.model";
 import { SpellSlot } from "./spells/spell-slot.model";
 import { EnergySlot } from "./energy-slot.model";
-import { Condition } from "../condition.model";
+import { Condition } from "./conditions/condition.model";
 import { Inventory } from "./inventory.model";
 import { Note } from "./note.model";
 import { Skill } from "./skills/skill.model";
