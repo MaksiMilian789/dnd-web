@@ -12,6 +12,7 @@ import { Subject, switchMap, tap } from 'rxjs';
 
 import { WorkshopService } from '@core/services/api/workshop.service';
 import { Spell } from '@core/models';
+import { CreateSpellDialogComponent } from '../create-spell-dialog/create-spell-dialog.component';
 
 @Component({
   selector: 'app-spells-list',
@@ -67,8 +68,8 @@ export class SpellsListComponent {
   }
 
   addItem(): void {
-    /*this._dialogs
-      .open<boolean>(new PolymorpheusComponent(CreateConditionDialogComponent), {
+    this._dialogs
+      .open<boolean>(new PolymorpheusComponent(CreateSpellDialogComponent), {
         size: 'page',
         closeable: true,
       })
@@ -76,7 +77,7 @@ export class SpellsListComponent {
         complete: () => {
             this.refresh();
         },
-    });*/
+    });
   }
 
   deleteItem(id: number): void {

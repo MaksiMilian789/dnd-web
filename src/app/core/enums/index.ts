@@ -13,3 +13,4 @@ export * from './dice.enum';
 export * from './language.enum';
 export * from './recharge.enum';
 export * from './component.enum';
+export * from './magic-school.enum';

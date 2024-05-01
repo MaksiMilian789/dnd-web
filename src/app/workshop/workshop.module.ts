@@ -17,6 +17,7 @@ import { CreateBackgroundDialogComponent } from './backgrounds/components/create
 import { CreateRaceDialogComponent } from './races/components/create-race-dialog/create-race-dialog.component';
 import { CreateClassDialogComponent } from './player-classes/components/create-class-dialog/create-class-dialog.component';
 import { CreateObjectDialogComponent } from './inventory/components/create-object-dialog/create-object-dialog.component';
+import { CreateSpellDialogComponent } from './spells/components/create-spell-dialog/create-spell-dialog.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { CreateObjectDialogComponent } from './inventory/components/create-objec
     CreateBackgroundDialogComponent,
     CreateRaceDialogComponent,
     CreateClassDialogComponent,
-    CreateObjectDialogComponent
+    CreateObjectDialogComponent,
+    CreateSpellDialogComponent
   ],
   imports: [
     SharedModule,
