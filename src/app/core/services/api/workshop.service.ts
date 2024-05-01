@@ -16,6 +16,7 @@ import {
   RaceCreate,
   ShortCharacter,
   Skill,
+  SkillCreate,
 } from '@core/models';
 
 @Injectable({
@@ -65,6 +66,10 @@ export class WorkshopService {
 
   public getSkills(): Observable<Skill[]> {
     return this._http.get<Skill[]>(`${this._baseUrl}/getSkills`, {});
+  }
+
+  public createSkill(req: SkillCreate): Observable<void> {
+    return this._http.post<void>(`${this._baseUrl}/skill`, req);
   }
 
   /*public deleteCharacters(ids: number[]): Observable<void> {

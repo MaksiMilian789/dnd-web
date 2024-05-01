@@ -40,7 +40,7 @@ import {
   VISION_END,
   VISION_START,
 } from '@core/enums';
-import { ConditionCreate, Skill, SkillValue, World } from '@core/models';
+import { ConditionCreate, Damage, DiceRoll, Skill, SkillCreate, SkillValue, World } from '@core/models';
 import { WorkshopService } from '@core/services/api/workshop.service';
 import { AuthService } from '@core/services/auth/auth.service';
 import { WorldService } from '@shared';
@@ -154,19 +154,120 @@ export class CreateSkillDialogComponent {
   }
 
   create(): void {
-    /*let skillIds: number[] = this.skills.map(x => x.id);
-    const dto: ConditionCreate = {
+    let skillValue: SkillValue = new SkillValue();
+    if (this.chosenEffect()) {
+      const val = this.effectForm;
+      skillValue.effect.advantage = val.controls['advantage'].value;
+      skillValue.effect.competent = val.controls['competent'].value;
+      skillValue.effect.disAdvantage = val.controls['disAdvantage'].value;
+      skillValue.effect.dynamic = val.controls['dynamic'].value;
+      skillValue.effect.flat = val.controls['flat'].value;
+      skillValue.effect.mastery = val.controls['mastery'].value;
+      skillValue.effect.saveRoll = val.controls['saveRoll'].value;
+    }
+    if (this.chosenResistance()) {
+      const val = this.resistanceForm;
+      skillValue.resistance.damageType = val.controls['damageType'].value;
+      skillValue.resistance.flat = val.controls['flat'].value;
+    }
+    if (this.chosenTypeVision()) {
+      const val = this.typeVisionForm;
+      skillValue.typeVision.name = val.controls['name'].value;
+    }
+    if (this.chosenDamage()) {
+      const val = this.damageForm;
+      let damageRoll: DiceRoll = new DiceRoll();
+      damageRoll.dice = val.controls['dice'].value;
+      damageRoll.rolls = val.controls['rolls'].value;
+
+      skillValue.damage.damageRoll = damageRoll;
+      skillValue.damage.damageType = val.controls['damageType'].value;
+      skillValue.damage.flat = val.controls['flat'].value;
+      skillValue.damage.heal = val.controls['heal'].value;
+    }
+    if (this.chosenAttackBonus()) {
+      const val = this.attackBonusForm;
+      let damageRoll: DiceRoll = new DiceRoll();
+      damageRoll.dice = val.controls['dice'].value;
+      damageRoll.rolls = val.controls['rolls'].value;
+      let damage: Damage = new Damage();
+      damage.damageRoll = damageRoll;
+      damage.damageType = val.controls['damageType'].value;
+      damage.flat = val.controls['flat'].value;
+      damage.heal = false;
+
+      skillValue.attackBonus.damage = damage;
+      skillValue.attackBonus.accuracyBonus = val.controls['accuracyBonus'].value;
+      skillValue.attackBonus.advantage = val.controls['advantage'].value;
+      skillValue.attackBonus.disAdvantage = val.controls['disAdvantage'].value;
+      skillValue.attackBonus.attackType = val.controls['type'].value;
+    }
+    if (this.chosenPerLevel()) {
+      const val = this.perLevelForm;
+      skillValue.perLevel.dynamic = val.controls['dynamic'].value;
+      skillValue.perLevel.flat = val.controls['flat'].value;
+    }
+    if (this.chosenUseSpell()) {
+      const val = this.useSpellForm;
+      skillValue.useSpell = val.controls['useSpell'].value;
+    }
+    if (this.chosenItemType()) {
+      const val = this.itemTypeForm;
+      skillValue.itemType = val.controls['itemType'].value;
+    }
+    if (this.chosenLanguage()) {
+      const val = this.languageForm;
+      skillValue.language = val.controls['language'].value;
+    }
+
+    let skill: SkillCreate = {
       name: this.form.controls['name'].value,
       description: this.form.controls['description'].value,
+      actionType: this.form.controls['actionType'].value,
+      skillType: Number(this.form.controls['skillType'].value),
+      value: skillValue,
+      passive: this.form.controls['passive'].value,
+      recharge: this.form.controls['recharge'].value,
+      charges: this.form.controls['charges'].value,
       system: System.Dnd,
       authorId: this._authService.currentUser?.id!,
-      worldId: this.form.controls['worldId'].value ?? null,
-      skillIds: skillIds,
     };
-    this._workshopService.createCondition(dto).subscribe(() => {
+
+    this._workshopService.createSkill(skill).subscribe(() => {
       this._snackbar.open('Создание успешно.');
       this.context.completeWith(true);
-    });*/
+    });
+  }
+
+  invalid(): boolean {
+    if (this.chosenEffect()) {
+      return this.form.invalid || this.effectForm.invalid;
+    }
+    if (this.chosenResistance()) {
+      return this.form.invalid || this.resistanceForm.invalid;
+    }
+    if (this.chosenTypeVision()) {
+      return this.form.invalid || this.typeVisionForm.invalid;
+    }
+    if (this.chosenDamage()) {
+      return this.form.invalid || this.damageForm.invalid;
+    }
+    if (this.chosenAttackBonus()) {
+      return this.form.invalid || this.attackBonusForm.invalid;
+    }
+    if (this.chosenPerLevel()) {
+      return this.form.invalid || this.perLevelForm.invalid;
+    }
+    if (this.chosenUseSpell()) {
+      return this.form.invalid || this.useSpellForm.invalid;
+    }
+    if (this.chosenItemType()) {
+      return this.form.invalid || this.itemTypeForm.invalid;
+    }
+    if (this.chosenLanguage()) {
+      return this.form.invalid || this.languageForm.invalid;
+    }
+    return this.form.invalid;
   }
 
   close(): void {
