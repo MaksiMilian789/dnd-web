@@ -9,6 +9,7 @@
     <tui-textarea formControlName="description" class="field-medium info" [expandable]="true" [maxLength]="100">
         Описание
     </tui-textarea>
+    <button tuiButton appearance="outline" (click)="addSkills()" class="info">Добавить скиллы</button>
     <tui-select formControlName="worldId" [stringify]="stringifyWorld()" [tuiTextfieldCleaner]="true" class="info">
         Принадлежность к миру
         <tui-data-list *tuiDataList>

@@ -5,13 +5,15 @@ import { WorkshopHomeComponent } from './components/workshop-home/workshop-home.
 import { WorkshopShellComponent } from './components/workshop-shell/workshop-shell.component';
 import { ConditionsListComponent } from './conditions/components/conditions-list/conditions-list.component';
 import { CreateConditionDialogComponent } from './conditions/components/create-condition-dialog/create-condition-dialog.component';
+import { SelectSkillsComponent } from './skills/components/select-skills/select-skills.component';
 
 @NgModule({
   declarations: [
     WorkshopShellComponent,
     WorkshopHomeComponent,
     ConditionsListComponent,
-    CreateConditionDialogComponent
+    CreateConditionDialogComponent,    
+    SelectSkillsComponent
   ],
   imports: [
     SharedModule,

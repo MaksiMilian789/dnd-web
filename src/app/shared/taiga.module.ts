@@ -14,6 +14,7 @@ import {
   TuiPrimitiveTextfieldModule,
   TuiTooltipModule,
   TuiHostedDropdownModule,
+  TuiPrimitiveCheckboxModule,
 } from '@taiga-ui/core';
 import {
   TuiAccordionModule,
@@ -62,7 +63,8 @@ import {
     TuiCheckboxBlockModule,
     TuiHostedDropdownModule,
     TuiActiveZoneModule,
-    TuiAccordionModule
+    TuiAccordionModule,
+    TuiPrimitiveCheckboxModule
   ],
 })
 export class TaigaModule {}

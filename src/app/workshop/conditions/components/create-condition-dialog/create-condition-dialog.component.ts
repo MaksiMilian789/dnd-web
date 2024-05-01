@@ -1,16 +1,20 @@
 import { Component, Inject, Signal } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { TuiDialogContext } from '@taiga-ui/core';
-import { POLYMORPHEUS_CONTEXT } from '@tinkoff/ng-polymorpheus';
+import { TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
+import { POLYMORPHEUS_CONTEXT, PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
 
 import { System } from '@core/enums';
-import { ConditionCreate, World } from '@core/models';
+import { ConditionCreate, Skill, World } from '@core/models';
 import { WorkshopService } from '@core/services/api/workshop.service';
 import { AuthService } from '@core/services/auth/auth.service';
 import { WorldService } from '@shared';
 import { tuiPure, TuiStringHandler } from '@taiga-ui/cdk';
 import { toSignal } from '@angular/core/rxjs-interop';
+import {
+  SelectSkillsComponent,
+  SelectSkillsComponentData,
+} from 'src/app/workshop/skills/components/select-skills/select-skills.component';
 
 @Component({
   selector: 'app-create-condition-dialog',
@@ -21,13 +25,14 @@ export class CreateConditionDialogComponent {
   form: FormGroup;
 
   // TODO: Состояниям можно добавлять только passive скиллы
-  skillIds: number[] = [];
+  skills: Skill[] = [];
 
   worlds: Signal<World[]>;
 
   constructor(
     @Inject(POLYMORPHEUS_CONTEXT)
     protected readonly context: TuiDialogContext<boolean>,
+    @Inject(TuiDialogService) private readonly _dialogs: TuiDialogService,
     private _workshopService: WorkshopService,
     private _worldService: WorldService,
     private _authService: AuthService,
@@ -45,18 +50,36 @@ export class CreateConditionDialogComponent {
   }
 
   create(): void {
+    let skillIds: number[] = [];
     const dto: ConditionCreate = {
       name: this.form.controls['name'].value,
       description: this.form.controls['description'].value,
       system: System.Dnd,
       authorId: this._authService.currentUser?.id!,
       worldId: this.form.controls['worldId'].value ?? null,
-      skillIds: this.skillIds,
+      skillIds: skillIds,
     };
     this._workshopService.createCondition(dto).subscribe(() => {
       this._snackbar.open('Создание успешно.');
       this.context.completeWith(true);
     });
+  }
+
+  addSkills(): void {
+    const data: SelectSkillsComponentData = {
+      skills: this.skills,
+      onlyPassvie: true
+    };
+
+    this._dialogs
+      .open<Skill[]>(new PolymorpheusComponent(SelectSkillsComponent), {
+        data: data,
+        size: 'page',
+        closeable: false
+      })
+      .subscribe((val) => {
+        this.skills = val;
+      });
   }
 
   close(): void {
