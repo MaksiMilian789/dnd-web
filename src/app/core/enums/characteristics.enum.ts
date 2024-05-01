@@ -1,5 +1,6 @@
 export enum CharacteristicsEnum {
-  Strength = 0,
+  None = 0,
+  Strength,
   Dexterity,
   Constitution,
   Intelligence,
@@ -8,6 +9,7 @@ export enum CharacteristicsEnum {
 }
 
 export const CHARACTERISTICS_LOCALIZATION: Record<CharacteristicsEnum, string> = {
+  [CharacteristicsEnum.None]: 'Нет',
   [CharacteristicsEnum.Strength]: 'Сила',
   [CharacteristicsEnum.Dexterity]: 'Ловкость',
   [CharacteristicsEnum.Constitution]: 'Телосложение',

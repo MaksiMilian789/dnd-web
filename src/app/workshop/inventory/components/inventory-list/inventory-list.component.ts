@@ -11,6 +11,8 @@ import { Subject, switchMap, tap } from 'rxjs';
 
 import { WorkshopService } from '@core/services/api/workshop.service';
 import { Inventory } from '@core/models';
+import { CreateObjectDialogComponent } from '../create-object-dialog/create-object-dialog.component';
+import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
 
 @Component({
   selector: 'app-inventory-list',
@@ -66,8 +68,8 @@ export class InventoryListComponent {
   }
 
   addItem(): void {
-    /*this._dialogs
-      .open<boolean>(new PolymorpheusComponent(CreateConditionDialogComponent), {
+    this._dialogs
+      .open<boolean>(new PolymorpheusComponent(CreateObjectDialogComponent), {
         size: 'page',
         closeable: true,
       })
@@ -75,7 +77,7 @@ export class InventoryListComponent {
         complete: () => {
             this.refresh();
         },
-    });*/
+    });
   }
 
   deleteItem(id: number): void {

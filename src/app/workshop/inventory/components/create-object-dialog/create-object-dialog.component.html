@@ -1,0 +1,94 @@
+<form [formGroup]="form">
+    <div class="header">
+        <h3>Создание нового предмета</h3>
+    </div>
+    <tui-input formControlName="name" class="info">
+        Название
+        <input placeholder="Название предмета" tuiTextfield />
+    </tui-input>
+    <tui-textarea formControlName="description" class="field-medium info" [expandable]="true" [maxLength]="1000">
+        Описание
+    </tui-textarea>
+    <tui-checkbox-block formControlName="attachment" class="info">
+        Настройка
+    </tui-checkbox-block>
+    <tui-select formControlName="rare" [stringify]="stringifyRare()" class="info">
+        Редкость предмета
+        <tui-data-list *tuiDataList>
+            <button *ngFor="let rare of rares | keyvalue : stopSort" tuiOption [value]="rare.key">
+                {{ rare.value }}
+            </button>
+        </tui-data-list>
+    </tui-select>
+    <tui-select formControlName="type" [stringify]="stringifyItemType()" class="info">
+        Тип предмета
+        <tui-data-list *tuiDataList>
+            <button *ngFor="let itemType of itemTypes | keyvalue : stopSort" tuiOption [value]="itemType.key">
+                {{ itemType.value }}
+            </button>
+        </tui-data-list>
+    </tui-select>
+    <tui-badged-content [contentTop]="skills.length">
+        <button tuiButton appearance="outline" (click)="addSkills()" class="info">Добавить скиллы</button>
+    </tui-badged-content>
+    <tui-select formControlName="attackType" [stringify]="stringifyAttackType()" class="info">
+        Тип атаки
+        <tui-data-list *tuiDataList>
+            <button *ngFor="let atackType of attackTypes | keyvalue : stopSort" tuiOption [value]="atackType.key">
+                {{ atackType.value }}
+            </button>
+        </tui-data-list>
+    </tui-select>
+    @if(hasDamage()){
+    <tui-select formControlName="mainCharacteristic" [stringify]="stringifyCharacteristics()" class="info">
+        Основная характеристика
+        <tui-data-list *tuiDataList>
+            <button *ngFor="let mainCharacteristic of mainCharacteristics | keyvalue : stopSort" tuiOption [value]="mainCharacteristic.key">
+                {{ mainCharacteristic.value }}
+            </button>
+        </tui-data-list>
+    </tui-select>
+    <form [formGroup]="damageForm">
+        <tui-input-number formControlName="flat" class="info">
+            Фиксированное значение
+            <input placeholder="Фиксированное значение" tuiTextfield />
+        </tui-input-number>
+        <tui-input-number formControlName="rolls" class="info">
+            Броски кубика
+            <input placeholder="Число бросков кубика" tuiTextfield />
+        </tui-input-number>
+        @if(damageForm.controls['rolls'].value >= 1){
+        <tui-select formControlName="dice" [stringify]="stringifyDice()" class="info">
+            Кубик
+            <tui-data-list *tuiDataList>
+                <button *ngFor="let dice of dices | keyvalue : stopSort" tuiOption [value]="dice.key">
+                    {{ dice.value }}
+                </button>
+            </tui-data-list>
+        </tui-select>
+        }
+        <tui-checkbox-block formControlName="heal" class="info">
+            Лечение?
+        </tui-checkbox-block>
+        @if(!damageForm.controls['heal'].value){
+        <tui-select formControlName="damageType" [stringify]="stringifyDamageType()" class="info">
+            Тип урона
+            <tui-data-list *tuiDataList>
+                <button *ngFor="let damageType of damageTypes | keyvalue : stopSort" tuiOption [value]="damageType.key">
+                    {{ damageType.value }}
+                </button>
+            </tui-data-list>
+        </tui-select>
+        }
+    </form>
+    }
+    <tui-select formControlName="worldId" [stringify]="stringifyWorld()" [tuiTextfieldCleaner]="true" class="info">
+        Принадлежность к миру
+        <tui-data-list *tuiDataList>
+            <button *ngFor="let world of worlds()" tuiOption [value]="world.id">
+                {{ world.name }}
+            </button>
+        </tui-data-list>
+    </tui-select>
+    <button tuiButton appearance="outline" (click)="create()" class="info" [disabled]="form.invalid">Создать</button>
+</form>
