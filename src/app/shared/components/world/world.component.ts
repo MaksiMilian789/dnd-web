@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { ShortWorld } from '../../models/world.model';
-import { HttpService } from '../../services/http-service.service';
-import { EditWorldDialogComponent } from './edit-world-dialog/edit-world-dialog.component';
+
+import { WorldService } from '@core/services/api/world.service';
+import { ShortWorld } from '@core/models';
+import { EditWorldDialogComponent } from 'src/app/master/world/components/edit-world-dialog/edit-world-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-world',
@@ -17,13 +18,13 @@ export class WorldComponent {
   world$: Observable<ShortWorld>;
 
   constructor(
-    private _http: HttpService,
+    private _worldService: WorldService,
     private _route: ActivatedRoute,
     private _router: Router,
     private _dialog: MatDialog
   ) {
     this.role = this._router.url.split('/')[1];
-    this.world$ = this._http.loadWorld(this.worldId);
+    this.world$ = this._worldService.loadWorld(this.worldId);
   }
 
   editWorld(world: ShortWorld): void {
@@ -37,6 +38,6 @@ export class WorldComponent {
         width: '300px',
       })
       .afterClosed()
-      .subscribe(() => (this.world$ = this._http.loadWorld(this.worldId)));
+      .subscribe(() => (this.world$ = this._worldService.loadWorld(this.worldId)));
   }
 }

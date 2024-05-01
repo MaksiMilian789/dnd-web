@@ -1,0 +1,181 @@
+<div tuiGroup class="group" [collapsed]="true">
+    <button appearance="outline" size="l" tuiButton type="button" (click)="useStandard()" [disabled]="standard">
+        Стандарт
+    </button>
+    <button appearance="outline" size="l" tuiButton type="button" (click)="usePointBy()" [disabled]="pointBy">
+        Закуп
+    </button>
+    <button appearance="outline" size="l" tuiButton type="button" (click)="useCustom()" [disabled]="custom">
+        Кастом
+    </button>
+</div>
+
+<form [formGroup]="standard ? standardForm : pointBy ? pointByForm : custom ? customForm : customForm">
+    <div tuiGroup class="group">
+        <div>
+            <tui-input-slider formControlName="strength" class="slider-group" [min]="min" [max]="max" [quantum]="1">
+                Сила
+            </tui-input-slider>
+        </div>
+        <div>
+            <tui-input-number [(ngModel)]="bonus.strength" class="tui-group__inherit-item"
+                [ngModelOptions]="{standalone: true}" [readOnly]="true">
+                Бонус
+                <input placeholder="Бонус" tuiTextfield />
+            </tui-input-number>
+        </div>
+        <div>
+            <tui-input-number [(ngModel)]="strength" class="tui-group__inherit-item"
+                [ngModelOptions]="{standalone: true}" [readOnly]="true">
+                Итого
+                <input placeholder="Итого" tuiTextfield />
+            </tui-input-number>
+            <tui-error [error]="'Модиф-ор: ' + modificator.strength.toString()"></tui-error>
+        </div>
+    </div>
+    <div tuiGroup class="group">
+        <div>
+            <tui-input-slider formControlName="dexterity" class="slider-group" [min]="min" [max]="max" [quantum]="1">
+                Ловкость
+            </tui-input-slider>
+        </div>
+        <div>
+            <tui-input-number [(ngModel)]="bonus.dexterity" class="tui-group__inherit-item"
+                [ngModelOptions]="{standalone: true}" [readOnly]="true">
+                Бонус
+                <input placeholder="Бонус" tuiTextfield />
+            </tui-input-number>
+        </div>
+        <div>
+            <tui-input-number [(ngModel)]="dexterity" class="tui-group__inherit-item"
+                [ngModelOptions]="{standalone: true}" [readOnly]="true">
+                Итого
+                <input placeholder="Итого" tuiTextfield />
+            </tui-input-number>
+            <tui-error [error]="'Модиф-ор: ' + modificator.dexterity.toString()"></tui-error>
+        </div>
+    </div>
+    <div tuiGroup class="group">
+        <div>
+            <tui-input-slider formControlName="constitution" class="slider-group" [min]="min" [max]="max" [quantum]="1">
+                Телосложение
+            </tui-input-slider>
+        </div>
+        <div>
+            <tui-input-number [(ngModel)]="bonus.constitution" class="tui-group__inherit-item"
+                [ngModelOptions]="{standalone: true}" [readOnly]="true">
+                Бонус
+                <input placeholder="Бонус" tuiTextfield />
+            </tui-input-number>
+        </div>
+        <div>
+            <tui-input-number [(ngModel)]="constitution" class="tui-group__inherit-item"
+                [ngModelOptions]="{standalone: true}" [readOnly]="true">
+                Итого
+                <input placeholder="Итого" tuiTextfield />
+            </tui-input-number>
+            <tui-error [error]="'Модиф-ор: ' + modificator.constitution"></tui-error>
+        </div>
+    </div>
+    <div tuiGroup class="group">
+        <div>
+            <tui-input-slider formControlName="intelligence" class="slider-group" [min]="min" [max]="max" [quantum]="1">
+                Интеллект
+            </tui-input-slider>
+        </div>
+        <div>
+            <tui-input-number [(ngModel)]="bonus.intelligence" class="tui-group__inherit-item"
+                [ngModelOptions]="{standalone: true}" [readOnly]="true">
+                Бонус
+                <input placeholder="Бонус" tuiTextfield />
+            </tui-input-number>
+        </div>
+        <div>
+            <tui-input-number [(ngModel)]="intelligence" class="tui-group__inherit-item"
+                [ngModelOptions]="{standalone: true}" [readOnly]="true">
+                Итого
+                <input placeholder="Итого" tuiTextfield />
+            </tui-input-number>
+            <tui-error [error]="'Модиф-ор: ' + modificator.intelligence"></tui-error>
+        </div>
+    </div>
+    <div tuiGroup class="group">
+        <div>
+            <tui-input-slider formControlName="wisdom" class="slider-group" [min]="min" [max]="max" [quantum]="1">
+                Мудрость
+            </tui-input-slider>
+        </div>
+        <div>
+            <tui-input-number [(ngModel)]="bonus.wisdom" class="tui-group__inherit-item"
+                [ngModelOptions]="{standalone: true}" [readOnly]="true">
+                Бонус
+                <input placeholder="Бонус" tuiTextfield />
+            </tui-input-number>
+        </div>
+        <div>
+            <tui-input-number [(ngModel)]="wisdom" class="tui-group__inherit-item" [ngModelOptions]="{standalone: true}"
+                [readOnly]="true">
+                Итого
+                <input placeholder="Итого" tuiTextfield />
+            </tui-input-number>
+            <tui-error [error]="'Модиф-ор: ' + modificator.wisdom"></tui-error>
+        </div>
+    </div>
+    <div tuiGroup class="group">
+        <div>
+            <tui-input-slider formControlName="charisma" class="slider-group" [min]="min" [max]="max" [quantum]="1">
+                Харизма
+            </tui-input-slider>
+        </div>
+        <div>
+            <tui-input-number [(ngModel)]="bonus.charisma" class="tui-group__inherit-item"
+                [ngModelOptions]="{standalone: true}" [readOnly]="true">
+                Бонус
+                <input placeholder="Бонус" tuiTextfield />
+            </tui-input-number>
+        </div>
+        <div>
+            <tui-input-number [(ngModel)]="charisma" class="tui-group__inherit-item"
+                [ngModelOptions]="{standalone: true}" [readOnly]="true">
+                Итого
+                <input placeholder="Итого" tuiTextfield />
+            </tui-input-number>
+            <tui-error [error]="'Модиф-ор: ' + modificator.charisma"></tui-error>
+        </div>
+    </div>
+</form>
+
+<div class="actions-point">
+    @if(standard){
+    <button mat-raised-button (click)="createCharacter();" [disabled]="!correctStandard()">Создать персонажа</button>
+    <div>
+        <span [class.success]="usePoint(15)" [class.error]="errorPoint(15)">15&nbsp;</span>
+        <span [class.success]="usePoint(14)" [class.error]="errorPoint(14)">14&nbsp;</span>
+        <span [class.success]="usePoint(13)" [class.error]="errorPoint(13)">13&nbsp;</span>
+        <span [class.success]="usePoint(12)" [class.error]="errorPoint(12)">12&nbsp;</span>
+        <span [class.success]="usePoint(10)" [class.error]="errorPoint(10)">10&nbsp;</span>
+        <span [class.success]="usePoint(8)" [class.error]="errorPoint(8)">8</span>
+    </div>
+    }
+
+    @if(pointBy){
+    <div class="actions-point">
+        <button mat-raised-button (click)="createCharacter();" [disabled]="!correctPointBy()">Создать персонажа</button>
+        <div>
+            <span [class.error]="!correctPointBy()">Очки: {{pointBySum()}}/27</span>
+        </div>
+        <tui-tooltip content="8 - 0 очков
+        9 - 1 очко
+        10 - 2 очка
+        11 - 3 очка
+        12 - 4 очка
+        13 - 5 очков
+        14 - 7 очков
+        15 - 9 очков"></tui-tooltip>
+    </div>
+    }
+
+    @if(custom){
+    <button mat-raised-button (click)="createCharacter();">Создать персонажа</button>
+    }
+</div>

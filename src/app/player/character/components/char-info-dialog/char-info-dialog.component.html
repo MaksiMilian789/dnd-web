@@ -1,0 +1,46 @@
+<div class="avatar">
+    АВАТАРКА
+</div>
+
+<tui-input [(ngModel)]="character.name" class="info" [ngModelOptions]="{standalone: true}" [readOnly]="true">
+    Имя персонажа
+    <input placeholder="Имя персонажа" tuiTextfield />
+</tui-input>
+
+<tui-input-number [(ngModel)]="character.level" class="info" [ngModelOptions]="{standalone: true}" [readOnly]="true">
+    Уровень персонажа
+    <input placeholder="Уровень персонажа" tuiTextfield />
+</tui-input-number>
+
+<tui-input-number [(ngModel)]="character.age" class="info" [ngModelOptions]="{standalone: true}" [readOnly]="true">
+    Возраст персонажа
+    <input placeholder="Возраст персонажа" tuiTextfield />
+</tui-input-number>
+
+<tui-input [(ngModel)]="localizeGender" class="info" [ngModelOptions]="{standalone: true}" [readOnly]="true">
+    Пол персонажа
+    <input placeholder="Пол персонажа" tuiTextfield />
+</tui-input>
+
+<tui-input [(ngModel)]="character.classInstance.name" class="info" [ngModelOptions]="{standalone: true}"
+    [readOnly]="true">
+    Класс персонажа
+    <input placeholder="Класс персонажа" tuiTextfield />
+</tui-input>
+
+<tui-input [(ngModel)]="character.raceInstance.name" class="info" [ngModelOptions]="{standalone: true}"
+    [readOnly]="true">
+    Раса персонажа
+    <input placeholder="Раса персонажа" tuiTextfield />
+</tui-input>
+
+<tui-input [(ngModel)]="character.backgroundInstance.name" class="info" [ngModelOptions]="{standalone: true}"
+    [readOnly]="true">
+    Предыстория персонажа
+    <input placeholder="Предыстория персонажа" tuiTextfield />
+</tui-input>
+
+<tui-input [(ngModel)]="localizeIdeology" class="info" [ngModelOptions]="{standalone: true}" [readOnly]="true">
+    Мировозрение персонажа
+    <input placeholder="Предыстория персонажа" tuiTextfield />
+</tui-input>

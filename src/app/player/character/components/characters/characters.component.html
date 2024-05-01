@@ -1,0 +1,49 @@
+<mat-toolbar color="primary" class="toolbar mat-elevation-z6 secondary-toolbar">
+    <button mat-icon-button [routerLink]="['/player']">
+        <mat-icon>arrow_back</mat-icon>
+    </button>
+    <div class="spacer"></div>
+    <button mat-icon-button (click)="enableSelectionMode()" matTooltip="Включить режим выбора"
+        *ngIf="!isSelectionModeEnabled; else selectionButtons">
+        <mat-icon>checklist</mat-icon>
+    </button>
+    <ng-template #selectionButtons>
+        <button mat-icon-button (click)="disableSelectionMode()" matTooltip="Отменить">
+            <mat-icon>cancel</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deleteSelectedItems()" matTooltip="Удалить выбранное"
+            [disabled]="!canDelete">
+            <mat-icon>delete_forever</mat-icon>
+        </button>
+    </ng-template>
+    <a mat-icon-button (click)="addCharacter()">
+        <mat-icon>person_add</mat-icon>
+    </a>
+</mat-toolbar>
+
+<div class="center">
+    <ng-container *ngIf="shortCharacters$ | async as characters">
+        <div *ngFor="let character of characters;">
+            <div class="card-container">
+                <mat-checkbox class="card-checkbox" *ngIf="isSelectionModeEnabled" [ngModel]="isItemSelected(character)"
+                    (change)="toggleSelection(character)"></mat-checkbox>
+                <mat-card class="card pointer" [routerLink]="['/player/character', character.id]">
+                    <mat-card-title>
+                        <div class="name-container">
+                            <span class="truncate block">{{character.name}}</span>
+                        </div>
+                    </mat-card-title>
+                    <mat-card-subtitle>
+                        <div class="class-name-container">
+                            <span class="truncate block">{{character.className}}</span>
+                        </div>
+                        <div class="level">Уровень: {{character.level}}</div>
+                    </mat-card-subtitle>
+                </mat-card>
+            </div>
+        </div>
+        @if(characters.length == 0){
+        <span class="truncate block">Нет персонажей</span>
+        }
+    </ng-container>
+</div>

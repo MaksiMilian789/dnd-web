@@ -1,0 +1,55 @@
+.center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 30px;
+  gap: 1rem;
+  overflow: auto;
+  height: calc(100% - 100px);
+}
+
+.card-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: medium;
+}
+
+.card-checkbox {
+  margin: 15px;
+}
+
+.card {
+  min-width: 200px;
+  width: 70vw;
+  height: 60px;
+}
+
+.level {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+}
+
+.mat-mdc-checkbox {
+  margin: 0px;
+}
+
+.mat-mdc-card-title,
+.mat-mdc-card-subtitle {
+  margin: 5px;
+}
+
+.class-name-container {
+  width: 30vw;
+}
+
+.name-container {
+  width: 50vw;
+}
+
+.block {
+  display: block;
+}

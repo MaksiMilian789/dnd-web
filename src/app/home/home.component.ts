@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '../core/services/auth/auth.service';
 import { PwaService } from '../shared/services/pwa-service.service';
 
 @Component({
@@ -13,10 +13,7 @@ export class HomeComponent{
   userLogin: string = "";
 
   constructor(public pwa: PwaService, private _auth: AuthService) {
-    if (sessionStorage.getItem('auth') != null) {
-      // Получение информации о пользователе
-      this.userLogin = sessionStorage.getItem('auth') as string;
-    }
+    this.userLogin = _auth.currentUser?.login ?? '';
   }
 
   logout(): void {

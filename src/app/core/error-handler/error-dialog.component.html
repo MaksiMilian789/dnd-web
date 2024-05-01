@@ -1,0 +1,28 @@
+<p class="error-text">{{ context.data.message }}</p>
+<ng-container *ngIf="context.data.details">
+  <div class="expand-button-container">
+    <button
+      type="button"
+      tuiButton
+      [iconRight]="iconTemplate"
+      appearance="flat"
+      size="s"
+      (click)="showDetails = !showDetails"
+    >
+      Подробнее
+      <ng-template #iconTemplate>
+        <tui-svg src="tuiIconChevronDown" class="icon" [class.icon_rotated]="showDetails"></tui-svg>
+      </ng-template>
+    </button>
+  </div>
+  <tui-expand [expanded]="showDetails">
+    <ng-template tuiExpandContent>
+      <div class="error-text">
+        {{ detailsAsString }}
+      </div>
+    </ng-template>
+  </tui-expand>
+</ng-container>
+<div class="actions">
+  <button tuiButton size="m" (click)="context.completeWith()">Ок</button>
+</div>

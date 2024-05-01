@@ -1,0 +1,153 @@
+<mat-stepper [linear]="true" #stepper>
+    <mat-step [completed]="completedStep1" matTooltip="Имя, пол, возраст, мировозрение" [stepControl]="form1">
+        <ng-template matStepLabel>Основа</ng-template>
+
+        <div class="container">
+            <tui-island size="m" textAlign="center" class="island">
+                <div class="tui-island__content">
+                    <div class="header">
+                        <div>
+                            <h3 class="tui-island__title">Основная информация о персонаже</h3>
+                        </div>
+                    </div>
+                    <form class="tui-space_top-4" [formGroup]="form1">
+                        <div class="tui-form__row">
+                            <tui-input formControlName="name">
+                                Имя персонажа
+                                <input tuiTextfield />
+                            </tui-input>
+                        </div>
+
+                        <div class="tui-form__row">
+                            <tui-select formControlName="gender" [stringify]="stringifyGender()">
+                                Пол
+                                <tui-data-list *tuiDataList>
+                                    <button *ngFor="let gender of genders | keyvalue" tuiOption [value]="gender.key">
+                                        {{ gender.value }}
+                                    </button>
+                                </tui-data-list>
+                            </tui-select>
+                        </div>
+
+                        <div class="tui-form__row">
+                            <tui-input-number formControlName="age" [min]="1" [max]="9999999999">
+                                Возраст персонажа
+                                <input tuiTextfield />
+                            </tui-input-number>
+                        </div>
+
+                        <div class="tui-form__row">
+                            <tui-select formControlName="ideology" [stringify]="stringifyIdeology()">
+                                Идеология
+                                <tui-data-list *tuiDataList>
+                                    <button *ngFor="let ideology of ideologies | keyvalue" tuiOption
+                                        [value]="ideology.key">
+                                        {{ ideology.value }}
+                                    </button>
+                                </tui-data-list>
+                            </tui-select>
+                        </div>
+                    </form>
+                    <div class="actions">
+                        <button mat-raised-button (click)="step1(stepper);"
+                            [disabled]="this.form1.invalid">Далее</button>
+                    </div>
+                </div>
+            </tui-island>
+        </div>
+    </mat-step>
+
+    <mat-step [completed]="completedStep2" matTooltip="Раса, предыстория" [stepControl]="form2">
+        <ng-template matStepLabel>Раса</ng-template>
+        <div class="container">
+            <tui-island size="m" textAlign="center" class="island">
+                <div class="tui-island__content">
+                    <div class="header">
+                        <div>
+                            <h3 class="tui-island__title">Основная информация о персонаже</h3>
+                        </div>
+                    </div>
+                    <form class="tui-space_top-4" [formGroup]="form2">
+                        <div class="tui-form__row">
+                            <tui-select formControlName="race" [stringify]="stringifyRace()">
+                                Раса
+                                <tui-data-list *tuiDataList>
+                                    <button *ngFor="let race of races()" tuiOption [value]="race.id">
+                                        {{ race.name }}
+                                    </button>
+                                </tui-data-list>
+                            </tui-select>
+                        </div>
+
+                        @if(this.form2.controls['race'].value){
+                        <tui-textarea class="tui-space_bottom-4 field-small description" [(ngModel)]="raceDescription"
+                            [ngModelOptions]="{standalone: true}" [readOnly]="true">
+                            Описание расы
+                        </tui-textarea>
+                        }
+
+                        <div class="tui-form__row">
+                            <tui-select formControlName="background" [stringify]="stringifyBackground()">
+                                Предыстория
+                                <tui-data-list *tuiDataList>
+                                    <button *ngFor="let background of backgrounds()" tuiOption [value]="background.id">
+                                        {{ background.name }}
+                                    </button>
+                                </tui-data-list>
+                            </tui-select>
+                        </div>
+
+                        @if(this.form2.controls['background'].value){
+                        <tui-textarea class="tui-space_bottom-4 field-small description"
+                            [(ngModel)]="backgroundDescription" [ngModelOptions]="{standalone: true}" [readOnly]="true">
+                            Описание предыстории
+                        </tui-textarea>
+                        }
+                    </form>
+                    <div class="actions">
+                        <button mat-raised-button (click)="step2(stepper);"
+                            [disabled]="this.form2.invalid">Далее</button>
+                    </div>
+                </div>
+            </tui-island>
+        </div>
+    </mat-step>
+
+    <mat-step [completed]="completedStep3" matTooltip="Класс" [stepControl]="form3">
+        <ng-template matStepLabel>Класс</ng-template>
+        <div class="container">
+            <tui-island size="m" textAlign="center" class="island">
+                <div class="tui-island__content">
+                    <div class="header">
+                        <div>
+                            <h3 class="tui-island__title">Основная информация о персонаже</h3>
+                        </div>
+                    </div>
+                    <form class="tui-space_top-4" [formGroup]="form3">
+                        <div class="tui-form__row">
+                            <tui-select formControlName="class" [stringify]="stringifyClass()">
+                                Класс
+                                <tui-data-list *tuiDataList>
+                                    <button *ngFor="let class of classes()" tuiOption [value]="class.id">
+                                        {{ class.name }}
+                                    </button>
+                                </tui-data-list>
+                            </tui-select>
+                        </div>
+
+                        @if(this.form3.controls['class'].value){
+                        <tui-textarea class="tui-space_bottom-4 field-small description" [(ngModel)]="classDescription"
+                            [ngModelOptions]="{standalone: true}" [readOnly]="true">
+                            Описание класса
+                        </tui-textarea>
+                        }
+                    </form>
+                    <div class="actions">
+                        <button mat-raised-button (click)="createCharacteristics();"
+                            [disabled]="this.form3.invalid">Распределить характеристики</button>
+                    </div>
+                </div>
+            </tui-island>
+        </div>
+    </mat-step>
+</mat-stepper>

@@ -1,25 +1,33 @@
 <mat-toolbar color="primary" class="toolbar mat-elevation-z8 primary-toolbar">
+    <img src="/assets/icons/icon-96x96.png" alt="" srcset="" style="height: 48px; width: 48px;" [routerLink]="['']"
+        class="clickable logo" />
     <div>
-        <span [routerLink]="['']" class="pointer">DnD компаньон</span>
+        <span [routerLink]="['']" class="clickable logo-name">DnD компаньон</span>
     </div>
     <div class="spacer"></div>
-        <span>{{ userLogin }}</span>
-        <button mat-icon-button (click)="logout()" matTooltip="Выйти">
-            <mat-icon>logout</mat-icon>
-        </button>
-</mat-toolbar>
-<div class="center">
-    <a mat-raised-button [routerLink]="['player']" class="home-button">
-        <mat-icon [inline]="true" class="home-icon">person</mat-icon>
-        Игрок
-    </a>
-    <br>
-    <a mat-raised-button [routerLink]="['master']" class="home-button">
-        <mat-icon [inline]="true" class="home-icon">engineering</mat-icon>
-        Мастер
-    </a>
-    <br>
-    <button mat-raised-button *ngIf="pwa.showInstallPromotion" (click)="pwa.addToHomeScreen()" class="pwa-button">
-        Добавить на домашний экран
+    <span>{{ userLogin }}</span>
+    <button mat-icon-button (click)="logout()" matTooltip="Выйти">
+        <mat-icon>logout</mat-icon>
     </button>
+</mat-toolbar>
+<div class="container">
+    <tui-island size="m" textAlign="center">
+        <h3 class="tui-island__title player">Выбор роли</h3>
+        <a mat-raised-button [routerLink]="['player']" class="player home-button ">
+            Игрок
+        </a>
+        <br>
+        <a mat-raised-button [routerLink]="['master']" class="master home-button ">
+            Мастер
+        </a>
+        <br>
+        <a mat-raised-button [routerLink]="['workshop']" class="workshop home-button ">
+            Мастерская
+        </a>
+        <br>
+        @if (pwa.showInstallPromotion) {
+        <button tuiButton (click)="pwa.addToHomeScreen()" class="pwa-button" size="s" appearance="outline">Добавить на домашний
+            экран</button>
+        }
+    </tui-island>
 </div>

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { RegistrationService } from './registration.service';
+import { RegistrationService } from '../core/services/api/registration.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-registration',
@@ -11,7 +11,6 @@ import { RegistrationService } from './registration.service';
 })
 export class RegistrationComponent {
   form: FormGroup;
-  hide = true;
 
   constructor(
     private _registration: RegistrationService,
@@ -34,7 +33,6 @@ export class RegistrationComponent {
     if (this.form.value.password != this.form.value.passwordRepeat) {
       this._snackbar.open('Введённые пароли не совпадают');
     } else {
-      // Проверка в базе по Http
       this._registration.registration(
         this.form.value.login,
         this.form.value.password

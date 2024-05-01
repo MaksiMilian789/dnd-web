@@ -1,5 +1,5 @@
 :host {
-  height: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -11,25 +11,17 @@
   align-items: center;
 }
 
-.reg-form {
-  display: flex;
-  flex-direction: column;
-  width: 300px;
+.login-island {
+  width: 450px;
+
+  .actions {
+    display: flex;
+    margin-top: 24px;
+  }
 }
 
-.actions {
-  display: flex;
-}
-
-.pointer {
-  cursor: pointer;
-}
-
-.error-valid {
-  color: red;
-  font-size: 12px;
-}
-
-mat-form-field{
-  margin-bottom: 10px;
+.theme-switcher-container {
+  position: fixed;
+  bottom: 12px;
+  right: 12px;
 }

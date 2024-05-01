@@ -1,0 +1,25 @@
+.container {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.island {
+  width: 300px;
+
+  .remember-me-checkbox {
+    text-align: start;
+  }
+
+  .actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 24px;
+  }
+}
+
+.description {
+  margin-top: 1rem;
+  width: 100%;
+}

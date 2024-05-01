@@ -1,0 +1,232 @@
+<ng-container *ngIf="character()">
+    <mat-toolbar color="primary" class="toolbar mat-elevation-z6 secondary-toolbar">
+        <button mat-icon-button [routerLink]="['..']">
+            <mat-icon>arrow_back</mat-icon>
+        </button>
+        <div class="name-container">
+            <span class="truncate block">
+                {{character()!.name}}
+            </span>
+        </div>
+        <div class="spacer"></div>
+        <button mat-icon-button (click)="charInfo()">
+            <mat-icon>info</mat-icon>
+        </button>
+        <tui-hosted-dropdown #dropdown [content]="content">
+            <button mat-icon-button>
+                <mat-icon>menu</mat-icon>
+            </button>
+        </tui-hosted-dropdown>
+        <ng-template #content let-activeZone let-close="close">
+            <tui-data-list role="menu" tuiDataListDropdownManager class="menu">
+                <tui-opt-group>
+                    <button tuiOption size="m" [routerLink]="['../inventory']">
+                        Инвентарь
+                        <tui-svg src="tuiIconLayers"></tui-svg>
+                    </button>
+                    <button tuiOption size="m" [routerLink]="['../skills']">
+                        Способности
+                        <tui-svg src="tuiIconZap"></tui-svg>
+                    </button>
+                    <button tuiOption size="m" [routerLink]="['../spells']">
+                        Заклинания
+                        <tui-svg src="tuiIconSlack"></tui-svg>
+                    </button>
+                    <button tuiOption size="m" [routerLink]="['../notes']">
+                        Заметки
+                        <tui-svg src="tuiIconEdit3"></tui-svg>
+                    </button>
+                </tui-opt-group>
+                <tui-opt-group>
+                    <tui-checkbox-block contentAlign="right" [formControl]="showEnergy" size="m" class="checkbox-menu">
+                        Энергия
+                    </tui-checkbox-block>
+                    <tui-checkbox-block contentAlign="right" [formControl]="showSpellSlots" size="m"
+                        class="checkbox-menu">
+                        Ячейки заклинаний
+                    </tui-checkbox-block>
+                    <tui-checkbox-block contentAlign="right" [formControl]="showConditions" size="m"
+                        class="checkbox-menu">
+                        Состояния
+                    </tui-checkbox-block>
+                </tui-opt-group>
+            </tui-data-list>
+        </ng-template>
+    </mat-toolbar>
+    <mat-divider></mat-divider>
+
+    <div class="overflow-container">
+        <div class="container">
+            <div>
+                <tui-input-number [(ngModel)]="getArmor" class="info" [ngModelOptions]="{standalone: true}"
+                    [readOnly]="true">
+                    КД
+                    <input placeholder="КД" tuiTextfield />
+                </tui-input-number>
+            </div>
+            <div>
+                <tui-input-number [(ngModel)]="getMaxHp" class="info" [ngModelOptions]="{standalone: true}"
+                    [readOnly]="true">
+                    Max HP
+                    <input placeholder="Max HP" tuiTextfield />
+                </tui-input-number>
+            </div>
+            <div>
+                <tui-input-number [(ngModel)]="getProfBonus" class="info" [ngModelOptions]="{standalone: true}"
+                    [readOnly]="true">
+                    БМ
+                    <input placeholder="БМ" tuiTextfield />
+                </tui-input-number>
+            </div>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="container" [formGroup]="hpForm">
+            <div>
+                <tui-input-number formControlName="hp" class="hp" [min]="0" [step]="1">
+                    HP
+                </tui-input-number>
+            </div>
+            <div>
+                <tui-input-number formControlName="addHp" class="hp" [min]="0" [step]="1">
+                    Доп HP
+                </tui-input-number>
+            </div>
+        </div>
+        <mat-divider></mat-divider>
+        <div tuiGroup class="container">
+            <div>
+                <tui-input-number [(ngModel)]="modificator.strength" class="stat" [ngModelOptions]="{standalone: true}"
+                    [readOnly]="true">
+                    Сила
+                    <input placeholder="Сила" tuiTextfield />
+                </tui-input-number>
+                <div class="descr">
+                    <tui-error [error]="'Стат: ' + character()!.characteristics.strength"></tui-error>
+                    <tui-error [error]="'Спас: ' + 0"></tui-error>
+                </div>
+            </div>
+            <div>
+                <tui-input-number [(ngModel)]="modificator.dexterity" class="stat" [ngModelOptions]="{standalone: true}"
+                    [readOnly]="true">
+                    Ловкость
+                    <input placeholder="Ловкость" tuiTextfield />
+                </tui-input-number>
+                <div class="descr">
+                    <tui-error [error]="'Стат: ' + character()!.characteristics.dexterity"></tui-error>
+                    <tui-error [error]="'Спас: ' + 0"></tui-error>
+                </div>
+            </div>
+            <div>
+                <tui-input-number [(ngModel)]="modificator.constitution" class="stat"
+                    [ngModelOptions]="{standalone: true}" [readOnly]="true">
+                    Телосложение
+                    <input placeholder="Телосложение" tuiTextfield />
+                </tui-input-number>
+                <div class="descr">
+                    <tui-error [error]="'Стат: ' + character()!.characteristics.constitution"></tui-error>
+                    <tui-error [error]="'Спас: ' + 0"></tui-error>
+                </div>
+            </div>
+        </div>
+        <div tuiGroup class="container">
+            <div>
+                <tui-input-number [(ngModel)]="modificator.intelligence" class="stat"
+                    [ngModelOptions]="{standalone: true}" [readOnly]="true">
+                    Интеллект
+                    <input placeholder="Интеллект" tuiTextfield />
+                </tui-input-number>
+                <div class="descr">
+                    <tui-error [error]="'Стат: ' + character()!.characteristics.intelligence"></tui-error>
+                    <tui-error [error]="'Спас: ' + 0"></tui-error>
+                </div>
+            </div>
+            <div>
+                <tui-input-number [(ngModel)]="modificator.wisdom" class="stat" [ngModelOptions]="{standalone: true}"
+                    [readOnly]="true">
+                    Мудрость
+                    <input placeholder="Мудрость" tuiTextfield />
+                </tui-input-number>
+                <div class="descr">
+                    <tui-error [error]="'Стат: ' + character()!.characteristics.wisdom"></tui-error>
+                    <tui-error [error]="'Спас: ' + 0"></tui-error>
+                </div>
+            </div>
+            <div>
+                <tui-input-number [(ngModel)]="modificator.charisma" class="stat" [ngModelOptions]="{standalone: true}"
+                    [readOnly]="true">
+                    Харизма
+                    <input placeholder="Харизма" tuiTextfield />
+                </tui-input-number>
+                <div class="descr">
+                    <tui-error [error]="'Стат: ' + character()!.characteristics.charisma"></tui-error>
+                    <tui-error [error]="'Спас: ' + 0"></tui-error>
+                </div>
+            </div>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="container">
+            <div>
+                <tui-input-number [(ngModel)]="getSpeed" class="speed" [readOnly]="true">
+                    Скорость
+                    <input placeholder="Скорость" tuiTextfield />
+                </tui-input-number>
+            </div>
+            <div>
+                <tui-input-number [(ngModel)]="getInitiative" class="initiative" [readOnly]="true">
+                    Инициатива
+                    <input placeholder="Инициатива" tuiTextfield />
+                </tui-input-number>
+            </div>
+            <div>
+                <tui-checkbox-block contentAlign="right" [formControl]="concentration" class="concentration">
+                    <span class="concentration-text">Концентрация</span>
+                </tui-checkbox-block>
+            </div>
+        </div>
+        <div class="energy" [class.none]="!showEnergy.value">
+            <mat-divider></mat-divider>
+            <div class="container">
+                <tui-accordion class="accordion full">
+                    <tui-accordion-item>
+                        Энергия
+                        <ng-template tuiAccordionItemContent>
+                            Значение
+                        </ng-template>
+                    </tui-accordion-item>
+                </tui-accordion>
+            </div>
+        </div>
+        <div class="spellSlots" [class.none]="!showSpellSlots.value">
+            <mat-divider></mat-divider>
+            <div class="container">
+                <tui-accordion class="accordion full">
+                    <tui-accordion-item>
+                        Ячейки
+                        <ng-template tuiAccordionItemContent>
+                            Значение
+                        </ng-template>
+                    </tui-accordion-item>
+                </tui-accordion>
+            </div>
+        </div>
+        <div class="conditions" [class.none]="!showConditions.value">
+            <mat-divider></mat-divider>
+            <div class="container">
+                <tui-accordion class="accordion" [class.full]="openConditions">
+                    <tui-accordion-item [(open)]="openConditions">
+                        Состояния
+                        <ng-template tuiAccordionItemContent class="horizontal-overflow">
+                            @for(cond of character()!.conditions; track cond){
+                            <button icon="tuiIconZap" tuiIconButton (click)="true" size="m"
+                                appearance="outline"></button>
+                            }
+                        </ng-template>
+                    </tui-accordion-item>
+                </tui-accordion>
+                @if(!openConditions){
+                <button icon="tuiIconPlus" tuiIconButton (click)="addCondition()" appearance="outline"></button>
+                }
+            </div>
+        </div>
+    </div>
+</ng-container>

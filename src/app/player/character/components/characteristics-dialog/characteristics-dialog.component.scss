@@ -1,0 +1,39 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.group {
+  width: 80vw;
+  margin-top: 1rem;
+}
+
+.slider-group {
+  ::ng-deep tui-input-number {
+    border-radius: inherit;
+  }
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.actions-point {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.error {
+  color: red;
+}
+
+.success {
+  color: rgb(0, 138, 23);
+}

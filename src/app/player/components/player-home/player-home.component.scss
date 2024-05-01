@@ -1,0 +1,83 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background:
+    url('/assets/backgrounds/sword.png') no-repeat,
+    url('/assets/backgrounds/earth.png') right bottom no-repeat;
+    transition: background-size 1s ease-in-out 100ms;
+}
+
+@media screen and (max-width: 4096px) {
+  .container {
+    animation: appear 1s ease;
+    background-size: 200px, 220px;
+  }  
+
+  .container:has(.char:hover) {
+    background-size: 220px, 170px;
+  }
+
+  .container:has(.world:hover) {
+    background-size: 150px, 240px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .container {
+    animation: appearMobile 1s ease;
+    background-size: 150px, 170px;
+  }  
+    
+  .container:has(.char:hover) {
+    background-size: 180px, 140px;
+  }
+
+  .container:has(.world:hover) {
+    background-size: 120px, 200px;
+  }
+}
+
+@keyframes appearMobile {
+  0% {
+    background-size: 0px, 0px;
+  }
+  100% {
+    background-size: 150px, 170px;
+  }
+}
+
+@keyframes appear {
+  0% {
+    background-size: 0px, 0px;
+  }
+  100% {
+    background-size: 200px, 220px;
+  }
+}
+
+.home-button {
+  font-size: 4vh;
+  min-width: 300px;
+  width: 55vw;
+  min-height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+}
+
+.home-icon {
+  margin-bottom: 0.5vh;
+}

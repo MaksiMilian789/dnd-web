@@ -2,31 +2,47 @@
   <span [routerLink]="['']" class="pointer">DnD Компаньон</span>
 </mat-toolbar>
 <div class="container">
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>Вход</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <form class="login-form" [formGroup]="form">
-        <mat-form-field appearance="fill">
-          <mat-label>Логин</mat-label>
-          <input matInput formControlName="login" (keyup.enter)="password.focus()" />
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-          <mat-label>Пароль</mat-label>
-          <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" (keyup.enter)="auth()"
-            #password />
-          <mat-icon matSuffix (click)="hide = !hide">{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
-        </mat-form-field>
+  <tui-island size="m" textAlign="center" class="login-island">
+    <div class="tui-island__content">
+      <div class="header">
+        <img src="/assets/icons/icon-96x96.png" alt="" srcset="" />
+        <div>
+          <h3 class="tui-island__title">Компаньон</h3>
+          <h4 class="tui-island__paragraph">Вход в систему</h4>
+        </div>
+      </div>
+
+      <form class="tui-space_top-4" [formGroup]="form">
+        <div class="tui-form__row">
+          <tui-input formControlName="login">
+            Логин
+            <input tuiTextfield (keyup.enter.stop)="passwordElement.nativeElement.focus()" />
+          </tui-input>
+        </div>
+
+        <div class="tui-form__row">
+          <tui-input-password formControlName="password">
+            Пароль
+            <input tuiTextfield autocomplete="current-password" #passwordElement="elementRef" tuiElement
+              (keyup.enter.stop)="submit()" />
+          </tui-input-password>
+          <tui-error [error]="error"></tui-error>
+        </div>
+        <div class="tui-form__row remember-me-checkbox">
+          <tui-checkbox-labeled size="l" formControlName="rememberMe">
+            Запомнить меня этом устройстве
+          </tui-checkbox-labeled>
+        </div>
       </form>
-    </mat-card-content>
-    <mat-card-actions class="actions">
-      <button mat-stroked-button color="accent" [routerLink]="['/registration']">Регистрация</button>
-      <div class="spacer"></div>
-      <button mat-stroked-button color="accent" (click)="auth()" [disabled]="form.invalid">Войти</button>
-    </mat-card-actions>
-    <button mat-raised-button *ngIf="pwa.showInstallPromotion" (click)="pwa.addToHomeScreen()" class="pwa-button">
-      Добавить на домашний экран
-    </button>
-  </mat-card>
+
+      <div class="actions">
+        <button tuiButton [routerLink]="['/registration']">Регистрация</button>
+        <div class="spacer"></div>
+        <button tuiButton [showLoader]="isAuthInProcess" [disabled]="form.invalid" (click)="submit()">Войти</button>
+      </div>
+    </div>
+  </tui-island>
+  @if (pwa.showInstallPromotion) {
+  <button tuiButton (click)="pwa.addToHomeScreen()" class="pwa-button" size="s" appearance="outline">Добавить на домашний экран</button>
+  }
 </div>

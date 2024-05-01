@@ -1,0 +1,102 @@
+.center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 30px;
+  margin-top: 10px;
+}
+
+.divider-vertical {
+  height: 100px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  margin-left: 10px;
+  margin-right: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .info {
+    width: 30vw;
+  }
+
+  .hp {
+    width: 45vw;
+  }
+}
+
+.stat {
+  width: 30vw;
+}
+
+.perception {
+  width: 59vw;
+}
+
+.view {
+  width: 34vw;
+}
+
+.descr {
+  text-align: center;
+}
+
+.name-container {
+  width: calc(100vw - 250px);
+  font-size: medium;
+  margin-top: 4px;
+}
+
+.stat-skill {
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (max-height: 775px) {
+  .container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+}
+
+@media screen and (max-height: 680px) {
+  .container {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+}
+
+@media screen and (max-height: 630px) {
+  .container {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+}
+
+.block {
+  display: block;
+}
+
+.none {
+  display: none;
+}
+
+.menu {
+  width: 150px;
+}
+
+.overflow-container {
+  overflow: auto;
+  height: calc(100vh - 130px);
+}
+
+.checkbox-menu {
+  margin-top: 5px;
+  margin-bottom: 2px;
+}

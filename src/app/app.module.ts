@@ -1,75 +1,53 @@
-import { NgModule } from '@angular/core';
+import { ErrorHandler, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { NgDompurifySanitizer } from '@tinkoff/ng-dompurify';
+import {
+  TuiRootModule,
+  TuiDialogModule,
+  TuiAlertModule,
+  TUI_SANITIZER,
+} from '@taiga-ui/core';
 
+import { CoreModule } from '@core/core.module';
+import { GlobalErrorHandler } from '@core/error-handler';
+import { AuthInterceptor } from '@core/services/auth/auth.interceptor';
+import { SharedModule } from '@shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthComponent } from './auth/auth.component';
-import { SharedModule } from './shared';
-import { PlayerShellComponent } from './player/player-shell/player-shell.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AuthGuard } from './auth/auth.guard';
 import { HomeComponent } from './home/home.component';
-import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { PlayerHomeComponent } from './player/player-home/player-home.component';
-import { CharactersComponent } from './player/characters/characters.component';
-import { InitiativeTrackerComponent } from './master/initiative-tracker/initiative-tracker.component';
-import { HttpClientModule } from '@angular/common/http';
-import { CharacterMainComponent } from './player/character/character-main/character-main.component';
-import { CharacterInventoryComponent } from './player/character/character-inventory/character-inventory.component';
-import { MasterShellComponent } from './master/master-shell/master-shell.component';
-import { MasterHomeComponent } from './master/master-home/master-home.component';
-import { AccessPlayersComponent } from './master/access-players/access-players.component';
-import { AddTrackerDialogComponent } from './master/initiative-tracker/add-tracker-dialog/add-tracker-dialog.component';
-import { AddCharacter1NameComponent } from './player/add-character/add-character1-name/add-character1-name.component';
-import { AddCharacter2ClassComponent } from './player/add-character/add-character2-class/add-character2-class.component';
-import { AddCharacter3RaceComponent } from './player/add-character/add-character3-race/add-character3-race.component';
-import { AddCharacter4BackgroundComponent } from './player/add-character/add-character4-background/add-character4-background.component';
 import { RegistrationComponent } from './registration/registration.component';
-import { AddItemDialogComponent } from './player/character/character-inventory/add-item-dialog/add-item-dialog.component';
-import { CharacterSkillsComponent } from './player/character/character-skills/character-skills.component';
-import { AddSkillDialogComponent } from './player/character/character-skills/add-skill-dialog/add-skill-dialog.component';
-import { CharacterSpellsComponent } from './player/character/character-spells/character-spells.component';
-import { AddSpellDialogComponent } from './player/character/character-spells/add-spell-dialog/add-spell-dialog.component';
-import { CharacterInfoDialogComponent } from './player/character/character-info-dialog/character-info-dialog.component';
-import { AddConditionDialogComponent } from './player/character/character-main/add-condition-dialog/add-condition-dialog.component';
-import { EditPriorityItemComponent } from './player/character/character-main/edit-priority-item/edit-priority-item.component';
+import { PlayerModule } from './player/player.module';
+import { MasterModule } from './master/master.module';
+import { WorkshopModule } from './workshop/workshop.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthComponent,
     RegistrationComponent,
-    PlayerShellComponent,
     HomeComponent,
-    PlayerHomeComponent,
-    CharactersComponent,
-    InitiativeTrackerComponent,
-    CharacterMainComponent,
-    CharacterInventoryComponent,
-    MasterShellComponent,
-    MasterHomeComponent,
-    AccessPlayersComponent,
-    AddTrackerDialogComponent,
-    AddCharacter1NameComponent,
-    AddCharacter2ClassComponent,
-    AddCharacter3RaceComponent,
-    AddCharacter4BackgroundComponent,
-    AddItemDialogComponent,
-    CharacterSkillsComponent,
-    AddSkillDialogComponent,
-    CharacterSpellsComponent,
-    AddSpellDialogComponent,
-    CharacterInfoDialogComponent,
-    AddConditionDialogComponent,
-    EditPriorityItemComponent
   ],
   imports: [
+    CoreModule,
     HttpClientModule,
+    BrowserAnimationsModule,
     BrowserModule,
+
     AppRoutingModule,
     SharedModule,
-    BrowserAnimationsModule,
+    PlayerModule,
+    MasterModule,
+    WorkshopModule,
+
+    TuiRootModule,
+    TuiDialogModule,
+    TuiAlertModule,
+
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the application is stable
@@ -77,7 +55,20 @@ import { EditPriorityItemComponent } from './player/character/character-main/edi
       registrationStrategy: 'registerWhenStable:30000',
     }),
   ],
-  providers: [AuthGuard],
+  providers: [
+    { provide: ErrorHandler, useClass: GlobalErrorHandler },
+    { provide: TUI_SANITIZER, useClass: NgDompurifySanitizer },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+    {
+      provide: LOCALE_ID,
+      useValue: 'ru',
+    },
+    { provide: ErrorHandler, useClass: GlobalErrorHandler },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
