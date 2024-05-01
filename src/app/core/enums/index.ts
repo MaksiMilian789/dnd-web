@@ -8,3 +8,7 @@ export * from './attack-type.enum';
 export * from './rare.enum';
 export * from './item-type.enum';
 export * from './characteristics.enum';
+export * from './damage-type.enum';
+export * from './dice.enum';
+export * from './language.enum';
+export * from './recharge.enum';

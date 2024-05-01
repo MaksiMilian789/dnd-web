@@ -24,7 +24,6 @@ import {
 export class CreateConditionDialogComponent {
   form: FormGroup;
 
-  // TODO: Состояниям можно добавлять только passive скиллы
   skills: Skill[] = [];
 
   worlds: Signal<World[]>;
@@ -50,7 +49,7 @@ export class CreateConditionDialogComponent {
   }
 
   create(): void {
-    let skillIds: number[] = [];
+    let skillIds: number[] = this.skills.map(x => x.id);
     const dto: ConditionCreate = {
       name: this.form.controls['name'].value,
       description: this.form.controls['description'].value,

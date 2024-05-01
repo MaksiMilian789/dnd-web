@@ -6,10 +6,14 @@
         Название
         <input placeholder="Название состояния" tuiTextfield />
     </tui-input>
-    <tui-textarea formControlName="description" class="field-medium info" [expandable]="true" [maxLength]="100">
+    <tui-textarea formControlName="description" class="field-medium info" [expandable]="true" [maxLength]="1000">
         Описание
     </tui-textarea>
+    <tui-badged-content
+    [contentTop]="skills.length"
+  >
     <button tuiButton appearance="outline" (click)="addSkills()" class="info">Добавить скиллы</button>
+</tui-badged-content>
     <tui-select formControlName="worldId" [stringify]="stringifyWorld()" [tuiTextfieldCleaner]="true" class="info">
         Принадлежность к миру
         <tui-data-list *tuiDataList>

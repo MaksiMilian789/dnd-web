@@ -1,4 +1,4 @@
-import { SkillType, System } from "@core/enums";
+import { Recharge, SkillType, System } from "@core/enums";
 import { ActionType } from "@core/enums/action-type.enum";
 import { SkillValue } from "./skill-value.model";
 
@@ -11,7 +11,7 @@ export interface Skill {
   value: SkillValue;
   distance?: number;
   passive: boolean;
-  recharge: number;
+  recharge: Recharge;
   charges: number;
   hidden: boolean;
   system: System;

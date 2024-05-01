@@ -18,6 +18,8 @@ import {
 } from '@taiga-ui/core';
 import {
   TuiAccordionModule,
+  TuiBadgeModule,
+  TuiBadgedContentModule,
   TuiCheckboxBlockModule,
   TuiCheckboxLabeledModule,
   TuiDataListDropdownManagerModule,
@@ -64,7 +66,9 @@ import {
     TuiHostedDropdownModule,
     TuiActiveZoneModule,
     TuiAccordionModule,
-    TuiPrimitiveCheckboxModule
+    TuiPrimitiveCheckboxModule,
+    TuiBadgedContentModule,
+    TuiBadgeModule
   ],
 })
 export class TaigaModule {}

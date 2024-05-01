@@ -2,6 +2,7 @@ export * from './character/backgrounds/background.model';
 export * from './character/backgrounds/background-create.model';
 export * from './character/skills/skill.model';
 export * from './character/skills/skill-value.model';
+export * from './character/skills/skill-create.model';
 export * from './character/classes/class.model';
 export * from './character/classes/class-create.model';
 export * from './character/races/race.model';
