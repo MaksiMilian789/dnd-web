@@ -13,21 +13,27 @@ import { InventoryListComponent } from './inventory/components/inventory-list/in
 import { ClassListComponent } from './player-classes/components/class-list/class-list.component';
 import { RaceListComponent } from './races/components/race-list/race-list.component';
 import { SpellsListComponent } from './spells/components/spells-list/spells-list.component';
+import { CreateBackgroundDialogComponent } from './backgrounds/components/create-background-dialog/create-background-dialog.component';
+import { CreateRaceDialogComponent } from './races/components/create-race-dialog/create-race-dialog.component';
+import { CreateClassDialogComponent } from './player-classes/components/create-class-dialog/create-class-dialog.component';
 
 @NgModule({
   declarations: [
     WorkshopShellComponent,
     WorkshopHomeComponent,
-    ConditionsListComponent,
-    CreateConditionDialogComponent,    
+    ConditionsListComponent,  
     SelectSkillsComponent,    
-    SkillsListComponent,
-    CreateSkillDialogComponent,    
+    SkillsListComponent,  
     BackgroundsListComponent,
     InventoryListComponent,
     ClassListComponent,
     RaceListComponent,
-    SpellsListComponent
+    SpellsListComponent,
+    CreateSkillDialogComponent,  
+    CreateConditionDialogComponent,  
+    CreateBackgroundDialogComponent,
+    CreateRaceDialogComponent,
+    CreateClassDialogComponent
   ],
   imports: [
     SharedModule,

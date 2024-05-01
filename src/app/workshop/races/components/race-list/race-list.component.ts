@@ -12,6 +12,7 @@ import { Subject, switchMap, tap } from 'rxjs';
 
 import { WorkshopService } from '@core/services/api/workshop.service';
 import { Race } from '@core/models';
+import { CreateRaceDialogComponent } from '../create-race-dialog/create-race-dialog.component';
 
 @Component({
   selector: 'app-race-list',
@@ -67,8 +68,8 @@ export class RaceListComponent {
   }
 
   addItem(): void {
-    /*this._dialogs
-      .open<boolean>(new PolymorpheusComponent(CreateConditionDialogComponent), {
+    this._dialogs
+      .open<boolean>(new PolymorpheusComponent(CreateRaceDialogComponent), {
         size: 'page',
         closeable: true,
       })
@@ -76,7 +77,7 @@ export class RaceListComponent {
         complete: () => {
             this.refresh();
         },
-    });*/
+    });
   }
 
   deleteItem(id: number): void {

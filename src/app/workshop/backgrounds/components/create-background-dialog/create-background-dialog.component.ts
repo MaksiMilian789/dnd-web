@@ -5,7 +5,7 @@ import { TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
 import { POLYMORPHEUS_CONTEXT, PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
 
 import { System } from '@core/enums';
-import { ConditionCreate, Skill, World } from '@core/models';
+import { BackgroundCreate, ConditionCreate, Skill, World } from '@core/models';
 import { WorkshopService } from '@core/services/api/workshop.service';
 import { AuthService } from '@core/services/auth/auth.service';
 import { WorldService } from '@shared';
@@ -17,11 +17,11 @@ import {
 } from 'src/app/workshop/skills/components/select-skills/select-skills.component';
 
 @Component({
-  selector: 'app-create-condition-dialog',
-  templateUrl: './create-condition-dialog.component.html',
-  styleUrl: './create-condition-dialog.component.scss',
+  selector: 'app-create-background-dialog',
+  templateUrl: './create-background-dialog.component.html',
+  styleUrl: './create-background-dialog.component.scss',
 })
-export class CreateConditionDialogComponent {
+export class CreateBackgroundDialogComponent {
   form: FormGroup;
 
   skills: Skill[] = [];
@@ -50,7 +50,7 @@ export class CreateConditionDialogComponent {
 
   create(): void {
     let skillIds: number[] = this.skills.map(x => x.id);
-    const dto: ConditionCreate = {
+    const dto: BackgroundCreate = {
       name: this.form.controls['name'].value,
       description: this.form.controls['description'].value,
       system: System.Dnd,
@@ -58,7 +58,7 @@ export class CreateConditionDialogComponent {
       worldId: this.form.controls['worldId'].value ?? null,
       skillIds: skillIds,
     };
-    this._workshopService.createCondition(dto).subscribe(() => {
+    this._workshopService.createBackground(dto).subscribe(() => {
       this._snackbar.open('Создание успешно.');
       this.context.completeWith(true);
     });

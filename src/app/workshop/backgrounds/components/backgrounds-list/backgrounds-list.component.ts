@@ -11,6 +11,8 @@ import { Subject, switchMap, tap } from 'rxjs';
 
 import { Background } from '@core/models';
 import { WorkshopService } from '@core/services/api/workshop.service';
+import { CreateBackgroundDialogComponent } from '../create-background-dialog/create-background-dialog.component';
+import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
 
 @Component({
   selector: 'app-backgrounds-list',
@@ -66,8 +68,8 @@ export class BackgroundsListComponent {
   }
 
   addItem(): void {
-    /*this._dialogs
-      .open<boolean>(new PolymorpheusComponent(CreateConditionDialogComponent), {
+    this._dialogs
+      .open<boolean>(new PolymorpheusComponent(CreateBackgroundDialogComponent), {
         size: 'page',
         closeable: true,
       })
@@ -75,7 +77,7 @@ export class BackgroundsListComponent {
         complete: () => {
             this.refresh();
         },
-    });*/
+    });
   }
 
   deleteItem(id: number): void {

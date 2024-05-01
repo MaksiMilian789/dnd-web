@@ -12,6 +12,7 @@ import { Subject, switchMap, tap } from 'rxjs';
 
 import { WorkshopService } from '@core/services/api/workshop.service';
 import { Class } from '@core/models';
+import { CreateClassDialogComponent } from '../create-class-dialog/create-class-dialog.component';
 
 @Component({
   selector: 'app-class-list',
@@ -67,8 +68,8 @@ export class ClassListComponent {
   }
 
   addItem(): void {
-    /*this._dialogs
-      .open<boolean>(new PolymorpheusComponent(CreateConditionDialogComponent), {
+    this._dialogs
+      .open<boolean>(new PolymorpheusComponent(CreateClassDialogComponent), {
         size: 'page',
         closeable: true,
       })
@@ -76,7 +77,7 @@ export class ClassListComponent {
         complete: () => {
             this.refresh();
         },
-    });*/
+    });
   }
 
   deleteItem(id: number): void {
