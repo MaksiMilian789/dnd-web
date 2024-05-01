@@ -1,6 +1,6 @@
 import { AttackType, CharacteristicsEnum, ItemType, Rare, System } from '@core/enums';
-import { Skill } from './skills/skill.model';
-import { Damage } from './skills/skill-value.model';
+import { Skill } from '../skills/skill.model';
+import { Damage } from '../skills/skill-value.model';
 
 export interface Inventory {
   id: number;

@@ -1,0 +1,57 @@
+<mat-toolbar color="primary" class="toolbar mat-elevation-z6 secondary-toolbar">
+  <button mat-icon-button [routerLink]="['..']">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  Предыстории
+  <div class="spacer"></div>
+  <button mat-icon-button (click)="addItem()">
+    <mat-icon>add</mat-icon>
+  </button>
+</mat-toolbar>
+
+<div class="mat-elevation-z2 container">
+  <div class="table-overflow">
+    <table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort>
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Название </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Описание </th>
+        <td mat-cell *matCellDef="let element">
+          {{element.description.substring(0, 14)}}{{element.description.length > 15 ? '...' : ''}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+        <td mat-cell *matCellDef="let element"> <button mat-icon-button
+            (click)="deleteItem(element.id); $event.stopPropagation();"><mat-icon>delete</mat-icon></button></td>
+      </ng-container>
+
+      <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+      <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+          <div class="element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+            <div class="element-description">
+              {{element.description}}
+            </div>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplay; sticky: true"></tr>
+      <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="element-row"
+        [class.expanded-row]="expandedElement === element" (click)="expandedElement = element">
+      </tr>
+      <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
+
+      <tr class="mat-row center" *matNoDataRow>
+        <td class="mat-cell no-data mat-hint" colspan="3">Нет предысторий</td>
+      </tr>
+    </table>
+  </div>
+  <div class="containerBottom">
+    <mat-paginator [pageSize]="25" [pageSizeOptions]="[10, 15, 25, 50, 100]" showFirstLastButtons></mat-paginator>
+  </div>
+</div>

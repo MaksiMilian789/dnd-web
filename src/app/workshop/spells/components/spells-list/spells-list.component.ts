@@ -6,18 +6,17 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
-import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
 import { TuiDialogService } from '@taiga-ui/core';
+import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
 import { Subject, switchMap, tap } from 'rxjs';
 
-import { Character, Inventory } from '@core/models';
-import { CharacterService } from '@core/services/api/character.service';
-import { AddInventoryDialogComponentData, AddItemDialogComponent } from '../add-item-dialog/add-item-dialog.component';
+import { WorkshopService } from '@core/services/api/workshop.service';
+import { Spell } from '@core/models';
 
 @Component({
-  selector: 'app-character-inventory',
-  templateUrl: './character-inventory.component.html',
-  styleUrls: ['./character-inventory.component.scss'],
+  selector: 'app-spells-list',
+  templateUrl: './spells-list.component.html',
+  styleUrls: ['./spells-list.component.scss'],
   animations: [
     trigger('detailExpand', [
       state('collapsed', style({ height: '0px', minHeight: '0', display: 'none' })),
@@ -26,34 +25,31 @@ import { AddInventoryDialogComponentData, AddItemDialogComponent } from '../add-
     ]),
   ],
 })
-export class CharacterInventoryComponent {
+export class SpellsListComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  charId: number = Number(this._route.snapshot.paramMap.get('characterId'));
-  character: Signal<Character | null>;
+  spells: Signal<Spell[]>;
 
-  dataSource!: MatTableDataSource<Inventory>;
-  columnsToDisplay = ['name', 'quantity', 'actions'];
-  expandedElement!: Inventory;
+  dataSource!: MatTableDataSource<Spell>;
+  columnsToDisplay = ['name', 'description', 'actions'];
+  expandedElement!: Spell;
 
   private readonly _refresh$ = new Subject<void>();
 
   constructor(
     @Inject(TuiDialogService) private readonly _dialogs: TuiDialogService,
-    private _characterService: CharacterService,
+    private _workshopService: WorkshopService,
     private _route: ActivatedRoute,
     private _snackbar: MatSnackBar,
   ) {
-    //TODO: вывести количество настрое и сколько занято, а также возможность настройки
-
-    this.character = toSignal(
+    this.spells = toSignal(
       this._refresh$.pipe(
-        switchMap(() => this._characterService.loadCharacter(this.charId)),
+        switchMap(() => this._workshopService.getSpells()),
         tap((val) => this.setData(val)),
       ),
       {
-        initialValue: null,
+        initialValue: [],
       },
     );
     this.refresh();
@@ -63,29 +59,24 @@ export class CharacterInventoryComponent {
     this._refresh$.next();
   }
 
-  setData(character: Character): void {
-    this.dataSource = new MatTableDataSource(character.objectInstance ?? []);
-    this.paginator._intl.itemsPerPageLabel = 'Предметов на страницу';
+  setData(data: Spell[]): void {
+    this.dataSource = new MatTableDataSource(data);
+    this.paginator._intl.itemsPerPageLabel = 'Состояний на страницу';
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
   }
 
   addItem(): void {
-    const data: AddInventoryDialogComponentData = {
-      character: this.character()!,
-    };
-
-    this._dialogs
-      .open<boolean>(new PolymorpheusComponent(AddItemDialogComponent), {
-        data: data,
+    /*this._dialogs
+      .open<boolean>(new PolymorpheusComponent(CreateConditionDialogComponent), {
         size: 'page',
         closeable: true,
       })
       .subscribe({
         complete: () => {
-          this.refresh();
+            this.refresh();
         },
-      });
+    });*/
   }
 
   deleteItem(id: number): void {

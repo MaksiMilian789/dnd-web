@@ -1,12 +1,12 @@
 import { AttackType, System } from "@core/enums";
-import { ActionTime, Skill } from "@core/models";
+import { ActionTime, Damage, Skill } from "@core/models";
 
 export interface Spell {
   id: number;
   name: string;
   description: string;
   level: number;
-  //damage: Damage;
+  damage: Damage;
   attackType: AttackType;
   actionTime: ActionTime;
   //components: 

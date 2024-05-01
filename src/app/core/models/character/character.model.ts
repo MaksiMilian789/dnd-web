@@ -6,7 +6,7 @@ import { Class } from "./classes/class.model";
 import { SpellSlot } from "./spells/spell-slot.model";
 import { EnergySlot } from "./energy-slot.model";
 import { Condition } from "./conditions/condition.model";
-import { Inventory } from "./inventory.model";
+import { Inventory } from "./inventory/inventory.model";
 import { Note } from "./note.model";
 import { Skill } from "./skills/skill.model";
 import { Spell } from "./spells/spell.model";

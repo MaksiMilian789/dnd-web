@@ -12,11 +12,15 @@ import {
   ClassCreate,
   Condition,
   ConditionCreate,
+  Inventory,
+  InventoryCreate,
   Race,
   RaceCreate,
   ShortCharacter,
   Skill,
   SkillCreate,
+  Spell,
+  SpellCreate,
 } from '@core/models';
 
 @Injectable({
@@ -70,6 +74,22 @@ export class WorkshopService {
 
   public createSkill(req: SkillCreate): Observable<void> {
     return this._http.post<void>(`${this._baseUrl}/skill`, req);
+  }
+
+  public getSpells(): Observable<Spell[]> {
+    return this._http.get<Spell[]>(`${this._baseUrl}/getSpells`, {});
+  }
+
+  public createSpell(req: SpellCreate): Observable<void> {
+    return this._http.post<void>(`${this._baseUrl}/spell`, req);
+  }
+
+  public getInventoryObjects(): Observable<Inventory[]> {
+    return this._http.get<Inventory[]>(`${this._baseUrl}/getObjects`, {});
+  }
+
+  public createInventoryObject(req: InventoryCreate): Observable<void> {
+    return this._http.post<void>(`${this._baseUrl}/object`, req);
   }
 
   /*public deleteCharacters(ids: number[]): Observable<void> {

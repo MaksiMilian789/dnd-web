@@ -8,6 +8,11 @@ import { CreateConditionDialogComponent } from './conditions/components/create-c
 import { SelectSkillsComponent } from './skills/components/select-skills/select-skills.component';
 import { SkillsListComponent } from './skills/components/skills-list/skills-list.component';
 import { CreateSkillDialogComponent } from './skills/components/create-skill-dialog/create-skill-dialog.component';
+import { BackgroundsListComponent } from './backgrounds/components/backgrounds-list/backgrounds-list.component';
+import { InventoryListComponent } from './inventory/components/inventory-list/inventory-list.component';
+import { ClassListComponent } from './player-classes/components/class-list/class-list.component';
+import { RaceListComponent } from './races/components/race-list/race-list.component';
+import { SpellsListComponent } from './spells/components/spells-list/spells-list.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +22,12 @@ import { CreateSkillDialogComponent } from './skills/components/create-skill-dia
     CreateConditionDialogComponent,    
     SelectSkillsComponent,    
     SkillsListComponent,
-    CreateSkillDialogComponent
+    CreateSkillDialogComponent,    
+    BackgroundsListComponent,
+    InventoryListComponent,
+    ClassListComponent,
+    RaceListComponent,
+    SpellsListComponent
   ],
   imports: [
     SharedModule,
