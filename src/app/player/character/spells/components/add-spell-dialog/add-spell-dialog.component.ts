@@ -11,6 +11,7 @@ import { POLYMORPHEUS_CONTEXT } from '@tinkoff/ng-polymorpheus';
 import { Character, Spell } from '@core/models';
 import { CharacterService } from '@core/services/api/character.service';
 import { FormControl } from '@angular/forms';
+import { WorkshopService } from '@core/services/api/workshop.service';
 
 export interface AddSpellDialogComponentData {
   character: Character;
@@ -45,13 +46,14 @@ export class AddSpellDialogComponent {
     @Inject(POLYMORPHEUS_CONTEXT)
     protected readonly context: TuiDialogContext<boolean, AddSpellDialogComponentData>,
     private _characterService: CharacterService,
+    private _workshopService: WorkshopService,
     private _snackbar: MatSnackBar,
     private _route: ActivatedRoute,
   ) {
-    /*_characterService.get().subscribe((val) => {
+    _workshopService.getSpells().subscribe((val) => {
       this.allData = val;
       this.setData();
-    });*/
+    });
 
     this.hidden.valueChanges.subscribe(() => this.setData());
   }
@@ -69,12 +71,10 @@ export class AddSpellDialogComponent {
   }
 
   add(spellId: number) {
-    /*this._characterService.addCharacterSkill(this.context.data.character.id!, skillId).subscribe({
+    this._characterService.addCharacterSpell(this.context.data.character.id!, spellId).subscribe({
       complete: () => {
         this._snackbar.open('Добавление успешно.');
       },
-    });*/
+    });
   }
 }
-
-

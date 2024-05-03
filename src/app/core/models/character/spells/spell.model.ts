@@ -14,5 +14,5 @@ export interface Spell {
   components: ComponentsSpell[];
   distance?: number;
   system: System;
-  skillInstance: Skill[];
+  skillInstances: Skill[];
 }

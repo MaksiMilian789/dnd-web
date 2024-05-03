@@ -86,6 +86,30 @@ export class CharacterService {
       },
     );
   }
+  
+  public addCharacterInventoryObject(charId: number, objectId: number): Observable<void> {
+    var params = new HttpParams().append('id', charId);
+    params = params.append('objectId', objectId);
+    return this._http.put<void>(
+      `${this._baseUrl}/addObject`,
+      {},
+      {
+        params: params,
+      },
+    );
+  }
+
+  public addCharacterSpell(charId: number, spellId: number): Observable<void> {
+    var params = new HttpParams().append('id', charId);
+    params = params.append('spellId', spellId);
+    return this._http.put<void>(
+      `${this._baseUrl}/addSpell`,
+      {},
+      {
+        params: params,
+      },
+    );
+  }
 
   /*public deleteCharacters(ids: number[]): Observable<void> {
     return this._http.delete<void>(`${this._baseUrl}/deleteCharacter`, {
@@ -93,27 +117,11 @@ export class CharacterService {
     });
   }
 
-  public getItems(): Observable<Item[]> {
-    return this._http.get<Item[]>(`${this._baseUrl}/listItems`, {});
-  }
-
-  public addCharacterItem(charId: number, objectId: number): Observable<void> {
-    return this._http.post<void>(
-      `${this._baseUrl}/addCharacterItem`,
-      { charId: charId, objectId: objectId },
-      {}
-    );
-  }
-
   public deleteCharacterItem(id: number): Observable<void> {
     var params = new HttpParams().append('id', id);
     return this._http.delete<void>(`${this._baseUrl}/deleteCharacterItem`, {
       params: params,
     });
-  }
-
-  public getSpells(): Observable<Spell[]> {
-    return this._http.get<Spell[]>(`${this._baseUrl}/listSpells`, {});
   }
 
   public addCharacterSpell(charId: number, spellId: number): Observable<void> {
@@ -168,17 +176,6 @@ export class CharacterService {
       },
       {}
     );
-  }
-
-  public getConditions(): Observable<Condition[]> {
-    return this._http.get<Condition[]>(`${this._baseUrl}/listConditions`, {});
-  }
-
-  public getCharacterConditions(id: number): Observable<Condition[]> {
-    var params = new HttpParams().append('id', id);
-    return this._http.get<Condition[]>(`${this._baseUrl}/characterConditions`, {
-      params: params,
-    });
   }
 
   public addCharacterCondition(

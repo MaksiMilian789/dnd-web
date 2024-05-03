@@ -11,6 +11,7 @@ import { POLYMORPHEUS_CONTEXT } from '@tinkoff/ng-polymorpheus';
 import { Character, Inventory } from '@core/models';
 import { CharacterService } from '@core/services/api/character.service';
 import { FormControl } from '@angular/forms';
+import { WorkshopService } from '@core/services/api/workshop.service';
 
 export interface AddInventoryDialogComponentData {
   character: Character;
@@ -45,13 +46,14 @@ export class AddItemDialogComponent {
     @Inject(POLYMORPHEUS_CONTEXT)
     protected readonly context: TuiDialogContext<boolean, AddInventoryDialogComponentData>,
     private _characterService: CharacterService,
+    private _workshopService: WorkshopService,
     private _snackbar: MatSnackBar,
     private _route: ActivatedRoute,
   ) {
-    /*_characterService.get().subscribe((val) => {
+    _workshopService.getInventoryObjects().subscribe((val) => {
       this.allData = val;
       this.setData();
-    });*/
+    });
 
     this.hidden.valueChanges.subscribe(() => this.setData());
   }
@@ -69,11 +71,10 @@ export class AddItemDialogComponent {
   }
 
   add(objectId: number) {
-    /*this._characterService.addCharacterSkill(this.context.data.character.id!, skillId).subscribe({
+    this._characterService.addCharacterInventoryObject(this.context.data.character.id!, objectId).subscribe({
       complete: () => {
         this._snackbar.open('Добавление успешно.');
       },
-    });*/
+    });
   }
 }
-

@@ -80,13 +80,13 @@ export class CharacterSkillsComponent {
     });
 
     character.objectInstance.forEach((instance) => {
-      instance.skillInstance.forEach((element) => {
+      instance.skillInstances.forEach((element) => {
         data.push(element);
       });
     });
 
     character.spellInstance.forEach((instance) => {
-      instance.skillInstance.forEach((element) => {
+      instance.skillInstances.forEach((element) => {
         data.push(element);
       });
     });

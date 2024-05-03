@@ -17,5 +17,5 @@ export interface Inventory {
   equipped: boolean;
   imageId?: number;
   system: System;
-  skillInstance: Skill[];
+  skillInstances: Skill[];
 }
