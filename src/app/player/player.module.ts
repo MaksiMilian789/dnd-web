@@ -16,6 +16,9 @@ import { CharacteristicsDialogComponent } from './character/components/character
 import { CharInfoDialogComponent } from './character/components/char-info-dialog/char-info-dialog.component';
 import { CharacterBattleComponent } from './character/components/character-battle/character-battle.component';
 import { AddConditionDialogComponent } from './character/conditions/components/add-condition-dialog/add-condition-dialog.component';
+import { NoteComponent } from './character/notes/components/note/note.component';
+import { NotesHomeComponent } from './character/notes/components/notes-home/notes-home.component';
+import { NotesShellComponent } from './character/notes/components/notes-shell/notes-shell.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,10 @@ import { AddConditionDialogComponent } from './character/conditions/components/a
     CharacteristicsDialogComponent,    
     CharInfoDialogComponent,    
     CharacterBattleComponent,
-    AddConditionDialogComponent
+    AddConditionDialogComponent,
+    NoteComponent,
+    NotesHomeComponent,
+    NotesShellComponent
   ],
   imports: [
     SharedModule,

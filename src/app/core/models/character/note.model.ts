@@ -1,3 +1,6 @@
 export interface Note {
-  //TODO
+  id: number;
+  header: string;
+  text: string;
+  imageId?: number;
 }

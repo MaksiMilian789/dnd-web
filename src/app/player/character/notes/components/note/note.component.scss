@@ -1,0 +1,50 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+::ng-deep.angular-editor-textarea {
+  border-radius: 10px;
+}
+
+::ng-deep.angular-editor-toolbar {
+  border-radius: 10px;
+}
+
+.footer {
+  width: 85vw;
+}
+
+.island {
+  height: 100%;
+}
+
+.button {
+  margin-top: 10px;
+}
+
+.redText {
+  color: Red;
+  font-size: 12px;
+  font-family: Arial;
+}
+
+h1.titleText {
+  color: #63a5ce;
+  text-align: left;
+  margin-top: 40px;
+  font-weight: normal;
+}

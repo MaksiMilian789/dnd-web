@@ -1,0 +1,11 @@
+<div class="container">
+    <tui-island size="m" textAlign="center" class="island">
+        <angular-editor [formControl]="text" [config]="editorConfig"></angular-editor>
+        <div class="footer">
+            <button tuiButton type="button" [icon]="edit ? 'tuiIconSaveLarge' : 'tuiIconEdit3Large'"
+                appearance="outline" class="button" (click)="editorButtonClick()">
+                {{edit ? 'Сохранить' : 'Редактировать'}}
+            </button>
+        </div>
+    </tui-island>
+</div>

@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './material.module';
 import { TaigaModule } from './taiga.module';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 import { ColorPipe } from './pipes/color.pipe';
 import { StatsSkillPipe } from './pipes/stats-skill.pipe';
@@ -34,7 +35,8 @@ import { WorldsComponent } from './components/worlds/worlds.component';
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-    TaigaModule
+    TaigaModule,    
+    AngularEditorModule 
   ],
   exports: [
     CommonModule,
@@ -43,7 +45,8 @@ import { WorldsComponent } from './components/worlds/worlds.component';
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-    TaigaModule,
+    TaigaModule,   
+    AngularEditorModule,
 
     WorldsComponent,
     AddWorldDialogComponent,
