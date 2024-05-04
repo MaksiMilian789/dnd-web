@@ -1,5 +1,5 @@
 <mat-toolbar color="primary" class="toolbar mat-elevation-z6 secondary-toolbar">
-    <button mat-icon-button [routerLink]="['..']">
+    <button mat-icon-button [routerLink]="['/player']">
         <mat-icon>arrow_back</mat-icon>
     </button>
     <div class="spacer"></div>
@@ -16,22 +16,34 @@
             <mat-icon>delete_forever</mat-icon>
         </button>
     </ng-template>
-    <button mat-icon-button *ngIf="role == 'master'" (click)="addWorld()">
-        <mat-icon>add</mat-icon>
-    </button>
+    <a mat-icon-button (click)="addWorld()">
+        <mat-icon>ev_shadow_add</mat-icon>
+    </a>
 </mat-toolbar>
 
-<ng-container *ngIf="shortWorlds$ | async as worlds">
-    <div class="center" *ngFor="let world of worlds;">
-        <div class="card-container">
-            <mat-checkbox class="card-checbox" *ngIf="isSelectionModeEnabled" [ngModel]="isItemSelected(world)"
-                (change)="toggleSelection(world)"></mat-checkbox>
-            <mat-card class="card pointer" [routerLink]="role == 'master' ? ['/master/world', world.id] : ['/player/world', world.id]">
-                <mat-card-title>{{world.name}}</mat-card-title>
-                <mat-card-subtitle>
-                    {{world.description}}
-                </mat-card-subtitle>
-            </mat-card>
+<div class="center">
+    <ng-container *ngIf="shortWorlds$ | async as worlds">
+        <div *ngFor="let world of worlds;">
+            <div class="card-container">
+                <mat-checkbox class="card-checkbox" *ngIf="isSelectionModeEnabled" [ngModel]="isItemSelected(world)"
+                    (change)="toggleSelection(world)"></mat-checkbox>
+                <mat-card class="card pointer" [routerLink]="role == 'master' ? ['/master/world', world.id] : ['/player/world', world.id]">
+                    <mat-card-title>
+                        <div class="name-container">
+                            <span class="truncate block">{{world.name}}</span>
+                        </div>
+                    </mat-card-title>
+                    <mat-card-subtitle>
+                        <div class="description-container">
+                            <span class="truncate block">{{world.description}}</span>
+                        </div>
+                    </mat-card-subtitle>
+                </mat-card>
+            </div>
         </div>
-    </div>
-</ng-container>
+        @if(worlds.length == 0){
+        <span class="truncate block">Нет миров</span>
+        }
+    </ng-container>
+</div>
+
