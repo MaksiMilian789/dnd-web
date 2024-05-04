@@ -12,7 +12,7 @@ import { PlayerHomeComponent } from './components/player-home/player-home.compon
 import { PlayerShellComponent } from './components/player-shell/player-shell.component';
 import { CreateCharacterComponent } from './character/components/create-character/create-character.component';
 import { CharacterBattleComponent } from './character/components/character-battle/character-battle.component';
-import { NotesShellComponent } from './character/notes/components/notes-shell/notes-shell.component';
+import { NoteComponent } from './character/notes/components/note/note.component';
 
 export const PLAYER_ROUTES: Routes = [
   {
@@ -54,7 +54,7 @@ export const PLAYER_ROUTES: Routes = [
       },
       {
         path: 'character/:characterId/notes',
-        component: NotesShellComponent,
+        component: NoteComponent,
       },
       {
         path: 'worlds',

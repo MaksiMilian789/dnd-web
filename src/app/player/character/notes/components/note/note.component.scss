@@ -1,23 +1,51 @@
 :host {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   height: 100%;
 }
 
-.container {
+.example-container {
+  flex: 1 1 auto;
+}
+
+.sidenav {
+  min-width: 300px;
+}
+
+:host::ng-deep.mat-drawer-inner-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.drawer-content {
+  overflow: auto;
+  flex: 1 1 auto;
+}
+
+.sidenav-content {
   display: flex;
   flex-direction: column;
   height: 100%;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
+}
+
+.mat-mdc-list-item {
+  .mat-icon {
+    color: black;
+  }
 }
 
 ::ng-deep.angular-editor-textarea {
   border-radius: 10px;
+
+  ul {
+    margin-left: 10px;
+    list-style: disc;
+  }
+
+  ol {
+    margin-left: 10px;
+    list-style: decimal;
+  }
 }
 
 ::ng-deep.angular-editor-toolbar {
@@ -28,23 +56,23 @@
   width: 85vw;
 }
 
-.island {
+.container {
   height: 100%;
+  margin: 0.5rem;
+}
+
+.island {
+  height: calc(100% - 40px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .button {
   margin-top: 10px;
 }
 
-.redText {
-  color: Red;
-  font-size: 12px;
-  font-family: Arial;
-}
-
-h1.titleText {
-  color: #63a5ce;
-  text-align: left;
-  margin-top: 40px;
-  font-weight: normal;
+.header {
+  margin-bottom: 10px;
+  width: 90vw;
 }

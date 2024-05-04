@@ -111,6 +111,25 @@ export class CharacterService {
     );
   }
 
+  public saveNote(charId: number, header: string, text: string, imageId: number | null, noteId: number | null): Observable<void> {
+    var params = new HttpParams().append('id', charId);
+    params = params.append('header', header);
+    params = params.append('text', text);
+    if(!!imageId){
+      params = params.append('imageId', imageId);
+    }
+    if(!!noteId){
+      params = params.append('noteId', noteId);
+    }
+    return this._http.put<void>(
+      `${this._baseUrl}/note`,
+      {},
+      {
+        params: params,
+      },
+    );
+  }
+
   /*public deleteCharacters(ids: number[]): Observable<void> {
     return this._http.delete<void>(`${this._baseUrl}/deleteCharacter`, {
       body: { id: ids },
