@@ -1,9 +1,12 @@
-<a mat-raised-button [routerLink]="['worlds']" class="home-button">
-    <mat-icon [inline]="true">public</mat-icon>
-    Игровые миры
-</a>
-<br>
-<!-->><a mat-raised-button [routerLink]="['access-players']" class="home-button">
-    <mat-icon [inline]="true">group</mat-icon>
-    Управление игроками
-</a><-->
+<div class="container">
+    <tui-island size="m" textAlign="center">
+        <h3 class="tui-island__title">Кабинет Мастера</h3>
+        <a mat-raised-button [routerLink]="['access-players']" class="home-button">
+            Управление игроками
+        </a>
+        <br>
+        <a mat-raised-button [routerLink]="['worlds']" class="home-button world">
+            Игровые миры
+        </a>
+    </tui-island>
+</div>
