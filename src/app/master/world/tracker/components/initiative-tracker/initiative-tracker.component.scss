@@ -6,21 +6,11 @@
   margin: 15px;
 }
 
-@media screen and (max-width: 365px) {
-  .card {
-    min-width: 110px !important;
-    width: 25vw !important;
-  }
-
-  .mat-card-title {
-    font-size: medium !important;
-  }
-}
-
 .card-container {
   display: flex;
   flex-direction: row;
   align-items: center;
+  gap: 10px;
 }
 
 .tracker-container {
@@ -30,27 +20,25 @@
   align-items: center;
 }
 
-.mat-card-title {
-  font-size: large;
-}
-
 .first {
   margin-top: 20px;
 }
 
-.list {
-  padding-left: 30px;
+.sort {
+  margin-top: 20px;
+  width: 50vw;
+  min-width: 100px;
+  margin-bottom: 10px;
 }
 
-.sort {
-  margin-top: auto;
-  width: 70vw;
-  margin-bottom: 10px;
+.scroll {
+  margin-top: 10px;
 }
 
 .next {
   margin-top: 10px;
-  width: 70vw;
+  width: 50vw;
+  min-width: 100px;
 }
 
 .divider {
@@ -65,27 +53,51 @@
 }
 
 .card-remove {
-  height: 35px;
-  width: 15px;
-  margin-left: 5px;
+  height: 57px;
+  width: 57px;
   display: flex;
   align-items: center;
 }
 
 .button-remove {
-  width: 15px;
+  padding-top: 15px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+}
+
+.initiative {
+  color: gray;
+}
+
+.mat-mdc-card-title {
+  font-size: large;
+  margin-left: 5px;
+  margin-top: 5px;
+}
+
+.mat-mdc-card-subtitle {
+  font-size: medium;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 12px;
 }
 
 .card-img {
   height: 57px;
   width: 57px;
-  margin-right: 5px;
   padding: 5px;
 }
 
 .card-icon {
-  height: 57px;
-  width: 57px;
+  position: absolute;
+  height: 47px;
+  width: 47px;
+}
+
+.inner-icon{
+  margin-top: 12px;
+  margin-left: 12px;
 }
 
 .red {
@@ -103,7 +115,7 @@
 .card {
   min-width: 145px;
   width: 33vw;
-  height: 35px;
+  height: 57px;
 }
 
 *::-webkit-scrollbar,

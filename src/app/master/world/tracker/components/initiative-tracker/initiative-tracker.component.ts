@@ -15,8 +15,6 @@ import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
   styleUrls: ['./initiative-tracker.component.scss'],
 })
 export class InitiativeTrackerComponent {
-  @ViewChild(CdkVirtualScrollViewport) virtualScroll!: CdkVirtualScrollViewport;
-
   units: TrackerUnit[] = [];
   worldId: number = Number(this._route.snapshot.paramMap.get('worldId'));
 
@@ -31,7 +29,7 @@ export class InitiativeTrackerComponent {
 
   sort(): void {
     this.units.sort((a, b) => parseInt(b.initiative) - parseInt(a.initiative));
-    this.virtualScroll.scrollToIndex(0);
+    //this.virtualScroll.scrollToIndex(0);
   }
 
   next(): void {
@@ -51,24 +49,19 @@ export class InitiativeTrackerComponent {
 
   add(): void {
     this._dialogs
-      .open(new PolymorpheusComponent(CreateTrackerUnitDialogComponent), {
+      .open<TrackerUnit | null>(new PolymorpheusComponent(CreateTrackerUnitDialogComponent), {
         size: 'page',
         closeable: true,
       })
-      .subscribe({
-        complete: () => {
-          
-        },
-      });
-        /*if (val != false) {
-          console.log( this.units)
+      .subscribe((val) => {
+        if (val) {
           this.units.push(val as TrackerUnit);
-          console.log( this.units)
           this._worldService.setTracker(this.worldId, this.units).subscribe({
             complete: () => {
               this._snackbar.open('Добавление успешно.');
             },
           });
-        }*/
+        }
+      });
   }
 }

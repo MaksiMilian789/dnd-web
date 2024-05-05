@@ -19,12 +19,12 @@ export class CreateTrackerUnitDialogComponent {
 
   constructor(
     @Inject(POLYMORPHEUS_CONTEXT)
-    protected readonly context: TuiDialogContext<boolean | TrackerUnit>,
+    protected readonly context: TuiDialogContext<TrackerUnit | null>,
     @Inject(TuiDialogService) private readonly _dialogs: TuiDialogService,
   ) {
     this.form = new FormGroup({
       name: new FormControl('', Validators.required),
-      initiative: new FormControl('', Validators.required),
+      initiative: new FormControl(0, [Validators.required]),
       color: new FormControl(0, Validators.required),
       icon: new FormControl(0, Validators.required),
     });
@@ -37,11 +37,13 @@ export class CreateTrackerUnitDialogComponent {
       color: Colors[this.form.value.color],
       icon: Icons[this.form.value.icon],
     };
-    this.context.completeWith(newUnit);
+    setTimeout(() => {
+      this.context.completeWith(newUnit);
+    }, 300);
   }
 
   close(): void {
-    this.context.completeWith(false);
+    this.context.completeWith(null);
   }
 
   getIcon(): string {

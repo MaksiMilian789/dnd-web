@@ -61,7 +61,7 @@ export class WorldService {
 
   public setTracker(id: number, tracker: TrackerUnit[]): Observable<void> {
     var params = new HttpParams().append('worldId', id);
-    return this._http.put<void>(`${this._baseUrl}/editTracker`, tracker, {
+    return this._http.put<void>(`${this._baseUrl}/setTracker`, tracker, {
       params: params,
     });
   }

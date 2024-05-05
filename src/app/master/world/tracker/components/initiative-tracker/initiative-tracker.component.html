@@ -1,69 +1,87 @@
 <mat-toolbar color="primary" class="toolbar mat-elevation-z6 secondary-toolbar">
-    <a mat-icon-button [routerLink]="['..']">
-        <mat-icon>arrow_back</mat-icon>
-    </a>
-    <div class="spacer"></div>
-    <button mat-icon-button (click)="add()">
-        <mat-icon>person_add</mat-icon>
-    </button>
+  <a mat-icon-button [routerLink]="['..']">
+    <mat-icon>arrow_back</mat-icon>
+  </a>
+  <div class="spacer"></div>
+  <button mat-icon-button (click)="add()">
+    <mat-icon>person_add</mat-icon>
+  </button>
 </mat-toolbar>
-@if(units.length != 0){
-<div class="tracker-container">
+@if (units.length != 0) {
+  <div class="tracker-container">
     <div class="center first">
-        <div class="card-container">
-            <mat-card class="card-img">
-                <div class="card-icon" [ngClass]="{
-            red: units[0].color === 'red',
-            green: units[0].color === 'green',
-            yellow: units[0].color === 'yellow'
-            }">
-                </div>
-            </mat-card>
-            <mat-card class="card">
-                <mat-card-title class="truncate">{{units[0].name}}</mat-card-title>
-                <mat-card-subtitle>
-                    Инициатива:
-                    <div style="float: right;">{{units[0].initiative}}</div>
-                </mat-card-subtitle>
-            </mat-card>
-            <mat-card class="card-remove">
-                <button mat-icon-button class="button-remove" (click)="remove(units[0])">
-                    <mat-icon [inline]="true">remove</mat-icon>
-                </button>
-            </mat-card>
-        </div>
+      <div class="card-container">
+        <mat-card class="card-img">
+          <div
+            class="card-icon"
+            [ngClass]="{
+              red: units[0].color === 'red',
+              green: units[0].color === 'green',
+              yellow: units[0].color === 'yellow'
+            }"
+          ></div>
+          @if (units[0].icon != 'none') {
+            <div class="card-icon inner-icon">
+              <mat-icon>
+                {{ units[0].icon }}
+              </mat-icon>
+            </div>
+          }
+        </mat-card>
+        <mat-card class="card">
+          <mat-card-title class="truncate">{{ units[0].name }}</mat-card-title>
+          <mat-card-subtitle>
+            Инициатива:
+            <div style="float: right">{{ units[0].initiative }}</div>
+          </mat-card-subtitle>
+        </mat-card>
+        <mat-card class="card-remove">
+          <button mat-icon-button class="button-remove" (click)="remove(units[0])">
+            <mat-icon [inline]="true">remove</mat-icon>
+          </button>
+        </mat-card>
+      </div>
     </div>
     <button mat-raised-button class="next" (click)="next()">Следующий</button>
     <mat-divider class="divider"></mat-divider>
 
-    <cdk-virtual-scroll-viewport itemSize="50" class="viewport">
-        <div class="center list" *cdkVirtualFor="let unit of units | slice:1; let i = index">
-            <div class="card-container">
-                <mat-card class="card-img">
-                    <div class="card-icon" [ngClass]="{
-            red: unit.color === 'red',
-            green: unit.color === 'green',
-            yellow: unit.color === 'yellow'
-            }">
-                    </div>
-                </mat-card>
-                <mat-card class="card">
-                    <mat-card-title class="truncate">{{unit.name}}</mat-card-title>
-                    <mat-card-subtitle>
-                        Инициатива:
-                        <div style="float: right;">{{unit.initiative}}</div>
-                    </mat-card-subtitle>
-                </mat-card>
-                <mat-card class="card-remove">
-                    <button mat-icon-button class="button-remove" (click)="remove(unit)">
-                        <mat-icon [inline]="true">remove</mat-icon>
-                    </button>
-                </mat-card>
-            </div>
+    <tui-scrollbar class="scroll">
+      <div class="center list" *ngFor="let unit of units | slice: 1; let i = index">
+        <div class="card-container">
+          <mat-card class="card-img">
+            <div
+              class="card-icon"
+              [ngClass]="{
+                red: unit.color === 'red',
+                green: unit.color === 'green',
+                yellow: unit.color === 'yellow'
+              }"
+            ></div>
+            @if (unit.icon != 'none') {
+              <div class="card-icon inner-icon">
+                <mat-icon>
+                  {{ unit.icon }}
+                </mat-icon>
+              </div>
+            }
+          </mat-card>
+          <mat-card class="card">
+            <mat-card-title class="truncate">{{ unit.name }}</mat-card-title>
+            <mat-card-subtitle>
+              Инициатива:
+              <div style="float: right" class="initiative">{{ unit.initiative }}</div>
+            </mat-card-subtitle>
+          </mat-card>
+          <mat-card class="card-remove">
+            <button mat-icon-button class="button-remove" (click)="remove(unit)">
+              <mat-icon [inline]="true">remove</mat-icon>
+            </button>
+          </mat-card>
         </div>
-    </cdk-virtual-scroll-viewport>
+      </div>
+    </tui-scrollbar>
     <button mat-raised-button class="sort" (click)="sort()">Отсортировать</button>
-</div>
-}@else {
-<span class="center">Нет юнитов</span>
+  </div>
+} @else {
+  <span class="center">Нет юнитов</span>
 }

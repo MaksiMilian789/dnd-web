@@ -6,10 +6,9 @@
         Имя
         <input placeholder="Имя" tuiTextfield />
     </tui-input>
-    <tui-input-number formControlName="initiative" class="info">
+    <tui-input-slider formControlName="initiative" class="info" [min]="0" [max]="100" [steps]="100" [quantum]="0.1">
         Инициатива
-        <input placeholder="Инициатива" tuiTextfield />
-    </tui-input-number>
+    </tui-input-slider>
     <tui-select formControlName="color" [stringify]="stringifyColor()" class="info">
         Цвет
         <tui-data-list *tuiDataList>
@@ -31,5 +30,5 @@
         <mat-icon>{{getIcon()}}</mat-icon>
     </div>
     }
-    <button tuiButton appearance="outline" (click)="create()" class="info" >Добавить</button>
+    <button tuiButton appearance="outline" (click)="create()" class="info" [disabled]="form.invalid">Добавить</button>
 </form>
