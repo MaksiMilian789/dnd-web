@@ -13,6 +13,7 @@ import { SimpleDialogComponent } from './components/simple-dialog';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog';
 import { WikiComponent } from './components/wiki/wiki.component';
 import { WorldsComponent } from './components/worlds/worlds.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { WorldsComponent } from './components/worlds/worlds.component';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
+    ScrollingModule,
     MaterialModule,
     TaigaModule,    
     AngularEditorModule 
@@ -40,6 +42,7 @@ import { WorldsComponent } from './components/worlds/worlds.component';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
+    ScrollingModule,
     MaterialModule,
     TaigaModule,   
     AngularEditorModule,

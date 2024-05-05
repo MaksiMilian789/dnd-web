@@ -1,0 +1,35 @@
+<form [formGroup]="form">
+    <div class="header">
+        <h3>Добавить нового юнита в трекер</h3>
+    </div>
+    <tui-input formControlName="name" class="info">
+        Имя
+        <input placeholder="Имя" tuiTextfield />
+    </tui-input>
+    <tui-input-number formControlName="initiative" class="info">
+        Инициатива
+        <input placeholder="Инициатива" tuiTextfield />
+    </tui-input-number>
+    <tui-select formControlName="color" [stringify]="stringifyColor()" class="info">
+        Цвет
+        <tui-data-list *tuiDataList>
+            <button *ngFor="let color of colors | keyvalue : stopSort" tuiOption [value]="color.key">
+                {{ color.value }}
+            </button>
+        </tui-data-list>
+    </tui-select>
+    <tui-select formControlName="icon" [stringify]="stringifyIcon()" class="info">
+        Иконка
+        <tui-data-list *tuiDataList>
+            <button *ngFor="let icon of icons | keyvalue : stopSort" tuiOption [value]="icon.key">
+                {{ icon.value }}
+            </button>
+        </tui-data-list>
+    </tui-select>
+    @if(form.controls['icon'].value && form.controls['icon'].value != 0){
+    <div class="icon">
+        <mat-icon>{{getIcon()}}</mat-icon>
+    </div>
+    }
+    <button tuiButton appearance="outline" (click)="create()" class="info" >Добавить</button>
+</form>

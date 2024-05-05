@@ -1,0 +1,21 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.info {
+  width: 90vw;
+  margin: 10px;
+}
+
+.header {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.icon {
+  display: flex;
+  justify-content: center;
+}

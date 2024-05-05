@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { APP_CONFIG, AppConfig } from '@core/config';
 import { ShortWorld, TrackerUnit, World } from '@core/models';
 import { Role } from '@core/enums';
+import { Tracker } from '@core/models/tracker.model';
 
 @Injectable({
   providedIn: 'root',
@@ -51,15 +52,18 @@ export class WorldService {
     return this._http.put<void>(`${this._baseUrl}`, world, {});
   }
 
-  public getTracker(id: number): Observable<TrackerUnit[]> {
-    var params = new HttpParams().append('id', id);
-    return this._http.get<TrackerUnit[]>(`${this._baseUrl}/getTracker`, {
+  public getTracker(id: number): Observable<Tracker> {
+    var params = new HttpParams().append('worldId', id);
+    return this._http.get<Tracker>(`${this._baseUrl}/getTracker`, {
       params: params,
     });
   }
 
   public setTracker(id: number, tracker: TrackerUnit[]): Observable<void> {
-    return this._http.put<void>(`${this._baseUrl}/editTracker`, { id: id, tracker: tracker }, {});
+    var params = new HttpParams().append('worldId', id);
+    return this._http.put<void>(`${this._baseUrl}/editTracker`, tracker, {
+      params: params,
+    });
   }
 
   /*public deleteWorlds(ids: number[]): Observable<void> {
