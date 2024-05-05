@@ -1,0 +1,54 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background:
+    url('/assets/backgrounds/book.png') no-repeat,
+    url('/assets/backgrounds/unicorn.png') right bottom no-repeat;
+  transition: background-size 1s ease-in-out 100ms;
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+  overflow: auto;
+  height: calc(100% - 100px);
+  font-size: medium;
+}
+
+@media screen and (max-width: 4096px) {
+  :host {
+    animation: appear 1s ease;
+    background-size: 170px, 170px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  :host {
+    animation: appearMobile 1s ease;
+    background-size: 120px, 120px;
+  }
+}
+
+@keyframes appearMobile {
+  0% {
+    background-size: 0px, 0px;
+  }
+  100% {
+    background-size: 120px, 120px;
+  }
+}
+
+@keyframes appear {
+  0% {
+    background-size: 0px, 0px;
+  }
+  100% {
+    background-size: 170px, 170px;
+  }
+}

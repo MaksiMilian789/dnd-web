@@ -1,1 +1,68 @@
-<p>wiki works!</p>
+<mat-toolbar color="primary" class="toolbar secondary-toolbar">
+  <button mat-icon-button [routerLink]="['..']">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  Wiki мира
+  <div class="spacer"></div>
+  @if (role == 'master') {
+    <button mat-icon-button (click)="addWiki()" [disabled]="create">
+      <mat-icon>add</mat-icon>
+    </button>
+  }
+  <button mat-icon-button (click)="drawer.toggle()" [disabled]="wiki.length == 0">
+    <mat-icon>menu_book</mat-icon>
+  </button>
+</mat-toolbar>
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="sidenav mat-elevation-z4" [mode]="drawlerMode" [(opened)]="openDrawer" position="end">
+    <div class="drawer-content">
+      <mat-nav-list>
+        @for (wikiPart of wiki; track $index) {
+          <a
+            mat-list-item
+            (click)="selectWiki(wikiPart.id)"
+            routerLinkActive="active"
+            (click)="openDrawer = !openDrawer"
+          >
+            <mat-icon matListItemIcon>edit_note</mat-icon>
+            <p matLine class="nav-list-text">{{ wikiPart.name }}</p>
+          </a>
+        }
+      </mat-nav-list>
+    </div>
+  </mat-drawer>
+  <div class="sidenav-content">
+    @if (wikiId) {
+      @if (pageId || create) {
+        <div class="container">
+          <tui-island size="m" textAlign="center" class="island">
+            <tui-input [formControl]="header" class="header" [readOnly]="!editorConfig.editable">
+              Заголовок
+              <input tuiTextfield />
+            </tui-input>
+            <angular-editor [formControl]="text" [config]="editorConfig"></angular-editor>
+            <div class="footer">
+              @if (role == 'master') {
+                <button
+                  tuiButton
+                  type="button"
+                  [icon]="edit ? 'tuiIconSaveLarge' : 'tuiIconEdit3Large'"
+                  appearance="outline"
+                  class="button"
+                  (click)="editorButtonClick()"
+                  [disabled]="!canSave()"
+                >
+                  {{ edit ? (create ? 'Создать' : 'Сохранить') : 'Редактировать' }}
+                </button>
+              }
+            </div>
+          </tui-island>
+        </div>
+      } @else {
+        Список разделов
+      }
+    } @else {
+      <app-wiki-home></app-wiki-home>
+    }
+  </div>
+</mat-drawer-container>

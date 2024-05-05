@@ -1,55 +1,71 @@
 <mat-toolbar color="primary" class="toolbar mat-elevation-z6 secondary-toolbar">
-    <button mat-icon-button [routerLink]="['/player']">
-        <mat-icon>arrow_back</mat-icon>
-    </button>
-    @if(role == 'master'){
+  <button mat-icon-button [routerLink]="['/player']">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  @if (role == 'master') {
     Миры мастера
-    }@else {
+  } @else {
     Миры игрока
-    }
-    <div class="spacer"></div>
-    @if(role == 'master'){
-    <button mat-icon-button (click)="enableSelectionMode()" matTooltip="Включить режим выбора"
-        *ngIf="!isSelectionModeEnabled; else selectionButtons">
-        <mat-icon>checklist</mat-icon>
+  }
+  <div class="spacer"></div>
+  @if (role == 'master') {
+    <button
+      mat-icon-button
+      (click)="enableSelectionMode()"
+      matTooltip="Включить режим выбора"
+      *ngIf="!isSelectionModeEnabled; else selectionButtons"
+    >
+      <mat-icon>checklist</mat-icon>
     </button>
     <ng-template #selectionButtons>
-        <button mat-icon-button (click)="disableSelectionMode()" matTooltip="Отменить">
-            <mat-icon>cancel</mat-icon>
-        </button>
-        <button mat-icon-button color="warn" (click)="deleteSelectedItems()" matTooltip="Удалить выбранное"
-            [disabled]="!canDelete">
-            <mat-icon>delete_forever</mat-icon>
-        </button>
+      <button mat-icon-button (click)="disableSelectionMode()" matTooltip="Отменить">
+        <mat-icon>cancel</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        color="warn"
+        (click)="deleteSelectedItems()"
+        matTooltip="Удалить выбранное"
+        [disabled]="!canDelete"
+      >
+        <mat-icon>delete_forever</mat-icon>
+      </button>
     </ng-template>
     <a mat-icon-button (click)="addWorld()">
-        <mat-icon>ev_shadow_add</mat-icon>
-    </a>}
+      <mat-icon>ev_shadow_add</mat-icon>
+    </a>
+  }
 </mat-toolbar>
 
 <div class="center">
+  <tui-scrollbar class="scroll">
     <ng-container *ngIf="shortWorlds$ | async as worlds">
-        <div *ngFor="let world of worlds;">
-            <div class="card-container">
-                <mat-checkbox class="card-checkbox" *ngIf="isSelectionModeEnabled" [ngModel]="isItemSelected(world)"
-                    (change)="toggleSelection(world)"></mat-checkbox>
-                <mat-card class="card pointer"
-                    [routerLink]="role == 'master' ? ['/master/world', world.id] : ['/player/world', world.id]">
-                    <mat-card-title>
-                        <div class="name-container">
-                            <span class="truncate block">{{world.name}}</span>
-                        </div>
-                    </mat-card-title>
-                    <mat-card-subtitle>
-                        <div class="description-container">
-                            <span class="truncate block">{{world.description}}</span>
-                        </div>
-                    </mat-card-subtitle>
-                </mat-card>
+      <div *ngFor="let world of worlds" class="item">
+        <mat-checkbox
+          class="card-checkbox"
+          *ngIf="isSelectionModeEnabled"
+          [ngModel]="isItemSelected(world)"
+          (change)="toggleSelection(world)"
+        ></mat-checkbox>
+        <mat-card
+          class="card pointer"
+          [routerLink]="role == 'master' ? ['/master/world', world.id] : ['/player/world', world.id]"
+        >
+          <mat-card-title>
+            <div class="name-container">
+              <span class="truncate block">{{ world.name }}</span>
             </div>
-        </div>
-        @if(worlds.length == 0){
+          </mat-card-title>
+          <mat-card-subtitle>
+            <div class="description-container">
+              <span class="truncate block">{{ world.description }}</span>
+            </div>
+          </mat-card-subtitle>
+        </mat-card>
+      </div>
+      @if (worlds.length == 0) {
         <span class="truncate block">Нет миров</span>
-        }
+      }
     </ng-container>
+  </tui-scrollbar>
 </div>

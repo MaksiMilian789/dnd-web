@@ -1,0 +1,10 @@
+<form [formGroup]="form">
+    <div class="header">
+        <h3>Создание нового раздела wiki</h3>
+    </div>
+    <tui-input formControlName="name" class="info">
+        Название
+        <input placeholder="Название раздела" tuiTextfield />
+    </tui-input>
+    <button tuiButton appearance="outline" (click)="create()" class="info" [disabled]="form.invalid">Создать</button>
+</form>

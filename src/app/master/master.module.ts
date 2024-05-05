@@ -7,6 +7,7 @@ import { MasterShellComponent } from './components/master-shell/master-shell.com
 import { InitiativeTrackerComponent } from './world/tracker/components/initiative-tracker/initiative-tracker.component';
 import { CreateWorldDialogComponent } from './world/components/create-world-dialog/create-world-dialog.component';
 import { CreateTrackerUnitDialogComponent } from './world/tracker/components/create-tracker-unit-dialog/create-tracker-unit-dialog.component';
+import { CreateWikiDialogComponent } from './world/wiki/components/create-wiki-dialog/create-wiki-dialog.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { CreateTrackerUnitDialogComponent } from './world/tracker/components/cre
     MasterHomeComponent,
     AccessPlayersComponent,
     CreateTrackerUnitDialogComponent,
-    CreateWorldDialogComponent
+    CreateWorldDialogComponent,
+    CreateWikiDialogComponent
   ],
   imports: [
     SharedModule,

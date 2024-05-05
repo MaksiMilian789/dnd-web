@@ -7,6 +7,7 @@ import { AccessPlayersComponent } from './access/components/access-players/acces
 import { MasterHomeComponent } from './components/master-home/master-home.component';
 import { MasterShellComponent } from './components/master-shell/master-shell.component';
 import { InitiativeTrackerComponent } from './world/tracker/components/initiative-tracker/initiative-tracker.component';
+import { WikiComponent } from '@shared/components/wiki/wiki.component';
 
 export const MASTER_ROUTES: Routes = [
     {
@@ -33,6 +34,10 @@ export const MASTER_ROUTES: Routes = [
           {
             path: 'world/:worldId/tracker',
             component: InitiativeTrackerComponent,
+          },
+          {
+            path: 'world/:worldId/wiki',
+            component: WikiComponent,
           },
         ],
       },

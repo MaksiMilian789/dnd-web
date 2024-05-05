@@ -13,6 +13,7 @@ import { PlayerShellComponent } from './components/player-shell/player-shell.com
 import { CreateCharacterComponent } from './character/components/create-character/create-character.component';
 import { CharacterBattleComponent } from './character/components/character-battle/character-battle.component';
 import { NoteComponent } from './character/notes/components/note/note.component';
+import { WikiComponent } from '@shared/components/wiki/wiki.component';
 
 export const PLAYER_ROUTES: Routes = [
   {
@@ -63,6 +64,10 @@ export const PLAYER_ROUTES: Routes = [
       {
         path: 'world/:worldId',
         component: WorldComponent,
+      },
+      {
+        path: 'world/:worldId/wiki',
+        component: WikiComponent,
       },
     ],
   },

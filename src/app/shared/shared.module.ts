@@ -13,6 +13,7 @@ import { SimpleDialogComponent } from './components/simple-dialog';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog';
 import { WikiComponent } from './components/wiki/wiki.component';
 import { WorldsComponent } from './components/worlds/worlds.component';
+import { WikiHomeComponent } from './components/wiki-home/wiki-home.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { WorldsComponent } from './components/worlds/worlds.component';
     WikiComponent,
     SimpleDialogComponent,
     ConfirmationDialogComponent,
+    WikiHomeComponent,
 
     ColorPipe, 
     StatsSkillPipe,
@@ -45,6 +47,7 @@ import { WorldsComponent } from './components/worlds/worlds.component';
     AngularEditorModule,
 
     WorldsComponent,
+    WikiHomeComponent,
 
     ColorPipe,
     StatsSkillPipe

@@ -66,6 +66,18 @@ export class WorldService {
     });
   }
 
+  public addWikiPart(name: string, id: number): Observable<void> {
+    var params = new HttpParams().append('worldId', id);
+    params = params.append('name', name);
+    return this._http.post<void>(
+      `${this._baseUrl}/wikiPart`,
+      {},
+      {
+        params: params,
+      },
+    );
+  }
+
   /*public deleteWorlds(ids: number[]): Observable<void> {
     return this._http.delete<void>(`${this._baseUrl}/deleteWorld`, {
       body: { id: ids },
