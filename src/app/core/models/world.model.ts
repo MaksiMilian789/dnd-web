@@ -4,4 +4,6 @@ export interface ShortWorld {
   description: string;
 }
 
-export interface World extends ShortWorld {}
+export interface World extends ShortWorld {
+  imaheId?: number;
+}

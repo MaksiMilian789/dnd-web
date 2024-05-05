@@ -1,0 +1,14 @@
+<form [formGroup]="form">
+    <div class="header">
+        <h3>Создание нового мира</h3>
+    </div>
+    <tui-input formControlName="name" class="info">
+        Название
+        <input placeholder="Название мира" tuiTextfield />
+    </tui-input>
+    <tui-textarea formControlName="description" class="field-medium info" [expandable]="true" [maxLength]="1000">
+        Описание
+    </tui-textarea>
+    <button tuiButton appearance="outline" (click)="true" class="info" [disabled]="true">Карта</button>
+    <button tuiButton appearance="outline" (click)="create()" class="info" [disabled]="form.invalid">Создать</button>
+</form>

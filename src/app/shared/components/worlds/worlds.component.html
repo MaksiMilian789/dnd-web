@@ -2,7 +2,13 @@
     <button mat-icon-button [routerLink]="['/player']">
         <mat-icon>arrow_back</mat-icon>
     </button>
+    @if(role == 'master'){
+    Миры мастера
+    }@else {
+    Миры игрока
+    }
     <div class="spacer"></div>
+    @if(role == 'master'){
     <button mat-icon-button (click)="enableSelectionMode()" matTooltip="Включить режим выбора"
         *ngIf="!isSelectionModeEnabled; else selectionButtons">
         <mat-icon>checklist</mat-icon>
@@ -18,7 +24,7 @@
     </ng-template>
     <a mat-icon-button (click)="addWorld()">
         <mat-icon>ev_shadow_add</mat-icon>
-    </a>
+    </a>}
 </mat-toolbar>
 
 <div class="center">
@@ -27,7 +33,8 @@
             <div class="card-container">
                 <mat-checkbox class="card-checkbox" *ngIf="isSelectionModeEnabled" [ngModel]="isItemSelected(world)"
                     (change)="toggleSelection(world)"></mat-checkbox>
-                <mat-card class="card pointer" [routerLink]="role == 'master' ? ['/master/world', world.id] : ['/player/world', world.id]">
+                <mat-card class="card pointer"
+                    [routerLink]="role == 'master' ? ['/master/world', world.id] : ['/player/world', world.id]">
                     <mat-card-title>
                         <div class="name-container">
                             <span class="truncate block">{{world.name}}</span>
@@ -46,4 +53,3 @@
         }
     </ng-container>
 </div>
-

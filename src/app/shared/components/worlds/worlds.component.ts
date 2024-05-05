@@ -1,13 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { TuiDialogService } from '@taiga-ui/core';
 import { Observable } from 'rxjs';
 
 import { WorldService } from '@core/services/api/world.service';
 import { ShortWorld } from '@core/models';
 import { AuthService } from '@core/services/auth/auth.service';
-import { AddWorldDialogComponent } from 'src/app/master/world/components/add-world-dialog/add-world-dialog.component';
+import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
+import { CreateWorldDialogComponent } from 'src/app/master/world/components/create-world-dialog/create-world-dialog.component';
 
 @Component({
   selector: 'app-worlds',
@@ -26,11 +27,11 @@ export class WorldsComponent {
   userId: number;
 
   constructor(
+    @Inject(TuiDialogService) private readonly _dialogs: TuiDialogService,
     private _worldService: WorldService,
     private _auth: AuthService,
     private _router: Router,
-    private _dialog: MatDialog,
-    private _snackbar: MatSnackBar
+    private _snackbar: MatSnackBar,
   ) {
     this.role = this._router.url.split('/')[1];
     // Получение информации о пользователе
@@ -79,11 +80,15 @@ export class WorldsComponent {
   }
 
   addWorld(): void {
-    this._dialog
-      .open(AddWorldDialogComponent, { width: '300px' })
-      .afterClosed()
-      .subscribe(
-        () => (this.shortWorlds$ = this._worldService.loadShortWorlds(this.userId, 0))
-      );
+    this._dialogs
+      .open<boolean>(new PolymorpheusComponent(CreateWorldDialogComponent), {
+        size: 'page',
+        closeable: true,
+      })
+      .subscribe({
+        complete: () => {
+          this.shortWorlds$ = this._worldService.loadShortWorlds(this.userId, 0);
+        },
+      });
   }
 }

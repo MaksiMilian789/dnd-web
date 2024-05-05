@@ -8,8 +8,6 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 
 import { ColorPipe } from './pipes/color.pipe';
 import { StatsSkillPipe } from './pipes/stats-skill.pipe';
-import { AddWorldDialogComponent } from '../master/world/components/add-world-dialog/add-world-dialog.component';
-import { EditWorldDialogComponent } from '../master/world/components/edit-world-dialog/edit-world-dialog.component';
 import { WorldComponent } from './components/world/world.component';
 import { SimpleDialogComponent } from './components/simple-dialog';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog';
@@ -21,8 +19,6 @@ import { WorldsComponent } from './components/worlds/worlds.component';
     WorldsComponent,
     WorldComponent,
     WikiComponent,
-    AddWorldDialogComponent,
-    EditWorldDialogComponent, 
     SimpleDialogComponent,
     ConfirmationDialogComponent,
 
@@ -49,8 +45,6 @@ import { WorldsComponent } from './components/worlds/worlds.component';
     AngularEditorModule,
 
     WorldsComponent,
-    AddWorldDialogComponent,
-    EditWorldDialogComponent,
 
     ColorPipe,
     StatsSkillPipe

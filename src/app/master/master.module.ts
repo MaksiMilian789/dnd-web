@@ -6,6 +6,7 @@ import { MasterHomeComponent } from './components/master-home/master-home.compon
 import { MasterShellComponent } from './components/master-shell/master-shell.component';
 import { AddTrackerDialogComponent } from './world/tracker/components/add-tracker-dialog/add-tracker-dialog.component';
 import { InitiativeTrackerComponent } from './world/tracker/components/initiative-tracker/initiative-tracker.component';
+import { CreateWorldDialogComponent } from './world/components/create-world-dialog/create-world-dialog.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { InitiativeTrackerComponent } from './world/tracker/components/initiativ
     MasterHomeComponent,
     AccessPlayersComponent,
     AddTrackerDialogComponent,
+    CreateWorldDialogComponent
   ],
   imports: [
     SharedModule,

@@ -1,28 +1,38 @@
-
 <ng-container *ngIf="world$ | async as world">
     <mat-toolbar color="primary" class="toolbar mat-elevation-z6 secondary-toolbar">
-    <a mat-icon-button [routerLink]="role == 'master' ? ['/master/worlds'] : ['/player/worlds']">
-        <mat-icon>arrow_back</mat-icon>
-    </a>
-    <div class="spacer"></div>
-    <button mat-icon-button *ngIf="role == 'master'" (click)="editWorld(world)">
-        <mat-icon>edit</mat-icon>
-    </button>
-</mat-toolbar>
-
-    <div class="card-container center">
-        <mat-card class="card">
-            <mat-card-title>{{world.name}}</mat-card-title>
-            <mat-card-content>
-                {{world.description}}
-            </mat-card-content>
-        </mat-card>
-    </div>
-
-    <div class="center" *ngIf="role == 'master'">
-        <a mat-raised-button [routerLink]="['tracker']" class="home-button">
-            <mat-icon [inline]="true">directions_run</mat-icon>
+        <a mat-icon-button [routerLink]="role == 'master' ? ['/master/worlds'] : ['/player/worlds']">
+            <mat-icon>arrow_back</mat-icon>
+        </a>
+        <div class="spacer"></div>
+        @if(!edit){
+        <button mat-icon-button *ngIf="role == 'master'" (click)="editChange(world)">
+            <mat-icon>edit</mat-icon>
+        </button>
+        }@else {
+        <button mat-icon-button *ngIf="role == 'master'" (click)="save(world)">
+            <mat-icon>save</mat-icon>
+        </button>
+        <button mat-icon-button *ngIf="role == 'master'" (click)="editChange(world)">
+            <mat-icon>edit_off</mat-icon>
+        </button>
+        }
+    </mat-toolbar>
+    <form [formGroup]="form" class="center">
+        <tui-input formControlName="name" class="info" [readOnly]="!edit">
+            Название
+            <input placeholder="Название мира" tuiTextfield />
+        </tui-input>
+        <tui-textarea formControlName="description" class="field-medium info" [expandable]="true" [maxLength]="1000"
+            [readOnly]="!edit">
+            Описание
+        </tui-textarea>
+    </form>
+    <div class="center">
+        <a mat-raised-button *ngIf="role == 'master'" [routerLink]="['tracker']" class="home-button world">
             Трекер инициативы
+        </a>
+        <a mat-raised-button [routerLink]="['wiki']" class="home-button">
+            Вики мира
         </a>
     </div>
 </ng-container>

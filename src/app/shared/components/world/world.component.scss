@@ -4,30 +4,19 @@
   justify-content: center;
   align-items: center;
   margin: 30px;
-}
-
-.card-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.card {
-  min-width: 200px;
-  width: 70vw;
-}
-
-mat-card-title {
-  text-align: center;
-  margin-bottom: 15px;
+  gap: 1rem;
 }
 
 .home-button {
   font-size: 3vh;
-  min-width: 330px;
-  width: 55vw;
+  min-width: 300px;
+  width: 50vw;
   min-height: 7vh;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.info {
+  width: 80vw;
 }

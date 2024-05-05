@@ -2,6 +2,7 @@
     <button mat-icon-button [routerLink]="['/player']">
         <mat-icon>arrow_back</mat-icon>
     </button>
+    Персонажи игрока
     <div class="spacer"></div>
     <button mat-icon-button (click)="enableSelectionMode()" matTooltip="Включить режим выбора"
         *ngIf="!isSelectionModeEnabled; else selectionButtons">

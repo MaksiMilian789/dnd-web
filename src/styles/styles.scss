@@ -1,13 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
-@import "material.scss";
+@import 'material.scss';
 
 @font-face {
   font-family: 'Material Icons';
   font-style: normal;
   font-weight: 400;
-  src: local('Material Icons'), local('MaterialIcons-Regular'),
-    url('/assets/fonts/MaterialIcons-Regular.woff2')
-      format('woff2');
+  src:
+    local('Material Icons'),
+    local('MaterialIcons-Regular'),
+    url('/assets/fonts/MaterialIcons-Regular.woff2') format('woff2');
 }
 
 :root {
@@ -23,7 +24,7 @@ body {
 }
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
 @media screen and (max-width: 500px) {
@@ -82,4 +83,24 @@ body {
 
 .pointer {
   cursor: pointer;
+}
+
+.strike-diagonal-left {
+  background: linear-gradient(
+    to left top,
+    transparent 47.75%,
+    currentColor 49.5%,
+    currentColor 50.5%,
+    transparent 52.25%
+  );
+}
+
+.strike-diagonal-right {
+  background: linear-gradient(
+    to right top,
+    transparent 47.75%,
+    currentColor 49.5%,
+    currentColor 50.5%,
+    transparent 52.25%
+  );
 }
