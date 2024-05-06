@@ -102,7 +102,7 @@ export class NoteComponent {
           if (this.create) {
             this.create = false;
           }
-          this._snackbar.open('Создание заметки успешно. Можете выбрать её в меню слева.');
+          this._snackbar.open('Сохранение заметки успешно');
         });
     } else {
       this.enableEditor();

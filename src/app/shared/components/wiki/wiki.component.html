@@ -59,7 +59,30 @@
           </tui-island>
         </div>
       } @else {
-        Список разделов
+        <div class="container">
+          <tui-island size="m" textAlign="center" class="island">
+            @if (role == 'master') {
+              <div class="create-page">
+                <button tuiButton (click)="addWikiPage()" appearance="outline">Создать странцу</button>
+                <mat-divider class="divider"></mat-divider>
+              </div>
+            }
+            @if (getWikiPartPages().length > 0) {
+              <tui-scrollbar>
+                <div class="pages">
+                  @for (wikiPage of getWikiPartPages(); track $index) {
+                    <button tuiButton (click)="selectWikiPage(wikiPage)" appearance="outline" class="page-button">
+                      {{ wikiPage.header.substring(0, 30) }}{{wikiPage.header.length > 30 ? '...' : ''}}
+                    </button>
+                  }
+                </div>
+              </tui-scrollbar>
+            } @else {
+              Нет страниц
+            }
+            <div></div>
+          </tui-island>
+        </div>
       }
     } @else {
       <app-wiki-home></app-wiki-home>

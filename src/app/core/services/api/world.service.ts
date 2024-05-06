@@ -78,6 +78,25 @@ export class WorldService {
     );
   }
 
+  public saveWikiPage(wikiId: number, header: string, text: string, imageId: number | null, pageId: number | null): Observable<void> {
+    var params = new HttpParams().append('wikiId', wikiId);
+    params = params.append('header', header);
+    params = params.append('text', text);
+    if(!!imageId){
+      params = params.append('imageId', imageId);
+    }
+    if(!!pageId){
+      params = params.append('pageId', pageId);
+    }
+    return this._http.put<void>(
+      `${this._baseUrl}/wikiPage`,
+      {},
+      {
+        params: params,
+      },
+    );
+  }
+
   /*public deleteWorlds(ids: number[]): Observable<void> {
     return this._http.delete<void>(`${this._baseUrl}/deleteWorld`, {
       body: { id: ids },

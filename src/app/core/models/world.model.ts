@@ -12,8 +12,9 @@ export interface World extends ShortWorld {
 export interface Wiki {
   id: number;
   name: number;
-  pages: WikiPage;
+  pages: WikiPage[];
 }
+
 export interface WikiPage {
   id: number;
   header: string;

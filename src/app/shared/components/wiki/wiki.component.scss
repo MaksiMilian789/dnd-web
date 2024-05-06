@@ -1,79 +1,93 @@
 :host {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.example-container {
+  flex: 1 1 auto;
+}
+
+.sidenav {
+  min-width: 300px;
+}
+
+:host::ng-deep.mat-drawer-inner-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.drawer-content {
+  overflow: auto;
+  flex: 1 1 auto;
+}
+
+.sidenav-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.mat-mdc-list-item {
+  .mat-icon {
+    color: black;
   }
-  
-  .example-container {
-    flex: 1 1 auto;
+}
+
+::ng-deep.angular-editor-textarea {
+  border-radius: 10px;
+
+  ul {
+    margin-left: 10px;
+    list-style: disc;
   }
-  
-  .sidenav {
-    min-width: 300px;
+
+  ol {
+    margin-left: 10px;
+    list-style: decimal;
   }
-  
-  :host::ng-deep.mat-drawer-inner-container {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .drawer-content {
-    overflow: auto;
-    flex: 1 1 auto;
-  }
-  
-  .sidenav-content {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-  }
-  
-  .mat-mdc-list-item {
-    .mat-icon {
-      color: black;
-    }
-  }
-  
-  ::ng-deep.angular-editor-textarea {
-    border-radius: 10px;
-  
-    ul {
-      margin-left: 10px;
-      list-style: disc;
-    }
-  
-    ol {
-      margin-left: 10px;
-      list-style: decimal;
-    }
-  }
-  
-  ::ng-deep.angular-editor-toolbar {
-    border-radius: 10px;
-  }
-  
-  .footer {
-    width: 85vw;
-  }
-  
-  .container {
-    height: 100%;
-    margin: 0.5rem;
-  }
-  
-  .island {
-    height: calc(100% - 40px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .button {
-    margin-top: 10px;
-  }
-  
-  .header {
-    margin-bottom: 10px;
-    width: 90vw;
-  }
-  
+}
+
+::ng-deep.angular-editor-toolbar {
+  border-radius: 10px;
+}
+
+.footer {
+  width: 85vw;
+}
+
+.container {
+  height: calc(100% - 1rem);
+  margin: 0.5rem;
+}
+
+.island {
+  height: calc(100% - 40px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.button {
+  margin-top: 10px;
+}
+
+.header {
+  margin-bottom: 10px;
+  width: 90vw;
+}
+
+.create-page {
+  width: 80vw;
+}
+
+.divider {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.pages {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

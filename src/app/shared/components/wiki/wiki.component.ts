@@ -101,6 +101,8 @@ export class WikiComponent {
   }
 
   selectWiki(id: number): void {
+    this.create = false;
+    this.pageId = null;
     this.wikiId = id;
   }
 
@@ -123,15 +125,17 @@ export class WikiComponent {
   editorButtonClick(): void {
     if (this.edit) {
       this.disableEditor();
-      /*this._characterService
-        .saveNote(this.charId, this.header.value!, this.text.value!, null, this.noteId)
-        .subscribe(() => {
-          this.refresh();
-          if (this.create) {
-            this.create = false;
-          }
-          this._snackbar.open('Создание заметки успешно. Можете выбрать её в меню слева.');
-        });*/
+      if (this.wikiId) {
+        this._worldService
+          .saveWikiPage(this.wikiId, this.header.value!, this.text.value!, null, this.pageId)
+          .subscribe(() => {
+            this.refresh();
+            if (this.create) {
+              this.create = false;
+            }
+            this._snackbar.open('Сохранение страницы успешно');
+          });
+      }
     } else {
       this.enableEditor();
     }
@@ -160,5 +164,12 @@ export class WikiComponent {
     this.editorConfig.minHeight = 'calc(100vh - 370px)';
     this.editorConfig.minHeight = 'calc(100vh - 370px)';
     this.editorConfig.editable = false;
+  }
+
+  getWikiPartPages(): WikiPage[] {
+    if (this.wikiId) {
+      return this.wiki.find((x) => x.id == this.wikiId)!.pages;
+    }
+    return [];
   }
 }
