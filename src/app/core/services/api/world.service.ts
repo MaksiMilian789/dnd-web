@@ -37,11 +37,11 @@ export class WorldService {
     });
   }
 
-  public createWorld(userId: number, name: string, description: string): Observable<void> {
+  public createWorld(userId: number, name: string, description: string, imageId?: number): Observable<void> {
     var params = new HttpParams().append('userId', userId);
     return this._http.post<void>(
       `${this._baseUrl}`,
-      { name: name, description: description },
+      { name: name, description: description, imageId: imageId },
       {
         params: params,
       },

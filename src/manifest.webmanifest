@@ -1,18 +1,13 @@
 {
-  "name": "dnd-web",
-  "short_name": "dnd-web",
+  "name": "D&D компаньон",
+  "short_name": "D&D компаньон",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
+  "orientation": "any",
   "scope": "./",
   "start_url": "./",
   "icons": [
-    {
-      "src": "assets/icons/icon-96x96.png",
-      "sizes": "96x96",
-      "type": "image/png",
-      "purpose": "maskable any"
-    },
     {
       "src": "assets/icons/icon-144x144.png",
       "sizes": "144x144",

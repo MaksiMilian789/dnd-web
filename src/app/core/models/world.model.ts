@@ -5,7 +5,7 @@ export interface ShortWorld {
 }
 
 export interface World extends ShortWorld {
-  imaheId?: number;
+  imageId?: number;
   wiki?: Wiki[];
 }
 

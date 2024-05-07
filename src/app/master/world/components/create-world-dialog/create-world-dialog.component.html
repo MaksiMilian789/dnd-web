@@ -9,6 +9,13 @@
     <tui-textarea formControlName="description" class="field-medium info" [expandable]="true" [maxLength]="1000">
         Описание
     </tui-textarea>
-    <button tuiButton appearance="outline" (click)="true" class="info" [disabled]="true">Карта</button>
+    <div class="file info">
+        <tui-input-files accept="image/*" [formControl]="img"></tui-input-files>
+    
+        <tui-files class="tui-space_top-1">
+          <tui-file *ngIf="hasImage() && img.value" [file]="img.value" (removed)="removeFile()"></tui-file>
+          <tui-file *ngIf="loading" state="loading" [file]="img.value" (removed)="removeFile()"></tui-file>
+        </tui-files>
+      </div>
     <button tuiButton appearance="outline" (click)="create()" class="info" [disabled]="form.invalid">Создать</button>
 </form>

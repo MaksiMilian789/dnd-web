@@ -1,0 +1,27 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.image {
+  max-width: 100vw;
+  max-height: 100vh;
+  overflow: auto;
+}
+
+.buttons {
+  position: absolute;
+  right: 30px;
+  bottom: 30px;
+}
+
+.button {
+  margin-right: 15px;
+}
+
+::ng-deep.t-content{
+  padding: 0 !important;
+}

@@ -1,5 +1,5 @@
 <mat-toolbar color="primary" class="toolbar mat-elevation-z6 secondary-toolbar">
-  <button mat-icon-button [routerLink]="['/player']">
+  <button mat-icon-button [routerLink]="['..']">
     <mat-icon>arrow_back</mat-icon>
   </button>
   @if (role == 'master') {
@@ -49,6 +49,7 @@
         ></mat-checkbox>
         <mat-card
           class="card pointer"
+          [class.min-card]="isSelectionModeEnabled"
           [routerLink]="role == 'master' ? ['/master/world', world.id] : ['/player/world', world.id]"
         >
           <mat-card-title>

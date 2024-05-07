@@ -41,7 +41,11 @@
           [ngModel]="isItemSelected(character)"
           (change)="toggleSelection(character)"
         ></mat-checkbox>
-        <mat-card class="card pointer" [routerLink]="['/player/character', character.id]">
+        <mat-card
+          class="card pointer"
+          [class.min-card]="isSelectionModeEnabled"
+          [routerLink]="['/player/character', character.id]"
+        >
           <mat-card-title>
             <div class="name-container">
               <span class="truncate block">{{ character.name }}</span>

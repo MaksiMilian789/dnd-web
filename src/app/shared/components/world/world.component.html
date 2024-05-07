@@ -4,6 +4,9 @@
             <mat-icon>arrow_back</mat-icon>
         </a>
         <div class="spacer"></div>
+        <button mat-icon-button (click)="openMap(world.imageId!)" [disabled]="!hasMap(world)">
+            <mat-icon>map</mat-icon>
+        </button>
         @if(!edit){
         <button mat-icon-button *ngIf="role == 'master'" (click)="editChange(world)">
             <mat-icon>edit</mat-icon>
@@ -22,7 +25,7 @@
             Название
             <input placeholder="Название мира" tuiTextfield />
         </tui-input>
-        <tui-textarea formControlName="description" class="field-medium info" [expandable]="true" [maxLength]="1000"
+        <tui-textarea formControlName="description" class="field-medium info" [expandable]="true" [rows]="rows" [maxLength]="1000"
             [readOnly]="!edit">
             Описание
         </tui-textarea>

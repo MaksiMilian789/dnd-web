@@ -1,12 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { TuiDialogService } from '@taiga-ui/core';
 import { Observable, tap } from 'rxjs';
 
 import { WorldService } from '@core/services/api/world.service';
 import { ShortWorld, World } from '@core/models';
-import { MatDialog } from '@angular/material/dialog';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { OpenImageDialogComponent, OpenImageDialogData } from '../open-image-dialog/open-image-dialog.component';
+import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
 
 @Component({
   selector: 'app-world',
@@ -22,10 +24,10 @@ export class WorldComponent {
   edit: boolean = false;
 
   constructor(
+    @Inject(TuiDialogService) private readonly _dialogs: TuiDialogService,
     private _worldService: WorldService,
     private _route: ActivatedRoute,
     private _router: Router,
-    private _dialog: MatDialog,
     private _snackbar: MatSnackBar,
   ) {
     this.form = new FormGroup({
@@ -63,5 +65,26 @@ export class WorldComponent {
     this._worldService.editWorld(world).subscribe(() => {
       this._snackbar.open('Сохранение успешно');
     });
+  }
+
+  hasMap(currentWorld: World): boolean {
+    return currentWorld.imageId ? true : false;
+  }
+
+  openMap(imageId: number): void {
+    let data: OpenImageDialogData = {
+      imageId: imageId,
+    };
+    this._dialogs
+      .open<boolean>(new PolymorpheusComponent(OpenImageDialogComponent), {
+        data: data,
+        size: 'page',
+        closeable: true,
+      })
+      .subscribe();
+  }
+
+  get rows(): number {
+    return Math.floor(window.innerHeight / 70);
   }
 }

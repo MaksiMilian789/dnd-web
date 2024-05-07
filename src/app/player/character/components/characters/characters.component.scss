@@ -13,6 +13,14 @@
 
 .item {
   margin-top: 10px;
+  margin-bottom: 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.min-card {
+  width: calc(75vw - 40px) !important;
 }
 
 .card-checkbox {
@@ -21,7 +29,7 @@
 
 .card {
   min-width: 200px;
-  width: 70vw;
+  width: 75vw;
   height: 60px;
 }
 

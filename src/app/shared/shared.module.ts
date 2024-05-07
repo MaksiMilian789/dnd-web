@@ -14,6 +14,7 @@ import { ConfirmationDialogComponent } from './components/confirmation-dialog';
 import { WikiComponent } from './components/wiki/wiki.component';
 import { WorldsComponent } from './components/worlds/worlds.component';
 import { WikiHomeComponent } from './components/wiki-home/wiki-home.component';
+import { OpenImageDialogComponent } from './components/open-image-dialog/open-image-dialog.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { WikiHomeComponent } from './components/wiki-home/wiki-home.component';
     SimpleDialogComponent,
     ConfirmationDialogComponent,
     WikiHomeComponent,
+    OpenImageDialogComponent,
 
     ColorPipe, 
     StatsSkillPipe,
@@ -48,6 +50,7 @@ import { WikiHomeComponent } from './components/wiki-home/wiki-home.component';
 
     WorldsComponent,
     WikiHomeComponent,
+    OpenImageDialogComponent,
 
     ColorPipe,
     StatsSkillPipe

@@ -1,0 +1,27 @@
+<div class="image">
+  <img
+    [src]="image"
+    [style.width.px]="form.controls['width'].value"
+    [style.height.px]="form.controls['height'].value"
+  />
+</div>
+
+<div class="buttons">
+  <tui-island>
+    <button
+      tuiIconButton
+      icon="tuiIconMinus"
+      shape="rounded"
+      [disabled]="min()"
+      (click)="minus()"
+      class="button"
+    ></button>
+    <button
+      tuiIconButton
+      icon="tuiIconPlus"
+      shape="rounded"
+      [disabled]="max()"
+      (click)="plus()"
+    ></button
+  ></tui-island>
+</div>
