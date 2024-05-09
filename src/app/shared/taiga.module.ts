@@ -30,6 +30,7 @@ import {
   TuiInputPasswordModule,
   TuiInputSliderModule,
   TuiIslandModule,
+  TuiRadioBlockModule,
   TuiSelectModule,
   TuiStepperModule,
   TuiTextareaModule,
@@ -68,7 +69,8 @@ import {
     TuiAccordionModule,
     TuiPrimitiveCheckboxModule,
     TuiBadgedContentModule,
-    TuiBadgeModule
+    TuiBadgeModule,
+    TuiRadioBlockModule
   ],
 })
 export class TaigaModule {}

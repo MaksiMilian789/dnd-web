@@ -67,7 +67,8 @@ export class CreateClassDialogComponent {
   addSkills(): void {
     const data: SelectSkillsComponentData = {
       skills: this.skills,
-      onlyPassvie: true
+      onlyPassvie: true,
+      forCreateCharacter: false
     };
 
     this._dialogs

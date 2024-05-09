@@ -13,10 +13,12 @@ import { CharacterService } from '@core/services/api/character.service';
 import { FormControl } from '@angular/forms';
 import { WorkshopService } from '@core/services/api/workshop.service';
 import { SelectionModel } from '@angular/cdk/collections';
+import { SkillType } from '@core/enums';
 
 export interface SelectSkillsComponentData {
   skills: Skill[];
   onlyPassvie: boolean;
+  forCreateCharacter: boolean;
 }
 
 @Component({
@@ -70,6 +72,11 @@ export class SelectSkillsComponent {
     let data = this.allData.filter(
       (val) => val.hidden == this.hidden.value && val.passive == this.context.data.onlyPassvie,
     );
+
+    if(this.context.data.forCreateCharacter){
+      data = data.filter((val) => (val.skillType >= SkillType.Athletics && val.skillType <= SkillType.Persuasion) || val.skillType == SkillType.Language);
+    }
+
     this.dataSource = new MatTableDataSource(data);
     this.paginator._intl.itemsPerPageLabel = 'Способностей на страницу';
     this.dataSource.sort = this.sort;

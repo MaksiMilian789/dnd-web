@@ -14,6 +14,7 @@
   >
     <button tuiButton appearance="outline" (click)="addSkills()" class="info">Добавить скиллы</button>
 </tui-badged-content>
+<div class="info message">Рекомендуется не добавлять владения навыками, языками и инструментами в предысторию, чтобы игрок мог выбрать нужные во время создания персонажа по системе из Tasha's Cauldron of Everything</div>
     <tui-select formControlName="worldId" [stringify]="stringifyWorld()" [tuiTextfieldCleaner]="true" class="info">
         Принадлежность к миру
         <tui-data-list *tuiDataList>

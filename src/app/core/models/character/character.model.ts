@@ -47,4 +47,5 @@ export interface CharacterWithId extends ShortCharacter {
   classId: number;
   raceId: number;
   backgroundId: number;
+  skillIds: number[];
 }

@@ -14,6 +14,7 @@
   >
     <button tuiButton appearance="outline" (click)="addSkills()" class="info">Добавить скиллы</button>
 </tui-badged-content>
+<div class="info message">Рекомендуется не добавлять владения навыками, языками и инструментами в класс, чтобы игрок мог выбрать нужные во время создания персонажа по системе из Tasha's Cauldron of Everything</div>
     <tui-select formControlName="worldId" [stringify]="stringifyWorld()" [tuiTextfieldCleaner]="true" class="info">
         Принадлежность к миру
         <tui-data-list *tuiDataList>
@@ -23,5 +24,5 @@
         </tui-data-list>
     </tui-select>
     <button tuiButton appearance="outline" (click)="create()" class="info" [disabled]="form.invalid">Создать</button>
-    <div class="info message">Предлагается создавать класс для персонажа первого (или текущего) уровня. Функционал создания класса с автоматической прогрессией в разработке!</div>
+    <div class="info message">Предлагается создавать класс для персонажа первого (или текущего) уровня. Функционал создания класса с автоматической прогрессией в разработке!</div>    
 </form>

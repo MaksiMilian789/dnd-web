@@ -123,6 +123,7 @@ export class CreateObjectDialogComponent {
     const data: SelectSkillsComponentData = {
       skills: this.skills,
       onlyPassvie: true,
+      forCreateCharacter: false
     };
 
     this._dialogs

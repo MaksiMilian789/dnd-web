@@ -37,3 +37,26 @@
 .success {
   color: rgb(0, 138, 23);
 }
+
+.menu {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.radio {
+  width: 190px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.bonus-form {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.not-events {
+  pointer-events: none;
+}

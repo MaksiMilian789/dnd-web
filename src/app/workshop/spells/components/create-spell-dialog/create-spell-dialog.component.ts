@@ -151,6 +151,7 @@ export class CreateSpellDialogComponent {
     const data: SelectSkillsComponentData = {
       skills: this.skills,
       onlyPassvie: true,
+      forCreateCharacter: false
     };
 
     this._dialogs

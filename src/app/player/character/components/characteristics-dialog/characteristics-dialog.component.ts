@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Characteristics } from '@core/models/character/characteristics.model';
 import { modificator } from '@shared/utils/modificator';
 import { TuiDialogContext } from '@taiga-ui/core';
@@ -42,13 +43,59 @@ export class CharacteristicsDialogComponent {
     charisma: new FormControl(0, { nonNullable: true, validators: Validators.required }),
   });
 
-  constructor(@Inject(POLYMORPHEUS_CONTEXT) private readonly context: TuiDialogContext<Characteristics | null>) {}
+  bonusType = new FormControl('Tasha', { nonNullable: true, validators: Validators.required });
+  maxSumBonus: number = 3;
+
+  bonusStrength = new FormControl(0, { nonNullable: true, validators: Validators.required });
+  bonusDexterity = new FormControl(0, { nonNullable: true, validators: Validators.required });
+  bonusConstitution = new FormControl(0, { nonNullable: true, validators: Validators.required });
+  bonusIntelligence = new FormControl(0, { nonNullable: true, validators: Validators.required });
+  bonusWisdom = new FormControl(0, { nonNullable: true, validators: Validators.required });
+  bonusCharisma = new FormControl(0, { nonNullable: true, validators: Validators.required });
+
+  constructor(
+    @Inject(POLYMORPHEUS_CONTEXT) private readonly context: TuiDialogContext<Characteristics | null>,
+    private _snackbar: MatSnackBar,
+  ) {
+    this.bonusType.valueChanges.subscribe((val) => {
+      if (val == 'AllOne') {
+        this.bonusStrength.setValue(1);
+        this.bonusDexterity.setValue(1);
+        this.bonusConstitution.setValue(1);
+        this.bonusIntelligence.setValue(1);
+        this.bonusWisdom.setValue(1);
+        this.bonusCharisma.setValue(1);
+        this.maxSumBonus = 6;
+      }
+
+      if (val == 'Feat') {
+        this.bonusStrength.setValue(0);
+        this.bonusDexterity.setValue(0);
+        this.bonusConstitution.setValue(0);
+        this.bonusIntelligence.setValue(0);
+        this.bonusWisdom.setValue(0);
+        this.bonusCharisma.setValue(0);
+        _snackbar.open('Не забудьте добавить черту после создания персонажа!');
+        this.maxSumBonus = 2;
+      }
+
+      if (val == 'Tasha') {
+        this.bonusStrength.setValue(0);
+        this.bonusDexterity.setValue(0);
+        this.bonusConstitution.setValue(0);
+        this.bonusIntelligence.setValue(0);
+        this.bonusWisdom.setValue(0);
+        this.bonusCharisma.setValue(0);
+        this.maxSumBonus = 3;
+      }
+    });
+  }
 
   close(): void {
     this.context.completeWith(null);
   }
 
-  createCharacter(): void {
+  save(): void {
     let characteristics: Characteristics = {
       strength: 0,
       dexterity: 0,
@@ -57,37 +104,38 @@ export class CharacteristicsDialogComponent {
       wisdom: 0,
       charisma: 0,
     };
-    if (this.standard) {
-      characteristics = {
-        strength: this.standardForm.controls.strength.value,
-        dexterity: this.standardForm.controls.dexterity.value,
-        constitution: this.standardForm.controls.constitution.value,
-        intelligence: this.standardForm.controls.intelligence.value,
-        wisdom: this.standardForm.controls.wisdom.value,
-        charisma: this.standardForm.controls.charisma.value,
-      };
-    }
-    if (this.pointBy) {
-      characteristics = {
-        strength: this.pointByForm.controls.strength.value,
-        dexterity: this.pointByForm.controls.dexterity.value,
-        constitution: this.pointByForm.controls.constitution.value,
-        intelligence: this.pointByForm.controls.intelligence.value,
-        wisdom: this.pointByForm.controls.wisdom.value,
-        charisma: this.pointByForm.controls.charisma.value,
-      };
-    }
-    if (this.custom) {
-      characteristics = {
-        strength: this.customForm.controls.strength.value,
-        dexterity: this.customForm.controls.dexterity.value,
-        constitution: this.customForm.controls.constitution.value,
-        intelligence: this.customForm.controls.intelligence.value,
-        wisdom: this.customForm.controls.wisdom.value,
-        charisma: this.customForm.controls.charisma.value,
-      };
-    }
+    characteristics = {
+      strength: Number(this.strength),
+      dexterity: Number(this.dexterity),
+      constitution: Number(this.constitution),
+      intelligence: Number(this.intelligence),
+      wisdom: Number(this.wisdom),
+      charisma: Number(this.charisma),
+    };
+
     this.context.completeWith(characteristics);
+  }
+
+  readonlyBonus(): boolean {
+    if (this.bonusType.value == 'AllOne') {
+      return true;
+    }
+    return false;
+  }
+
+  bonusSum(): number{
+    var sum = 0;
+    sum += this.bonusStrength.value;
+    sum += this.bonusDexterity.value;
+    sum += this.bonusConstitution.value;
+    sum += this.bonusIntelligence.value;
+    sum += this.bonusWisdom.value;
+    sum += this.bonusCharisma.value;
+    return sum;
+  }
+
+  correctBonuses(): boolean{
+    return this.bonusSum() <= this.maxSumBonus;
   }
 
   useStandard(): void {
@@ -212,32 +260,32 @@ export class CharacteristicsDialogComponent {
   get modificator(): Characteristics {
     if (this.standard) {
       return {
-        strength: modificator(this.standardForm.controls.strength.value + this.bonus.strength),
-        dexterity: modificator(this.standardForm.controls.dexterity.value + this.bonus.dexterity),
-        constitution: modificator(this.standardForm.controls.constitution.value + this.bonus.constitution),
-        intelligence: modificator(this.standardForm.controls.intelligence.value + this.bonus.intelligence),
-        wisdom: modificator(this.standardForm.controls.wisdom.value + this.bonus.wisdom),
-        charisma: modificator(this.standardForm.controls.charisma.value + this.bonus.charisma),
+        strength: modificator(this.standardForm.controls.strength.value + this.bonusStrength.value),
+        dexterity: modificator(this.standardForm.controls.dexterity.value + this.bonusDexterity.value),
+        constitution: modificator(this.standardForm.controls.constitution.value + this.bonusConstitution.value),
+        intelligence: modificator(this.standardForm.controls.intelligence.value + this.bonusIntelligence.value),
+        wisdom: modificator(this.standardForm.controls.wisdom.value + this.bonusWisdom.value),
+        charisma: modificator(this.standardForm.controls.charisma.value + this.bonusCharisma.value),
       };
     }
     if (this.pointBy) {
       return {
-        strength: modificator(this.pointByForm.controls.strength.value + this.bonus.strength),
-        dexterity: modificator(this.pointByForm.controls.dexterity.value + this.bonus.dexterity),
-        constitution: modificator(this.pointByForm.controls.constitution.value + this.bonus.constitution),
-        intelligence: modificator(this.pointByForm.controls.intelligence.value + this.bonus.intelligence),
-        wisdom: modificator(this.pointByForm.controls.wisdom.value + this.bonus.wisdom),
-        charisma: modificator(this.pointByForm.controls.charisma.value + this.bonus.charisma),
+        strength: modificator(this.pointByForm.controls.strength.value + this.bonusStrength.value),
+        dexterity: modificator(this.pointByForm.controls.dexterity.value + this.bonusDexterity.value),
+        constitution: modificator(this.pointByForm.controls.constitution.value + this.bonusConstitution.value),
+        intelligence: modificator(this.pointByForm.controls.intelligence.value + this.bonusIntelligence.value),
+        wisdom: modificator(this.pointByForm.controls.wisdom.value + this.bonusWisdom.value),
+        charisma: modificator(this.pointByForm.controls.charisma.value + this.bonusCharisma.value),
       };
     }
     if (this.custom) {
       return {
-        strength: modificator(this.customForm.controls.strength.value + this.bonus.strength),
-        dexterity: modificator(this.customForm.controls.dexterity.value + this.bonus.dexterity),
-        constitution: modificator(this.customForm.controls.constitution.value + this.bonus.constitution),
-        intelligence: modificator(this.customForm.controls.intelligence.value + this.bonus.intelligence),
-        wisdom: modificator(this.customForm.controls.wisdom.value + this.bonus.wisdom),
-        charisma: modificator(this.customForm.controls.charisma.value + this.bonus.charisma),
+        strength: modificator(this.customForm.controls.strength.value + this.bonusStrength.value),
+        dexterity: modificator(this.customForm.controls.dexterity.value + this.bonusDexterity.value),
+        constitution: modificator(this.customForm.controls.constitution.value + this.bonusConstitution.value),
+        intelligence: modificator(this.customForm.controls.intelligence.value + this.bonusIntelligence.value),
+        wisdom: modificator(this.customForm.controls.wisdom.value + this.bonusWisdom.value),
+        charisma: modificator(this.customForm.controls.charisma.value + this.bonusCharisma.value),
       };
     }
 
@@ -251,92 +299,80 @@ export class CharacteristicsDialogComponent {
     };
   }
 
-  get bonus(): Characteristics {
-    //TODO: взять со skills расы
-    return {
-      strength: 1,
-      dexterity: 1,
-      constitution: 1,
-      intelligence: 1,
-      wisdom: 1,
-      charisma: 1,
-    };
-  }
-
   get strength(): string {
     if (this.standard) {
-      return (this.standardForm.controls['strength'].value + this.bonus.strength).toString();
+      return (this.standardForm.controls['strength'].value + this.bonusStrength.value).toString();
     }
     if (this.pointBy) {
-      return (this.pointByForm.controls['strength'].value + this.bonus.strength).toString();
+      return (this.pointByForm.controls['strength'].value + this.bonusStrength.value).toString();
     }
     if (this.custom) {
-      return (this.customForm.controls['strength'].value + this.bonus.strength).toString();
+      return (this.customForm.controls['strength'].value + this.bonusStrength.value).toString();
     }
     return '';
   }
 
   get dexterity(): string {
     if (this.standard) {
-      return (this.standardForm.controls['dexterity'].value + this.bonus.dexterity).toString();
+      return (this.standardForm.controls['dexterity'].value + this.bonusDexterity.value).toString();
     }
     if (this.pointBy) {
-      return (this.pointByForm.controls['dexterity'].value + this.bonus.dexterity).toString();
+      return (this.pointByForm.controls['dexterity'].value + this.bonusDexterity.value).toString();
     }
     if (this.custom) {
-      return (this.customForm.controls['dexterity'].value + this.bonus.dexterity).toString();
+      return (this.customForm.controls['dexterity'].value + this.bonusDexterity.value).toString();
     }
     return '';
   }
 
   get constitution(): string {
     if (this.standard) {
-      return (this.standardForm.controls['constitution'].value + this.bonus.constitution).toString();
+      return (this.standardForm.controls['constitution'].value + this.bonusConstitution.value).toString();
     }
     if (this.pointBy) {
-      return (this.pointByForm.controls['constitution'].value + this.bonus.constitution).toString();
+      return (this.pointByForm.controls['constitution'].value + this.bonusConstitution.value).toString();
     }
     if (this.custom) {
-      return (this.customForm.controls['constitution'].value + this.bonus.constitution).toString();
+      return (this.customForm.controls['constitution'].value + this.bonusConstitution.value).toString();
     }
     return '';
   }
 
   get intelligence(): string {
     if (this.standard) {
-      return (this.standardForm.controls['intelligence'].value + this.bonus.intelligence).toString();
+      return (this.standardForm.controls['intelligence'].value + this.bonusIntelligence.value).toString();
     }
     if (this.pointBy) {
-      return (this.pointByForm.controls['intelligence'].value + this.bonus.intelligence).toString();
+      return (this.pointByForm.controls['intelligence'].value + this.bonusIntelligence.value).toString();
     }
     if (this.custom) {
-      return (this.customForm.controls['intelligence'].value + this.bonus.intelligence).toString();
+      return (this.customForm.controls['intelligence'].value + this.bonusIntelligence.value).toString();
     }
     return '';
   }
 
   get wisdom(): string {
     if (this.standard) {
-      return (this.standardForm.controls['wisdom'].value + this.bonus.wisdom).toString();
+      return (this.standardForm.controls['wisdom'].value + this.bonusWisdom.value).toString();
     }
     if (this.pointBy) {
-      return (this.pointByForm.controls['wisdom'].value + this.bonus.wisdom).toString();
+      return (this.pointByForm.controls['wisdom'].value + this.bonusWisdom.value).toString();
     }
     if (this.custom) {
-      return (this.customForm.controls['wisdom'].value + this.bonus.wisdom).toString();
+      return (this.customForm.controls['wisdom'].value + this.bonusWisdom.value).toString();
     }
     return '';
   }
 
   get charisma(): string {
     if (this.standard) {
-      return (this.standardForm.controls['charisma'].value + this.bonus.charisma).toString();
+      return (this.standardForm.controls['charisma'].value + this.bonusCharisma.value).toString();
     }
     if (this.pointBy) {
-      return (this.pointByForm.controls['charisma'].value + this.bonus.charisma).toString();
+      return (this.pointByForm.controls['charisma'].value + this.bonusCharisma.value).toString();
     }
     if (this.custom) {
-      return (this.customForm.controls['charisma'].value + this.bonus.charisma).toString();
+      return (this.customForm.controls['charisma'].value + this.bonusCharisma.value).toString();
     }
     return '';
   }

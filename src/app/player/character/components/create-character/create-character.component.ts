@@ -7,7 +7,7 @@ import { TuiDialogService } from '@taiga-ui/core';
 import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
 
 import { GENDER_LOCALIZATION, Gender, IDEOLOGY_LOCALIZATION, Ideology, System } from '@core/enums';
-import { Background, CharacterWithId, Class, Race } from '@core/models';
+import { Background, CharacterWithId, Class, Race, Skill } from '@core/models';
 import { CharacterService } from '@core/services/api/character.service';
 import { CharacteristicsDialogComponent } from '../characteristics-dialog/characteristics-dialog.component';
 import { Characteristics } from '@core/models/character/characteristics.model';
@@ -15,6 +15,7 @@ import { AuthService } from '@core/services/auth/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { WorkshopService } from '@core/services/api/workshop.service';
+import { SelectSkillsComponentData, SelectSkillsComponent } from 'src/app/workshop/skills/components/select-skills/select-skills.component';
 
 @Component({
   selector: 'app-create-character',
@@ -25,6 +26,9 @@ export class CreateCharacterComponent {
   completedStep1: boolean = false;
   completedStep2: boolean = false;
   completedStep3: boolean = false;
+
+  characteristics: Characteristics | null = null;
+  skills: Skill[] = [];
 
   protected readonly form1: FormGroup;
   protected readonly form2: FormGroup;
@@ -113,23 +117,43 @@ export class CreateCharacterComponent {
       })
       .subscribe((val) => {
         if (val != null) {
-          this.createCharacter(val as Characteristics);
+          this.characteristics = val;
         }
       });
   }
 
-  createCharacter(characteristics: Characteristics): void {
+  chooseSkills(): void{
+    const data: SelectSkillsComponentData = {
+      skills: this.skills,
+      onlyPassvie: true,
+      forCreateCharacter: true
+    };
+
+    this._dialogs
+      .open<Skill[]>(new PolymorpheusComponent(SelectSkillsComponent), {
+        data: data,
+        size: 'page',
+        closeable: false
+      })
+      .subscribe((val) => {
+        this.skills = val;
+      });
+  }
+
+  createCharacter(): void {
+    let skillIds: number[] = this.skills.map(x => x.id);
     const character: CharacterWithId = {
       age: this.form1.controls['age'].value,
       gender: this.form1.controls['gender'].value,
       ideology: this.form1.controls['ideology'].value,
-      characteristics: characteristics,
+      characteristics: this.characteristics!,
       classId: this.form3.controls['class'].value,
       raceId: this.form2.controls['race'].value,
       backgroundId: this.form2.controls['background'].value,
       name: this.form1.controls['name'].value,
       level: 1,
       system: System.Dnd,
+      skillIds: skillIds
     };
 
     this._characterService.createCharacter(character, this._auth.currentUser?.id!).subscribe(() => {
