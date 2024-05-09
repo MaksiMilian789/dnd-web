@@ -62,12 +62,12 @@
         <div class="tui-island__content">
           <div class="header">
             <div>
-              <h3 class="tui-island__title">Основная информация о персонаже</h3>
+              <h3 class="tui-island__title">Раса и предыстория</h3>
             </div>
           </div>
           <form class="tui-space_top-4" [formGroup]="form2">
-            <div class="tui-form__row">
-              <tui-select formControlName="race" [stringify]="stringifyRace()">
+            <div class="select-info">
+              <tui-select formControlName="race" [stringify]="stringifyRace()" class="select">
                 Раса
                 <tui-data-list *tuiDataList>
                   <button *ngFor="let race of races()" tuiOption [value]="race.id">
@@ -75,6 +75,9 @@
                   </button>
                 </tui-data-list>
               </tui-select>
+              @if (this.form2.controls['race'].value) {
+                <button mat-icon-button (click)="(true)"><mat-icon>info</mat-icon></button>
+              }
             </div>
 
             @if (this.form2.controls['race'].value) {
@@ -86,14 +89,11 @@
               >
                 Описание расы
               </tui-textarea>
-              <div class="actions">
-                <button mat-raised-button (click)="(true)">Способности расы</button>
-              </div>
               <mat-divider class="divider"></mat-divider>
             }
 
-            <div class="tui-form__row">
-              <tui-select formControlName="background" [stringify]="stringifyBackground()">
+            <div class="select-info">
+              <tui-select formControlName="background" [stringify]="stringifyBackground()" class="select">
                 Предыстория
                 <tui-data-list *tuiDataList>
                   <button *ngFor="let background of backgrounds()" tuiOption [value]="background.id">
@@ -101,6 +101,11 @@
                   </button>
                 </tui-data-list>
               </tui-select>
+              @if (this.form2.controls['background'].value) {
+                <button mat-icon-button (click)="(true)">
+                  <mat-icon>info</mat-icon>
+                </button>
+              }
             </div>
 
             @if (this.form2.controls['background'].value) {
@@ -112,9 +117,6 @@
               >
                 Описание предыстории
               </tui-textarea>
-              <div class="actions">
-                <button mat-raised-button (click)="(true)">Способности предыстории</button>
-              </div>
               <mat-divider class="divider"></mat-divider>
             }
           </form>
@@ -133,12 +135,12 @@
         <div class="tui-island__content">
           <div class="header">
             <div>
-              <h3 class="tui-island__title">Основная информация о персонаже</h3>
+              <h3 class="tui-island__title">Класс, навыки, владения</h3>
             </div>
           </div>
           <form class="tui-space_top-4" [formGroup]="form3">
-            <div class="tui-form__row">
-              <tui-select formControlName="class" [stringify]="stringifyClass()">
+            <div class="select-info">
+              <tui-select formControlName="class" [stringify]="stringifyClass()" class="select">
                 Класс
                 <tui-data-list *tuiDataList>
                   <button *ngFor="let class of classes()" tuiOption [value]="class.id">
@@ -146,6 +148,11 @@
                   </button>
                 </tui-data-list>
               </tui-select>
+              @if (this.form3.controls['class'].value) {
+                <button mat-icon-button (click)="(true)">
+                  <mat-icon>info</mat-icon>
+                </button>
+              }
             </div>
 
             @if (this.form3.controls['class'].value) {
@@ -157,14 +164,13 @@
               >
                 Описание класса
               </tui-textarea>
-              <div class="actions">
-                <button mat-raised-button (click)="(true)">Способности класса</button>
-              </div>
               <mat-divider class="divider"></mat-divider>
             }
           </form>
           <div class="actions">
-            <tui-badged-content [colorTop]="characteristics == null ? 'var(--tui-error-fill)' : 'var(--tui-success-fill)'">
+            <tui-badged-content
+              [colorTop]="characteristics == null ? 'var(--tui-error-fill)' : 'var(--tui-success-fill)'"
+            >
               <button mat-raised-button (click)="createCharacteristics()" [disabled]="this.form3.invalid">
                 Распределить характеристики
               </button>

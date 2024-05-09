@@ -24,7 +24,19 @@
   width: 100%;
 }
 
-.divider{
+.divider {
   margin-top: 10px;
-  margin-bottom: -5px;
+}
+
+.select-info {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  gap: 5px;
+  margin-top: 8px;
+}
+
+.select {
+  width: 80vw;
 }
