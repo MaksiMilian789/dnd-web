@@ -14,6 +14,9 @@ import { CharacterService } from '@core/services/api/character.service';
 import { Characteristics } from '@core/models/character/characteristics.model';
 import { modificator } from '@shared/utils/modificator';
 import { CharInfoDialogComponent, CharInfoDialogData } from '../char-info-dialog/char-info-dialog.component';
+import { CalculateService } from '../../services/calculate.service';
+import { SkillType } from '@core/enums';
+import { Skill } from '@core/models';
 
 const CLOSE_SIZE = 775;
 
@@ -30,14 +33,19 @@ export class CharacterMainComponent {
   });
   hpForm: FormGroup;
 
+  skillTypes = SkillType;
+
   protected showSkills: FormControl<boolean>;
-  
+
+  protected masteryBonus = 0;
+
   private readonly _refresh$ = new Subject<void>();
 
   constructor(
     @Inject(TuiDialogService) private readonly _dialogs: TuiDialogService,
     @Inject(LOCAL_STORAGE) private readonly _localStorage: Storage,
     private _characterService: CharacterService,
+    private _calculateService: CalculateService,
     private _route: ActivatedRoute,
     private _snackbar: MatSnackBar,
     public pipe: StatsSkillPipe,
@@ -53,7 +61,7 @@ export class CharacterMainComponent {
     } else {
       this.showSkills = new FormControl<boolean>(window.innerHeight > 775, { nonNullable: true });
     }
-    
+
     this.character = toSignal(
       this._refresh$.pipe(
         switchMap(() => this._characterService.loadCharacter(this.charId)),
@@ -62,6 +70,7 @@ export class CharacterMainComponent {
             hp: val.hp,
             addHp: val.addHp,
           });
+          this.masteryBonus = this._calculateService.calculateMasteryBonus(val.level);
         }),
       ),
       {
@@ -76,7 +85,7 @@ export class CharacterMainComponent {
     this.showSkills.valueChanges.subscribe((val) => {
       this._localStorage.setItem('show_skills_' + this.charId.toString(), val.toString());
     });
-  
+
     this.refresh();
   }
 
@@ -102,12 +111,54 @@ export class CharacterMainComponent {
   get modificator(): Characteristics {
     if (this.character()) {
       return {
-        strength: modificator(this.character()!.characteristics.strength + this.bonus.strength),
-        dexterity: modificator(this.character()!.characteristics.dexterity + this.bonus.dexterity),
-        constitution: modificator(this.character()!.characteristics.constitution + this.bonus.constitution),
-        intelligence: modificator(this.character()!.characteristics.intelligence + this.bonus.intelligence),
-        wisdom: modificator(this.character()!.characteristics.wisdom + this.bonus.wisdom),
-        charisma: modificator(this.character()!.characteristics.charisma + this.bonus.charisma),
+        strength: modificator(
+          this._calculateService.calculateEffectValue(
+            SkillType.Strength,
+            this.characterSkills(),
+            this.masteryBonus,
+            this.character()!.characteristics.strength,
+          ),
+        ),
+        dexterity: modificator(
+          this._calculateService.calculateEffectValue(
+            SkillType.Dexterity,
+            this.characterSkills(),
+            this.masteryBonus,
+            this.character()!.characteristics.dexterity,
+          ),
+        ),
+        constitution: modificator(
+          this._calculateService.calculateEffectValue(
+            SkillType.Constitution,
+            this.characterSkills(),
+            this.masteryBonus,
+            this.character()!.characteristics.constitution,
+          ),
+        ),
+        intelligence: modificator(
+          this._calculateService.calculateEffectValue(
+            SkillType.Intelligence,
+            this.characterSkills(),
+            this.masteryBonus,
+            this.character()!.characteristics.intelligence,
+          ),
+        ),
+        wisdom: modificator(
+          this._calculateService.calculateEffectValue(
+            SkillType.Wisdom,
+            this.characterSkills(),
+            this.masteryBonus,
+            this.character()!.characteristics.wisdom,
+          ),
+        ),
+        charisma: modificator(
+          this._calculateService.calculateEffectValue(
+            SkillType.Charisma,
+            this.characterSkills(),
+            this.masteryBonus,
+            this.character()!.characteristics.charisma,
+          ),
+        ),
       };
     } else {
       return {
@@ -121,28 +172,76 @@ export class CharacterMainComponent {
     }
   }
 
-  get bonus(): Characteristics {
-    //TODO: взять со skills
-    return {
-      strength: 0,
-      dexterity: 0,
-      constitution: 0,
-      intelligence: 0,
-      wisdom: 0,
-      charisma: 0,
-    };
+  calculateSkillValue(type: SkillType): number {
+    return 0;
+  }
+  
+  calculateSaveRollValue(type: SkillType, value: number): number {
+    return this._calculateService.calculateEffectSaveRoll(type, this.characterSkills(), this.masteryBonus, value);
+  }
+
+  characterSkills(): Skill[] {
+    if (!this.character()) {
+      return [];
+    }
+
+    let data: Skill[] = [];
+    this.character()!.skillInstance.forEach((element) => {
+      if (element.passive || element.activated) data.push(element);
+    });
+
+    this.character()!.backgroundInstance.skillInstances.forEach((element) => {
+      if (element.passive || element.activated) data.push(element);
+    });
+
+    this.character()!.classInstance.skillInstances.forEach((element) => {
+      if (element.passive || element.activated) data.push(element);
+    });
+
+    this.character()!.raceInstance.skillInstances.forEach((element) => {
+      if (element.passive || element.activated) data.push(element);
+    });
+
+    this.character()!.objectInstance.forEach((instance) => {
+      if (instance.equipped) {
+        instance.skillInstances.forEach((element) => {
+          if (element.passive || element.activated) data.push(element);
+        });
+      }
+    });
+
+    this.character()!.spellInstance.forEach((instance) => {
+      instance.skillInstances.forEach((element) => {
+        if (element.passive || element.activated) data.push(element);
+      });
+    });
+    return data;
   }
 
   get getArmor(): number {
-    return 15;
+    if (this.character()) {
+      return this._calculateService.calculateArmor(
+        this.characterSkills(),
+        this.modificator.dexterity,
+        this.character()!.objectInstance,
+      );
+    }
+    return 0;
   }
 
   get getMaxHp(): number {
-    return 135;
+    if (this.character()) {
+      return this._calculateService.calculateMaxHp(
+        this.character()!.level,
+        this.characterSkills(),
+        this.modificator.constitution,
+      );
+    }
+    return 0;
   }
 
   get getProfBonus(): number {
-    return 6;
+    return this.masteryBonus;
   }
 
   get getPerception(): number {
@@ -150,6 +249,6 @@ export class CharacterMainComponent {
   }
 
   get getView(): string {
-    return 'Обычное';
+    return this._calculateService.calculatePriorityVision(this.characterSkills());
   }
 }

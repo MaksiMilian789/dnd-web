@@ -23,6 +23,7 @@ import {
   TuiCheckboxBlockModule,
   TuiCheckboxLabeledModule,
   TuiDataListDropdownManagerModule,
+  TuiDataListWrapperModule,
   TuiInputDateTimeModule,
   TuiInputFilesModule,
   TuiInputModule,
@@ -70,7 +71,8 @@ import {
     TuiPrimitiveCheckboxModule,
     TuiBadgedContentModule,
     TuiBadgeModule,
-    TuiRadioBlockModule
+    TuiRadioBlockModule,
+    TuiDataListWrapperModule
   ],
 })
 export class TaigaModule {}

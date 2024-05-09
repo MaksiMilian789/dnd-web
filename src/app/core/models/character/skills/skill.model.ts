@@ -15,4 +15,5 @@ export interface Skill {
   charges: number;
   hidden: boolean;
   system: System;
+  activated: boolean
 }

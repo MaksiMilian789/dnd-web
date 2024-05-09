@@ -72,6 +72,8 @@ export class CreateSkillDialogComponent {
   protected readonly itemTypes = ITEM_TYPE_LOCALIZATION;
   protected readonly languages = LANGUAGE_LOCALIZATION;
 
+  visions = ['Обычное', 'Тёмное', 'Видение сквозь маг тьму', 'Видение невидимых', 'Слепое', 'Истинное'];
+
   constructor(
     @Inject(POLYMORPHEUS_CONTEXT)
     protected readonly context: TuiDialogContext<boolean>,
@@ -344,6 +346,20 @@ export class CreateSkillDialogComponent {
       return type == LANGUAGE;
     }
     return false;
+  }
+
+  onlyValue(): boolean {
+    if (
+      this.form.controls['skillType'].value >= SkillType.ClassArmor &&
+      this.form.controls['skillType'].value <= SkillType.SpeedClimb
+    ) {
+      return true;
+    }
+    return false;
+  }
+
+  classArmor(): boolean {
+    return this.form.controls['skillType'].value == SkillType.ClassArmor;
   }
 
   @tuiPure
