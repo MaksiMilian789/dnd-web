@@ -1,4 +1,4 @@
 {
-  "api": "http://localhost:5028",
+  "api": "https://dnd-server.onrender.com",
   "version": "0.0.0-placeholder"
 }
