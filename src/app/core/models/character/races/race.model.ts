@@ -5,4 +5,6 @@ export interface Race {
   name: string;
   description: string;
   skillInstances: Skill[];
+  authorId?: number;
+  worldId?: number;
 }

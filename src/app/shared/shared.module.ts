@@ -16,6 +16,7 @@ import { WorldsComponent } from './components/worlds/worlds.component';
 import { WikiHomeComponent } from './components/wiki-home/wiki-home.component';
 import { OpenImageDialogComponent } from './components/open-image-dialog/open-image-dialog.component';
 import { SkillInfoTableComponent } from './components/skill-info-table/skill-info-table.component';
+import { InventoryInfoTableComponent } from './components/inventory-info-table/inventory-info-table.component';
 
 @NgModule({
   declarations: [
@@ -27,8 +28,9 @@ import { SkillInfoTableComponent } from './components/skill-info-table/skill-inf
     WikiHomeComponent,
     OpenImageDialogComponent,
     SkillInfoTableComponent,
+    InventoryInfoTableComponent,
 
-    ColorPipe, 
+    ColorPipe,
     StatsSkillPipe,
   ],
   imports: [
@@ -37,8 +39,8 @@ import { SkillInfoTableComponent } from './components/skill-info-table/skill-inf
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-    TaigaModule,    
-    AngularEditorModule 
+    TaigaModule,
+    AngularEditorModule,
   ],
   exports: [
     CommonModule,
@@ -47,16 +49,17 @@ import { SkillInfoTableComponent } from './components/skill-info-table/skill-inf
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-    TaigaModule,   
+    TaigaModule,
     AngularEditorModule,
 
     WorldsComponent,
     WikiHomeComponent,
     OpenImageDialogComponent,
     SkillInfoTableComponent,
+    InventoryInfoTableComponent,
 
     ColorPipe,
-    StatsSkillPipe
+    StatsSkillPipe,
   ],
 })
 export class SharedModule {}

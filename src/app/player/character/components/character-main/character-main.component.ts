@@ -221,7 +221,7 @@ export class CharacterMainComponent {
     });
     
     this.character()!.conditions.forEach((instance) => {
-      instance.skillInstance.forEach((element) => {
+      instance.skillInstances.forEach((element) => {
         if (element.passive || element.activated) data.push(element);
       });
     });

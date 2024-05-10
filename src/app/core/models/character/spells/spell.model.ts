@@ -15,4 +15,6 @@ export interface Spell {
   distance?: number;
   system: System;
   skillInstances: Skill[];
+  authorId?: number;
+  worldId?: number;
 }

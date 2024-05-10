@@ -51,6 +51,7 @@
           <div class="element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
             <div class="element-description">
               {{element.description}}
+              <app-inventory-info-table [inventory]="element"></app-inventory-info-table>
             </div>
           </div>
         </td>

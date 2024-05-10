@@ -17,4 +17,6 @@ export interface Skill {
   hidden: boolean;
   system: System;
   activated: boolean
+  authorId?: number;
+  worldId?: number;
 }

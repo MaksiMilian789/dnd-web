@@ -1,0 +1,46 @@
+<span>{{ 'Редкость: ' + stringifyRare(inventory().rare) }}</span>
+
+@if (inventory().distance! > 0) {
+  <span>{{ 'Дистанция: ' + inventory().distance }}</span>
+}
+
+@if (inventory().attachment) {
+  <span>{{ 'Настройка: ' }}{{ inventory().attachment ? 'да' : 'нет' }}</span>
+}
+
+<span>{{ 'Тип предмета: ' + stringifyItemType(inventory().type) }}</span>
+
+@if (hasDamage()) {
+  <span>{{ 'Тип атаки: ' + stringifyAttackType(inventory().attackType) }}</span>
+  <span>{{ 'Основная характеристика: ' + stringifyCharacteristics(inventory().mainCharacteristic) }}</span>
+  <ng-container *tuiLet="inventory().damage as damage">
+    @if (!damage.heal) {
+      <span>{{ 'Тип урона: ' + stringifyDamageType(damage.damageType) }}</span>
+    }
+    <span>{{ 'Лечение?: ' }}{{ damage.heal ? 'да' : 'нет' }}</span>
+
+    @if (damage.flat > 0) {
+      <span>{{ 'Фиксированное значение: ' + damage.flat }}</span>
+    }
+
+    @if (damage.damageRoll.rolls > 0) {
+      <span>{{ 'Количество кубов: ' + damage.damageRoll.rolls }}</span>
+      <span>{{ 'Куб: ' + stringifyDice(damage.damageRoll.dice) }}</span>
+    }
+  </ng-container>
+}
+
+@if (inventory().skillInstances.length > 0) {
+  <div>
+    <tui-accordion class="skills">
+      @for (skill of inventory().skillInstances; track skill) {
+        <tui-accordion-item size="s">
+          {{ skill.name }}
+          <ng-template tuiAccordionItemContent>
+            <app-skill-info-table [skill]="skill"></app-skill-info-table>
+          </ng-template>
+        </tui-accordion-item>
+      }
+    </tui-accordion>
+  </div>
+}

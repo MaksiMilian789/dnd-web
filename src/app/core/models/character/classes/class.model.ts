@@ -5,4 +5,6 @@ export interface Class {
   name: string;
   description: string;
   skillInstances: Skill[];
+  authorId?: number;
+  worldId?: number;
 }

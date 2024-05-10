@@ -6,7 +6,7 @@ export interface Condition {
   name: string;
   description: string;
   system: System;
-  authorId: number;
+  authorId?: number;
   worldId?: number;
-  skillInstance: Skill[];
+  skillInstances: Skill[];
 }

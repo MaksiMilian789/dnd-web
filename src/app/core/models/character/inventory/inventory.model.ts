@@ -18,4 +18,6 @@ export interface Inventory {
   imageId?: number;
   system: System;
   skillInstances: Skill[];
+  authorId?: number;
+  worldId?: number;
 }

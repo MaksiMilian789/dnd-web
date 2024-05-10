@@ -2,7 +2,7 @@
   <button mat-icon-button [routerLink]="['..']">
     <mat-icon>arrow_back</mat-icon>
   </button>
-  Классы
+  Мастерская классов
   <div class="spacer"></div>
   <button mat-icon-button (click)="addItem()">
     <mat-icon>add</mat-icon>
@@ -27,7 +27,7 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
         <td mat-cell *matCellDef="let element"> <tui-hosted-dropdown #dropdown [content]="content">
             <button mat-icon-button (click)="$event.stopPropagation(); dropdown.open = !dropdown.open">
-              <mat-icon>menu</mat-icon>
+              <mat-icon>settings</mat-icon>
             </button>
           </tui-hosted-dropdown>
           <ng-template #content let-activeZone let-close="close">
