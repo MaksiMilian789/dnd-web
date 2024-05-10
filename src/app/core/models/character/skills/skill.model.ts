@@ -1,6 +1,7 @@
 import { Recharge, SkillType, System } from "@core/enums";
 import { ActionType } from "@core/enums/action-type.enum";
 import { SkillValue } from "./skill-value.model";
+import { ActionTime } from "../spells/action-time.model";
 
 export interface Skill {
   id: number;
@@ -9,6 +10,7 @@ export interface Skill {
   actionType: ActionType;
   skillType: SkillType;
   value: SkillValue;
+  actionTime: ActionTime;
   distance?: number;
   passive: boolean;
   recharge: Recharge;

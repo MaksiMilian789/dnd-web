@@ -3,8 +3,17 @@
 
 @if (!skill().passive) {
   <span>{{ 'Тип действия: ' + stringifyActionType(skill().actionType) }}</span>
-  <span>{{ 'Зарядов: ' + skill().currentCharges + '/' + skill().charges }}</span>
+  @if (skill().currentCharges >= 0) {
+    <span>{{ 'Зарядов: ' + skill().currentCharges + '/' + skill().charges }}</span>
+  } @else {
+    <span>{{ 'Зарядов: ' + skill().charges }}</span>
+  }
   <span>{{ 'Перезарядка: ' + stringifyRecharge(skill().recharge) }}</span>
+
+  @if (skill().actionTime) {
+    <span>{{ 'Длительность: '}}{{ skill().actionTime.time > 0 ? skill().actionTime.time + ' сек' : 'мгновенная'}}</span>
+    <span>{{ 'Концентрация?: ' }}{{ skill().actionTime.concentrate ? 'да' : 'нет' }}</span>
+  }
 }
 
 @if (skill().distance! > 0) {

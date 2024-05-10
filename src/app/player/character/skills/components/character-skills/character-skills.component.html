@@ -45,15 +45,27 @@
               </tui-opt-group>
               @if (!element.passive) {
                 <tui-opt-group>
-                  <div class="toggle">
-                    Активация
-                    <tui-toggle
-                      [(ngModel)]="element.activated"
-                      [showIcons]="true"
-                      (click)="toggleItem(element)"
-                      [disabled]="!canToggle(element)"
-                    ></tui-toggle>
-                  </div>
+                  @if (element.actionTime.time > 0) {
+                    <div class="toggle">
+                      Активация
+                      <tui-toggle
+                        [(ngModel)]="element.activated"
+                        [showIcons]="true"
+                        (click)="toggleItem(element)"
+                        [disabled]="!canToggle(element)"
+                      ></tui-toggle>
+                    </div>
+                  } @else {
+                    <button
+                      tuiOption
+                      appearance="flat"
+                      (click)="activateInstantSkill(element)"
+                      [disabled]="element.currentCharges == 0"
+                    >
+                      Активация
+                      <tui-svg src="tuiIconZap"></tui-svg>
+                    </button>
+                  }
                   <button
                     tuiOption
                     appearance="flat"

@@ -125,6 +125,6 @@ export const SKILL_TYPE_LOCALIZATION: Record<SkillType, string> = {
   [SkillType.Hp]: "HP за уровень",
   [SkillType.Language]: "Язык",
   [SkillType.ItemType]: "Владение типом предметов",
-  [SkillType.UseSpell]: "Использование заклинания",
+  [SkillType.UseSpell]: "Использование заклинания или способности",
   [SkillType.Initiative]: "Инициатива"
 };

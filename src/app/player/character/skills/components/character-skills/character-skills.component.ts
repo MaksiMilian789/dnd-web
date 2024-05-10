@@ -102,12 +102,24 @@ export class CharacterSkillsComponent {
       skill.currentCharges -= 1;
       skill.activated = true;
       this._characterService.toggleSkill(this.charId, skill.id, true).subscribe();
+      this._snackbar.open(
+        'Способность переведена в активное состояние. Потрачен 1 заряд. Осталось ' + skill.currentCharges + '!',
+      );
     } else {
-      this._characterService.toggleSkill(this.charId, skill.id, false).subscribe();
+      this._characterService.toggleSkill(this.charId, skill.id, false, 0).subscribe();
+      this._snackbar.open('Способность отключена!');
     }
   }
 
-  resetSkillCharges(skill: Skill): void{
+  activateInstantSkill(skill: Skill): void {
+    skill.currentCharges -= 1;
+    this._snackbar.open(
+      'Способность использовна. Потрачен 1 заряд. Осталось ' + skill.currentCharges + '!',
+    );
+    this._characterService.toggleSkill(this.charId, skill.id, false).subscribe();
+  }
+
+  resetSkillCharges(skill: Skill): void {
     this._characterService.resetSkillCharges(this.charId, skill.id).subscribe();
     skill.currentCharges = skill.charges;
   }

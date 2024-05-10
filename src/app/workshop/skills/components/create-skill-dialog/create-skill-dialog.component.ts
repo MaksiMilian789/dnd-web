@@ -40,7 +40,7 @@ import {
   VISION_END,
   VISION_START,
 } from '@core/enums';
-import { ConditionCreate, Damage, DiceRoll, Skill, SkillCreate, SkillValue, World } from '@core/models';
+import { ActionTime, ConditionCreate, Damage, DiceRoll, Skill, SkillCreate, SkillValue, World } from '@core/models';
 import { WorkshopService } from '@core/services/api/workshop.service';
 import { AuthService } from '@core/services/auth/auth.service';
 import { WorldService } from '@shared';
@@ -92,6 +92,8 @@ export class CreateSkillDialogComponent {
       passive: new FormControl(false, [Validators.required]),
       recharge: new FormControl<Recharge>(0, [Validators.required]),
       charges: new FormControl(0, [Validators.required]),
+      time: new FormControl(0, [Validators.required]),
+      concentrate: new FormControl(false, [Validators.required]),
       worldId: new FormControl<number | null>(null),
     });
 
@@ -169,7 +171,7 @@ export class CreateSkillDialogComponent {
     }
     if (this.chosenResistance()) {
       const val = this.resistanceForm;
-      skillValue.resistance.damageType = val.controls['damageType'].value;
+      skillValue.resistance.damageType = Number(val.controls['damageType'].value);
       skillValue.resistance.flat = val.controls['flat'].value;
     }
     if (this.chosenTypeVision()) {
@@ -183,7 +185,7 @@ export class CreateSkillDialogComponent {
       damageRoll.rolls = val.controls['rolls'].value;
 
       skillValue.damage.damageRoll = damageRoll;
-      skillValue.damage.damageType = val.controls['damageType'].value;
+      skillValue.damage.damageType = Number(val.controls['damageType'].value);
       skillValue.damage.flat = val.controls['flat'].value;
       skillValue.damage.heal = val.controls['heal'].value;
     }
@@ -194,7 +196,7 @@ export class CreateSkillDialogComponent {
       damageRoll.rolls = val.controls['rolls'].value;
       let damage: Damage = new Damage();
       damage.damageRoll = damageRoll;
-      damage.damageType = val.controls['damageType'].value;
+      damage.damageType = Number(val.controls['damageType'].value);
       damage.flat = val.controls['flat'].value;
       damage.heal = false;
 
@@ -215,12 +217,17 @@ export class CreateSkillDialogComponent {
     }
     if (this.chosenItemType()) {
       const val = this.itemTypeForm;
-      skillValue.itemType = val.controls['itemType'].value;
+      skillValue.itemType = Number(val.controls['itemType'].value);
     }
     if (this.chosenLanguage()) {
       const val = this.languageForm;
-      skillValue.language = val.controls['language'].value;
+      skillValue.language = Number(val.controls['language'].value);
     }
+    
+    let actionTime: ActionTime = {
+      time: this.form.controls['time'].value,
+      concentrate: this.form.controls['concentrate'].value,
+    };
 
     let skill: SkillCreate = {
       name: this.form.controls['name'].value,
@@ -229,8 +236,9 @@ export class CreateSkillDialogComponent {
       skillType: Number(this.form.controls['skillType'].value),
       value: skillValue,
       passive: this.form.controls['passive'].value,
-      recharge: this.form.controls['recharge'].value,
+      recharge: Number(this.form.controls['recharge'].value),
       charges: this.form.controls['charges'].value,
+      actionTime: actionTime,
       system: System.Dnd,
       authorId: this._authService.currentUser?.id!,
     };

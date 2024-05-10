@@ -32,6 +32,13 @@
         </button>
       </tui-data-list>
     </tui-select>
+    <tui-input-number formControlName="time" class="info">
+        Время действия, сек
+        <input placeholder="Время в секундах" tuiTextfield />
+    </tui-input-number>
+    <tui-checkbox-block formControlName="concentrate" class="info">
+        Требуется концентрация?
+    </tui-checkbox-block>
   }
   <mat-divider></mat-divider>
   <tui-input-number formControlName="distance" class="info">

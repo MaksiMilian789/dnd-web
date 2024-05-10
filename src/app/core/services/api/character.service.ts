@@ -150,10 +150,11 @@ export class CharacterService {
     );
   }
 
-  public toggleSkill(charId: number, skillId: number, active: boolean): Observable<void> {
+  public toggleSkill(charId: number, skillId: number, active: boolean, changeCharges: number = -1): Observable<void> {
     var params = new HttpParams().append('id', charId);
     params = params.append('skillId', skillId);
     params = params.append('active', active);
+    params = params.append('changeCharges', changeCharges);
     return this._http.put<void>(
       `${this._baseUrl}/toggleSkill`,
       {},
