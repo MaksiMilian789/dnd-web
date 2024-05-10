@@ -63,6 +63,20 @@ export class CharacterService {
     );
   }
 
+  public editCharacterInfo(charId: number, name: string, level: number, age: number): Observable<void> {
+    var params = new HttpParams().append('id', charId);
+    params = params.append('level', level);
+    params = params.append('age', age);
+    params = params.append('name', name);
+    return this._http.put<void>(
+      `${this._baseUrl}/editInfo`,
+      {},
+      {
+        params: params,
+      },
+    );
+  }
+
   public addCharacterSkill(charId: number, skillId: number): Observable<void> {
     var params = new HttpParams().append('id', charId);
     params = params.append('skillId', skillId);
@@ -143,14 +157,6 @@ export class CharacterService {
     });
   }
 
-  public addCharacterSpell(charId: number, spellId: number): Observable<void> {
-    return this._http.post<void>(
-      `${this._baseUrl}/addCharacterSpell`,
-      { charId: charId, spellId: spellId },
-      {}
-    );
-  }
-
   public deleteCharacterSpell(charId: number, id: number): Observable<void> {
     return this._http.delete<void>(`${this._baseUrl}/deleteCharacterSpell`, {
       body: { charId: charId, spellId: id },
@@ -161,51 +167,6 @@ export class CharacterService {
     return this._http.delete<void>(`${this._baseUrl}/deleteCharacterSkill`, {
       body: { charId: charId, skillId: id },
     });
-  }
-
-  public editCharacterInfo(
-    id: number,
-    name: string,
-    age: number
-  ): Observable<void> {
-    return this._http.put<void>(
-      `${this._baseUrl}/editCharacterInfo`,
-      {
-        id: id,
-        name: name,
-        age: age,
-      },
-      {}
-    );
-  }
-
-  public editCharacterLevel(
-    id: number,
-    level: number,
-    maxHp: number,
-    proficiencyBonus: number
-  ): Observable<void> {
-    return this._http.put<void>(
-      `${this._baseUrl}/editCharacterLevel`,
-      {
-        id: id,
-        level: level,
-        maxHp: maxHp,
-        proficiencyBonus: proficiencyBonus,
-      },
-      {}
-    );
-  }
-
-  public addCharacterCondition(
-    charId: number,
-    conditionId: number
-  ): Observable<void> {
-    return this._http.post<void>(
-      `${this._baseUrl}/addCharacterCondition`,
-      { charId: charId, conditionId: conditionId },
-      {}
-    );
   }
 
   public deleteCharacterCondition(

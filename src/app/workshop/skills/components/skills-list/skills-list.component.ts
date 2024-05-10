@@ -61,6 +61,7 @@ export class SkillsListComponent {
   }
 
   setData(data: Skill[]): void {
+    data = data.filter(x => !x.hidden);
     this.dataSource = new MatTableDataSource(data);
     this.paginator._intl.itemsPerPageLabel = 'Способностей на страницу';
     this.dataSource.sort = this.sort;

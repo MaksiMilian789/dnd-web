@@ -99,13 +99,17 @@ export class CharacterMainComponent {
     };
 
     this._dialogs
-      .open(new PolymorpheusComponent(CharInfoDialogComponent), {
+      .open<boolean>(new PolymorpheusComponent(CharInfoDialogComponent), {
         data: data,
         size: 'page',
         closeable: true,
         dismissible: true,
       })
-      .subscribe();
+      .subscribe((val) => {
+        if (!!val) {
+          this.refresh();
+        }
+      });
   }
 
   get modificator(): Characteristics {
@@ -115,7 +119,7 @@ export class CharacterMainComponent {
           this._calculateService.calculateEffectValue(
             SkillType.Strength,
             this.characterSkills(),
-            this.masteryBonus,
+            0,
             this.character()!.characteristics.strength,
           ),
         ),
@@ -123,7 +127,7 @@ export class CharacterMainComponent {
           this._calculateService.calculateEffectValue(
             SkillType.Dexterity,
             this.characterSkills(),
-            this.masteryBonus,
+            0,
             this.character()!.characteristics.dexterity,
           ),
         ),
@@ -131,7 +135,7 @@ export class CharacterMainComponent {
           this._calculateService.calculateEffectValue(
             SkillType.Constitution,
             this.characterSkills(),
-            this.masteryBonus,
+            0,
             this.character()!.characteristics.constitution,
           ),
         ),
@@ -139,7 +143,7 @@ export class CharacterMainComponent {
           this._calculateService.calculateEffectValue(
             SkillType.Intelligence,
             this.characterSkills(),
-            this.masteryBonus,
+            0,
             this.character()!.characteristics.intelligence,
           ),
         ),
@@ -147,7 +151,7 @@ export class CharacterMainComponent {
           this._calculateService.calculateEffectValue(
             SkillType.Wisdom,
             this.characterSkills(),
-            this.masteryBonus,
+            0,
             this.character()!.characteristics.wisdom,
           ),
         ),
@@ -155,7 +159,7 @@ export class CharacterMainComponent {
           this._calculateService.calculateEffectValue(
             SkillType.Charisma,
             this.characterSkills(),
-            this.masteryBonus,
+            0,
             this.character()!.characteristics.charisma,
           ),
         ),
@@ -172,8 +176,8 @@ export class CharacterMainComponent {
     }
   }
 
-  calculateSkillValue(type: SkillType): number {
-    return 0;
+  calculateSkillValue(type: SkillType, value: number): number {
+    return this._calculateService.calculateEffectValue(type, this.characterSkills(), this.masteryBonus, value);
   }
   
   calculateSaveRollValue(type: SkillType, value: number): number {
@@ -215,6 +219,12 @@ export class CharacterMainComponent {
         if (element.passive || element.activated) data.push(element);
       });
     });
+    
+    this.character()!.conditions.forEach((instance) => {
+      instance.skillInstance.forEach((element) => {
+        if (element.passive || element.activated) data.push(element);
+      });
+    });
     return data;
   }
 
@@ -245,7 +255,8 @@ export class CharacterMainComponent {
   }
 
   get getPerception(): number {
-    return 12;
+    let persp = this.calculateSkillValue(this.skillTypes.Perception, this.modificator.wisdom);
+    return this._calculateService.calculatePassivePersption(this.characterSkills(), persp);
   }
 
   get getView(): string {

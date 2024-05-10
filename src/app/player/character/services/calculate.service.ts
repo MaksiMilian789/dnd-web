@@ -169,9 +169,32 @@ export class CalculateService {
     return [];
   }
 
-  // TODO
   calculatePassivePersption(skills: Skill[], perseprionMdf: number): number {
-    return 0;
+    let hasAdv = false;
+    let hasDisAdv = false;
+
+    skills.forEach((skill) => {
+      let effect = skill.value.effect;
+      if (skill.skillType == SkillType.Perception) {
+        if (effect.advantage) {
+          hasAdv = true;
+        }
+
+        if (effect.disAdvantage) {
+          hasDisAdv = true;
+        }
+      }
+    });
+
+    let result = 10 + perseprionMdf;
+    if (hasAdv) {
+      result += 5;
+    }
+    if (hasDisAdv) {
+      result -= 5;
+    }
+
+    return result;
   }
 
   calculateMaxHp(level: number, skills: Skill[], constitutionMdf: number): number {
@@ -206,5 +229,53 @@ export class CalculateService {
 
     let hp = level * (hpPerLevel + constitutionMdf) + dynamic;
     return hp > 0 ? hp : 0;
+  }
+
+  calculateSpeed(skills: Skill[], skillType = SkillType.Speed): number {
+    let flat = 0;
+    let dynamic = 0;
+    let hasSpeed = false;
+    skills.forEach((element) => {
+      if (element.skillType == skillType) {
+        let effect = element.value.effect;
+
+        if (effect.flat != 0) {
+          hasSpeed = true;
+          if (effect.flat > flat || flat == 0) {
+            flat = effect.flat;
+          }
+        }
+
+        if (effect.dynamic != 0) {
+          dynamic += effect.dynamic;
+        }
+      }
+    });
+
+    return hasSpeed ? flat + dynamic : 30 + dynamic;
+  }
+
+  calculateInitiative(skills: Skill[], dexterityMdf: number): number {
+    let flat = 0;
+    let dynamic = 0;
+    let isFlat = false;
+    skills.forEach((element) => {
+      if (element.skillType == SkillType.Initiative) {
+        let effect = element.value.effect;
+
+        if (effect.flat != 0) {
+          isFlat = true;
+          if (effect.flat > flat || flat == 0) {
+            flat = effect.flat;
+          }
+        }
+
+        if (effect.dynamic != 0) {
+          dynamic += effect.dynamic;
+        }
+      }
+    });
+
+    return isFlat ? flat : dynamic + dexterityMdf;
   }
 }

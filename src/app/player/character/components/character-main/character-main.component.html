@@ -101,7 +101,7 @@
           <tui-error [error]="'Спас: ' + calculateSaveRollValue(skillTypes.Strength, modificator.strength)"></tui-error>
           <div class="stat-skill" [class.none]="!showSkills.value">
             <mat-divider></mat-divider>
-            <div>Атлетика: {{ 10 }}</div>
+            <div>Атлетика: {{ calculateSkillValue(skillTypes.Athletics, modificator.strength) }}</div>
           </div>
         </div>
       </div>
@@ -120,9 +120,9 @@
           <tui-error [error]="'Спас: ' + calculateSaveRollValue(skillTypes.Dexterity, modificator.dexterity)"></tui-error>
           <div class="stat-skill" [class.none]="!showSkills.value">
             <mat-divider></mat-divider>
-            <div>Акробатика: {{ 10 }}</div>
-            <div>Ловкость рук: {{ 10 }}</div>
-            <div>Скрытность: {{ 10 }}</div>
+            <div>Акробатика: {{ calculateSkillValue(skillTypes.Acrobatics, modificator.dexterity) }}</div>
+            <div>Ловкость рук: {{ calculateSkillValue(skillTypes.SleightOfHand, modificator.dexterity) }}</div>
+            <div>Скрытность: {{ calculateSkillValue(skillTypes.Stealth, modificator.dexterity) }}</div>
           </div>
         </div>
       </div>
@@ -161,11 +161,11 @@
           <tui-error [error]="'Спас: ' + calculateSaveRollValue(skillTypes.Intelligence, modificator.intelligence)"></tui-error>
           <div class="stat-skill" [class.none]="!showSkills.value">
             <mat-divider></mat-divider>
-            <div>Анализ: {{ 10 }}</div>
-            <div>История: {{ 10 }}</div>
-            <div>Магия: {{ 10 }}</div>
-            <div>Природа: {{ 10 }}</div>
-            <div>Религия: {{ 10 }}</div>
+            <div>Анализ: {{ calculateSkillValue(skillTypes.Investigation, modificator.intelligence) }}</div>
+            <div>История: {{ calculateSkillValue(skillTypes.History, modificator.intelligence) }}</div>
+            <div>Магия: {{ calculateSkillValue(skillTypes.Arcana, modificator.intelligence) }}</div>
+            <div>Природа: {{ calculateSkillValue(skillTypes.Nature, modificator.intelligence) }}</div>
+            <div>Религия: {{ calculateSkillValue(skillTypes.Religion, modificator.intelligence) }}</div>
           </div>
         </div>
       </div>
@@ -184,11 +184,11 @@
           <tui-error [error]="'Спас: ' + calculateSaveRollValue(skillTypes.Wisdom, modificator.wisdom)"></tui-error>
           <div class="stat-skill" [class.none]="!showSkills.value">
             <mat-divider></mat-divider>
-            <div>Внимат-сть: {{ 10 }}</div>
-            <div>Выживание: {{ 10 }}</div>
-            <div>Медицина: {{ 10 }}</div>
-            <div>Прониц-сть: {{ 10 }}</div>
-            <div>Уход за жив: {{ 10 }}</div>
+            <div>Внимат-сть: {{ calculateSkillValue(skillTypes.Perception, modificator.wisdom) }}</div>
+            <div>Выживание: {{ calculateSkillValue(skillTypes.Survival, modificator.wisdom) }}</div>
+            <div>Медицина: {{ calculateSkillValue(skillTypes.Medicine, modificator.wisdom) }}</div>
+            <div>Прониц-сть: {{ calculateSkillValue(skillTypes.Insight, modificator.wisdom) }}</div>
+            <div>Уход за жив: {{ calculateSkillValue(skillTypes.AnimalHandling, modificator.wisdom) }}</div>
           </div>
         </div>
       </div>
@@ -207,10 +207,10 @@
           <tui-error [error]="'Спас: ' + calculateSaveRollValue(skillTypes.Charisma, modificator.charisma)"></tui-error>
           <div class="stat-skill" [class.none]="!showSkills.value">
             <mat-divider></mat-divider>
-            <div>Выступление: {{ 10 }}</div>
-            <div>Запугивание: {{ 10 }}</div>
-            <div>Обман: {{ 10 }}</div>
-            <div>Убеждение: {{ 10 }}</div>
+            <div>Выступление: {{ calculateSkillValue(skillTypes.Performance, modificator.charisma) }}</div>
+            <div>Запугивание: {{ calculateSkillValue(skillTypes.Intimidation, modificator.charisma) }}</div>
+            <div>Обман: {{ calculateSkillValue(skillTypes.Deception, modificator.charisma) }}</div>
+            <div>Убеждение: {{ calculateSkillValue(skillTypes.Persuasion, modificator.charisma) }}</div>
           </div>
         </div>
       </div>

@@ -102,7 +102,7 @@
                 </tui-input-number>
                 <div class="descr">
                     <tui-error [error]="'Стат: ' + character()!.characteristics.strength"></tui-error>
-                    <tui-error [error]="'Спас: ' + 0"></tui-error>
+                    <tui-error [error]="'Спас: ' + calculateSaveRollValue(skillTypes.Strength, modificator.strength)"></tui-error>
                 </div>
             </div>
             <div>
@@ -113,7 +113,7 @@
                 </tui-input-number>
                 <div class="descr">
                     <tui-error [error]="'Стат: ' + character()!.characteristics.dexterity"></tui-error>
-                    <tui-error [error]="'Спас: ' + 0"></tui-error>
+                    <tui-error [error]="'Спас: ' + calculateSaveRollValue(skillTypes.Dexterity, modificator.dexterity)"></tui-error>
                 </div>
             </div>
             <div>
@@ -124,7 +124,7 @@
                 </tui-input-number>
                 <div class="descr">
                     <tui-error [error]="'Стат: ' + character()!.characteristics.constitution"></tui-error>
-                    <tui-error [error]="'Спас: ' + 0"></tui-error>
+                    <tui-error [error]="'Спас: ' + calculateSaveRollValue(skillTypes.Constitution, modificator.constitution)"></tui-error>
                 </div>
             </div>
         </div>
@@ -137,7 +137,7 @@
                 </tui-input-number>
                 <div class="descr">
                     <tui-error [error]="'Стат: ' + character()!.characteristics.intelligence"></tui-error>
-                    <tui-error [error]="'Спас: ' + 0"></tui-error>
+                    <tui-error [error]="'Спас: ' + calculateSaveRollValue(skillTypes.Intelligence, modificator.intelligence)"></tui-error>
                 </div>
             </div>
             <div>
@@ -148,7 +148,7 @@
                 </tui-input-number>
                 <div class="descr">
                     <tui-error [error]="'Стат: ' + character()!.characteristics.wisdom"></tui-error>
-                    <tui-error [error]="'Спас: ' + 0"></tui-error>
+                    <tui-error [error]="'Спас: ' + calculateSaveRollValue(skillTypes.Wisdom, modificator.wisdom)"></tui-error>
                 </div>
             </div>
             <div>
@@ -159,7 +159,7 @@
                 </tui-input-number>
                 <div class="descr">
                     <tui-error [error]="'Стат: ' + character()!.characteristics.charisma"></tui-error>
-                    <tui-error [error]="'Спас: ' + 0"></tui-error>
+                    <tui-error [error]="'Спас: ' + calculateSaveRollValue(skillTypes.Charisma, modificator.charisma)"></tui-error>
                 </div>
             </div>
         </div>
