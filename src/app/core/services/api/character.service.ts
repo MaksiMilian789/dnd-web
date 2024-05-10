@@ -49,7 +49,7 @@ export class CharacterService {
       params: params,
     });
   }
-  
+
   public editCharacterHp(charId: number, hp: number, addHp: number): Observable<void> {
     var params = new HttpParams().append('id', charId);
     params = params.append('hp', hp);
@@ -100,7 +100,7 @@ export class CharacterService {
       },
     );
   }
-  
+
   public addCharacterInventoryObject(charId: number, objectId: number): Observable<void> {
     var params = new HttpParams().append('id', charId);
     params = params.append('objectId', objectId);
@@ -125,18 +125,62 @@ export class CharacterService {
     );
   }
 
-  public saveNote(charId: number, header: string, text: string, imageId: number | null, noteId: number | null): Observable<void> {
+  public saveNote(
+    charId: number,
+    header: string,
+    text: string,
+    imageId: number | null,
+    noteId: number | null,
+  ): Observable<void> {
     var params = new HttpParams().append('id', charId);
     params = params.append('header', header);
     params = params.append('text', text);
-    if(!!imageId){
+    if (!!imageId) {
       params = params.append('imageId', imageId);
     }
-    if(!!noteId){
+    if (!!noteId) {
       params = params.append('noteId', noteId);
     }
     return this._http.put<void>(
       `${this._baseUrl}/note`,
+      {},
+      {
+        params: params,
+      },
+    );
+  }
+
+  public toggleSkill(charId: number, skillId: number, active: boolean): Observable<void> {
+    var params = new HttpParams().append('id', charId);
+    params = params.append('skillId', skillId);
+    params = params.append('active', active);
+    return this._http.put<void>(
+      `${this._baseUrl}/toggleSkill`,
+      {},
+      {
+        params: params,
+      },
+    );
+  }
+
+  public resetSkillCharges(charId: number, skillId: number): Observable<void> {
+    var params = new HttpParams().append('id', charId);
+    params = params.append('skillId', skillId);
+    return this._http.put<void>(
+      `${this._baseUrl}/resetSkillCharges`,
+      {},
+      {
+        params: params,
+      },
+    );
+  }
+
+  public equipInventoryObject(charId: number, objectId: number, equip: boolean): Observable<void> {
+    var params = new HttpParams().append('id', charId);
+    params = params.append('objectId', objectId);
+    params = params.append('equip', equip);
+    return this._http.put<void>(
+      `${this._baseUrl}/equipObject`,
       {},
       {
         params: params,

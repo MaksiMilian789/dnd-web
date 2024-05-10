@@ -54,7 +54,7 @@
         <input placeholder="Значение" tuiTextfield />
       </tui-input-number>
       @if (effectForm.controls['flat'].value == 0) {
-        @if (!onlyValue()) {
+        @if (!onlyValue() && !mainCharacteristics()) {
           <tui-checkbox-block formControlName="mastery" class="info"> Владение </tui-checkbox-block>
           <tui-checkbox-block formControlName="competent" class="info"> Компетентность </tui-checkbox-block>
         }
@@ -66,7 +66,10 @@
       @if (!onlyValue()) {
         <tui-checkbox-block formControlName="advantage" class="info"> Преимущество </tui-checkbox-block>
         <tui-checkbox-block formControlName="disAdvantage" class="info"> Помеха </tui-checkbox-block>
-        <tui-checkbox-block formControlName="saveRoll" class="info"> Спасбросок </tui-checkbox-block>
+        @if(mainCharacteristics()){
+          <tui-checkbox-block formControlName="saveRoll" class="info"> Владение пасбросоком </tui-checkbox-block>
+        }
+        
       }
     </form>
   }

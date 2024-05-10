@@ -12,6 +12,7 @@ export interface Skill {
   distance?: number;
   passive: boolean;
   recharge: Recharge;
+  currentCharges: number;
   charges: number;
   hidden: boolean;
   system: System;

@@ -13,33 +13,58 @@
   <div class="table-overflow">
     <table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort>
       <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Название </th>
-        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Название</th>
+        <td mat-cell *matCellDef="let element" [class.active]="element.activated">{{ element.name }}</td>
       </ng-container>
 
       <ng-container matColumnDef="type">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Тип </th>
-        <td mat-cell *matCellDef="let element"> {{element.passive ? 'Пассивный' : 'Активный'}} </td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Тип</th>
+        <td mat-cell *matCellDef="let element">{{ element.passive ? 'Пассивный' : 'Активный' }}</td>
       </ng-container>
 
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
-        <td mat-cell *matCellDef="let element"> <tui-hosted-dropdown #dropdown [content]="content">
+        <td mat-cell *matCellDef="let element">
+          <tui-hosted-dropdown #dropdown [content]="content">
             <button mat-icon-button (click)="$event.stopPropagation(); dropdown.open = !dropdown.open">
               <mat-icon>menu</mat-icon>
             </button>
           </tui-hosted-dropdown>
           <ng-template #content let-activeZone let-close="close">
-            <span style="margin-left: 35px;">Меню в разработке</span>
-            <tui-data-list style="width: 180px;">
-              <button tuiOption appearance="flat" [disabled]="true">
-                Редактировать
-                <tui-svg src="tuiIconEdit"></tui-svg>
-              </button>
-              <button tuiOption appearance="flat" [disabled]="true">
-                Удалить
-                <tui-svg src="tuiIconTrash2"></tui-svg>
-              </button>
+            <span style="margin-left: 35px">Меню в разработке</span>
+            <tui-data-list style="width: 200px">
+              <tui-opt-group>
+                <button tuiOption appearance="flat" [disabled]="true">
+                  Редактировать
+                  <tui-svg src="tuiIconEdit"></tui-svg>
+                </button>
+                <button tuiOption appearance="flat" [disabled]="true">
+                  Удалить
+                  <tui-svg src="tuiIconTrash2"></tui-svg>
+                </button>
+              </tui-opt-group>
+              @if (!element.passive) {
+                <tui-opt-group>
+                  <div class="toggle">
+                    Активация
+                    <tui-toggle
+                      [(ngModel)]="element.activated"
+                      [showIcons]="true"
+                      (click)="toggleItem(element)"
+                      [disabled]="!canToggle(element)"
+                    ></tui-toggle>
+                  </div>
+                  <button
+                    tuiOption
+                    appearance="flat"
+                    (click)="resetSkillCharges(element)"
+                    [disabled]="element.currentCharges == element.charges"
+                  >
+                    Обновить заряды
+                    <tui-svg src="tuiIconRotateCcw"></tui-svg>
+                  </button>
+                </tui-opt-group>
+              }
             </tui-data-list>
           </ng-template>
         </td>
@@ -50,16 +75,21 @@
         <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
           <div class="element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
             <div class="element-description">
-              {{element.description}}
+              {{ element.description }}
+              <app-skill-info-table [skill]="element"></app-skill-info-table>
             </div>
           </div>
         </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="columnsToDisplay; sticky: true"></tr>
-      <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="element-row"
-        [class.expanded-row]="expandedElement === element" (click)="expandedElement = element">
-      </tr>
+      <tr
+        mat-row
+        *matRowDef="let element; columns: columnsToDisplay"
+        class="element-row"
+        [class.expanded-row]="expandedElement === element"
+        (click)="expandedElement = element"
+      ></tr>
       <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
 
       <tr class="mat-row center" *matNoDataRow>

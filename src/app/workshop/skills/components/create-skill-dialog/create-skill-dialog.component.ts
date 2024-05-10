@@ -225,7 +225,7 @@ export class CreateSkillDialogComponent {
     let skill: SkillCreate = {
       name: this.form.controls['name'].value,
       description: this.form.controls['description'].value,
-      actionType: this.form.controls['actionType'].value,
+      actionType: Number(this.form.controls['actionType'].value),
       skillType: Number(this.form.controls['skillType'].value),
       value: skillValue,
       passive: this.form.controls['passive'].value,
@@ -360,6 +360,16 @@ export class CreateSkillDialogComponent {
 
   classArmor(): boolean {
     return this.form.controls['skillType'].value == SkillType.ClassArmor;
+  }
+
+  mainCharacteristics(): boolean{    
+    if (
+      this.form.controls['skillType'].value >= 0 &&
+      this.form.controls['skillType'].value <= SkillType.Charisma
+    ) {
+      return true;
+    }
+    return false;
   }
 
   @tuiPure

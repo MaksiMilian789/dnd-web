@@ -50,6 +50,8 @@ tr.element-row:not(.expanded-row):active {
 
 .element-description {
   padding: 16px;
+  display: flex;
+  flex-direction: column;
 }
 
 .mat-cell {
@@ -88,4 +90,22 @@ mat-paginator {
 
 .center {
   text-align: center;
+}
+
+.toggle {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  margin-left: 11px;
+  width: 180px;
+  color: black;
+  font-size: larger;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.active {
+  font-size: large;
+  font-weight: bold;
 }

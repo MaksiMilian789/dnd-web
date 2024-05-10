@@ -97,6 +97,25 @@ export class CharacterSkillsComponent {
     this.dataSource.paginator = this.paginator;
   }
 
+  toggleItem(skill: Skill): void {
+    if (!skill.activated) {
+      skill.currentCharges -= 1;
+      skill.activated = true;
+      this._characterService.toggleSkill(this.charId, skill.id, true).subscribe();
+    } else {
+      this._characterService.toggleSkill(this.charId, skill.id, false).subscribe();
+    }
+  }
+
+  resetSkillCharges(skill: Skill): void{
+    this._characterService.resetSkillCharges(this.charId, skill.id).subscribe();
+    skill.currentCharges = skill.charges;
+  }
+
+  canToggle(skill: Skill): boolean {
+    return skill.currentCharges > 0 || skill.activated;
+  }
+
   addItem(): void {
     const data: AddSkillDialogComponentData = {
       character: this.character()!,
@@ -110,9 +129,9 @@ export class CharacterSkillsComponent {
       })
       .subscribe({
         complete: () => {
-            this.refresh();
+          this.refresh();
         },
-    });
+      });
   }
 
   deleteItem(id: number): void {

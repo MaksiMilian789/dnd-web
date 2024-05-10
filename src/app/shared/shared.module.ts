@@ -15,6 +15,7 @@ import { WikiComponent } from './components/wiki/wiki.component';
 import { WorldsComponent } from './components/worlds/worlds.component';
 import { WikiHomeComponent } from './components/wiki-home/wiki-home.component';
 import { OpenImageDialogComponent } from './components/open-image-dialog/open-image-dialog.component';
+import { SkillInfoTableComponent } from './components/skill-info-table/skill-info-table.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { OpenImageDialogComponent } from './components/open-image-dialog/open-im
     ConfirmationDialogComponent,
     WikiHomeComponent,
     OpenImageDialogComponent,
+    SkillInfoTableComponent,
 
     ColorPipe, 
     StatsSkillPipe,
@@ -51,6 +53,7 @@ import { OpenImageDialogComponent } from './components/open-image-dialog/open-im
     WorldsComponent,
     WikiHomeComponent,
     OpenImageDialogComponent,
+    SkillInfoTableComponent,
 
     ColorPipe,
     StatsSkillPipe

@@ -35,6 +35,7 @@ import {
   TuiSelectModule,
   TuiStepperModule,
   TuiTextareaModule,
+  TuiToggleModule,
 } from '@taiga-ui/kit';
 
 @NgModule({
@@ -72,7 +73,8 @@ import {
     TuiBadgedContentModule,
     TuiBadgeModule,
     TuiRadioBlockModule,
-    TuiDataListWrapperModule
+    TuiDataListWrapperModule,
+    TuiToggleModule
   ],
 })
 export class TaigaModule {}

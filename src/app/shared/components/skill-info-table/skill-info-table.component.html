@@ -1,0 +1,201 @@
+<span>{{ 'Тип: ' + stringifySkillType(skill().skillType) }}</span>
+<span>{{ 'Пассивно: ' }}{{ skill().passive ? 'да' : 'нет' }}</span>
+
+@if (!skill().passive) {
+  <span>{{ 'Тип действия: ' + stringifyActionType(skill().actionType) }}</span>
+  <span>{{ 'Зарядов: ' + skill().currentCharges + '/' + skill().charges }}</span>
+  <span>{{ 'Перезарядка: ' + stringifyRecharge(skill().recharge) }}</span>
+}
+
+@if (skill().distance! > 0) {
+  <span>{{ 'Дистанция: ' + skill().distance }}</span>
+}
+
+@if (isCharacteristics()) {
+  <ng-container *tuiLet="skill().value.effect as effect">
+    @if (effect.flat > 0) {
+      <span>{{ 'Фиксированное значение: ' + effect.flat }}</span>
+    }
+
+    @if (effect.dynamic > 0) {
+      <span>{{ 'Добавочное значение: ' + effect.dynamic }}</span>
+    }
+
+    @if (effect.advantage) {
+      <span>{{ 'Преимущество: да' }}</span>
+    }
+
+    @if (effect.disAdvantage) {
+      <span>{{ 'Помеха: да' }}</span>
+    }
+
+    @if (effect.saveRoll) {
+      <span>{{ 'Владение спасброском: да' }}</span>
+    }
+  </ng-container>
+}
+
+@if (isSkill()) {
+  <ng-container *tuiLet="skill().value.effect as effect">
+    @if (effect.flat > 0) {
+      <span>{{ 'Фиксированное значение: ' + effect.flat }}</span>
+    }
+
+    @if (effect.dynamic > 0) {
+      <span>{{ 'Добавочное значение: ' + effect.dynamic }}</span>
+    }
+
+    @if (effect.mastery) {
+      <span>{{ 'Владение: да' }}</span>
+    }
+
+    @if (effect.competent) {
+      <span>{{ 'Компетентность: да' }}</span>
+    }
+
+    @if (effect.advantage) {
+      <span>{{ 'Преимущество: да' }}</span>
+    }
+
+    @if (effect.disAdvantage) {
+      <span>{{ 'Помеха: да' }}</span>
+    }
+  </ng-container>
+}
+
+@if (isAll()) {
+  <ng-container *tuiLet="skill().value.effect as effect">
+    @if (effect.flat > 0) {
+      <span>{{ 'Фиксированное значение: ' + effect.flat }}</span>
+    }
+
+    @if (effect.dynamic > 0) {
+      <span>{{ 'Добавочное значение: ' + effect.dynamic }}</span>
+    }
+
+    @if (effect.mastery) {
+      <span>{{ 'Владение: да' }}</span>
+    }
+
+    @if (effect.competent) {
+      <span>{{ 'Компетентность: да' }}</span>
+    }
+
+    @if (effect.advantage) {
+      <span>{{ 'Преимущество: да' }}</span>
+    }
+
+    @if (effect.disAdvantage) {
+      <span>{{ 'Помеха: да' }}</span>
+    }
+
+    @if (effect.saveRoll) {
+      <span>{{ 'Владение спасброском: да' }}</span>
+    }
+  </ng-container>
+}
+
+@if (isOnlyEffectValue()) {
+  <ng-container *tuiLet="skill().value.effect as effect">
+    @if (effect.flat > 0 || (isSpeed() && effect.dynamic == 0)) {
+      <span>{{ 'Фиксированное значение: ' + effect.flat }}</span>
+    }
+
+    @if (effect.dynamic > 0) {
+      <span>{{ 'Добавочное значение: ' + effect.dynamic }}</span>
+    }
+  </ng-container>
+}
+
+@if (isResistance()) {
+  <ng-container *tuiLet="skill().value.resistance as resistance">
+    <span>{{ 'Тип урона: ' + stringifyDamageType(resistance.damageType) }}</span>
+    @if (resistance.flat && resistance.flat > 0) {
+      <span>{{ 'Значение плоской защиты: ' + resistance.flat }}</span>
+    }
+  </ng-container>
+}
+
+@if (isDamageHeal()) {
+  <ng-container *tuiLet="skill().value.damage as damageHeal">
+    @if (!damageHeal.heal) {
+      <span>{{ 'Тип урона: ' + stringifyDamageType(damageHeal.damageType) }}</span>
+    }
+    <span>{{ 'Лечение?: ' }}{{ damageHeal.heal ? 'да' : 'нет' }}</span>
+
+    @if (damageHeal.flat > 0) {
+      <span>{{ 'Фиксированное значение: ' + damageHeal.flat }}</span>
+    }
+
+    @if (damageHeal.damageRoll.rolls > 0) {
+      <span>{{ 'Количество кубов: ' + damageHeal.damageRoll.rolls }}</span>
+      <span>{{ 'Куб: ' + stringifyDice(damageHeal.damageRoll.dice) }}</span>
+    }
+  </ng-container>
+}
+
+@if (isVision()) {
+  <ng-container *tuiLet="skill().value.typeVision as typeVision">
+    <span>{{ 'Тип зрения: ' + typeVision.name }}</span>
+  </ng-container>
+}
+
+@if (isAttackBonus()) {
+  <ng-container *tuiLet="skill().value.attackBonus as attackBonus">
+    <span>{{ 'Тип атаки: ' + stringifyAttackType(attackBonus.attackType) }}</span>
+
+    @if (attackBonus.accuracyBonus != 0) {
+      <span>{{ 'Бонус к попаданию: ' + attackBonus.accuracyBonus }}</span>
+    }
+
+    @if (attackBonus.advantage) {
+      <span>{{ 'Преимущество: да' }}</span>
+    }
+
+    @if (attackBonus.disAdvantage) {
+      <span>{{ 'Помеха: да' }}</span>
+    }
+
+    <ng-container *tuiLet="attackBonus.damage as damage">
+      @if (!damage.heal) {
+        <span>{{ 'Тип урона: ' + stringifyDamageType(damage.damageType) }}</span>
+      }
+      <span>{{ 'Лечение?: ' }}{{ damage.heal ? 'да' : 'нет' }}</span>
+
+      @if (damage.flat > 0) {
+        <span>{{ 'Фиксированное значение: ' + damage.flat }}</span>
+      }
+
+      @if (damage.damageRoll.rolls > 0) {
+        <span>{{ 'Количество кубов: ' + damage.damageRoll.rolls }}</span>
+        <span>{{ 'Куб: ' + stringifyDice(damage.damageRoll.dice) }}</span>
+      }
+    </ng-container>
+  </ng-container>
+}
+
+@if (isPerLevel()) {
+  <ng-container *tuiLet="skill().value.perLevel as perLevel">
+    @if (perLevel.flat > 0) {
+      <span>{{ 'Фиксированное значение: ' + perLevel.flat }}</span>
+    }
+  </ng-container>
+}
+
+@if (isLanguage()) {
+  <ng-container *tuiLet="skill().value.language as language">
+    <span>{{ 'Владение языком: ' + stringifyLanguage(language) }}</span>
+  </ng-container>
+}
+
+@if (isItemType()) {
+  <ng-container *tuiLet="skill().value.itemType as itemType">
+    <span>{{ 'Владение типом предмета: ' + stringifyItemType(itemType) }}</span>
+  </ng-container>
+}
+
+@if (isUseSpell()) {
+  <ng-container *tuiLet="skill().value.useSpell as useSpell">
+    <span>{{ 'Использоване заклинания: ' + useSpell }}</span>
+  </ng-container>
+}
