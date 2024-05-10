@@ -3,5 +3,5 @@ export enum MagicSchool {
 }
 
 export const MAGIC_SCHOOL_LOCALIZATION: Record<MagicSchool, string> = {
-  [MagicSchool.Necromancy]: 'Реакция',
+  [MagicSchool.Necromancy]: 'Некромантия',
 };

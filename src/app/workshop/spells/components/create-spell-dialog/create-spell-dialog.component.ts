@@ -101,11 +101,11 @@ export class CreateSpellDialogComponent {
     if (this.form.controls['hasDamage'].value) {
       const val = this.damageForm;
       let damageRoll: DiceRoll = new DiceRoll();
-      damageRoll.dice = val.controls['dice'].value;
+      damageRoll.dice = Number(val.controls['dice'].value);
       damageRoll.rolls = val.controls['rolls'].value;
 
       damage.damageRoll = damageRoll;
-      damage.damageType = val.controls['damageType'].value;
+      damage.damageType = Number(val.controls['damageType'].value);
       damage.flat = val.controls['flat'].value;
       damage.heal = val.controls['heal'].value;
     }
@@ -133,7 +133,7 @@ export class CreateSpellDialogComponent {
       skillIds: skillIds,
       level: this.form.controls['level'].value,
       distance: this.form.controls['distance'].value,
-      actionType: this.form.controls['actionType'].value,
+      actionType: Number(this.form.controls['actionType'].value),
       damage: damage,
       actionTime: actionTime,
       // TODO: возможность нескольких компонентов

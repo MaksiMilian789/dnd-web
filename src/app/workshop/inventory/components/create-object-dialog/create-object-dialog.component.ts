@@ -90,7 +90,7 @@ export class CreateObjectDialogComponent {
     if (this.form.controls['attackType'].value != AttackType.NotWeapon) {
       const val = this.damageForm;
       let damageRoll: DiceRoll = new DiceRoll();
-      damageRoll.dice = val.controls['dice'].value;
+      damageRoll.dice = Number(val.controls['dice'].value);
       damageRoll.rolls = val.controls['rolls'].value;
 
       damage.damageRoll = damageRoll;
@@ -105,9 +105,9 @@ export class CreateObjectDialogComponent {
       damage: damage,
       attackType: Number(this.form.controls['attackType'].value),
       attachment: this.form.controls['attachment'].value,
-      rare: this.form.controls['rare'].value,
-      type: this.form.controls['type'].value,
-      mainCharacteristic: this.form.controls['mainCharacteristic'].value,
+      rare: Number(this.form.controls['rare'].value),
+      type: Number(this.form.controls['type'].value),
+      mainCharacteristic: Number(this.form.controls['mainCharacteristic'].value),
       system: System.Dnd,
       authorId: this._authService.currentUser?.id!,
       worldId: this.form.controls['worldId'].value ?? null,

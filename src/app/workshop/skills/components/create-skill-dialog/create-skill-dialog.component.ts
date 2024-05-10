@@ -179,7 +179,7 @@ export class CreateSkillDialogComponent {
     if (this.chosenDamage()) {
       const val = this.damageForm;
       let damageRoll: DiceRoll = new DiceRoll();
-      damageRoll.dice = val.controls['dice'].value;
+      damageRoll.dice = Number(val.controls['dice'].value);
       damageRoll.rolls = val.controls['rolls'].value;
 
       skillValue.damage.damageRoll = damageRoll;
@@ -190,7 +190,7 @@ export class CreateSkillDialogComponent {
     if (this.chosenAttackBonus()) {
       const val = this.attackBonusForm;
       let damageRoll: DiceRoll = new DiceRoll();
-      damageRoll.dice = val.controls['dice'].value;
+      damageRoll.dice = Number(val.controls['dice'].value);
       damageRoll.rolls = val.controls['rolls'].value;
       let damage: Damage = new Damage();
       damage.damageRoll = damageRoll;
