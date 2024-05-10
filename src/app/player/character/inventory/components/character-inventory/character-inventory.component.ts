@@ -70,6 +70,15 @@ export class CharacterInventoryComponent {
     this.dataSource.paginator = this.paginator;
   }
 
+  equipObject(object: Inventory): void {
+    if (object.equipped) {
+      this._characterService.equipInventoryObject(this.charId, object.id, false).subscribe();
+    } else {
+      this._characterService.equipInventoryObject(this.charId, object.id, true).subscribe();
+    }
+    object.equipped = !object.equipped;
+  }
+
   addItem(): void {
     const data: AddInventoryDialogComponentData = {
       character: this.character()!,
