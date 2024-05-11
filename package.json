@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --port 80",
-    "build": "node --max_old_space_size=512",
+    "start": "ng serve",
+    "build": "ng build",
     "build-node": "node --max_old_space_size=8048",
     "build-serve": "node --max_old_space_size=16048",
     "watch": "ng build --watch --configuration development",
