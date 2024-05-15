@@ -50,7 +50,7 @@
   }
 }
 
-@keyframes appearMobile {
+@-webkit-keyframes appearMobile {
   0% {
     background-size: 0px, 0px;
   }
@@ -59,7 +59,7 @@
   }
 }
 
-@keyframes appear {
+@-webkit-keyframes appear {
   0% {
     background-size: 0px, 0px;
   }
