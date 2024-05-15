@@ -79,13 +79,13 @@ export class CreateCharacterComponent {
         this.raceDescription = this.races().find((x) => x.id == val.race)?.description || '';
       }
       if (val.background) {
-        this.backgroundDescription = this.classes().find((x) => x.id == val.background)?.description || '';
+        this.backgroundDescription = this.backgrounds().find((x) => x.id == val.background)?.description || '';
       }
     });
 
     this.form3.valueChanges.subscribe((val) => {
       if (val.class) {
-        this.classDescription = this.races().find((x) => x.id == val.class)?.description || '';
+        this.classDescription = this.classes().find((x) => x.id == val.class)?.description || '';
       }
     });
   }
