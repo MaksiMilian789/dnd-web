@@ -10,6 +10,8 @@ import {
   TuiAlertModule,
   TUI_SANITIZER,
 } from '@taiga-ui/core';
+import { LoadingBarModule, LOADING_BAR_CONFIG } from '@ngx-loading-bar/core';
+import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 
 import { CoreModule } from '@core/core.module';
 import { GlobalErrorHandler } from '@core/error-handler';
@@ -24,6 +26,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { PlayerModule } from './player/player.module';
 import { MasterModule } from './master/master.module';
 import { WorkshopModule } from './workshop/workshop.module';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -37,6 +40,9 @@ import { WorkshopModule } from './workshop/workshop.module';
     HttpClientModule,
     BrowserAnimationsModule,
     BrowserModule,
+    LoadingBarModule,
+    LoadingBarHttpClientModule,
+    MatProgressBarModule,
 
     AppRoutingModule,
     SharedModule,
@@ -68,6 +74,7 @@ import { WorkshopModule } from './workshop/workshop.module';
       useValue: 'ru',
     },
     { provide: ErrorHandler, useClass: GlobalErrorHandler },
+    { provide: LOADING_BAR_CONFIG, useValue: { latencyThreshold: 100 } },
   ],
   bootstrap: [AppComponent],
 })

@@ -15,7 +15,10 @@ import { AuthService } from '@core/services/auth/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { WorkshopService } from '@core/services/api/workshop.service';
-import { SelectSkillsComponentData, SelectSkillsComponent } from 'src/app/workshop/skills/components/select-skills/select-skills.component';
+import {
+  SelectSkillsComponentData,
+  SelectSkillsComponent,
+} from 'src/app/workshop/skills/components/select-skills/select-skills.component';
 
 @Component({
   selector: 'app-create-character',
@@ -26,6 +29,9 @@ export class CreateCharacterComponent {
   completedStep1: boolean = false;
   completedStep2: boolean = false;
   completedStep3: boolean = false;
+
+  infoValue: Race | Background | Class | null = null;
+  openInfo = false;
 
   characteristics: Characteristics | null = null;
   skills: Skill[] = [];
@@ -79,13 +85,13 @@ export class CreateCharacterComponent {
         this.raceDescription = this.races().find((x) => x.id == val.race)?.description || '';
       }
       if (val.background) {
-        this.backgroundDescription = this.classes().find((x) => x.id == val.background)?.description || '';
+        this.backgroundDescription = this.backgrounds().find((x) => x.id == val.background)?.description || '';
       }
     });
 
     this.form3.valueChanges.subscribe((val) => {
       if (val.class) {
-        this.classDescription = this.races().find((x) => x.id == val.class)?.description || '';
+        this.classDescription = this.classes().find((x) => x.id == val.class)?.description || '';
       }
     });
   }
@@ -122,18 +128,18 @@ export class CreateCharacterComponent {
       });
   }
 
-  chooseSkills(): void{
+  chooseSkills(): void {
     const data: SelectSkillsComponentData = {
       skills: this.skills,
       onlyPassvie: true,
-      forCreateCharacter: true
+      forCreateCharacter: true,
     };
 
     this._dialogs
       .open<Skill[]>(new PolymorpheusComponent(SelectSkillsComponent), {
         data: data,
         size: 'page',
-        closeable: false
+        closeable: false,
       })
       .subscribe((val) => {
         this.skills = val;
@@ -141,7 +147,7 @@ export class CreateCharacterComponent {
   }
 
   createCharacter(): void {
-    let skillIds: number[] = this.skills.map(x => x.id);
+    let skillIds: number[] = this.skills.map((x) => x.id);
     const character: CharacterWithId = {
       age: this.form1.controls['age'].value,
       gender: this.form1.controls['gender'].value,
@@ -153,13 +159,34 @@ export class CreateCharacterComponent {
       name: this.form1.controls['name'].value,
       level: 1,
       system: System.Dnd,
-      skillIds: skillIds
+      skillIds: skillIds,
     };
 
     this._characterService.createCharacter(character, this._auth.currentUser?.id!).subscribe(() => {
       this._snackbar.open('Создание персонажа успешно');
       this._router.navigate(['/player/characters']);
     });
+  }
+
+  getRace(): Race {
+    return this.races().find((x) => x.id == this.form2.controls['race'].value)!;
+  }
+
+  getClass(): Class {
+    return this.classes().find((x) => x.id == this.form3.controls['class'].value)!;
+  }
+
+  getBackground(): Background {
+    return this.backgrounds().find((x) => x.id == this.form2.controls['background'].value)!;
+  }
+
+  openInfoDialog(val: Race | Background | Class): void {
+    if (val.skillInstances.length > 0) {
+      this.infoValue = val;
+      this.openInfo = true;
+    } else {
+      this._snackbar.open('Нет способностей');
+    }
   }
 
   @tuiPure

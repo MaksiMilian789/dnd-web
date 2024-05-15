@@ -1,0 +1,41 @@
+<span>{{ 'Уровень: '}}{{spell().level == 0 ? 'Заговор' : spell().level}}</span>
+
+@if (spell().distance! > 0) {
+  <span>{{ 'Дистанция: ' + spell().distance }}</span>
+}
+
+@if (hasDamage()) {
+  <ng-container *tuiLet="spell().damage as damage">
+    @if (!damage.heal) {
+      <span>{{ 'Тип урона: ' + stringifyDamageType(damage.damageType) }}</span>
+    }
+    <span>{{ 'Лечение?: ' }}{{ damage.heal ? 'да' : 'нет' }}</span>
+
+    @if (damage.flat > 0) {
+      <span>{{ 'Фиксированное значение: ' + damage.flat }}</span>
+    }
+
+    @if (damage.damageRoll.rolls > 0) {
+      <span>{{ 'Количество кубов: ' + damage.damageRoll.rolls }}</span>
+      <span>{{ 'Куб: ' + stringifyDice(damage.damageRoll.dice) }}</span>
+    }
+  </ng-container>
+}
+
+<span>{{ 'Время действия: '}}{{spell().actionTime.time == 0 ? 'Мгновенно' : spell().actionTime.time}}</span>
+<span>{{ 'Концентрация?: '}}{{spell().actionTime.concentrate ? 'Да' : 'Нет'}}</span>
+
+@if (spell().skillInstances.length > 0) {
+  <div>
+    <tui-accordion class="skills">
+      @for (skill of spell().skillInstances; track skill) {
+        <tui-accordion-item size="s">
+          {{ skill.name }}
+          <ng-template tuiAccordionItemContent>
+            <app-skill-info-table [skill]="skill"></app-skill-info-table>
+          </ng-template>
+        </tui-accordion-item>
+      }
+    </tui-accordion>
+  </div>
+}

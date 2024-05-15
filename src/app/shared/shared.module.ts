@@ -17,6 +17,8 @@ import { WikiHomeComponent } from './components/wiki-home/wiki-home.component';
 import { OpenImageDialogComponent } from './components/open-image-dialog/open-image-dialog.component';
 import { SkillInfoTableComponent } from './components/skill-info-table/skill-info-table.component';
 import { InventoryInfoTableComponent } from './components/inventory-info-table/inventory-info-table.component';
+import { DefaultInfoTableComponent } from './components/default-info-table/default-info-table.component';
+import { SpellInfoTableComponent } from './components/spell-info-table/spell-info-table.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { InventoryInfoTableComponent } from './components/inventory-info-table/i
     OpenImageDialogComponent,
     SkillInfoTableComponent,
     InventoryInfoTableComponent,
+    DefaultInfoTableComponent,
+    SpellInfoTableComponent,
 
     ColorPipe,
     StatsSkillPipe,
@@ -57,6 +61,8 @@ import { InventoryInfoTableComponent } from './components/inventory-info-table/i
     OpenImageDialogComponent,
     SkillInfoTableComponent,
     InventoryInfoTableComponent,
+    DefaultInfoTableComponent,
+    SpellInfoTableComponent,
 
     ColorPipe,
     StatsSkillPipe,

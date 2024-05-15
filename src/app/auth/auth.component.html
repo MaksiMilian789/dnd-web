@@ -36,7 +36,7 @@
       </form>
 
       <div class="actions">
-        <button tuiButton [routerLink]="['/registration']">Регистрация</button>
+        <button tuiButton [routerLink]="['/registration']" appearance="outline">Регистрация</button>
         <div class="spacer"></div>
         <button tuiButton [showLoader]="isAuthInProcess" [disabled]="form.invalid" (click)="submit()">Войти</button>
       </div>

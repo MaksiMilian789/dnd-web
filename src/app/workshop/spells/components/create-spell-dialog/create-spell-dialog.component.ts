@@ -139,7 +139,7 @@ export class CreateSpellDialogComponent {
       // TODO: возможность нескольких компонентов
       components: [components],
       hasDamage: this.form.controls['hasDamage'].value,
-      magicSchool: this.form.controls['magicSchool'].value,
+      magicSchool: Number(this.form.controls['magicSchool'].value),
     };
     this._workshopService.createSpell(dto).subscribe(() => {
       this._snackbar.open('Создание успешно.');
@@ -150,7 +150,7 @@ export class CreateSpellDialogComponent {
   addSkills(): void {
     const data: SelectSkillsComponentData = {
       skills: this.skills,
-      onlyPassvie: true,
+      onlyPassvie: false,
       forCreateCharacter: false
     };
 

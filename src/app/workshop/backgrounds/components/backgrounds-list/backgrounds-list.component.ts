@@ -29,6 +29,7 @@ import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
 export class BackgroundsListComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  substr: number = 0;
 
   backgrounds: Signal<Background[]>;
 
@@ -54,6 +55,9 @@ export class BackgroundsListComponent {
       },
     );
     this.refresh();
+
+    let width = window.innerWidth;
+    this.substr = Math.round(width/30);
   }
 
   refresh(): void {

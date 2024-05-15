@@ -1,0 +1,14 @@
+@if (value().skillInstances.length > 0) {
+  <div>
+    <tui-accordion class="skills">
+      @for (skill of value().skillInstances; track skill) {
+        <tui-accordion-item size="s">
+          {{ skill.name }}
+          <ng-template tuiAccordionItemContent>
+            <app-skill-info-table [skill]="skill"></app-skill-info-table>
+          </ng-template>
+        </tui-accordion-item>
+      }
+    </tui-accordion>
+  </div>
+}

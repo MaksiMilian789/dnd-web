@@ -36,7 +36,7 @@ export const ICONS_LOCALIZATION: Record<Icons, string> = {
   [Icons.mediation]: "Лук",
   [Icons.swords]: "Мечи",
   [Icons.science]: "Алхимик",
-  [Icons.psychology]: "Головной процесс",
+  [Icons.psychology]: "Искусственный интеллект",
   [Icons.skull]: "Враг",
   [Icons.raven]: "Ворон",
   [Icons.flare]: "Свет",

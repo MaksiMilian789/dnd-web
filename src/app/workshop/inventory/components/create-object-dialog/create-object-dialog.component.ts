@@ -87,14 +87,14 @@ export class CreateObjectDialogComponent {
     let skillIds: number[] = this.skills.map((x) => x.id);
     let damage: Damage = new Damage();
 
-    if (this.form.controls['attackType'].value != AttackType.NotWeapon) {
+    if (Number(this.form.controls['attackType'].value) != AttackType.NotWeapon) {
       const val = this.damageForm;
       let damageRoll: DiceRoll = new DiceRoll();
       damageRoll.dice = Number(val.controls['dice'].value);
       damageRoll.rolls = val.controls['rolls'].value;
 
       damage.damageRoll = damageRoll;
-      damage.damageType = val.controls['damageType'].value;
+      damage.damageType = Number(val.controls['damageType'].value);
       damage.flat = val.controls['flat'].value;
       damage.heal = val.controls['heal'].value;
     }
@@ -122,7 +122,7 @@ export class CreateObjectDialogComponent {
   addSkills(): void {
     const data: SelectSkillsComponentData = {
       skills: this.skills,
-      onlyPassvie: true,
+      onlyPassvie: false,
       forCreateCharacter: false
     };
 

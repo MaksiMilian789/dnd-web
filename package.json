@@ -25,6 +25,8 @@
     "@angular/service-worker": "^17.3.5",
     "@kolkov/angular-editor": "^3.0.0-beta.0",
     "@ng-web-apis/common": "^3.0.6",
+    "@ngx-loading-bar/core": "^6.0.2",
+    "@ngx-loading-bar/http-client": "^6.0.2",
     "@taiga-ui/addon-charts": "^3.74.0",
     "@taiga-ui/addon-commerce": "^3.74.0",
     "@taiga-ui/addon-doc": "^3.74.0",

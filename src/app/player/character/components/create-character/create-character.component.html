@@ -76,7 +76,7 @@
                 </tui-data-list>
               </tui-select>
               @if (this.form2.controls['race'].value) {
-                <button mat-icon-button (click)="(true)"><mat-icon>info</mat-icon></button>
+                <button mat-icon-button (click)="openInfoDialog(getRace())"><mat-icon>info</mat-icon></button>
               }
             </div>
 
@@ -102,7 +102,7 @@
                 </tui-data-list>
               </tui-select>
               @if (this.form2.controls['background'].value) {
-                <button mat-icon-button (click)="(true)">
+                <button mat-icon-button (click)="openInfoDialog(getBackground())">
                   <mat-icon>info</mat-icon>
                 </button>
               }
@@ -149,7 +149,7 @@
                 </tui-data-list>
               </tui-select>
               @if (this.form3.controls['class'].value) {
-                <button mat-icon-button (click)="(true)">
+                <button mat-icon-button (click)="openInfoDialog(getClass())">
                   <mat-icon>info</mat-icon>
                 </button>
               }
@@ -198,3 +198,9 @@
     </div>
   </mat-step>
 </mat-stepper>
+
+<ng-template let-observer [tuiDialogOptions]="{ label: 'Способности', size: 'm' }" [(tuiDialog)]="openInfo">
+  @if (infoValue) {
+    <app-default-info-table [value]="infoValue"></app-default-info-table>
+  }
+</ng-template>

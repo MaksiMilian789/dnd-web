@@ -204,7 +204,7 @@ export class CreateSkillDialogComponent {
       skillValue.attackBonus.accuracyBonus = val.controls['accuracyBonus'].value;
       skillValue.attackBonus.advantage = val.controls['advantage'].value;
       skillValue.attackBonus.disAdvantage = val.controls['disAdvantage'].value;
-      skillValue.attackBonus.attackType = val.controls['type'].value;
+      skillValue.attackBonus.attackType = Number(val.controls['type'].value);
     }
     if (this.chosenPerLevel()) {
       const val = this.perLevelForm;

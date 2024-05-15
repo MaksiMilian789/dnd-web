@@ -70,8 +70,14 @@ export class SelectSkillsComponent {
 
   setData(): void {
     let data = this.allData.filter(
-      (val) => val.hidden == this.hidden.value && val.passive == this.context.data.onlyPassvie,
+      (val) => val.hidden == this.hidden.value,
     );
+
+    if(this.context.data.onlyPassvie){
+      data = this.allData.filter(
+        (val) => val.passive == this.context.data.onlyPassvie,
+      );
+    }
 
     if(this.context.data.forCreateCharacter){
       data = data.filter((val) => (val.skillType >= SkillType.Athletics && val.skillType <= SkillType.Persuasion) || val.skillType == SkillType.Language);
