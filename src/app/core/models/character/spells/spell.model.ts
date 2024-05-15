@@ -9,7 +9,6 @@ export interface Spell {
   hasDamage: boolean;
   level: number;
   damage: Damage;
-  attackType: AttackType;
   actionTime: ActionTime;
   components: ComponentsSpell[];
   distance?: number;

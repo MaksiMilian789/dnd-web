@@ -52,6 +52,7 @@
           <div class="element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
             <div class="element-description">
               {{element.description}}
+              <app-default-info-table [value]="element"></app-default-info-table>
             </div>
           </div>
         </td>

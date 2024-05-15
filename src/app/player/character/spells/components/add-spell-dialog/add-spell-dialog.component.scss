@@ -50,6 +50,9 @@ tr.element-row:not(.expanded-row):active {
 
 .element-description {
   padding: 16px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .mat-cell {

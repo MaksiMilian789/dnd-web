@@ -15,6 +15,7 @@ import {
   TuiTooltipModule,
   TuiHostedDropdownModule,
   TuiPrimitiveCheckboxModule,
+  TuiDialogModule,
 } from '@taiga-ui/core';
 import {
   TuiAccordionModule,
@@ -74,7 +75,8 @@ import {
     TuiBadgeModule,
     TuiRadioBlockModule,
     TuiDataListWrapperModule,
-    TuiToggleModule
+    TuiToggleModule,
+    TuiDialogModule
   ],
 })
 export class TaigaModule {}
