@@ -1,3 +1,10 @@
+<mat-progress-bar
+  class="mat-elevation-z2 loader"
+  mode="determinate"
+  color="warn"
+  [value]="val || 0"
+  *ngIf="loaderValue$ | async as val"
+></mat-progress-bar>
 <tui-root>
-<router-outlet></router-outlet>
+  <router-outlet></router-outlet>
 </tui-root>
