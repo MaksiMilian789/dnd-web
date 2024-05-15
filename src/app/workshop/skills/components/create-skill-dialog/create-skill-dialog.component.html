@@ -108,7 +108,7 @@
   @if (chosenDamage()) {
     <form [formGroup]="damageForm">
       <tui-input-number formControlName="flat" class="info">
-        Фиксированное значение (0 не учитывается)
+        Фиксированное значение урона (0 не учитывается)
         <input placeholder="Фиксированное значение" tuiTextfield />
       </tui-input-number>
       <tui-input-number formControlName="rolls" class="info">
@@ -140,7 +140,7 @@
   }
   @if (chosenAttackBonus()) {
     <form [formGroup]="attackBonusForm">
-      <tui-select formControlName="attackType" [stringify]="stringifyAttackType()" class="info">
+      <tui-select formControlName="type" [stringify]="stringifyAttackType()" class="info">
         Тип атаки
         <tui-data-list *tuiDataList>
           <button *ngFor="let attackType of attackTypes | keyvalue: stopSort" tuiOption [value]="attackType.key">
@@ -150,10 +150,10 @@
       </tui-select>
       <tui-input-number formControlName="accuracyBonus" class="info">
         Бонус к попаданию
-        <input placeholder="Боонус" tuiTextfield />
+        <input placeholder="Бонус" tuiTextfield />
       </tui-input-number>
       <tui-input-number formControlName="flat" class="info">
-        Фиксированное значение (0 не учитывается)
+        Бонус к урону (0 не учитывается)
         <input placeholder="Фиксированное значение" tuiTextfield />
       </tui-input-number>
       <tui-input-number formControlName="rolls" class="info">

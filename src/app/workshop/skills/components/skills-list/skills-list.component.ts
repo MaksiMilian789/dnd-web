@@ -29,6 +29,7 @@ import { CreateSkillDialogComponent } from '../create-skill-dialog/create-skill-
 export class SkillsListComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  substr: number = 0;
 
   skills: Signal<Skill[]>;
 
@@ -54,6 +55,9 @@ export class SkillsListComponent {
       },
     );
     this.refresh();
+
+    let width = window.innerWidth;
+    this.substr = Math.round(width/30);
   }
 
   refresh(): void {

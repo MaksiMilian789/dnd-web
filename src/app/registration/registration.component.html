@@ -46,7 +46,7 @@
       </form>
 
       <div class="actions">
-        <button tuiButton [routerLink]="['/auth']">Назад к авторизации</button>
+        <button tuiIconButton [routerLink]="['/auth']" icon="tuiIconArrowLeft" appearance="outline"></button>
         <div class="spacer"></div>
         <button tuiButton [disabled]="form.invalid" (click)="registration()">Регистрация</button>
       </div>

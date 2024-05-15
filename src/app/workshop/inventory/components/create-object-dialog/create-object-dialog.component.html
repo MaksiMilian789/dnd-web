@@ -50,7 +50,11 @@
     </tui-select>
     <form [formGroup]="damageForm">
         <tui-input-number formControlName="flat" class="info">
-            Фиксированное значение
+            Бонус к урону
+            <input placeholder="Фиксированное значение" tuiTextfield />
+        </tui-input-number>
+        <tui-input-number class="info" [readOnly]="true">
+            Бонус к попаданию (в разработке)
             <input placeholder="Фиксированное значение" tuiTextfield />
         </tui-input-number>
         <tui-input-number formControlName="rolls" class="info">

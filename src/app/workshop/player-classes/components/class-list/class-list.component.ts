@@ -29,6 +29,7 @@ import { CreateClassDialogComponent } from '../create-class-dialog/create-class-
 export class ClassListComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  substr: number = 0;
 
   classes: Signal<Class[]>;
 
@@ -54,6 +55,9 @@ export class ClassListComponent {
       },
     );
     this.refresh();
+
+    let width = window.innerWidth;
+    this.substr = Math.round(width/30);
   }
 
   refresh(): void {

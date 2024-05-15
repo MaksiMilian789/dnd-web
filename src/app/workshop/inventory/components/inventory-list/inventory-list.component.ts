@@ -29,6 +29,7 @@ import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
 export class InventoryListComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  substr: number = 0;
 
   inventories: Signal<Inventory[]>;
 
@@ -54,6 +55,9 @@ export class InventoryListComponent {
       },
     );
     this.refresh();
+
+    let width = window.innerWidth;
+    this.substr = Math.round(width/30);
   }
 
   refresh(): void {

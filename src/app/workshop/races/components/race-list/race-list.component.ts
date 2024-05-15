@@ -29,6 +29,7 @@ import { CreateRaceDialogComponent } from '../create-race-dialog/create-race-dia
 export class RaceListComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  substr: number = 0;
 
   races: Signal<Race[]>;
 
@@ -54,6 +55,9 @@ export class RaceListComponent {
       },
     );
     this.refresh();
+
+    let width = window.innerWidth;
+    this.substr = Math.round(width/30);
   }
 
   refresh(): void {
@@ -75,9 +79,9 @@ export class RaceListComponent {
       })
       .subscribe({
         complete: () => {
-            this.refresh();
+          this.refresh();
         },
-    });
+      });
   }
 
   deleteItem(id: number): void {

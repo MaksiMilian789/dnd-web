@@ -29,6 +29,7 @@ import { CreateSpellDialogComponent } from '../create-spell-dialog/create-spell-
 export class SpellsListComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  substr: number = 0;
 
   spells: Signal<Spell[]>;
 
@@ -54,6 +55,9 @@ export class SpellsListComponent {
       },
     );
     this.refresh();
+
+    let width = window.innerWidth;
+    this.substr = Math.round(width/30);
   }
 
   refresh(): void {

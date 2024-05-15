@@ -30,6 +30,7 @@ import { CreateConditionDialogComponent } from '../create-condition-dialog/creat
 export class ConditionsListComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  substr: number = 0;
 
   conditions: Signal<Condition[]>;
 
@@ -55,6 +56,9 @@ export class ConditionsListComponent {
       },
     );
     this.refresh();
+
+    let width = window.innerWidth;
+    this.substr = Math.round(width/30);
   }
 
   refresh(): void {
