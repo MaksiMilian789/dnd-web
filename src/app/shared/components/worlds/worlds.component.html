@@ -50,7 +50,7 @@
         <mat-card
           class="card pointer"
           [class.min-card]="isSelectionModeEnabled"
-          [routerLink]="role == 'master' ? ['/master/world', world.id] : ['/player/world', world.id]"
+          [routerLink]="getRoute(world.id)"
         >
           <mat-card-title>
             <div class="name-container">

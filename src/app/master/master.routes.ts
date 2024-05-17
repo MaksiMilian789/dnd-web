@@ -20,10 +20,6 @@ export const MASTER_ROUTES: Routes = [
             component: MasterHomeComponent,
           },
           {
-            path: 'access-players',
-            component: AccessPlayersComponent,
-          },
-          {
             path: 'worlds',
             component: WorldsComponent,
           },
@@ -38,6 +34,14 @@ export const MASTER_ROUTES: Routes = [
           {
             path: 'world/:worldId/wiki',
             component: WikiComponent,
+          },
+          {
+            path: 'access-players',
+            component: WorldsComponent,
+          },
+          {
+            path: 'access-players/rights/:worldId',
+            component: AccessPlayersComponent,
           },
         ],
       },
