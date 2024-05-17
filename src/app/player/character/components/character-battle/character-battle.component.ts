@@ -42,6 +42,9 @@ export class CharacterBattleComponent {
   protected showConditions: FormControl<boolean>;
   protected openConditions: boolean = false;
 
+  energy = 0;
+  spellSlots = 0;
+
   private readonly _refresh$ = new Subject<void>();
 
   constructor(
@@ -270,6 +273,10 @@ export class CharacterBattleComponent {
       });
     });
     return data;
+  }
+
+  removeCond(): void {
+    this._snackbar.open('Снятие состояний в разработке!');
   }
 
   get getArmor(): number {

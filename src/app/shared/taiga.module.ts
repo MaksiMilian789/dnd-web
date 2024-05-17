@@ -11,7 +11,6 @@ import {
   TuiGroupModule,
   TuiHintModule,
   TuiErrorModule,
-  TuiPrimitiveTextfieldModule,
   TuiTooltipModule,
   TuiHostedDropdownModule,
   TuiPrimitiveCheckboxModule,
@@ -38,6 +37,7 @@ import {
   TuiTextareaModule,
   TuiToggleModule,
 } from '@taiga-ui/kit';
+	import {TuiRatingModule} from '@taiga-ui/experimental';
 
 @NgModule({
   exports: [
@@ -76,7 +76,8 @@ import {
     TuiRadioBlockModule,
     TuiDataListWrapperModule,
     TuiToggleModule,
-    TuiDialogModule
+    TuiDialogModule,
+    TuiRatingModule
   ],
 })
 export class TaigaModule {}
