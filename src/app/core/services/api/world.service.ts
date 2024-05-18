@@ -6,6 +6,7 @@ import { APP_CONFIG, AppConfig } from '@core/config';
 import { ShortWorld, TrackerUnit, World } from '@core/models';
 import { Role } from '@core/enums';
 import { Tracker } from '@core/models/tracker.model';
+import { UserRole } from '@core/models/user-role.model';
 
 @Injectable({
   providedIn: 'root',
@@ -95,6 +96,20 @@ export class WorldService {
         params: params,
       },
     );
+  }
+
+  public getRolesForWorld(worldId: number): Observable<UserRole[]> {
+    var params = new HttpParams().append('worldId', worldId);
+    return this._http.get<UserRole[]>(`${this._baseUrl}/getUserRoles`, {
+      params: params,
+    });
+  }
+
+  public setRolesForWorld(worldId: number, roles: UserRole[]): Observable<void> {
+    var params = new HttpParams().append('worldId', worldId);
+    return this._http.put<void>(`${this._baseUrl}/setUserRoles`, roles, {
+      params: params,
+    });
   }
 
   /*public deleteWorlds(ids: number[]): Observable<void> {

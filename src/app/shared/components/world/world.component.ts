@@ -9,6 +9,8 @@ import { WorldService } from '@core/services/api/world.service';
 import { ShortWorld, World } from '@core/models';
 import { OpenImageDialogComponent, OpenImageDialogData } from '../open-image-dialog/open-image-dialog.component';
 import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
+import { HttpEventType } from '@angular/common/http';
+import { UploadService } from '@core/services/api/upload.service';
 
 @Component({
   selector: 'app-world',
@@ -22,10 +24,17 @@ export class WorldComponent {
   form: FormGroup;
 
   edit: boolean = false;
+  loading: boolean = false;
+
+  img: FormControl = new FormControl();
+  readonly loadedFiles$ = this.img.valueChanges.subscribe((val) => {
+    this.uploadFile(val);
+  });
 
   constructor(
     @Inject(TuiDialogService) private readonly _dialogs: TuiDialogService,
     private _worldService: WorldService,
+    private _uploadService: UploadService,
     private _route: ActivatedRoute,
     private _router: Router,
     private _snackbar: MatSnackBar,
@@ -33,6 +42,7 @@ export class WorldComponent {
     this.form = new FormGroup({
       name: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
+      imageId: new FormControl(null),
     });
 
     this.role = this._router.url.split('/')[1];
@@ -41,6 +51,7 @@ export class WorldComponent {
         this.form.setValue({
           name: val.name,
           description: val.description,
+          imageId: val.imageId,
         });
       }),
     );
@@ -61,9 +72,20 @@ export class WorldComponent {
       id: currentWorld.id,
       name: this.form.controls['name'].value,
       description: this.form.controls['description'].value,
+      imageId: this.form.controls['imageId'].value,
     };
     this._worldService.editWorld(world).subscribe(() => {
       this._snackbar.open('Сохранение успешно');
+      this.edit = false;
+      this.world$ = this._worldService.loadWorld(this.worldId).pipe(
+        tap((val) => {
+          this.form.setValue({
+            name: val.name,
+            description: val.description,
+            imageId: val.imageId,
+          });
+        }),
+      );
     });
   }
 
@@ -82,6 +104,35 @@ export class WorldComponent {
         closeable: true,
       })
       .subscribe();
+  }
+
+  removeFile(): void {
+    this.form.controls['imageId'].setValue(null);
+  }
+
+  hasImage(): boolean {
+    return this.form.controls['imageId'].value;
+  }
+
+  removeImage(): void {
+    this.form.patchValue({ imageId: null });
+    this.img.reset();
+    this.loading = false;
+  }
+
+  private uploadFile(file: File): any {
+    if (file.size >= 10 * 1024 * 1024) {
+      this._snackbar.open('Превышен максимальный размер файла');
+      return;
+    }
+    this.loading = true;
+    this._uploadService.upload(file).subscribe((event) => {
+      if (event.type === HttpEventType.Response) {
+        this._snackbar.open('Изображение загружено');
+        this.form.patchValue({ imageId: event.body });
+        this.loading = false;
+      }
+    });
   }
 
   get rows(): number {

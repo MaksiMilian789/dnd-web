@@ -1,16 +1,36 @@
-<div class="avatar">АВАТАРКА</div>
+@if (character.imageId) {
+  <img class="avatar" [src]="image" />
+} @else {
+  <div class="margin"></div>
+}
 
 <tui-input [formControl]="name" class="info" [readOnly]="!edit" [pseudoFocus]="edit">
   Имя персонажа
   <input placeholder="Имя персонажа" tuiTextfield />
 </tui-input>
 
-<tui-input-number [formControl]="level" class="info" [readOnly]="!edit" [pseudoFocus]="edit" [min]="1" [step]="1" [precision]="0">
+<tui-input-number
+  [formControl]="level"
+  class="info"
+  [readOnly]="!edit"
+  [pseudoFocus]="edit"
+  [min]="1"
+  [step]="1"
+  [precision]="0"
+>
   Уровень персонажа
   <input placeholder="Уровень персонажа" tuiTextfield />
 </tui-input-number>
 
-<tui-input-number [formControl]="age" class="info" [readOnly]="!edit" [pseudoFocus]="edit" [min]="1" [step]="1" [precision]="0">
+<tui-input-number
+  [formControl]="age"
+  class="info"
+  [readOnly]="!edit"
+  [pseudoFocus]="edit"
+  [min]="1"
+  [step]="1"
+  [precision]="0"
+>
   Возраст персонажа
   <input placeholder="Возраст персонажа" tuiTextfield />
 </tui-input-number>
@@ -58,5 +78,22 @@
 @if (!edit) {
   <button tuiButton appearance="outline" (click)="editable()" class="info">Редактировать</button>
 } @else {
-  <button tuiButton appearance="outline" (click)="save()" class="info" [disabled]="name.invalid || level.invalid || age.invalid">Сохранить</button>
+  <div class="file info">
+    Аватар персонажа (квадратный формат):
+    <tui-input-files accept="image/*" [formControl]="img"></tui-input-files>
+
+    <tui-files class="tui-space_top-1">
+      <tui-file *ngIf="hasImage() && img.value" [file]="img.value" (removed)="removeFile()"></tui-file>
+      <tui-file *ngIf="loading" state="loading" [file]="img.value" (removed)="removeFile()"></tui-file>
+    </tui-files>
+  </div>
+  <button
+    tuiButton
+    appearance="outline"
+    (click)="save()"
+    class="info"
+    [disabled]="name.invalid || level.invalid || age.invalid"
+  >
+    Сохранить
+  </button>
 }

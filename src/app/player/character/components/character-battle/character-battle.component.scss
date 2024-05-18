@@ -138,3 +138,9 @@
   overflow-x: auto;
   overflow-y: hidden;
 }
+
+.rating {
+  fill: var(--tui-primary);
+  font-size: 0.625rem;
+  width: 100%;
+}

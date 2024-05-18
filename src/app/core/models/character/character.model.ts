@@ -24,6 +24,7 @@ export interface Character extends ShortCharacter {
   hp: number;
   addHp: number;
   maxAttachments: number;
+  imageId?: number;
   spellSlots: SpellSlot[];
   energySlots: EnergySlot[];
   gender: Gender;

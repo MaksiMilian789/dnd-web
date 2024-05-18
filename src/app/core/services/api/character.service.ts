@@ -63,11 +63,20 @@ export class CharacterService {
     );
   }
 
-  public editCharacterInfo(charId: number, name: string, level: number, age: number): Observable<void> {
+  public editCharacterInfo(
+    charId: number,
+    name: string,
+    level: number,
+    age: number,
+    imageId?: number,
+  ): Observable<void> {
     var params = new HttpParams().append('id', charId);
     params = params.append('level', level);
     params = params.append('age', age);
     params = params.append('name', name);
+    if (!!imageId) {
+      params = params.append('imageId', imageId);
+    }
     return this._http.put<void>(
       `${this._baseUrl}/editInfo`,
       {},

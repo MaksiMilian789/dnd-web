@@ -108,3 +108,16 @@ body {
 .mat-sort-header-container {
   padding-left: 0px !important;
 }
+
+.circle-badge::after {
+  display: block;
+  width: 8px;
+  border-radius: 50%;
+  color: red;
+  height: 8px;
+  background: red;
+  content: '';
+  position: absolute;
+  top: 4px;
+  right: 4px;
+}
