@@ -150,8 +150,8 @@ export class CreateCharacterComponent {
     let skillIds: number[] = this.skills.map((x) => x.id);
     const character: CharacterWithId = {
       age: this.form1.controls['age'].value,
-      gender: this.form1.controls['gender'].value,
-      ideology: this.form1.controls['ideology'].value,
+      gender: Number(this.form1.controls['gender'].value),
+      ideology: Number(this.form1.controls['ideology'].value),
       characteristics: this.characteristics!,
       classId: this.form3.controls['class'].value,
       raceId: this.form2.controls['race'].value,
