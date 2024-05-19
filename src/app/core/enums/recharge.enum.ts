@@ -10,6 +10,7 @@ export enum Recharge {
   d20,
   d25,
   d100,
+  none
 }
 
 export const RECHARGE_LOCALIZATION: Record<Recharge, string> = {
@@ -24,4 +25,5 @@ export const RECHARGE_LOCALIZATION: Record<Recharge, string> = {
   [Recharge.d20]: 'd20',
   [Recharge.d25]: 'd25',
   [Recharge.d100]: 'd100',
+  [Recharge.none]: "Нет перезарядки"
 };

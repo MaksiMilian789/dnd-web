@@ -4,7 +4,12 @@ export enum ItemType {
   LightArmor,
   MediumArmor,
   HeavyArmor,
-  Shield
+  Shield,
+  MagicItem,
+  Scroll,
+  Potion,
+  Ammo,
+  Other
 }
 
 export const ITEM_TYPE_LOCALIZATION: Record<ItemType, string> = {
@@ -14,4 +19,9 @@ export const ITEM_TYPE_LOCALIZATION: Record<ItemType, string> = {
   [ItemType.MediumArmor]: 'Средняя броня',
   [ItemType.HeavyArmor]: 'Тяжёлая броня',
   [ItemType.Shield]: 'Щит',
+  [ItemType.MagicItem]: "Чудесный предмет",
+  [ItemType.Scroll]: "Свиток",
+  [ItemType.Potion]: "Зелье",
+  [ItemType.Ammo]: "Боеприпас",
+  [ItemType.Other]: "Прочее"
 };
