@@ -37,7 +37,7 @@
                 <tui-input-files accept="image/*" [formControl]="img"></tui-input-files>
             
                 <tui-files class="tui-space_top-1">
-                  <tui-file *ngIf="hasImage() && img.value" [file]="img.value" (removed)="removeFile()"></tui-file>
+                  <tui-file *ngIf="hasImage() && img.value && !loading" [file]="img.value" (removed)="removeFile()"></tui-file>
                   <tui-file *ngIf="loading" state="loading" [file]="img.value" (removed)="removeFile()"></tui-file>
                 </tui-files>
               </div>
