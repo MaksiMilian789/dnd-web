@@ -94,7 +94,9 @@ export class CharacterBattleComponent {
     );
 
     this.hpForm.valueChanges.pipe(debounceTime(500)).subscribe((val) => {
-      this._characterService.editCharacterHp(this.charId, val.hp ?? 0, val.addHp ?? 0).subscribe();
+      if (val.hp != null && val.addHp != null) {
+        this._characterService.editCharacterHp(this.charId, val.hp, val.addHp).subscribe();
+      }
     });
 
     this.concentration.valueChanges.subscribe((val) => {
