@@ -93,15 +93,18 @@ export class WorldsComponent {
   }
 
   getRoute(id: number): any[] {
-    if(this.role != 'master'){
+    if (this.role != 'master') {
       return ['/player/world', id];
     }
 
-    console.log(this._router.url.split('/').pop())
-    if(this._router.url.split('/').pop() == 'access-players'){
+    if (this.isAccess()) {
       return ['/master/access-players/rights', id];
     }
-    
+
     return ['/master/world', id];
+  }
+
+  isAccess(): boolean {
+    return this._router.url.split('/').pop() == 'access-players';
   }
 }

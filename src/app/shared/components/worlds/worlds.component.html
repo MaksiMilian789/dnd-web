@@ -3,7 +3,7 @@
     <mat-icon>arrow_back</mat-icon>
   </button>
   @if (role == 'master') {
-    Миры мастера
+    {{isAccess() ? 'Выбор мира для выдачи прав' : 'Миры мастера'}}
   } @else {
     Миры игрока
   }
