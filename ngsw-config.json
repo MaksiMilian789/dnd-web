@@ -6,14 +6,7 @@
       "name": "app",
       "installMode": "prefetch",
       "resources": {
-        "files": [
-          "/favicon.ico",
-          "/index.html",
-          "/manifest.webmanifest",
-          "/*.css",
-          "/*.js",
-          "/**/*.html"
-        ]
+        "files": ["/favicon.ico", "/index.html", "/manifest.webmanifest", "/*.css", "/*.js", "/**/*.html"]
       }
     },
     {
@@ -21,20 +14,20 @@
       "installMode": "lazy",
       "updateMode": "prefetch",
       "resources": {
-        "files": [
-          "/assets/**",
-          "/*.(svg|cur|jpg|jpeg|png|apng|webp|avif|gif|otf|ttf|woff|woff2)"
-        ]
+        "files": ["/assets/**", "/*.(svg|cur|jpg|jpeg|png|apng|webp|avif|gif|otf|ttf|woff|woff2)"],
+        "urls": ["https://dnd-server.onrender.com/*.(svg|cur|jpg|jpeg|png|apng|webp|avif|gif|otf|ttf|woff|woff2)"]
       }
     }
   ],
-  "dataGroups": [{
-    "name": "localhost",
-    "urls": ["http://localhost:8081/*"],
-    "cacheConfig": {
-      "maxSize": 100,
-      "maxAge": "1d",
-      "strategy": "performance"
+  "dataGroups": [
+    {
+      "name": "localhost",
+      "urls": ["http://localhost:8081/*"],
+      "cacheConfig": {
+        "maxSize": 100,
+        "maxAge": "1d",
+        "strategy": "performance"
+      }
     }
-  }]
+  ]
 }
