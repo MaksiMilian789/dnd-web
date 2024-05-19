@@ -17,10 +17,14 @@ export class UserJwt implements User {
   /** Логин */
   login: string;
 
+  /** Срок действия токена. */
+  expired?: number;
+
   constructor(accessToken: string) {
     const decoded = jwtDecode<AuthJwtPayload>(accessToken);
 
     this.id = Number.parseInt(decoded.nameid);
     this.login = decoded.unique_name;
+    this.expired = decoded.exp;
   }
 }

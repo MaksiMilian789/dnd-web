@@ -73,7 +73,6 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
       provide: LOCALE_ID,
       useValue: 'ru',
     },
-    { provide: ErrorHandler, useClass: GlobalErrorHandler },
     { provide: LOADING_BAR_CONFIG, useValue: { latencyThreshold: 100 } },
   ],
   bootstrap: [AppComponent],

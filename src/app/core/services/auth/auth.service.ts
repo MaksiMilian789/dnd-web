@@ -22,7 +22,6 @@ export class AuthService {
   private readonly _currentUser$ = new BehaviorSubject<UserJwt | null>(null);
 
   get currentUser(): UserJwt | null {
-    console.log(this._currentUser$.getValue())
     return this._currentUser$.getValue();
   }
 
