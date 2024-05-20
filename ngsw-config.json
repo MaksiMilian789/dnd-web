@@ -22,7 +22,7 @@
   "dataGroups": [
     {
       "name": "server",
-      "urls": ["http://dnd-server.onrender.com/*"],
+      "urls": ["http://dnd-server.onrender.com/**"],
       "cacheConfig": {
         "maxSize": 100,
         "maxAge": "1d",
