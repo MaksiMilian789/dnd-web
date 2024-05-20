@@ -1,11 +1,15 @@
 import { Component, Inject } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { SwUpdate } from '@angular/service-worker';
+import { SwUpdate, VersionEvent, VersionReadyEvent } from '@angular/service-worker';
 import { LoadingBarService } from '@ngx-loading-bar/core';
 import { LOCAL_STORAGE } from '@ng-web-apis/common';
-import { Observable, delay } from 'rxjs';
+import { Observable, delay, filter } from 'rxjs';
 
 import { APP_CONFIG, AppConfig } from '@core/config';
+
+function isVersionReadyEvent(event: VersionEvent): event is VersionReadyEvent {
+  return event.type === 'VERSION_READY';
+}
 
 @Component({
   selector: 'app-root',
@@ -24,18 +28,11 @@ export class AppComponent {
   ) {
     this.loaderValue$ = loader.value$.pipe(delay(0));
 
-    _updates.versionUpdates.subscribe(() => {
-      let version = _localStorage.getItem('version');
-      if (!version) {
-        _localStorage.setItem('version', config.version);
-      }
-      if (version != config.version) {
-        _snackbar.open('Вышла новая версия приложения. Страница обновится через 3 секунды!');
-        _localStorage.setItem('version', config.version);
-        setTimeout(() => {
-          document.location.reload();
-        }, 3000);
-      }
+    _updates.versionUpdates.pipe(filter(isVersionReadyEvent)).subscribe(() => {
+      _snackbar.open('Вышла новая версия приложения. Страница обновится через 3 секунды!');
+      setTimeout(() => {
+        document.location.reload();
+      }, 3000);
     });
   }
 }
