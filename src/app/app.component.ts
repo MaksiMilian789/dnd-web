@@ -22,7 +22,9 @@ export class AppComponent {
     _updates.versionUpdates.subscribe(() => {
       _snackbar.open('Вышла новая версия приложения. Обновление произойдёт через 5 секунд!');
       _updates.activateUpdate().then(() => {
-        document.location.reload();
+        setTimeout(() => {
+          document.location.reload();
+        }, 5000);
       });
     });
   }
