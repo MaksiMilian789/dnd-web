@@ -21,12 +21,12 @@
   ],
   "dataGroups": [
     {
-      "name": "localhost",
-      "urls": ["http://localhost:8081/*"],
+      "name": "server",
+      "urls": ["http://dnd-server.onrender.com/*"],
       "cacheConfig": {
         "maxSize": 100,
         "maxAge": "1d",
-        "strategy": "performance"
+        "strategy": "freshness"
       }
     }
   ]
