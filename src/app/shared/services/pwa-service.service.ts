@@ -5,12 +5,11 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class PwaService {
-  public modalPwaPlatform: string | undefined = 'ANDROID'; // убрать значение
+  public modalPwaPlatform: string | undefined = 'ANDROID';
   modalPwaEvent: any;
   showInstallPromotion: boolean = false;
 
   constructor(private platform: Platform) {
-    console.log('constructor pwa');
     this._loadModalPwa();
   }
 
