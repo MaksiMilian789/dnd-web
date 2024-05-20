@@ -11,6 +11,7 @@ import { Observable, delay } from 'rxjs';
 })
 export class AppComponent {
   loaderValue$: Observable<number>;
+  reload: boolean = false;
 
   constructor(
     public loader: LoadingBarService,
@@ -20,10 +21,13 @@ export class AppComponent {
     this.loaderValue$ = loader.value$.pipe(delay(0));
 
     _updates.versionUpdates.subscribe(() => {
-      _snackbar.open('Вышла новая версия приложения. Сейчас произойдёт обновление!');
-      _updates.activateUpdate().then(() => {
-        document.location.reload();
-      });
+      if (!this.reload) {
+        _snackbar.open('Вышла новая версия приложения. Сейчас произойдёт обновление!');
+        _updates.activateUpdate().then(() => {
+          document.location.reload();
+          this.reload = true;
+        });
+      }
     });
   }
 }
