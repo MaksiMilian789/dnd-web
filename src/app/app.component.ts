@@ -26,6 +26,9 @@ export class AppComponent {
 
     _updates.versionUpdates.subscribe(() => {
       let version = _localStorage.getItem('version');
+      if (!version) {
+        _localStorage.setItem('version', config.version);
+      }
       if (version != config.version) {
         _snackbar.open('Вышла новая версия приложения. Обновите страницу для корректной работы!');
         _localStorage.setItem('version', config.version);
