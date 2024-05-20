@@ -22,11 +22,7 @@ export class AppComponent {
 
     _updates.versionUpdates.subscribe(() => {
       if (!this.reload) {
-        _snackbar.open('Вышла новая версия приложения. Сейчас произойдёт обновление!');
-        _updates.activateUpdate().then(() => {
-          document.location.reload();
-          this.reload = true;
-        });
+        _snackbar.open('Вышла новая версия приложения. Обновите страницу для корректной работы!');
       }
     });
   }
