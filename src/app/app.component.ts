@@ -30,8 +30,11 @@ export class AppComponent {
         _localStorage.setItem('version', config.version);
       }
       if (version != config.version) {
-        _snackbar.open('Вышла новая версия приложения. Обновите страницу для корректной работы!');
+        _snackbar.open('Вышла новая версия приложения. Страница обновится через 3 секунды!');
         _localStorage.setItem('version', config.version);
+        setTimeout(() => {
+          document.location.reload();
+        }, 3000);
       }
     });
   }
