@@ -20,11 +20,9 @@ export class AppComponent {
     this.loaderValue$ = loader.value$.pipe(delay(0));
 
     _updates.versionUpdates.subscribe(() => {
-      _snackbar.open('Вышла новая версия приложения. Обновление произойдёт через 5 секунд!');
+      _snackbar.open('Вышла новая версия приложения. Сейчас произойдёт обновление!');
       _updates.activateUpdate().then(() => {
-        setTimeout(() => {
-          document.location.reload();
-        }, 5000);
+        document.location.reload();
       });
     });
   }
